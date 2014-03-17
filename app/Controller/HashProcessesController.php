@@ -33,12 +33,24 @@ class HashprocessesController extends AppController {
  * @param string $id
  * @return void
  */
-	public function view($id = null) {
-		if (!$this->Hashprocess->exists($id)) {
-			throw new NotFoundException(__('Invalid hashprocess'));
-		}
-		$options = array('conditions' => array('Hashprocess.' . $this->Hashprocess->primaryKey => $id));
-		$this->set('hashprocess', $this->Hashprocess->find('first', $options));
+	public function view() {
+		$HashnameModel = ClassRegistry::init('Hashname');
+		$conditions = array(
+			'fields' => array('name'),
+			'order' => array('name ASC')
+		);
+		$result = $HashnameModel->find('all', $conditions);
+		// $data = array('Hashname' => array());
+		// foreach($result as $key => $model) {
+		// 	$data['Hashname'] .= $model['Hashname']['name'];
+		// }
+		// $this->log($data);
+		$this->set('data', $result);
+		// if (!$this->Hashprocess->exists($id)) {
+		// 	throw new NotFoundException(__('Invalid hashprocess'));
+		// }
+		// $options = array('conditions' => array('Hashprocess.' . $this->Hashprocess->primaryKey => $id));
+		// $this->set('hashprocess', $this->Hashprocess->find('first', $options));
 	}
 
 /**
