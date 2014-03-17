@@ -1,9 +1,9 @@
-<div class="hashProcesses form">
-<?php echo $this->Form->create('HashProcess'); ?>
+<div class="hashprocesses form">
+<?php echo $this->Form->create('Hashprocess'); ?>
 	<fieldset>
-		<legend><?php echo __('Add Hash Process'); ?></legend>
+		<legend><?php echo __('Add Hashprocess'); ?></legend>
 	<?php
-		echo $this->Form->create('plaintext');
+		echo $this->Form->input('plaintext');
 		echo $this->Form->input('message_digest');
 	?>
 	</fieldset>
@@ -13,6 +13,6 @@
 	<h3><?php echo __('Actions'); ?></h3>
 	<ul>
 
-		<li><?php echo $this->Html->link(__('List Hash Processes'), array('action' => 'index')); ?></li>
+		<li><?php echo $this->Html->link(__('List Hashprocesses'), array('action' => 'index')); ?></li>
 	</ul>
 </div>

@@ -1,5 +1,5 @@
-<div class="hashProcesses index">
-	<h2><?php echo __('Hash Processes'); ?></h2>
+<div class="hashprocesses index">
+	<h2><?php echo __('Hashprocesses'); ?></h2>
 	<table cellpadding="0" cellspacing="0">
 	<tr>
 			<th><?php echo $this->Paginator->sort('id'); ?></th>
@@ -7,15 +7,15 @@
 			<th><?php echo $this->Paginator->sort('message_digest'); ?></th>
 			<th class="actions"><?php echo __('Actions'); ?></th>
 	</tr>
-	<?php foreach ($hashProcesses as $hashProcess): ?>
+	<?php foreach ($hashprocesses as $hashprocess): ?>
 	<tr>
-		<td><?php echo h($hashProcess['HashProcess']['id']); ?>&nbsp;</td>
-		<td><?php echo h($hashProcess['HashProcess']['plaintext']); ?>&nbsp;</td>
-		<td><?php echo h($hashProcess['HashProcess']['message_digest']); ?>&nbsp;</td>
+		<td><?php echo h($hashprocess['Hashprocess']['id']); ?>&nbsp;</td>
+		<td><?php echo h($hashprocess['Hashprocess']['plaintext']); ?>&nbsp;</td>
+		<td><?php echo h($hashprocess['Hashprocess']['message_digest']); ?>&nbsp;</td>
 		<td class="actions">
-			<?php echo $this->Html->link(__('View'), array('action' => 'view', $hashProcess['HashProcess']['id'])); ?>
-			<?php echo $this->Html->link(__('Edit'), array('action' => 'edit', $hashProcess['HashProcess']['id'])); ?>
-			<?php echo $this->Form->postLink(__('Delete'), array('action' => 'delete', $hashProcess['HashProcess']['id']), null, __('Are you sure you want to delete # %s?', $hashProcess['HashProcess']['id'])); ?>
+			<?php echo $this->Html->link(__('View'), array('action' => 'view', $hashprocess['Hashprocess']['id'])); ?>
+			<?php echo $this->Html->link(__('Edit'), array('action' => 'edit', $hashprocess['Hashprocess']['id'])); ?>
+			<?php echo $this->Form->postLink(__('Delete'), array('action' => 'delete', $hashprocess['Hashprocess']['id']), null, __('Are you sure you want to delete # %s?', $hashprocess['Hashprocess']['id'])); ?>
 		</td>
 	</tr>
 <?php endforeach; ?>
@@ -37,6 +37,6 @@
 <div class="actions">
 	<h3><?php echo __('Actions'); ?></h3>
 	<ul>
-		<li><?php echo $this->Html->link(__('New Hash Process'), array('action' => 'add')); ?></li>
+		<li><?php echo $this->Html->link(__('New Hashprocess'), array('action' => 'add')); ?></li>
 	</ul>
 </div>

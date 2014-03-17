@@ -1,13 +1,13 @@
 <?php
 App::uses('AppController', 'Controller');
 /**
- * HashProcesses Controller
+ * Hashprocesses Controller
  *
- * @property HashProcess $HashProcess
+ * @property Hashprocess $Hashprocess
  * @property PaginatorComponent $Paginator
  * @property SessionComponent $Session
  */
-class HashProcessesController extends AppController {
+class HashprocessesController extends AppController {
 
 /**
  * Components
@@ -22,8 +22,8 @@ class HashProcessesController extends AppController {
  * @return void
  */
 	public function index() {
-		$this->HashProcess->recursive = 0;
-		$this->set('hashProcesses', $this->Paginator->paginate());
+		$this->Hashprocess->recursive = 0;
+		$this->set('hashprocesses', $this->Paginator->paginate());
 	}
 
 /**
@@ -34,15 +34,11 @@ class HashProcessesController extends AppController {
  * @return void
  */
 	public function view($id = null) {
-		// default code.
-		// if (!$this->HashProcess->exists($id)) {
-		// 	throw new NotFoundException(__('Invalid hash process'));
-		// }
-		// $options = array('conditions' => array('HashProcess.' . $this->HashProcess->primaryKey => $id));
-		// $this->set('hashProcess', $this->HashProcess->find('first', $options));
-		// default code.
-
-
+		if (!$this->Hashprocess->exists($id)) {
+			throw new NotFoundException(__('Invalid hashprocess'));
+		}
+		$options = array('conditions' => array('Hashprocess.' . $this->Hashprocess->primaryKey => $id));
+		$this->set('hashprocess', $this->Hashprocess->find('first', $options));
 	}
 
 /**
@@ -52,12 +48,12 @@ class HashProcessesController extends AppController {
  */
 	public function add() {
 		if ($this->request->is('post')) {
-			$this->HashProcess->create();
-			if ($this->HashProcess->save($this->request->data)) {
-				$this->Session->setFlash(__('The hash process has been saved.'));
+			$this->Hashprocess->create();
+			if ($this->Hashprocess->save($this->request->data)) {
+				$this->Session->setFlash(__('The hashprocess has been saved.'));
 				return $this->redirect(array('action' => 'index'));
 			} else {
-				$this->Session->setFlash(__('The hash process could not be saved. Please, try again.'));
+				$this->Session->setFlash(__('The hashprocess could not be saved. Please, try again.'));
 			}
 		}
 	}
@@ -70,19 +66,19 @@ class HashProcessesController extends AppController {
  * @return void
  */
 	public function edit($id = null) {
-		if (!$this->HashProcess->exists($id)) {
-			throw new NotFoundException(__('Invalid hash process'));
+		if (!$this->Hashprocess->exists($id)) {
+			throw new NotFoundException(__('Invalid hashprocess'));
 		}
 		if ($this->request->is(array('post', 'put'))) {
-			if ($this->HashProcess->save($this->request->data)) {
-				$this->Session->setFlash(__('The hash process has been saved.'));
+			if ($this->Hashprocess->save($this->request->data)) {
+				$this->Session->setFlash(__('The hashprocess has been saved.'));
 				return $this->redirect(array('action' => 'index'));
 			} else {
-				$this->Session->setFlash(__('The hash process could not be saved. Please, try again.'));
+				$this->Session->setFlash(__('The hashprocess could not be saved. Please, try again.'));
 			}
 		} else {
-			$options = array('conditions' => array('HashProcess.' . $this->HashProcess->primaryKey => $id));
-			$this->request->data = $this->HashProcess->find('first', $options);
+			$options = array('conditions' => array('Hashprocess.' . $this->Hashprocess->primaryKey => $id));
+			$this->request->data = $this->Hashprocess->find('first', $options);
 		}
 	}
 
@@ -94,37 +90,25 @@ class HashProcessesController extends AppController {
  * @return void
  */
 	public function delete($id = null) {
-		$this->HashProcess->id = $id;
-		if (!$this->HashProcess->exists()) {
-			throw new NotFoundException(__('Invalid hash process'));
+		$this->Hashprocess->id = $id;
+		if (!$this->Hashprocess->exists()) {
+			throw new NotFoundException(__('Invalid hashprocess'));
 		}
 		$this->request->onlyAllow('post', 'delete');
-		if ($this->HashProcess->delete()) {
-			$this->Session->setFlash(__('The hash process has been deleted.'));
+		if ($this->Hashprocess->delete()) {
+			$this->Session->setFlash(__('The hashprocess has been deleted.'));
 		} else {
-			$this->Session->setFlash(__('The hash process could not be deleted. Please, try again.'));
+			$this->Session->setFlash(__('The hashprocess could not be deleted. Please, try again.'));
 		}
 		return $this->redirect(array('action' => 'index'));
 	}
 
 	public function hashingPlaintext() {
-		// $plaintext = $this->request->data();
-
-		// $this->log('Hi.');
-
-		if ($this->request->is('post')) {
+		if($this->request->is('post')) {
 			$data = $this->request->is('post');
-			echo $data;
 			$messageDigest = md5($data);
 			$this->set('result', $messageDigest);
 			$this->render('result');
-			// $this->HashProcess->create();
-			// if ($this->HashProcess->save($this->request->data)) {
-			// 	$this->Session->setFlash(__('The hash process has been saved.'));
-			// 	return $this->redirect(array('action' => 'index'));
-			// } else {
-			// 	$this->Session->setFlash(__('The hash process could not be saved. Please, try again.'));
-			// }
 		}
 	}
 }
