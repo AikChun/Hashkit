@@ -4,7 +4,7 @@
 	<fieldset>
 		<legend> Get Your Hashing Fun!</legend>
 		<?php 
-			echo $this->Form->input('HashProcess.plaintext', array(
+			echo $this->Form->input('Hashprocess.plaintext', array(
 				'type' => 'text',
 				'div' => false,
 				'label' => 'Please enter your plaintext:'
