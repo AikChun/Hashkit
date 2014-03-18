@@ -116,27 +116,29 @@ class HashprocessesController extends AppController {
 	}
 
 	public function hashingPlaintext() {
+
 		if($this->request->is('post')) {
 			$data = $this->request->data;
 			$this->log($data);
-			try{
-				if(!isset($data['Hashprocess']['name'])) {
-					throw new Exception('No algorithms were chosen!');
+			if(!isset($data['Hashprocess']['plaintext'])) {
+				$this->log($data);
+				try{
+					if(!isset($data['Hashprocess']['hashname'])) {
+						throw new Exception('No algorithms were chosen!');
+					}
 				}
-				if(!isset($data['Hashprocess']['plaintext'])) {
-					throw new Exception('No plaintext was entered.');
+				catch(Exception $e) {
+					$this->referer();
+					echo 'Error occured. '. $e->getMessage();
 				}
-				if(isset($data['Hashprocess']['plaintext'])) {
-					$plaintext = $data['Hashprocess']['plaintext']; 
-					$messageDigest = md5($plaintext);
-					$this->set('result', $messageDigest);
-					$this->render('result');
-				}
-			}
-			catch(Exception $e) {
-				echo 'Error occured. '. $e->getMessage();
 			}
 			
+			if(isset($data['Hashprocess']['plaintext'])) {
+				$plaintext = $data['Hashprocess']['plaintext']; 
+				$messageDigest = md5($plaintext);
+				$this->set('result', $messageDigest);
+				$this->render('result');
+			}
 		}
 	}
 }

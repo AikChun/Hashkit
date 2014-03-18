@@ -28,7 +28,7 @@
 			$name = $model['Hashname']['name'];	
 			$algorithms[$name] = $name;
 		endforeach;
-		echo $this->Form->input('Select', array(
+		echo $this->Form->input('hashname', array(
 			'type'=>'select',
 			'multiple'=>'checkbox',
 			'label'=> __(''),

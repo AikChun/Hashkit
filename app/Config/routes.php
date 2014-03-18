@@ -31,7 +31,7 @@
  */
 	Router::connect('/pages/*', array('controller' => 'pages', 'action' => 'display'));
 
-	Router::connect('/', array('controller' => 'hashprocesses', 'action' => 'hashingPlaintext', 'hashing_plaintext'));
+	Router::connect('/', array('controller' => 'hashprocesses', 'action' => 'view'));
 
 /**
  * Load all plugin routes. See the CakePlugin documentation on
