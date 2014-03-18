@@ -20,13 +20,14 @@
 </div>
 <div class="actions">
 	<h3><?php echo __('Actions'); ?></h3>
-<?php
-	foreach($data as $key => $model ) {
-		echo $model['Hashname']['name'] . "<br/>";
-	}
-?>
 
-<input>
+	<?php foreach($data as $key => $model ) : ?>
+	<?php $name = $model['Hashname']['name'];?>
+<input type="checkbox" name="data[Hashname][name]" value="<?php echo $name;?>" id="<?php echo $name;?>">
+	<label for="<?php echo $name;?>"><?php echo $name;?></label> <br>
+	
+<?php endforeach;?>
+
 <!--
 	<ul>
 		<li><?php echo $this->Html->link(__('Edit Hashprocess'), array('action' => 'edit', $hashprocess['Hashprocess']['id'])); ?> </li>
