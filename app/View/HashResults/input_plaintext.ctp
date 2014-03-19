@@ -1,11 +1,12 @@
-<div class="hashprocesses view">
+<div class="hashResults view">
+	
 <?php 
-	echo $this->Form->create('HashProcess', array('action' => 'HashingPlaintext'));
+	echo $this->Form->create('HashResults', array('action' => 'inputPlaintext'));
 ?>
 	<fieldset>
 		<legend> Get Your Hashing Fun!</legend>
 		<?php 
-			echo $this->Form->input('Hashprocess.plaintext', array(
+			echo $this->Form->input('HashResult.plaintext', array(
 				'type' => 'text',
 				'div' => false,
 				'label' => 'Please enter your plaintext:'

@@ -38,6 +38,6 @@ class AppController extends Controller {
 	}
 
 	protected function _determinedTheme() {
-		$this->layout = 'admin';
+		$this->layout = 'hashprocess';
 	}
 }

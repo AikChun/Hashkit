@@ -50,7 +50,7 @@ $cakeDescription = __d('cake_dev', 'FYP: Hashkit');
 				<h3><?php echo __('Quick Links'); ?></h3>
 
 			<ul>
-			<li> <?php echo $this->Html->link('Home', array('controller' => 'hashprocesses', 'action' => 'view')); ?> </li>
+			<li> <?php echo $this->Html->link('Home', '/'); ?> </li>
 			</ul>
 			</div>
 
