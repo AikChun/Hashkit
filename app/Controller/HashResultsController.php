@@ -105,25 +105,43 @@ class HashResultsController extends AppController {
 
 	public function inputPlaintext() {
 		$selectedAlgorithms = $this->Session->read('selectedAlgorithms');
-		$this->log($selectedAlgorithms);
-		$listOfMessageDigest = array();
-		if($this->request->is('post')) {
-			$data = $this->request->data;
-			$this->log($data);
-			$plaintext = $data['HashResult']['plaintext'];
-			$output = array();
-			foreach($selectedAlgorithms['HashAlgorithm'] as $key => $hashName ) {
-				$messageDigest = hash(strtolower($hashName), $plaintext);
-
-				array_push($listOfMessageDigest, $messageDigest);
+		try {
+			if(empty($selectedAlgorithms['HashAlgorithm']) ) {
+				throw new Exception('You did not select any hash algorithm.');
 			}
-			$output['HashAlgorithm'] = $selectedAlgorithms['HashAlgorithm'];
-			$output['HashResult']['plaintext'] = $plaintext;
-			$output['HashResult']['message_digest'] = $listOfMessageDigest;
-			$this->log($output);
-			$this->set('output', $output);
-			$this->render('result');
+			if($this->request->is('post') && !empty($selectedAlgorithms)) {
+				$data = $this->request->data;
+				$plaintext = $data['HashResult']['plaintext'];
+				$output = $this->computeDigests($selectedAlgorithms, $plaintext);
+				$this->Session->write('output', $output);
+				$this->redirect(array('action' => 'result'));
+			}
+		}catch(Exception $e) {
+			$this->Session->setFlash($e->getMessage());
+			$this->redirect(array('controller' => 'pages', 'action' => 'choosetest'));
 		}
+
+	}
+
+	public function result() {
+		$output = $this->Session->read('output');
+		$this->Session->destroy();
+		$this->set("output", $output);
+	}
+
+	protected function computeDigests($selectedAlgorithms, $plaintext) {
+		$listOfMessageDigests = array();
+		$output = array();
+		foreach($selectedAlgorithms['HashAlgorithm'] as $key => $hashName ) {
+			$messageDigest = hash(strtolower($hashName), $plaintext);
+
+			array_push($listOfMessageDigests, $messageDigest);
+		}
+		$output['HashAlgorithm'] = $selectedAlgorithms['HashAlgorithm'];
+		$output['HashResult']['plaintext'] = $plaintext;
+		$output['HashResult']['message_digest'] = $listOfMessageDigests;
+		
+		return $output;
 	}
 
 
