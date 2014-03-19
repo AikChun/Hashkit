@@ -43,9 +43,5 @@ class HashTestsController extends AppController {
 		$HashAlgorithmModel = ClassRegistry::init('HashAlgorithm');
 		$data = $HashAlgorithmModel->find('all', $conditions);
 		$this->set('data', $data);
-
-		
-
 	}
-
 }
