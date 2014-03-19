@@ -15,6 +15,10 @@ class HashprocessesController extends AppController {
  * @var array
  */
 	public $components = array('Paginator', 'Session');
+	
+	public function beforeFilter() {
+		$this->layout = 'hashprocess';
+	}
 
 /**
  * index method

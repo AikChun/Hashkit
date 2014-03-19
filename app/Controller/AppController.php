@@ -38,7 +38,6 @@ class AppController extends Controller {
 	}
 
 	protected function _determinedTheme() {
-		$this->theme = false;
 		$this->layout = 'admin';
 	}
 }

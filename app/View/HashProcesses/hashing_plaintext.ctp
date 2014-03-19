@@ -1,3 +1,4 @@
+<div class="hashprocesses view">
 <?php 
 	echo $this->Form->create('HashProcess', array('action' => 'HashingPlaintext'));
 ?>
@@ -12,3 +13,4 @@
 		?>
 	</fieldset>
 <?php echo $this->Form->end(__('Submit')); ?>
+</div>
