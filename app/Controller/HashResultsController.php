@@ -104,13 +104,27 @@ class HashResultsController extends AppController {
 	}
 
 	public function inputPlaintext() {
+		$selectedAlgorithms = $this->Session->read('selectedAlgorithms');
+		$this->log($selectedAlgorithms);
+		$listOfMessageDigest = array();
 		if($this->request->is('post')) {
 			$data = $this->request->data;
 			$this->log($data);
 			$plaintext = $data['HashResult']['plaintext'];
-			$this->set('result', md5($plaintext));
+			$output = array();
+			foreach($selectedAlgorithms['HashAlgorithm'] as $key => $hashName ) {
+				$messageDigest = hash(strtolower($hashName), $plaintext);
+
+				array_push($listOfMessageDigest, $messageDigest);
+			}
+			$output['HashAlgorithm'] = $selectedAlgorithms['HashAlgorithm'];
+			$output['HashResult']['plaintext'] = $plaintext;
+			$output['HashResult']['message_digest'] = $listOfMessageDigest;
+			$this->log($output);
+			$this->set('output', $output);
 			$this->render('result');
 		}
 	}
+
 
 }

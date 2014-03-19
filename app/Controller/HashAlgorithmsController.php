@@ -40,16 +40,19 @@ class HashAlgorithmsController extends AppController {
 		// $options = array('conditions' => array('HashAlgorithm.' . $this->HashAlgorithm->primaryKey => $id));
 		// $this->set('hashAlgorithm', $this->HashAlgorithm->find('first', $options));
 		if($this->request->is('post')) {
-			$data = $this->request->post;
-			$this->redirect(array('controller' => 'HashResults' ,'action' => 'inputPlaintext'));
-
-
+			$selectedAlgorithms = $this->request->data['HashAlgorithm'];
+			/* $this->log($selectedAlgorithms); */
+			$this->Session->write('selectedAlgorithms' , $selectedAlgorithms);
+			return $this->redirect(array('controller' => 'HashResults' ,'action' => 'inputPlaintext'));
+			
 		}
 		$conditions = array(
 			'fields' => array('name'),
 			'order' => array('name ASC')
 		);
 			
+
+		$this->Session->destroy();
 		$data = $this->HashAlgorithm->find('all', $conditions);
 		$this->set('data', $data);
 
