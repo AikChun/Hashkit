@@ -26,13 +26,28 @@ class HashTestsController extends AppController {
  */
 	public function basicHashing() {
 		if($this->request->is('post')) {
-			$selectedAlgorithms = $this->request->data['HashTests'];
+			if(empty($this->request->data['HashTests']['HashAlgorithm'])) {
+				$this->Session->setFlash('You did not select any algorithms!');
+				return $this->redirect(array('action' => 'basicHashing'));
+			}
+			$data = $this->request->data['HashTests'];
+			$HashAlgorithmModel = ClassRegistry::init('HashAlgorithm');
+			$selectedAlgorithms = array();
+			foreach ($data as $key => $hashId) {
+				$searchCondition = array(
+					'conditions' => array(
+						'HashAlgorithm.id' => $data['HashAlgorithm'] 
+					),
+					'fields' => array('id','name')
+				);
+				$selectedAlgorithms = $HashAlgorithmModel->find('all', $searchCondition);
+			}
 			$this->Session->write('selectedAlgorithms' , $selectedAlgorithms);
-			return $this->redirect(array('controller' => 'HashTests' ,'action' => 'inputPlaintext'));
+			return $this->redirect(array('controller' => 'HashTests' ,'action' => 'basicHashingInput'));
 			
 		}
 		$conditions = array(
-			'fields' => array('name'),
+			'fields' => array('name', 'id' ),
 			'order' => array('name ASC')
 		);
 			
@@ -43,56 +58,41 @@ class HashTestsController extends AppController {
 		$this->set('data', $data);
 	}
 
-	public function inputPlaintext() {
+	public function basicHashingInput() {
 		$selectedAlgorithms = $this->Session->read('selectedAlgorithms');
-		try {
-			if(empty($selectedAlgorithms['HashAlgorithm']) ) {
-				throw new Exception('You did not select any hash algorithm.');
-			}
-			if($this->request->is('post') && !empty($selectedAlgorithms)) {
-				$data = $this->request->data;
-				$plaintext = $data['HashTests']['plaintext'];
-				$output = $this->computeDigests($selectedAlgorithms, $plaintext);
-				$hashResultModel = ClassRegistry::init('HashResult');
-				$hashAlgorithmModel = ClassRegistry::init('HashAlgorithm');
-				foreach($selectedAlgorithms['HashAlgorithm'] as $key => $name) {
-					$searchAlgorithmCondition = array(
-						'conditions' => array('HashAlgorithm.name' => $name),
-						'fields' => array('HashAlgorithm.id')
-					);
-					$searchResult = $hashAlgorithmModel->find('first', $searchAlgorithmCondition);
+		if($this->request->is('post')) {
+			$data = $this->request->data;
+			$output = $this->computeDigests($selectedAlgorithms, $data['HashTests']);
+			$this->log($output);
+			// $hashResultModel->create();
+			// if ($hashResultModel->save($output)) {
+			// 	$this->Session->setFlash(__('The hash result has been saved.'));
+			// 	return $this->redirect(array('action' => 'index'));
+			// } else {
+			// 	$this->Session->setFlash(__('The hash result could not be saved. Please, try again.'));
+			// }
 
-					$output['HashResult']['hash_algorithm_id'] = $searchResult['HashAlgorithm']['id'] ;
-					$this->log($output);
-				}
-				// $hashResultModel->create();
-				// if ($hashResultModel->save($output)) {
-				// 	$this->Session->setFlash(__('The hash result has been saved.'));
-				// 	return $this->redirect(array('action' => 'index'));
-				// } else {
-				// 	$this->Session->setFlash(__('The hash result could not be saved. Please, try again.'));
-				// }
+			$this->Session->write('output', $output);
+			$this->redirect(array('controller' => 'HashResults', 'action' => 'basicHashingResult'));
 
-				$this->Session->write('output', $output);
-				$this->redirect(array('controller' => 'HashResults', 'action' => 'result'));
-
-			}
-		}catch(Exception $e) {
-			$this->Session->setFlash($e->getMessage());
-			$this->redirect(array('controller' => 'pages', 'action' => 'begintest'));
 		}
 	}
-	protected function computeDigests($selectedAlgorithms, $plaintext) {
-		$listOfMessageDigests = array();
+	protected function computeDigests($selectedAlgorithms, $hashTestForm) {
+		$computed = array();
 		$output = array();
-		foreach($selectedAlgorithms['HashAlgorithm'] as $key => $hashName ) {
-			$messageDigest = hash(strtolower($hashName), $plaintext);
+		foreach($selectedAlgorithms as $key => $algorithm ) {
+			$messageDigest = hash(strtolower($algorithm['HashAlgorithm']['name']), $hashTestForm['plaintext']);
 
-			array_push($listOfMessageDigests, $messageDigest);
+			$computed['HashResult']['plaintext'] = $hashTestForm['plaintext'];
+			$computed['HashResult']['message_digest'] = $messageDigest;
+			$computed['HashResult']['hash_algorithm_id'] = $algorithm['HashAlgorithm']['id'];
+			$computed['HashResult']['hash_algorithm_name'] = $algorithm['HashAlgorithm']['name'];
+			$computed['HashResult']['user_id'] = $hashTestForm['id'];
+			array_push($output, $computed);
 		}
-		$output['HashAlgorithm'] = $selectedAlgorithms['HashAlgorithm'];
-		$output['HashResult']['plaintext'] = $plaintext;
-		$output['HashResult']['message_digest'] = $listOfMessageDigests;
+		// $output['HashAlgorithm'] = $selectedAlgorithms['HashAlgorithm'];
+		// $output['HashResult']['plaintext'] = $plaintext;
+		// $output['HashResult']['message_digest'] = $listOfMessageDigests;
 		
 		return $output;
 

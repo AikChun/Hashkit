@@ -1,7 +1,7 @@
 <div class="hashResults view">
 
 <?php
-echo $this->Form->create('HashTests', array('action' => 'inputPlaintext'));
+echo $this->Form->create('HashTests', array('action' => 'basicHashingInput'));
 ?>
 <fieldset>
 <legend> Get Your Hashing Fun!</legend>
@@ -10,6 +10,11 @@ echo $this->Form->input('plaintext', array(
 'type' => 'text',
 'div' => false,
 'label' => 'Please enter your plaintext:'
+));
+echo $this->Form->input('id', array(
+'type' => 'hidden',
+'div' => false,
+'value' => 1
 ));
 ?>
 <br><br><br>

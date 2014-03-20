@@ -104,10 +104,12 @@ class HashResultsController extends AppController {
 	}
 
 
-	public function result() {
+	public function basicHashingResult() {
 		$output = $this->Session->read('output');
-		$this->Session->destroy();
 		$this->set("output", $output);
+		$this->HashResult->create();
+		$this->HashResult->saveMany($output);
+		$this->Session->destroy();
 	}
 
 	public function showMyTestResults(){

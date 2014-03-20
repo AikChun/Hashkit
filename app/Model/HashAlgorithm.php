@@ -20,4 +20,9 @@ class HashAlgorithm extends AppModel {
  */
 	public $displayField = 'name';
 
+	public $hasMany = array(
+		'HashResult' => array(
+			'className' => 'HashResult',
+		)
+	);
 }

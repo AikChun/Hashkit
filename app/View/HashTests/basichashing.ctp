@@ -3,8 +3,8 @@
 	<?php 
 		$algorithms = array();
 		foreach($data as $key => $model ) : 
-			$name = $model['HashAlgorithm']['name'];
-			$algorithms[$name] = $name;
+			$id = $model['HashAlgorithm']['id'];
+			$algorithms[$id] = $model['HashAlgorithm']['name'];
 		endforeach;
 		$email = array('');
 		echo $this->Form->input('HashAlgorithm', array(

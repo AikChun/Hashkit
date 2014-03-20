@@ -20,4 +20,9 @@ class User extends AppModel {
  */
 	public $displayField = 'name';
 
+	public $hashMany = array(
+		'HashResult' => array(
+			'className' => 'HashResult'
+		)
+	);
 }
