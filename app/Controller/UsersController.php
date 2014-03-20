@@ -108,5 +108,19 @@ class UsersController extends AppController {
 	public function logoff() {
 		
 	}
+
+	public function register() {
+		if($this->request->is('post')) {
+			$data = $this->request->data;
+			$this->log($data);
+			try{
+				if(!($data['User']['password'] == $data['User']['confirm_password'])) {
+					throw new Exception ('Please the password\'s does not match!');
+				}
+			} catch(Exception $e) {
+				$this->Session->setFlash($e->getMessage());
+			}
+		}
+	}
 }
 
