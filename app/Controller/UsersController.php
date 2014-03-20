@@ -14,7 +14,8 @@ class UsersController extends AppController {
  *
  * @var array
  */
-	public $components = array('Paginator', 'Session');
+	public $components = array('Paginator', 'Session', 'Email');
+	public $helpers=array('Html','Form','Session');
 
 /**
  * index method
@@ -124,7 +125,7 @@ class UsersController extends AppController {
 	}
 
 	public function forget_password() {
-
+		$this->User->recursive=-1;
 	}
 
 }
