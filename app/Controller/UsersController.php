@@ -122,5 +122,10 @@ class UsersController extends AppController {
 			}
 		}
 	}
+
+	public function forget_password() {
+
+	}
+
 }
 
