@@ -60,7 +60,7 @@ class HashTestsController extends AppController {
 			}
 		}catch(Exception $e) {
 			$this->Session->setFlash($e->getMessage());
-			$this->redirect(array('controller' => 'pages', 'action' => 'choosetest'));
+			$this->redirect(array('controller' => 'pages', 'action' => 'begintest'));
 		}
 	}
 	protected function computeDigests($selectedAlgorithms, $plaintext) {
