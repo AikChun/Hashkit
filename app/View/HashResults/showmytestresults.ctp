@@ -5,18 +5,12 @@
 			<th><?php echo $this->Paginator->sort('id'); ?></th>
 			<th><?php echo $this->Paginator->sort('plaintext'); ?></th>
 			<th><?php echo $this->Paginator->sort('message_digest'); ?></th>
-			<th class="actions"><?php echo __('Actions'); ?></th>
 	</tr>
 	<?php foreach ($hashResults as $hashResult): ?>
 	<tr>
 		<td><?php echo h($hashResult['HashResult']['id']); ?>&nbsp;</td>
 		<td><?php echo h($hashResult['HashResult']['plaintext']); ?>&nbsp;</td>
 		<td><?php echo h($hashResult['HashResult']['message_digest']); ?>&nbsp;</td>
-		<td class="actions">
-			<?php echo $this->Html->link(__('View'), array('action' => 'view', $hashResult['HashResult']['id'])); ?>
-			<?php echo $this->Html->link(__('Edit'), array('action' => 'edit', $hashResult['HashResult']['id'])); ?>
-			<?php echo $this->Form->postLink(__('Delete'), array('action' => 'delete', $hashResult['HashResult']['id']), null, __('Are you sure you want to delete # %s?', $hashResult['HashResult']['id'])); ?>
-		</td>
 	</tr>
 <?php endforeach; ?>
 	</table>
@@ -33,10 +27,4 @@
 		echo $this->Paginator->next(__('next') . ' >', array(), null, array('class' => 'next disabled'));
 	?>
 	</div>
-</div>
-<div class="actions">
-	<h3><?php echo __('Actions'); ?></h3>
-	<ul>
-		<li><?php echo $this->Html->link(__('New Hash Result'), array('action' => 'add')); ?></li>
-	</ul>
 </div>

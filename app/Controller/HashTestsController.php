@@ -26,9 +26,7 @@ class HashTestsController extends AppController {
  */
 	public function basicHashing() {
 		if($this->request->is('post')) {
-			$this->log($this->request->data);
 			$selectedAlgorithms = $this->request->data['HashTests'];
-			$this->log($selectedAlgorithms);
 			$this->Session->write('selectedAlgorithms' , $selectedAlgorithms);
 			return $this->redirect(array('controller' => 'HashTests' ,'action' => 'inputPlaintext'));
 			
@@ -53,10 +51,31 @@ class HashTestsController extends AppController {
 			}
 			if($this->request->is('post') && !empty($selectedAlgorithms)) {
 				$data = $this->request->data;
-				$plaintext = $data['plaintext'];
+				$plaintext = $data['HashTests']['plaintext'];
 				$output = $this->computeDigests($selectedAlgorithms, $plaintext);
+				$hashResultModel = ClassRegistry::init('HashResult');
+				$hashAlgorithmModel = ClassRegistry::init('HashAlgorithm');
+				foreach($selectedAlgorithms['HashAlgorithm'] as $key => $name) {
+					$searchAlgorithmCondition = array(
+						'conditions' => array('HashAlgorithm.name' => $name),
+						'fields' => array('HashAlgorithm.id')
+					);
+					$searchResult = $hashAlgorithmModel->find('first', $searchAlgorithmCondition);
+
+					$output['HashResult']['hash_algorithm_id'] = $searchResult['HashAlgorithm']['id'] ;
+					$this->log($output);
+				}
+				// $hashResultModel->create();
+				// if ($hashResultModel->save($output)) {
+				// 	$this->Session->setFlash(__('The hash result has been saved.'));
+				// 	return $this->redirect(array('action' => 'index'));
+				// } else {
+				// 	$this->Session->setFlash(__('The hash result could not be saved. Please, try again.'));
+				// }
+
 				$this->Session->write('output', $output);
 				$this->redirect(array('controller' => 'HashResults', 'action' => 'result'));
+
 			}
 		}catch(Exception $e) {
 			$this->Session->setFlash($e->getMessage());

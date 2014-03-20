@@ -110,4 +110,9 @@ class HashResultsController extends AppController {
 		$this->set("output", $output);
 	}
 
+	public function showMyTestResults(){
+		$this->HashResult->recursive = 0;
+		$this->set('hashResults', $this->Paginator->paginate());
+	}
+
 }
