@@ -39,9 +39,15 @@ CREATE TABLE `hash_result` (
   `id` int(10) NOT NULL AUTO_INCREMENT,
   `plaintext` text NOT NULL,
   `message_digest` text NOT NULL,
-  PRIMARY KEY (`id`)
+  `hash_algorithm_id` int(10) NOT NULL,
+  `user_id` int(10) NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `user_id` (`user_id`),
+  CONSTRAINT `hash_result_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `user` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
+INSERT INTO `hash_result` (`id`, `plaintext`, `message_digest`, `hash_algorithm_id`, `user_id`) VALUES
+(3,	'asd',	'61118995d26bef582a59dec9220483e8 ',	0,	1);
 
 DROP TABLE IF EXISTS `user`;
 CREATE TABLE `user` (
@@ -57,4 +63,4 @@ CREATE TABLE `user` (
 INSERT INTO `user` (`id`, `password`, `name`, `email`, `group_id`, `profile`) VALUES
 (1,	'5baa61e4c9b93f3f0682250b6',	'aikchun',	'aikchun616@gmail.com',	1,	'HI there. I\'m the first user.');
 
--- 2014-03-19 11:30:31
+-- 2014-03-20 02:51:15
