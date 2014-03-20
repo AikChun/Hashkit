@@ -7,4 +7,5 @@
 	Digest: <?php echo $message_digest;?>
 	<br><br>
 <?php endforeach;?>	
+<?php echo $this->Form->end(__('Save to text file')); ?>
 </div>
