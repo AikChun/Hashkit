@@ -61,7 +61,7 @@ $cakeDescription = __d('cake_dev', 'FYP: Hashkit');
 
 			<ul>
 			<li> <?php echo $this->Html->link('Home', '/'); ?> </li>
-			<li><?php echo $this->Html->link('Begin a Test', '/pages/choosetest');?></li>
+			<li><?php echo $this->Html->link('Begin a Test', '/pages/begintest');?></li>
 			<li><?php echo $this->Html->link('Blog', 'http://hashkitproject.blogspot.sg/')?></li>
 			</ul>
 			</div>

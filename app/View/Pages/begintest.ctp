@@ -1,7 +1,7 @@
 <div class="pages view">
 
 <div class="header" style="font-size: 165%">
-Choose a Test
+Begin a Test 
 <br>
 <br>
 </div>
