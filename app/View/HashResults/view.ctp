@@ -6,9 +6,9 @@
 			<?php echo h($hashResult['HashResult']['id']); ?>
 			&nbsp;
 		</dd>
-		<dt><?php echo __('Plaint Text'); ?></dt>
+		<dt><?php echo __('Plaintext'); ?></dt>
 		<dd>
-			<?php echo h($hashResult['HashResult']['plaint_text']); ?>
+			<?php echo h($hashResult['HashResult']['plaintext']); ?>
 			&nbsp;
 		</dd>
 		<dt><?php echo __('Message Digest'); ?></dt>
@@ -18,6 +18,7 @@
 		</dd>
 	</dl>
 </div>
+<!--
 <div class="actions">
 	<h3><?php echo __('Actions'); ?></h3>
 	<ul>
@@ -27,3 +28,4 @@
 		<li><?php echo $this->Html->link(__('New Hash Result'), array('action' => 'add')); ?> </li>
 	</ul>
 </div>
+-->

@@ -11,6 +11,11 @@
 		<td><?php echo h($hashResult['HashResult']['id']); ?>&nbsp;</td>
 		<td><?php echo h($hashResult['HashResult']['plaintext']); ?>&nbsp;</td>
 		<td><?php echo h($hashResult['HashResult']['message_digest']); ?>&nbsp;</td>
+		<td class="actions">
+			<?php echo $this->Html->link(__('Details'), array('action' => 'view', $hashResult['HashResult']['id'])); ?>
+			<?php //echo $this->Html->link(__('Edit'), array('action' => 'edit', $hashResult['HashResult']['id'])); ?>
+			<?php //echo $this->Form->postLink(__('Delete'), array('action' => 'delete', $hashResult['HashResult']['id']), null, __('Are you sure you want to delete # %s?', $hashResult['HashResult']['id'])); ?>
+		</td>
 	</tr>
 <?php endforeach; ?>
 	</table>
