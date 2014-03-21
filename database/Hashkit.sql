@@ -66,10 +66,11 @@ CREATE TABLE `user` (
   `email` varchar(50) NOT NULL,
   `group_id` int(10) NOT NULL,
   `profile` text NOT NULL,
+  `status` varchar(10) NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
-INSERT INTO `user` (`id`, `password`, `name`, `email`, `group_id`, `profile`) VALUES
-(1,	'5baa61e4c9b93f3f0682250b6',	'aikchun',	'aikchun616@gmail.com',	1,	'HI there. I\'m the first user.');
+INSERT INTO `user` (`id`, `password`, `name`, `email`, `group_id`, `profile`, `status`) VALUES
+(1,	'5baa61e4c9b93f3f0682250b6',	'aikchun',	'aikchun616@gmail.com',	1,	'HI there. I\'m the first user.',	'OK');
 
--- 2014-03-20 21:40:31
+-- 2014-03-20 23:54:26
