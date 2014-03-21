@@ -61,6 +61,7 @@ $cakeDescription = __d('cake_dev', 'FYP: Hashkit');
 				<h3><?php echo __('Quick Links'); ?></h3>
 
 			<ul>
+			<li> <?php echo $this->Html->link('Admin Options', array('controller' => 'users', 'action' => 'index')); ?> </li>
 			<li> <?php echo $this->Html->link('Home', '/'); ?> </li>
 			<li><?php echo $this->Html->link('Begin a Test', '/pages/begintest');?></li>
 			<li><?php echo $this->Html->link('My Test Results', array('controller' => 'HashResults', 'action' => 'showmytestresults'))?></li>
