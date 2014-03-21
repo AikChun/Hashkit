@@ -77,6 +77,51 @@ class HashTestsController extends AppController {
 
 		}
 	}
+	public function computeAndCompare() {
+		if($this->request->is('post')) {
+			if(empty($this->request->data['HashTests']['HashAlgorithm'])) {
+				$this->Session->setFlash('You did not select any algorithms!');
+				return $this->redirect(array('action' => 'computeAndCompare'));
+			}
+			$data = $this->request->data['HashTests'];
+			$HashAlgorithmModel = ClassRegistry::init('HashAlgorithm');
+			$selectedAlgorithms = array();
+			foreach ($data as $key => $hashId) {
+				$searchCondition = array(
+					'conditions' => array(
+						'HashAlgorithm.id' => $data['HashAlgorithm'] 
+					),
+					'fields' => array('id','name')
+				);
+				$selectedAlgorithms = $HashAlgorithmModel->find('all', $searchCondition);
+			}
+			$this->Session->write('selectedAlgorithms' , $selectedAlgorithms);
+			return $this->redirect(array('controller' => 'HashTests' ,'action' => 'computeAndCompareInput'));
+			
+		}
+		$conditions = array(
+			'fields' => array('name', 'id' ),
+			'order' => array('name ASC')
+		);
+
+		$this->Session->destroy();
+		$HashAlgorithmModel = ClassRegistry::init('HashAlgorithm');
+		$data = $HashAlgorithmModel->find('all', $conditions);
+		$this->set('data', $data);
+	}
+
+	public function computeAndCompareInput() {
+		$selectedAlgorithms = $this->Session->read('selectedAlgorithms');
+		if($this->request->is('post')) {
+			$data = $this->request->data;
+			$output = $this->computeAndCompareDigests($selectedAlgorithms, $data['HashTests']);
+
+			$this->Session->write('output', $output);
+			$this->redirect(array('controller' => 'HashResults', 'action' => 'basicHashingResult'));
+
+		}
+
+	}
 	protected function computeDigests($selectedAlgorithms, $hashTestForm) {
 		$computed = array();
 		$output = array();
@@ -95,6 +140,13 @@ class HashTestsController extends AppController {
 		// $output['HashResult']['message_digest'] = $listOfMessageDigests;
 		
 		return $output;
+	}
 
+	protected function compareDigests($output) {
+		foreach($output as $key => $hashResult) {
+			
+		}
+		
+		
 	}
 }

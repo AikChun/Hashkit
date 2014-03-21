@@ -44,9 +44,9 @@ $cakeDescription = __d('cake_dev', 'FYP: Hashkit');
 		<?php 
 						echo "<div style='float:right'>";
 						//echo "Logged in as ";
-						echo $this->Html->link('Sign in', array('controller' => 'users', 'action' => 'login'));
+						echo $this->Html->link('Aik Chun', array('controller' => 'users', 'action' => 'login'));
 						echo " | ";
-						echo $this->Html->link('Register!', array('controller' => 'users', 'action' => 'register'));
+						echo $this->Html->link('Log out', array('controller' => 'users', 'action' => 'register'));
 						//echo $this->Html->link(('Logout'), array('controller' => 'users', 'action' => 'logout'));
 						echo "</div>";
 		?>
