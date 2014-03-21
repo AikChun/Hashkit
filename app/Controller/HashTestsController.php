@@ -117,7 +117,7 @@ class HashTestsController extends AppController {
 			$output = $this->computeAndCompareDigests($selectedAlgorithms, $data['HashTests']);
 
 			$this->Session->write('output', $output);
-			$this->redirect(array('controller' => 'HashResults', 'action' => 'basicHashingResult'));
+			$this->redirect(array('controller' => 'HashResults', 'action' => 'computeAndCompareResult'));
 
 		}
 
@@ -143,10 +143,20 @@ class HashTestsController extends AppController {
 	}
 
 	protected function compareDigests($output) {
+		$hashResultModel = ClassRegistry::init('HashResult');
+		$analysis = array();
 		foreach($output as $key => $hashResult) {
-			
+			$conditions = array(
+				'conditions' => array('HashResult.message_digest' => $hashResult['HashResult']['message_digest']),
+			);
+			$result = $hashResultModel->find('first', $conditions);
+
+			if(!empty($result['HashResult']['message_digest'])) {
+				$hashResult['HashResult']['analysis'] = 'This input is a very common hash value for the algorithm'. $analysis['HashResult']['hash_algorithm_id'];
+			}
+
 		}
-		
-		
+		$this->log($output);
+		return $output;
 	}
 }
