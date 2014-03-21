@@ -1,14 +1,21 @@
 <?php
 	
 ?>
-<div class="pages view">
+<div class="users view">
+<div style="float:center">
 <div class="header" style="font-size:165%">
 Welcome!
 </div>
 <br><br>This is a project done by a group of University of Wollongong (UOW) students. <br>
 The purpose of this project to provide the public with some tools for cryptographic application.<br><br>
 
-You can begin a simple cryptographic test by clicking 'Begin a test' on the right side of your screen.
+<?php echo $this->Html->link('Sign in', array('controller' => 'users', 'action' => 'login')); ?>
 	
-</div>
+ or 
 
+<?php echo $this->Html->link('Register', array('controller' => 'users', 'action' => 'register'));?>
+
+to begin using our product!
+
+</div>
+</div>

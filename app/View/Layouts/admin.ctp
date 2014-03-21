@@ -39,7 +39,17 @@ $cakeDescription = __d('cake_dev', 'FYP: Hashkit');
 <body>
 	<div id="container">
 		<div id="header">
-			<h1><?php echo $this->Html->link($cakeDescription, '/'); ?></h1>
+			<h1><?php echo $this->Html->link($cakeDescription, '/'); ?>
+		<?php 
+						echo "<div style='float:right'>";
+						//echo "Logged in as ";
+						echo $this->Html->link('Sign in', array('controller' => 'users', 'action' => 'login'));
+						echo " | ";
+						echo $this->Html->link('Register!', array('controller' => 'users', 'action' => 'register'));
+						//echo $this->Html->link(('Logout'), array('controller' => 'users', 'action' => 'logout'));
+						echo "</div>";
+		?>
+			</h1>
 		</div>
 		<div id="content">
 
@@ -47,8 +57,18 @@ $cakeDescription = __d('cake_dev', 'FYP: Hashkit');
 
 			<?php echo $this->fetch('content'); ?>
 
+			<div class="actions">
+				<h3><?php echo __('Quick Links'); ?></h3>
+
+			<ul>
+			<li> <?php echo $this->Html->link('Home', '/'); ?> </li>
+			<li><?php echo $this->Html->link('Blog', 'http://hashkitproject.blogspot.sg/')?></li>
+			</ul>
+			</div>
 		</div>
 		<div id="footer">
+
+		</div>
 			<?php //echo $this->Html->link(
 					// $this->Html->image('cake.power.gif', array('alt' => $cakeDescription, 'border' => '0')),
 					// 'http://www.cakephp.org/',

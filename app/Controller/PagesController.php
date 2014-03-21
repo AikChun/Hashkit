@@ -79,6 +79,7 @@ class PagesController extends AppController {
 	}
 
 	public function index() {
+		$this->layout = 'admin';
 
 	}
 	public function computeAndCompare() {

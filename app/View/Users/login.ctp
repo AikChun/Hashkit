@@ -1,5 +1,5 @@
 
-<div class="users view">
+<div class="users form">
 <?php
 echo $this->Form->create('User', array('action' => 'login', 'style' => "margin-left:62px;"));?>
 

@@ -104,6 +104,10 @@ class UsersController extends AppController {
 		return $this->redirect(array('action' => 'index'));
 	}
 	public function login() {
+		$this->layout = 'admin';
+		if($this->request->is('post')) {
+			$this->redirect(array('action' => 'home'));
+		}
 	}
 
 	public function logoff() {
@@ -111,6 +115,7 @@ class UsersController extends AppController {
 	}
 
 	public function register() {
+		$this->layout = 'admin';
 		if($this->request->is('post')) {
 			$data = $this->request->data;
 			$this->log($data);
@@ -125,7 +130,12 @@ class UsersController extends AppController {
 	}
 
 	public function forget_password() {
+		$this->layout = 'admin';
 		$this->User->recursive=-1;
+	}
+
+	public function home() {
+		
 	}
 
 }
