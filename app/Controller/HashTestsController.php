@@ -63,7 +63,6 @@ class HashTestsController extends AppController {
 		if($this->request->is('post')) {
 			$data = $this->request->data;
 			$output = $this->computeDigests($selectedAlgorithms, $data['HashTests']);
-			$this->log($output);
 			// $hashResultModel->create();
 			// if ($hashResultModel->save($output)) {
 			// 	$this->Session->setFlash(__('The hash result has been saved.'));
@@ -117,7 +116,7 @@ class HashTestsController extends AppController {
 			$output = $this->computeDigests($selectedAlgorithms, $data['HashTests']);
 			$outputResult = $this->compareDigests($output);
 
-			$this->Session->write('output', $output);
+			$this->Session->write('output', $outputResult);
 			$this->redirect(array('controller' => 'HashResults', 'action' => 'computeAndCompareResult'));
 
 		}
@@ -153,15 +152,17 @@ class HashTestsController extends AppController {
 				'fields' => 'id'
 			);
 			$result = $hashResultModel->find('first', $conditions);
+			$this->log('This is result.');
+			$this->log($result);
 
-			if(!empty($result['HashResult']['message_digest'])) {
-				$hashResult['HashResult']['analysis'] = 'This input is a very common hash value for the algorithm'. $analysis['HashResult']['hash_algorithm_id'];
+
+			if(!empty($result['HashResult']['id'])) {
+				$hashResult['HashResult']['analysis'] = 'This input is a very common hash value for the algorithm: '. $hashResult['HashResult']['hash_algorithm_name'];
 			} else {
-				$hashResult['HashResult']['analysis'] = 'This is not a common hash value for algorithm: '. $analysis['HashResult']['hash_algorithm_id'];
+				$hashResult['HashResult']['analysis'] = 'This is not a common hash value for algorithm: '. $hashResult['HashResult']['hash_algorithm_name'];
 			}
-
+			array_push($analysis, $hashResult);
 		}
-		$this->log($output);
-		return $output;
+		return $analysis;
 	}
 }

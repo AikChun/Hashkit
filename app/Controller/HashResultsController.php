@@ -113,7 +113,8 @@ class HashResultsController extends AppController {
 	}
 
 	public function computeAndCompareResult() {
-		$outputResult = $this->Session->read($outputResult);
+		$outputResult = $this->Session->read('output');
+		$this->log($outputResult);
 		$this->set('output', $outputResult);
 		$this->Session->destroy();
 	}
