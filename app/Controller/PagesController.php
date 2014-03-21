@@ -85,4 +85,8 @@ class PagesController extends AppController {
 	public function computeAndCompare() {
 
 	}
+
+	public function sendEmailNotification() {
+
+	}
 }
