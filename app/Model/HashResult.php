@@ -15,12 +15,11 @@ class HashResult extends AppModel {
 	public $hasOne = array(
 		'HashAlgorithm' => array(
 			'className' => 'HashAlgorithm',
-			'foreignKey' => 'hash_algorithm_id',
-			'counterCache' => true
+			'foreignKey' => 'id',
 		),
 		'User' => array(
 			'className' => 'User',
-			'foreignKey' => 'user_id',
+			'foreignKey' => 'id',
 			'counterCache' => true
 		)
 	);

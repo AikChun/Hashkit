@@ -112,6 +112,12 @@ class HashResultsController extends AppController {
 		$this->Session->destroy();
 	}
 
+	public function computeAndCompareResult() {
+		$outputResult = $this->Session->read($outputResult);
+		$this->set('output', $outputResult);
+		$this->Session->destroy();
+	}
+
 	public function showMyTestResults(){
 		$this->HashResult->recursive = 0;
 		$this->set('hashResults', $this->Paginator->paginate());

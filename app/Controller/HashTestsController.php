@@ -114,7 +114,8 @@ class HashTestsController extends AppController {
 		$selectedAlgorithms = $this->Session->read('selectedAlgorithms');
 		if($this->request->is('post')) {
 			$data = $this->request->data;
-			$output = $this->computeAndCompareDigests($selectedAlgorithms, $data['HashTests']);
+			$output = $this->computeDigests($selectedAlgorithms, $data['HashTests']);
+			$outputResult = $this->compareDigests($output);
 
 			$this->Session->write('output', $output);
 			$this->redirect(array('controller' => 'HashResults', 'action' => 'computeAndCompareResult'));
@@ -142,17 +143,21 @@ class HashTestsController extends AppController {
 		return $output;
 	}
 
+
 	protected function compareDigests($output) {
 		$hashResultModel = ClassRegistry::init('HashResult');
 		$analysis = array();
 		foreach($output as $key => $hashResult) {
 			$conditions = array(
 				'conditions' => array('HashResult.message_digest' => $hashResult['HashResult']['message_digest']),
+				'fields' => 'id'
 			);
 			$result = $hashResultModel->find('first', $conditions);
 
 			if(!empty($result['HashResult']['message_digest'])) {
 				$hashResult['HashResult']['analysis'] = 'This input is a very common hash value for the algorithm'. $analysis['HashResult']['hash_algorithm_id'];
+			} else {
+				$hashResult['HashResult']['analysis'] = 'This is not a common hash value for algorithm: '. $analysis['HashResult']['hash_algorithm_id'];
 			}
 
 		}

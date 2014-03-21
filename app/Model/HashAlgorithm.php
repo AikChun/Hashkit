@@ -22,7 +22,7 @@ class HashAlgorithm extends AppModel {
 
 	public $hasMany = array(
 		'HashResult' => array(
-			'className' => 'HashResult',
+			'className' => 'HashResult'
 		)
 	);
 }
