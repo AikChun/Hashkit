@@ -1,0 +1,33 @@
+<div class="hashTests view">
+
+<?php
+echo $this->Form->create('HashTests', array('action' => 'reverseHashLookUp'));
+?>
+<fieldset>
+<legend> Enter Hash value.</legend>
+<?php
+echo $this->Form->input('message_digest', array(
+'type' => 'text',
+'div' => false,
+'label' => 'Please enter your unsalted hash value:'
+));
+// echo $this->Form->input('id', array(
+// 'type' => 'hidden',
+// 'div' => false,
+// 'value' => 1
+// ));
+?>
+<br><br><br>
+<div class="or" style="font-size:200%">OR</div>
+<br><br>
+
+<?php
+echo $this->Form->input('file_upload', array(
+'type' => 'file',
+'div' => false,
+'label' => 'Upload your text file'
+));
+?>
+</fieldset>
+<?php echo $this->Form->end(__('Submit')); ?>
+</div>

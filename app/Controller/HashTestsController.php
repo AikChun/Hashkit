@@ -165,4 +165,12 @@ class HashTestsController extends AppController {
 		}
 		return $analysis;
 	}
+
+/**
+ * To look up plaintext equivalent when entering message digest
+ *
+ */
+	public function reverseHashLookUp() {
+
+	}
 }
