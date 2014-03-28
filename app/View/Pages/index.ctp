@@ -9,7 +9,11 @@ Welcome!
 <br><br>This is a project done by a group of University of Wollongong (UOW) students. <br>
 The purpose of this project to provide the public with some tools for cryptographic application.<br><br>
 
-<?php echo $this->Html->link('Sign in', array('controller' => 'users', 'action' => 'login')); ?>
+<?php 
+if(empty($authUser)): 
+
+echo $this->Html->link('Sign in', array('controller' => 'users', 'action' => 'login')); 
+?>
 	
  or 
 
@@ -17,5 +21,6 @@ The purpose of this project to provide the public with some tools for cryptograp
 
 to begin using our product!
 
+<?php endif;?>
 </div>
 </div>

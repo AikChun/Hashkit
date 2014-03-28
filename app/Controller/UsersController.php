@@ -16,7 +16,7 @@ class UsersController extends AppController {
  * @var array
  */
 	public $components = array('Paginator', 'Session', 'Email'); 
-	// public $helpers=array('Html','Form','Session');
+	public $helpers=array('Html','Form','Session');
 
 	public function beforeFilter() {
 		parent::beforeFilter();
@@ -48,7 +48,7 @@ class UsersController extends AppController {
  */
 	public function index() {
 		$this->User->recursive = 0;
-		/* $this->set('users', $this->Paginator->paginate()); */
+		$this->set('users', $this->Paginator->paginate());
 	}
 
 /**
@@ -71,8 +71,9 @@ class UsersController extends AppController {
  *
  * @return void
  */
-	public function add() {
+	public function admin_add() {
 		if ($this->request->is('post')) {
+			$this->log($this->request->data);
 			$this->User->create();
 			if ($this->User->save($this->request->data)) {
 				$this->Session->setFlash(__('The user has been saved.'));
@@ -134,7 +135,6 @@ class UsersController extends AppController {
 				$this->redirect($this->Auth->redirect());
 			} else {
 				$log = $this->User->getDataSource()->getLog(false, false);
-				$this->log($log);
 				$this->Session->setFlash(__('Your username or password was incorrect.'));
 			}
 		}
@@ -147,15 +147,15 @@ class UsersController extends AppController {
 	}
 
 	public function register() {
-		$this->layout = 'admin';
 		if($this->request->is('post')) {
 			$data = $this->request->data;
+			$data['User']['group_id'] = 3;
 			try{
 				if(!($data['User']['password'] == $data['User']['confirm_password'])) {
 					throw new Exception ('Please the password\'s does not match!');
 				}
 			$this->User->create();
-			if ($this->User->save($this->request->data)) {
+			if ($this->User->save($data)) {
 				$this->Session->setFlash(__('The user has been saved.'));
 				return $this->redirect(array('action' => 'index'));
 			} else {
@@ -169,7 +169,6 @@ class UsersController extends AppController {
 	}
 
 	public function forget_password() {
-		$this->layout = 'admin';
 		$this->User->recursive=-1;
 	}
 

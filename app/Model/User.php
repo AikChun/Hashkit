@@ -66,7 +66,7 @@ class User extends AppModel {
 		return true;
 	}
 
-	public function safeRead() {
+	public function safeRead($id) {
 		$this->recursive = 0;
 		$result = $this->find('first', array(
 			'conditions' => array('User.id' => $id),

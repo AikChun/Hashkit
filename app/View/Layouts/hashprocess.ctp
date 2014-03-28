@@ -44,10 +44,17 @@ $cakeDescription = __d('cake_dev', 'FYP: Hashkit');
 		<?php 
 						echo "<div style='float:right'>";
 						//echo "Logged in as ";
-						echo $this->Html->link('Aik Chun', array('controller' => 'users', 'action' => 'login'));
-						echo " | ";
-						echo $this->Html->link('Log out', array('controller' => 'users', 'action' => 'register'));
+						if(empty($authUser)) {
+							echo $this->Html->link('Sign in', array('controller' => 'users', 'action' => 'login'));
+							echo " | ";
+							echo $this->Html->link('Register!', array('controller' => 'users', 'action' => 'register'));
+						}
 						//echo $this->Html->link(('Logout'), array('controller' => 'users', 'action' => 'logout'));
+						else {
+							echo $this->Html->link($authUser['name'], array('controller' => 'users', 'action' => 'home'));
+							echo " | ";
+							echo $this->Html->link(('Logout'), array('controller' => 'users', 'action' => 'logout'));
+						}
 						echo "</div>";
 		?>
 			</h1>
@@ -57,16 +64,25 @@ $cakeDescription = __d('cake_dev', 'FYP: Hashkit');
 			<?php echo $this->Session->flash(); ?>
 
 			<?php echo $this->fetch('content'); ?>
-			<div class="actions">
-				<h3><?php echo __('Quick Links'); ?></h3>
 
-			<ul>
-			<li> <?php echo $this->Html->link('Admin Options', array('controller' => 'users', 'action' => 'index')); ?> </li>
-			<li> <?php echo $this->Html->link('Home', '/'); ?> </li>
-			<li><?php echo $this->Html->link('Begin a Test', '/pages/begintest');?></li>
-			<li><?php echo $this->Html->link('My Test Results', array('controller' => 'HashResults', 'action' => 'showmytestresults'))?></li>
-			<li><?php echo $this->Html->link('Blog', 'http://hashkitproject.blogspot.sg/')?></li>
-			</ul>
+			<div class="actions">
+				<?php  if($authUser['group_id'] == 1) :?>
+				<h3><?php echo __('Admin Actions'); ?></h3>
+				<ul>
+					<li><?php echo $this->Html->link(__('List Users'), array('action' => 'index')); ?></li>
+					<li><?php echo $this->Html->link(__('Add Users'), array('controller' => 'users', 'action' => 'admin_add')); ?></li>
+				</ul>
+				<?php endif;?>
+
+				<h3><?php echo __('Quick Links'); ?></h3>
+				<ul>
+					<li> <?php echo $this->Html->link('Home', '/'); ?> </li>
+					<?php if(!empty($authUser)) :?>
+					<li><?php echo $this->Html->link('Begin a Test', '/pages/begintest');?></li>
+					<li><?php echo $this->Html->link('My Test Results', array('controller' => 'HashResults', 'action' => 'showmytestresults'))?></li>
+					<?php endif;?>
+					<li><?php echo $this->Html->link('Blog', 'http://hashkitproject.blogspot.sg/')?></li>
+				</ul>
 			</div>
 
 		</div>

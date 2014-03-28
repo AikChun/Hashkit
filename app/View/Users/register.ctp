@@ -7,7 +7,6 @@
 		echo $this->Form->input('email', array('required'));
 		echo $this->Form->input('password', array('type' => 'password', 'required'));
 		echo $this->Form->input('confirm_password', array('type' => 'password', 'required'));
-		echo $this->Form->input('group_id', array('type' => 'hidden', 'value' => 1));
 		echo $this->Form->input('profile');
 	?>
 	</fieldset>

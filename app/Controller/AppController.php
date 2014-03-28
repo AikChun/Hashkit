@@ -72,7 +72,7 @@ class AppController extends Controller {
 	protected function _prepareLogin() {
 		//Configure AuthComponent
 		$this->Auth->loginAction = array('controller' => 'users', 'action' => 'login');
-		$this->Auth->loginRedirect = array('controller' => 'users', 'action' => 'home');
+		$this->Auth->loginRedirect = array('controller' => 'pages', 'action' => 'index');
 	}
 
 	protected function _setAuthUser() {
