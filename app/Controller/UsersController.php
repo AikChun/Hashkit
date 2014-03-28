@@ -9,13 +9,37 @@ App::uses('AppController', 'Controller');
  */
 class UsersController extends AppController {
 
+
 /**
  * Components
  *
  * @var array
  */
-	public $components = array('Paginator', 'Session', 'Email');
-	public $helpers=array('Html','Form','Session');
+	public $components = array('Paginator', 'Session', 'Email'); 
+	// public $helpers=array('Html','Form','Session');
+
+	public function beforeFilter() {
+		parent::beforeFilter();
+		$this->_configureAllowedActions();
+	}
+
+/**
+ * determine which actions require authentication or allow anonymous access
+ *
+ * @return void
+ **/
+ protected function _configureAllowedActions() {
+ 	$allowedActions = array(
+ 	 'login',
+ 	 'logout',
+ 	 'admin_login',
+ 	 'admin_logout',
+ 	 'forget_password',
+ 	 'reset_password',
+	 'register',
+ 	);
+ 	$this->Auth->allow($allowedActions);
+ }
 
 /**
  * index method
@@ -24,7 +48,7 @@ class UsersController extends AppController {
  */
 	public function index() {
 		$this->User->recursive = 0;
-		$this->set('users', $this->Paginator->paginate());
+		/* $this->set('users', $this->Paginator->paginate()); */
 	}
 
 /**
@@ -104,25 +128,40 @@ class UsersController extends AppController {
 		return $this->redirect(array('action' => 'index'));
 	}
 	public function login() {
-		$this->layout = 'admin';
 		if($this->request->is('post')) {
-			$this->redirect(array('action' => 'home'));
+			$this->log($this->request->data);
+			if($this->Auth->login()) {
+				$this->redirect($this->Auth->redirect());
+			} else {
+				$log = $this->User->getDataSource()->getLog(false, false);
+				$this->log($log);
+				$this->Session->setFlash(__('Your username or password was incorrect.'));
+			}
 		}
 	}
 
-	public function logoff() {
-		
+	public function logout() {
+		$this->Session->setFlash("Goodbye.");
+		$this->redirect($this->Auth->logout());
+
 	}
 
 	public function register() {
 		$this->layout = 'admin';
 		if($this->request->is('post')) {
 			$data = $this->request->data;
-			$this->log($data);
 			try{
 				if(!($data['User']['password'] == $data['User']['confirm_password'])) {
 					throw new Exception ('Please the password\'s does not match!');
 				}
+			$this->User->create();
+			if ($this->User->save($this->request->data)) {
+				$this->Session->setFlash(__('The user has been saved.'));
+				return $this->redirect(array('action' => 'index'));
+			} else {
+				$this->Session->setFlash(__('The user could not be saved. Please, try again.'));
+			}
+
 			} catch(Exception $e) {
 				$this->Session->setFlash($e->getMessage());
 			}

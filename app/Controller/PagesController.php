@@ -37,9 +37,21 @@ class PagesController extends AppController {
  */
 	public function beforeFilter() {
 		parent::beforeFilter();
+		$this->_configureAllowedActions();
 	}
 	public $uses = array();
 
+/**
+ * determine which actions require authentication or allow anonymous access
+ *
+ * @return void
+ **/
+ protected function _configureAllowedActions() {
+ 	$allowedActions = array(
+		'index'
+ 	);
+ 	$this->Auth->allow($allowedActions);
+ }
 /**
  * Displays a view
  *

@@ -6,6 +6,10 @@ App::uses('AppModel', 'Model');
  */
 class Group extends AppModel {
 
+	public $hasMany = array(
+
+	);
+	public $actAs = array('Acl' => array('type' => 'requester'));
 /**
  * Use table
  *
@@ -19,5 +23,9 @@ class Group extends AppModel {
  * @var string
  */
 	public $displayField = 'name';
+
+	public function parentNode() {
+		return null;
+	}
 
 }
