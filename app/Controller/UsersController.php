@@ -158,7 +158,6 @@ class UsersController extends AppController {
 					'fields' => array('User.email')
 				);
 				$searchResult = $this->User->find('first', $conditions );
-				$this->log($searchResult);
 				if(!empty($searchResult)) {
 					throw new Exception ('This email is not available. This email address has already been used.');
 				}
@@ -179,10 +178,6 @@ class UsersController extends AppController {
 
 	public function forget_password() {
 		$this->User->recursive=-1;
-	}
-
-	public function home() {
-		
 	}
 
 }
