@@ -34,6 +34,10 @@ App::uses('Controller', 'Controller');
 class AppController extends Controller {
 	public $authUser = null;
 
+	public $helpers = array(
+		'Html','Form','Session'
+	);
+
 	public $components = array(
 		'RequestHandler',
 		'Session',
@@ -64,14 +68,9 @@ class AppController extends Controller {
 		$this->layout = 'hashprocess';
 	}
 
-
-	public $helpers = array(
-		'Html','Form','Session'
-	);
-
 	protected function _prepareLogin() {
 		//Configure AuthComponent
-		$this->Auth->loginAction = array('controller' => 'users', 'action' => 'login');
+		$this->Auth->loginAction = array('controller' => 'pages', 'action' => 'index');
 		$this->Auth->loginRedirect = array('controller' => 'pages', 'action' => 'index');
 	}
 

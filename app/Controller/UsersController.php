@@ -134,7 +134,6 @@ class UsersController extends AppController {
 			if($this->Auth->login()) {
 				$this->redirect($this->Auth->redirect());
 			} else {
-				$log = $this->User->getDataSource()->getLog(false, false);
 				$this->Session->setFlash(__('Your username or password was incorrect.'));
 			}
 		}
@@ -154,16 +153,26 @@ class UsersController extends AppController {
 				if(!($data['User']['password'] == $data['User']['confirm_password'])) {
 					throw new Exception ('Please the password\'s does not match!');
 				}
-			$this->User->create();
-			if ($this->User->save($data)) {
-				$this->Session->setFlash(__('The user has been saved.'));
-				return $this->redirect(array('action' => 'index'));
-			} else {
-				$this->Session->setFlash(__('The user could not be saved. Please, try again.'));
-			}
+				$conditions = array(
+					'conditions' => array('User.email' => $data['User']['email']),
+					'fields' => array('User.email')
+				);
+				$searchResult = $this->User->find('first', $conditions );
+				$this->log($searchResult);
+				if(!empty($searchResult)) {
+					throw new Exception ('This email is not available. This email address has already been used.');
+				}
+				$this->User->create();
+				if ($this->User->save($data)) {
+					$this->Session->setFlash(__('You have registered successfully!'));
+					return $this->redirect(array('action' => 'index'));
+				} else {
+					$this->Session->setFlash(__('The user could not be saved. Please, try again.'));
+				}
 
 			} catch(Exception $e) {
 				$this->Session->setFlash($e->getMessage());
+				$this->redirect(array('action' => 'index'));
 			}
 		}
 	}
