@@ -51,7 +51,7 @@ $cakeDescription = __d('cake_dev', 'FYP: Hashkit');
 						}
 						//echo $this->Html->link(('Logout'), array('controller' => 'users', 'action' => 'logout'));
 						else {
-							echo $this->Html->link($authUser['name'], array('controller' => 'users', 'action' => 'home'));
+							echo $this->Html->link($authUser['name'], '/');
 							echo " | ";
 							echo $this->Html->link(('Logout'), array('controller' => 'users', 'action' => 'logout'));
 						}
@@ -78,8 +78,8 @@ $cakeDescription = __d('cake_dev', 'FYP: Hashkit');
 				<ul>
 					<li> <?php echo $this->Html->link('Home', '/'); ?> </li>
 					<?php if(!empty($authUser)) :?>
-					<li><?php echo $this->Html->link('Begin a Test', '/pages/begintest');?></li>
-					<li><?php echo $this->Html->link('My Test Results', array('controller' => 'HashResults', 'action' => 'showmytestresults'))?></li>
+					<li><?php echo $this->Html->link('Begin a Test', '/pages/begin_test');?></li>
+					<li><?php echo $this->Html->link('My Test Results', array('controller' => 'HashResults', 'action' => 'show_my_test_results'))?></li>
 					<?php endif;?>
 					<li><?php echo $this->Html->link('Blog', 'http://hashkitproject.blogspot.sg/')?></li>
 				</ul>
