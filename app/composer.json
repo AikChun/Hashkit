@@ -1,9 +1,9 @@
 {
-	"config": {
-		"vendor-dir": "Vendor"
-	},
-	"require": {
-		"markstory/acl_extras": "dev-master",
-		"simkimsia/permissions-extras": "dev-master"
-	}
+    "config": {
+   	 "vendor-dir": "Vendor"
+    },
+    "require": {
+   	 "markstory/acl_extras": "dev-master",
+   	 "simkimsia/permissions-extras": "dev-master"
+    }
 }
