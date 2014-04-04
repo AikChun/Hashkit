@@ -104,22 +104,27 @@ class HashResultsController extends AppController {
 	}
 
 
-	public function basicHashingResult() {
+	public function basic_hashing_result() {
 		$output = $this->Session->read('output');
-		$this->set("output", $output);
-		$this->HashResult->create();
-		$this->HashResult->saveMany($output);
-		$this->Session->destroy();
+		if(!empty($output)) {
+			$this->set("output", $output);
+			$this->HashResult->create();
+			$this->HashResult->saveMany($output);
+		} else {
+			$output = '';
+			$this->set('output', $output);
+		}
+		$this->Session->write('output', '');
 	}
 
-	public function computeAndCompareResult() {
+	public function compute_and_compare_result() {
 		$outputResult = $this->Session->read('output');
 		$this->log($outputResult);
 		$this->set('output', $outputResult);
 		$this->Session->destroy();
 	}
 
-	public function showMyTestResults(){
+	public function show_my_test_results() {
 		$this->HashResult->recursive = 0;
 		$this->set('hashResults', $this->Paginator->paginate());
 	}

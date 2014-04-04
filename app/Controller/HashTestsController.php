@@ -1,6 +1,8 @@
 
 <?php
 App::uses('AppController', 'Controller');
+App::uses('HashingLib', 'Lib/Hashing');
+
 /**
  * HashTests Controller
  *
@@ -15,20 +17,41 @@ class HashTestsController extends AppController {
  *
  * @var array
  */
-	public $components = array('Paginator', 'Session');
+	public $components = array('Paginator', 'Session', 'Email'); 
+	public $helpers=array('Html','Form','Session');
+
+	public function beforeFilter() {
+		parent::beforeFilter();
+		$this->_configureAllowedActions();
+	}
 
 /**
- * view method
+ * determine which actions require authentication or allow anonymous access
+ *
+ * @return void
+ **/
+	 protected function _configureAllowedActions() {
+		$allowedActions = array(
+		);
+		$this->Auth->allow($allowedActions);
+	 }
+
+/**
+ * Basic Hashing method
  *
  * @throws NotFoundException
  * @param string $id
  * @return void
  */
-	public function basicHashing() {
+
+/**
+ * User is to choose the algorithms that he/she wants to hash the plaintext.
+ */
+	public function basic_hashing() {
 		if($this->request->is('post')) {
 			if(empty($this->request->data['HashTests']['HashAlgorithm'])) {
 				$this->Session->setFlash('You did not select any algorithms!');
-				return $this->redirect(array('action' => 'basicHashing'));
+				return $this->redirect(array('action' => 'basic_hashing'));
 			}
 			$data = $this->request->data['HashTests'];
 			$HashAlgorithmModel = ClassRegistry::init('HashAlgorithm');
@@ -43,7 +66,8 @@ class HashTestsController extends AppController {
 				$selectedAlgorithms = $HashAlgorithmModel->find('all', $searchCondition);
 			}
 			$this->Session->write('selectedAlgorithms' , $selectedAlgorithms);
-			return $this->redirect(array('controller' => 'HashTests' ,'action' => 'basicHashingInput'));
+			$this->log("before basic hashing");
+			return $this->redirect(array('controller' => 'HashTests' ,'action' => 'basic_hashing_input'));
 			
 		}
 		$conditions = array(
@@ -52,31 +76,32 @@ class HashTestsController extends AppController {
 		);
 			
 
-		$this->Session->destroy();
+		$this->Session->write('selectedAlgorithms' , '');
 		$HashAlgorithmModel = ClassRegistry::init('HashAlgorithm');
 		$data = $HashAlgorithmModel->find('all', $conditions);
 		$this->set('data', $data);
 	}
 
-	public function basicHashingInput() {
+	/**
+	 * Allow user to input plaintext that is to be hashed.
+	 */
+	public function basic_hashing_input() {
+		$this->log("Enter basic hashing");
 		$selectedAlgorithms = $this->Session->read('selectedAlgorithms');
 		if($this->request->is('post')) {
 			$data = $this->request->data;
-			$output = $this->computeDigests($selectedAlgorithms, $data['HashTests']);
-			// $hashResultModel->create();
-			// if ($hashResultModel->save($output)) {
-			// 	$this->Session->setFlash(__('The hash result has been saved.'));
-			// 	return $this->redirect(array('action' => 'index'));
-			// } else {
-			// 	$this->Session->setFlash(__('The hash result could not be saved. Please, try again.'));
-			// }
+			$output = HashingLib::computeDigests($selectedAlgorithms, $data['HashTests']);
 
 			$this->Session->write('output', $output);
-			$this->redirect(array('controller' => 'HashResults', 'action' => 'basicHashingResult'));
+			$this->redirect(array('controller' => 'HashResults', 'action' => 'basic_hashing_result'));
 
 		}
 	}
-	public function computeAndCompare() {
+
+/**
+ * To allow the user choose the algorithms that is to analyzed.
+ */
+	public function compute_and_compare() {
 		if($this->request->is('post')) {
 			if(empty($this->request->data['HashTests']['HashAlgorithm'])) {
 				$this->Session->setFlash('You did not select any algorithms!');
@@ -103,12 +128,15 @@ class HashTestsController extends AppController {
 			'order' => array('name ASC')
 		);
 
-		$this->Session->destroy();
+		$this->Session->write('selectedAlgorithms' , '');
 		$HashAlgorithmModel = ClassRegistry::init('HashAlgorithm');
 		$data = $HashAlgorithmModel->find('all', $conditions);
 		$this->set('data', $data);
 	}
 
+/**
+ * Input page of the compute and compare functionality of the project.
+ */
 	public function computeAndCompareInput() {
 		$selectedAlgorithms = $this->Session->read('selectedAlgorithms');
 		if($this->request->is('post')) {
@@ -122,6 +150,10 @@ class HashTestsController extends AppController {
 		}
 
 	}
+
+/**
+ * Compute the hashed value of the input plaintext.
+ */
 	protected function computeDigests($selectedAlgorithms, $hashTestForm) {
 		$computed = array();
 		$output = array();
@@ -142,7 +174,10 @@ class HashTestsController extends AppController {
 		return $output;
 	}
 
-
+/**
+ * Compare the message digests to come up with an analysis
+ *
+ */
 	protected function compareDigests($output) {
 		$hashResultModel = ClassRegistry::init('HashResult');
 		$analysis = array();

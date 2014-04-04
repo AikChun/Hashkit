@@ -1,5 +1,5 @@
 <div class="hashTests view">
-	<?php echo $this->Form->create('HashTests', array('action' => 'basicHashing'));?>
+	<?php echo $this->Form->create('HashTests');?>
 	<?php 
 		$algorithms = array();
 		foreach($data as $key => $model ) : 
