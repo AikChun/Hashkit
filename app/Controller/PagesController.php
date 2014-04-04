@@ -100,4 +100,8 @@ class PagesController extends AppController {
 	public function sendEmailNotification() {
 
 	}
+
+	public function begin_test() {
+
+	}
 }
