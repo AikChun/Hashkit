@@ -1,4 +1,4 @@
--- Adminer 3.7.1 MySQL dump
+-- Adminer 4.0.3 MySQL dump
 
 SET NAMES utf8;
 SET foreign_key_checks = 0;
@@ -22,7 +22,7 @@ CREATE TABLE `acos` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 INSERT INTO `acos` (`id`, `parent_id`, `model`, `foreign_key`, `alias`, `lft`, `rght`) VALUES
-(1,	NULL,	NULL,	NULL,	'controllers',	1,	104),
+(1,	NULL,	NULL,	NULL,	'controllers',	1,	106),
 (2,	1,	NULL,	NULL,	'Groups',	2,	13),
 (3,	2,	NULL,	NULL,	'index',	3,	4),
 (4,	2,	NULL,	NULL,	'view',	5,	6),
@@ -44,36 +44,37 @@ INSERT INTO `acos` (`id`, `parent_id`, `model`, `foreign_key`, `alias`, `lft`, `
 (20,	17,	NULL,	NULL,	'computeAndCompare',	43,	44),
 (21,	17,	NULL,	NULL,	'computeAndCompareInput',	45,	46),
 (22,	17,	NULL,	NULL,	'reverseHashLookUp',	47,	48),
-(23,	1,	NULL,	NULL,	'Pages',	56,	65),
+(23,	1,	NULL,	NULL,	'Pages',	56,	67),
 (24,	23,	NULL,	NULL,	'display',	57,	58),
 (25,	23,	NULL,	NULL,	'index',	59,	60),
 (26,	23,	NULL,	NULL,	'computeAndCompare',	61,	62),
 (27,	23,	NULL,	NULL,	'sendEmailNotification',	63,	64),
-(28,	1,	NULL,	NULL,	'Users',	66,	91),
-(29,	28,	NULL,	NULL,	'index',	67,	68),
-(30,	28,	NULL,	NULL,	'view',	69,	70),
-(31,	28,	NULL,	NULL,	'add',	71,	72),
-(32,	28,	NULL,	NULL,	'edit',	73,	74),
-(33,	28,	NULL,	NULL,	'delete',	75,	76),
-(34,	28,	NULL,	NULL,	'login',	77,	78),
-(35,	28,	NULL,	NULL,	'logoff',	79,	80),
-(36,	28,	NULL,	NULL,	'register',	81,	82),
-(37,	28,	NULL,	NULL,	'forget_password',	83,	84),
-(38,	28,	NULL,	NULL,	'home',	85,	86),
-(39,	1,	NULL,	NULL,	'AclExtras',	92,	93),
-(40,	1,	NULL,	NULL,	'DebugKit',	94,	101),
-(41,	40,	NULL,	NULL,	'ToolbarAccess',	95,	100),
-(42,	41,	NULL,	NULL,	'history_state',	96,	97),
-(43,	41,	NULL,	NULL,	'sql_explain',	98,	99),
-(44,	1,	NULL,	NULL,	'PermissionsExtras',	102,	103),
-(45,	28,	NULL,	NULL,	'admin_add',	87,	88),
-(46,	28,	NULL,	NULL,	'logout',	89,	90),
+(28,	1,	NULL,	NULL,	'Users',	68,	93),
+(29,	28,	NULL,	NULL,	'index',	69,	70),
+(30,	28,	NULL,	NULL,	'view',	71,	72),
+(31,	28,	NULL,	NULL,	'add',	73,	74),
+(32,	28,	NULL,	NULL,	'edit',	75,	76),
+(33,	28,	NULL,	NULL,	'delete',	77,	78),
+(34,	28,	NULL,	NULL,	'login',	79,	80),
+(35,	28,	NULL,	NULL,	'logoff',	81,	82),
+(36,	28,	NULL,	NULL,	'register',	83,	84),
+(37,	28,	NULL,	NULL,	'forget_password',	85,	86),
+(38,	28,	NULL,	NULL,	'home',	87,	88),
+(39,	1,	NULL,	NULL,	'AclExtras',	94,	95),
+(40,	1,	NULL,	NULL,	'DebugKit',	96,	103),
+(41,	40,	NULL,	NULL,	'ToolbarAccess',	97,	102),
+(42,	41,	NULL,	NULL,	'history_state',	98,	99),
+(43,	41,	NULL,	NULL,	'sql_explain',	100,	101),
+(44,	1,	NULL,	NULL,	'PermissionsExtras',	104,	105),
+(45,	28,	NULL,	NULL,	'admin_add',	89,	90),
+(46,	28,	NULL,	NULL,	'logout',	91,	92),
 (47,	17,	NULL,	NULL,	'basic_hashing',	49,	50),
 (48,	17,	NULL,	NULL,	'basic_hashing_input',	51,	52),
 (49,	8,	NULL,	NULL,	'basic_hashing_result',	31,	32),
 (50,	8,	NULL,	NULL,	'compute_and_compare_result',	33,	34),
 (51,	8,	NULL,	NULL,	'show_my_test_results',	35,	36),
-(52,	17,	NULL,	NULL,	'compute_and_compare',	53,	54);
+(52,	17,	NULL,	NULL,	'compute_and_compare',	53,	54),
+(53,	23,	NULL,	NULL,	'begin_test',	65,	66);
 
 DROP TABLE IF EXISTS `aros`;
 CREATE TABLE `aros` (
@@ -109,7 +110,10 @@ INSERT INTO `aros_acos` (`id`, `aro_id`, `aco_id`, `_create`, `_read`, `_update`
 (1,	1,	1,	'1',	'1',	'1',	'1'),
 (2,	2,	1,	'-1',	'-1',	'-1',	'-1'),
 (3,	2,	31,	'1',	'1',	'1',	'1'),
-(4,	3,	1,	'-1',	'-1',	'-1',	'-1');
+(4,	3,	1,	'-1',	'-1',	'-1',	'-1'),
+(5,	3,	23,	'1',	'1',	'1',	'1'),
+(6,	3,	17,	'1',	'1',	'1',	'1'),
+(7,	3,	8,	'1',	'1',	'1',	'1');
 
 DROP TABLE IF EXISTS `group`;
 CREATE TABLE `group` (
@@ -174,6 +178,7 @@ CREATE TABLE `user` (
 
 INSERT INTO `user` (`id`, `password`, `name`, `email`, `group_id`, `profile`, `status`, `created`, `modified`) VALUES
 (5,	'96b9369f55be479d63a8ef366966a03a607657e4',	'yong',	'yong24@gmail.com',	1,	'I am yong',	'',	'2014-03-28 01:05:48',	'2014-03-28 01:05:48'),
-(10,	'96b9369f55be479d63a8ef366966a03a607657e4',	'AikChun',	'aikchun616@gmail.com',	1,	'I am the main user.',	'',	'2014-03-28 01:36:02',	'2014-03-28 01:36:02');
+(10,	'96b9369f55be479d63a8ef366966a03a607657e4',	'AikChun',	'aikchun616@gmail.com',	1,	'I am the main user.',	'',	'2014-03-28 01:36:02',	'2014-03-28 01:36:02'),
+(11,	'96b9369f55be479d63a8ef366966a03a607657e4',	'dude',	'dude@gmail.com',	3,	'',	'',	'2014-04-05 00:20:03',	'2014-04-05 00:20:03');
 
--- 2014-04-03 20:28:29
+-- 2014-04-05 00:49:33
