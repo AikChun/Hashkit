@@ -195,5 +195,45 @@ class UsersController extends AppController {
 		}
 	}
 
-}
+/**
+ * reset_password method
+ *
+ * @return void
+ */
+	public function reset_password() {
+		if(isset($_GET['token'])){
+			$userData = $this->User->findByToken($_GET['token']);
+			$validToken = $userData;
+			$this->set('token', $_GET['token']);
+		} else {
+			$validToken = false;
+		}
 
+		if (!$validToken) {
+			$this->Session->setFlash('Invalid link. Please Login.');
+			$this->redirect(array('action' => 'login'));
+		}
+
+		if ($this->request->is('get')) {
+			if ($validToken) {
+				$this->request->data = $userData;
+			}
+		} else if ($this->request->is('post') || $this->request->is('put')) {
+			try {
+				$result = $this->User->resetPassword($this->request->data);
+				$errorMessage = "Not successful";
+			} catch(CakeException $error) {
+				$result = false;
+				$errorMessage = $error->getMessage();
+			}
+
+			if ($result) {
+				$this->Session->setFlash('Password successfully changed');
+				$this->redirect(array('action' => 'login'));
+			} else {
+				$this->Session->setFlash($errorMessage);
+			}
+		}
+	}
+
+}

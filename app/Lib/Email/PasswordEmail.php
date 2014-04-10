@@ -4,7 +4,7 @@ App::uses('CakeEmail', 'Network/Email');
 class PasswordEmail {
 
 	private $emailConfig = 'gmail';
-	private $sender = 'support@hashkit.com';
+	private $sender = 'hashkitproject@hashkit.com';
 
 	private $from;
 	private $to;
