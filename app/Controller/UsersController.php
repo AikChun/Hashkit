@@ -177,7 +177,22 @@ class UsersController extends AppController {
 	}
 
 	public function forget_password() {
-		$this->User->recursive=-1;
+		if ($this->request->is('post')) {
+			$email = $this->request->data['User']['email'];
+			$emailExist = $this->User->checkEmailExists($email);
+
+			if ($emailExist === true) {
+				//concat datetime and email, and hash them to create token
+				$userData = $this->User->findXORCreateToken($email);
+
+				//send email with token
+				$this->User->sendToken($userData);
+				$this->Session->setFlash('The reset link has been sent to your email. Please check your email and click the link.');
+				$this->redirect(array('action' => 'login'));
+			} else {
+				$this->Session->setFlash('Did you enter a valid email address?');
+			}
+		}
 	}
 
 }

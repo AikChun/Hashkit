@@ -5,23 +5,22 @@ class PasswordEmail {
 
 	private $emailConfig = 'gmail';
 	private $sender = 'support@hashkit.com';
-	private $hashkit = 'support@hashkit.com';
 
 	private $from;
 	private $to;
 
 	private $email;
-	private $admin = false;
 
-	public function __construct($to, $admin=false) {
-		$this->from	= array('full_name' => 'Hashkit', 'email' => $this->hashkit);
+	public function __construct($to) {
+		$this->from	= array('full_name' => 'Hashkit Password Support System', 'email' => $this->sender);
 		$this->to	= $to;
-		$this->admin = $admin;
 
 		$this->_prepareAddressFields();
 	}
 
 	protected function _prepareAddressFields() {
+		$this->emailConfig = Configure::read('EMAIL_CONFIG');
+		$this->sender = Configure::read('EMAIL_SENDER');
 		$fromEmail	= $this->from['email'];
 		$fromFullName	= $this->from['full_name'];
 
@@ -41,8 +40,8 @@ class PasswordEmail {
 	public function sendNewPassword($newPassword) {
 		$email = $this->email;
 		$email->subject('[Password Reset] Do NOT reply to this email');
-
-		if (EMAIL_ON) {
+		$emailOn = Configure::read('EMAIL_ON');
+		if ($emailOn) {
 			$result = $email->send("This is your new password $newPassword.");
 		} else {
 			$result = $email;
@@ -53,14 +52,9 @@ class PasswordEmail {
 	public function sendToken($token) {
 		$email = $this->email;
 		$email->subject('[Password Reset] Do NOT reply to this email');
-		if ($this->admin) {
-			$prefix = '/admin';
-		} else {
-			$prefix = '';
-		}
-		$baseURL = Router::url($prefix . '/users/reset_password?token=' . $token, true);
-
-		if (EMAIL_ON) {
+		$baseURL = Router::url('/users/reset_password?token=' . $token, true);
+		$emailOn = Configure::read('EMAIL_ON');
+		if ($emailOn) {
 			$result = $email->send("Please click this link to reset your password. $baseURL");
 		} else {
 			$result = $email;
