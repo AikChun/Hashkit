@@ -132,6 +132,10 @@ class HashResultsController extends AppController {
 
 	public function calculate_probability_of_collision_result() {
 		$probability = $this->Session->read('probability');
+		$samplespace = $this->Session->read('samplespace');
+		$totalhash = $this->Session->read('totalhash');
 		$this->set('probability',$probability);
+		$this->set('samplespace',$samplespace);
+		$this->set('totalhash', $totalhash);
 	}
 }
