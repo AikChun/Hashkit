@@ -129,8 +129,9 @@ class HashTestsController extends AppController {
 			if (!empty($data['HashTests']['plaintext'])) {
 
 				$output = HashingLib::computeDigests($selectedAlgorithms, $data['HashTests']['plaintext']);
+                $output[0]['HashResult']['user_id'] = $this->Auth->user('id');
 	            $this->Session->write('output', $output);
-				$this->redirect(array('controller' => 'HashResults', 'action' => 'basic_hashing_result'));			
+				$this->redirect(array('controller' => 'HashResults', 'action' => 'basic_hashing_result'));
 			}
 
 			elseif (!empty($data['HashTests']['file_upload']) && 
@@ -141,6 +142,7 @@ class HashTestsController extends AppController {
 			$lineArray = file($data['HashTests']['file_upload']['tmp_name']);
 
 			$output = HashingLib::computeDigests($selectedAlgorithms, $lineArray);
+<<<<<<< HEAD
 			$this->log($output);
 
 			$mdline = explode("\n",$output[0]['HashResult']['message_digest']);
@@ -148,6 +150,11 @@ class HashTestsController extends AppController {
 
 			$dup = HashTestsController::checkDuplicatesInArray($mdline);
 			//$this->log($dup);
+=======
+            foreach($output as $key => $row) {
+                $output[$key]['HashResult']['user_id'] = $this->Auth->user('id');
+            }
+>>>>>>> 34eb347a87f5eeb4316b08d4c4a177bbee1168eb
 
             $this->Session->write('output', $output);
 			$this->redirect(array('controller' => 'HashResults', 'action' => 'basic_hashing_result'));
@@ -316,10 +323,15 @@ class HashTestsController extends AppController {
 	}
  
 	public function avalanche_effect() {
+        
+        $HashAlgorithmV1Model = ClassRegistry::init('HashAlgorithmV1');
+        $result = $HashAlgorithmV1Model->find('all');
+        $this->log($result);
+        $this->set('result', $result);
 		if($this->request->is('post')) {
 			$data = $this->request->data;
-			$this->log($data);
 			$this->set('data', $data);
+
 		}
 			
 	}
