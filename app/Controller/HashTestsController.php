@@ -142,19 +142,15 @@ class HashTestsController extends AppController {
 			$lineArray = file($data['HashTests']['file_upload']['tmp_name']);
 
 			$output = HashingLib::computeDigests($selectedAlgorithms, $lineArray);
-<<<<<<< HEAD
-			$this->log($output);
 
 			$mdline = explode("\n",$output[0]['HashResult']['message_digest']);
 			//$this->log($mdline);
 
 			$dup = HashTestsController::checkDuplicatesInArray($mdline);
 			//$this->log($dup);
-=======
             foreach($output as $key => $row) {
                 $output[$key]['HashResult']['user_id'] = $this->Auth->user('id');
             }
->>>>>>> 34eb347a87f5eeb4316b08d4c4a177bbee1168eb
 
             $this->Session->write('output', $output);
 			$this->redirect(array('controller' => 'HashResults', 'action' => 'basic_hashing_result'));
