@@ -17,7 +17,7 @@
 			$algorithms[$id] = $model['HashAlgorithmV1']['name'];
 		endforeach;
 		echo $this->Form->input('HashAlgorithm', array(
-			'empty' => '(choose one)'
+			'empty' => '(choose one)',
 			'options'=> array('Algorithms'=> $algorithms)
 			)
 		);
