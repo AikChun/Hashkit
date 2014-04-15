@@ -104,10 +104,10 @@ class HashTestsController extends AppController {
 
     	foreach ($dup as $q => $w) {
     		foreach ($array as $a => $s) {
-    			$count += 1;
     			if($w == $s) {
     				array_push($dupIndex, $count);
     			}
+    			$count += 1;
     		}
     		$count = 0;
     	}
@@ -141,15 +141,20 @@ class HashTestsController extends AppController {
 
 			$lineArray = file($data['HashTests']['file_upload']['tmp_name']);
 
-			$dup = HashTestsController::checkDuplicatesInArray($lineArray);
-			//$this->log($dup);
-
 			$output = HashingLib::computeDigests($selectedAlgorithms, $lineArray);
-			//$this->log($output);
+
+			$mdline = explode("\n",$output[0]['HashResult']['message_digest']);
+			//$this->log($mdline);
+
+			$dup = HashTestsController::checkDuplicatesInArray($mdline);
+			//$this->log($dup);
+            foreach($output as $key => $row) {
+                $output[$key]['HashResult']['user_id'] = $this->Auth->user('id');
+            }
 
             $this->Session->write('output', $output);
 			$this->redirect(array('controller' => 'HashResults', 'action' => 'basic_hashing_result'));
-        
+        	
 		}
 	}
 }
