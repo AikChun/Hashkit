@@ -73,7 +73,6 @@ class UsersController extends AppController {
  */
 	public function admin_add() {
 		if ($this->request->is('post')) {
-			$this->log($this->request->data);
 			$this->User->create();
 			if ($this->User->save($this->request->data)) {
 				$this->Session->setFlash(__('The user has been saved.'));
@@ -130,7 +129,6 @@ class UsersController extends AppController {
 	}
 	public function login() {
 		if($this->request->is('post')) {
-			$this->log($this->request->data);
 			if($this->Auth->login()) {
 				$this->redirect($this->Auth->redirect());
 			} else {
