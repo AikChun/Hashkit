@@ -302,11 +302,13 @@ class HashTestsController extends AppController {
 
 			//total of hash value which we want to match(birthday) 
 			$K = pow((int)$data['HashTests']['customized_algorithm_base'],(int)$data['HashTests']['customized_algorithm_exponent']);
-			//$firstexpEqu = ((- $N) * ($N - 1)) / (2 * $K); 
+
 			$firstexpEqu = (- pow($N,2)) / (2 * $K);
 			$probability = (1 - exp($firstexpEqu)) * 100;
 
 			$this->Session->write('probability', $probability);
+			$this->Session->write('N', $N);
+			$this->Session->write('K', $K);
 			$this->redirect(array('controller' => 'HashResults', 'action' => 'calculate_probability_of_collision_result'));
 		}
 		
