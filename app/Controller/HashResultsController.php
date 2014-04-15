@@ -106,6 +106,7 @@ class HashResultsController extends AppController {
 
 	public function basic_hashing_result() {
 		$output = $this->Session->read('output');
+        $this->log($output);
 		if(!empty($output)) {
 			$this->set("output", $output);
 			$this->HashResult->create();
@@ -129,8 +130,7 @@ class HashResultsController extends AppController {
 		$this->set('hashResults', $this->Paginator->paginate());
 	}
 
-	public function calculate_probability_of_collision_result()
-	{
+	public function calculate_probability_of_collision_result() {
 		$probability = $this->Session->read('probability');
 		$this->set('probability',$probability);
 	}
