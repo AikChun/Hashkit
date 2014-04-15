@@ -22,14 +22,14 @@ CREATE TABLE `acos` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 INSERT INTO `acos` (`id`, `parent_id`, `model`, `foreign_key`, `alias`, `lft`, `rght`) VALUES
-(1,	NULL,	NULL,	NULL,	'controllers',	1,	106),
+(1,	NULL,	NULL,	NULL,	'controllers',	1,	118),
 (2,	1,	NULL,	NULL,	'Groups',	2,	13),
 (3,	2,	NULL,	NULL,	'index',	3,	4),
 (4,	2,	NULL,	NULL,	'view',	5,	6),
 (5,	2,	NULL,	NULL,	'add',	7,	8),
 (6,	2,	NULL,	NULL,	'edit',	9,	10),
 (7,	2,	NULL,	NULL,	'delete',	11,	12),
-(8,	1,	NULL,	NULL,	'HashResults',	14,	37),
+(8,	1,	NULL,	NULL,	'HashResults',	14,	39),
 (9,	8,	NULL,	NULL,	'index',	15,	16),
 (10,	8,	NULL,	NULL,	'view',	17,	18),
 (11,	8,	NULL,	NULL,	'add',	19,	20),
@@ -38,43 +38,49 @@ INSERT INTO `acos` (`id`, `parent_id`, `model`, `foreign_key`, `alias`, `lft`, `
 (14,	8,	NULL,	NULL,	'basicHashingResult',	25,	26),
 (15,	8,	NULL,	NULL,	'computeAndCompareResult',	27,	28),
 (16,	8,	NULL,	NULL,	'showMyTestResults',	29,	30),
-(17,	1,	NULL,	NULL,	'HashTests',	38,	55),
-(18,	17,	NULL,	NULL,	'basicHashing',	39,	40),
-(19,	17,	NULL,	NULL,	'basicHashingInput',	41,	42),
-(20,	17,	NULL,	NULL,	'computeAndCompare',	43,	44),
-(21,	17,	NULL,	NULL,	'computeAndCompareInput',	45,	46),
-(22,	17,	NULL,	NULL,	'reverseHashLookUp',	47,	48),
-(23,	1,	NULL,	NULL,	'Pages',	56,	67),
-(24,	23,	NULL,	NULL,	'display',	57,	58),
-(25,	23,	NULL,	NULL,	'index',	59,	60),
-(26,	23,	NULL,	NULL,	'computeAndCompare',	61,	62),
-(27,	23,	NULL,	NULL,	'sendEmailNotification',	63,	64),
-(28,	1,	NULL,	NULL,	'Users',	68,	93),
-(29,	28,	NULL,	NULL,	'index',	69,	70),
-(30,	28,	NULL,	NULL,	'view',	71,	72),
-(31,	28,	NULL,	NULL,	'add',	73,	74),
-(32,	28,	NULL,	NULL,	'edit',	75,	76),
-(33,	28,	NULL,	NULL,	'delete',	77,	78),
-(34,	28,	NULL,	NULL,	'login',	79,	80),
-(35,	28,	NULL,	NULL,	'logoff',	81,	82),
-(36,	28,	NULL,	NULL,	'register',	83,	84),
-(37,	28,	NULL,	NULL,	'forget_password',	85,	86),
-(38,	28,	NULL,	NULL,	'home',	87,	88),
-(39,	1,	NULL,	NULL,	'AclExtras',	94,	95),
-(40,	1,	NULL,	NULL,	'DebugKit',	96,	103),
-(41,	40,	NULL,	NULL,	'ToolbarAccess',	97,	102),
-(42,	41,	NULL,	NULL,	'history_state',	98,	99),
-(43,	41,	NULL,	NULL,	'sql_explain',	100,	101),
-(44,	1,	NULL,	NULL,	'PermissionsExtras',	104,	105),
-(45,	28,	NULL,	NULL,	'admin_add',	89,	90),
-(46,	28,	NULL,	NULL,	'logout',	91,	92),
-(47,	17,	NULL,	NULL,	'basic_hashing',	49,	50),
-(48,	17,	NULL,	NULL,	'basic_hashing_input',	51,	52),
+(17,	1,	NULL,	NULL,	'HashTests',	40,	63),
+(18,	17,	NULL,	NULL,	'basicHashing',	41,	42),
+(19,	17,	NULL,	NULL,	'basicHashingInput',	43,	44),
+(20,	17,	NULL,	NULL,	'computeAndCompare',	45,	46),
+(21,	17,	NULL,	NULL,	'computeAndCompareInput',	47,	48),
+(22,	17,	NULL,	NULL,	'reverseHashLookUp',	49,	50),
+(23,	1,	NULL,	NULL,	'Pages',	64,	77),
+(24,	23,	NULL,	NULL,	'display',	65,	66),
+(25,	23,	NULL,	NULL,	'index',	67,	68),
+(26,	23,	NULL,	NULL,	'computeAndCompare',	69,	70),
+(27,	23,	NULL,	NULL,	'sendEmailNotification',	71,	72),
+(28,	1,	NULL,	NULL,	'Users',	78,	105),
+(29,	28,	NULL,	NULL,	'index',	79,	80),
+(30,	28,	NULL,	NULL,	'view',	81,	82),
+(31,	28,	NULL,	NULL,	'add',	83,	84),
+(32,	28,	NULL,	NULL,	'edit',	85,	86),
+(33,	28,	NULL,	NULL,	'delete',	87,	88),
+(34,	28,	NULL,	NULL,	'login',	89,	90),
+(35,	28,	NULL,	NULL,	'logoff',	91,	92),
+(36,	28,	NULL,	NULL,	'register',	93,	94),
+(37,	28,	NULL,	NULL,	'forget_password',	95,	96),
+(38,	28,	NULL,	NULL,	'home',	97,	98),
+(39,	1,	NULL,	NULL,	'AclExtras',	106,	107),
+(40,	1,	NULL,	NULL,	'DebugKit',	108,	115),
+(41,	40,	NULL,	NULL,	'ToolbarAccess',	109,	114),
+(42,	41,	NULL,	NULL,	'history_state',	110,	111),
+(43,	41,	NULL,	NULL,	'sql_explain',	112,	113),
+(44,	1,	NULL,	NULL,	'PermissionsExtras',	116,	117),
+(45,	28,	NULL,	NULL,	'admin_add',	99,	100),
+(46,	28,	NULL,	NULL,	'logout',	101,	102),
+(47,	17,	NULL,	NULL,	'basic_hashing',	51,	52),
+(48,	17,	NULL,	NULL,	'basic_hashing_input',	53,	54),
 (49,	8,	NULL,	NULL,	'basic_hashing_result',	31,	32),
 (50,	8,	NULL,	NULL,	'compute_and_compare_result',	33,	34),
 (51,	8,	NULL,	NULL,	'show_my_test_results',	35,	36),
-(52,	17,	NULL,	NULL,	'compute_and_compare',	53,	54),
-(53,	23,	NULL,	NULL,	'begin_test',	65,	66);
+(52,	17,	NULL,	NULL,	'compute_and_compare',	55,	56),
+(53,	23,	NULL,	NULL,	'begin_test',	73,	74),
+(54,	8,	NULL,	NULL,	'calculate_probability_of_collision_result',	37,	38),
+(55,	17,	NULL,	NULL,	'checkDuplicatesInArray',	57,	58),
+(56,	17,	NULL,	NULL,	'calculate_probability_of_collision',	59,	60),
+(57,	17,	NULL,	NULL,	'avalanche_effect',	61,	62),
+(58,	23,	NULL,	NULL,	'hash_function_properties',	75,	76),
+(59,	28,	NULL,	NULL,	'reset_password',	103,	104);
 
 DROP TABLE IF EXISTS `aros`;
 CREATE TABLE `aros` (
@@ -143,6 +149,32 @@ INSERT INTO `hash_algorithm` (`id`, `name`) VALUES
 (4,	'MD4'),
 (5,	'SHA256');
 
+DROP TABLE IF EXISTS `hash_algorithm_v1`;
+CREATE TABLE `hash_algorithm_v1` (
+  `id` int(10) NOT NULL AUTO_INCREMENT,
+  `name` varchar(40) NOT NULL,
+  `base` int(11) NOT NULL,
+  `exponent` int(11) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+INSERT INTO `hash_algorithm_v1` (`id`, `name`, `base`, `exponent`) VALUES
+(1,	'MD2',	2,	128),
+(2,	'MD4',	2,	128),
+(3,	'MD5',	2,	128),
+(4,	'Panama',	2,	256),
+(5,	'ripemd',	2,	128),
+(6,	'ripemd-128',	2,	128),
+(7,	'ripemd-256',	2,	256),
+(8,	'ripemd-160',	2,	160),
+(9,	'ripemd-320',	2,	320),
+(10,	'rtr0',	2,	160),
+(11,	'SHA-0',	2,	160),
+(12,	'SHA-1',	2,	160),
+(13,	'SHA-224',	2,	224),
+(14,	'SHA-256',	2,	256),
+(15,	'whirlpool',	2,	512);
+
 DROP TABLE IF EXISTS `hash_result`;
 CREATE TABLE `hash_result` (
   `id` int(10) NOT NULL AUTO_INCREMENT,
@@ -155,11 +187,7 @@ CREATE TABLE `hash_result` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 INSERT INTO `hash_result` (`id`, `plaintext`, `message_digest`, `hash_algorithm_id`, `user_id`) VALUES
-(3,	'hello',	'5d41402abc4b2a76b9719d911017c592',	2,	1),
-(4,	'hello',	'5d41402abc4b2a76b9719d911017c592',	2,	1),
-(5,	'hello',	'5d41402abc4b2a76b9719d911017c592',	2,	1),
-(6,	'hello',	'5d41402abc4b2a76b9719d911017c592',	2,	1),
-(7,	'hello',	'5d41402abc4b2a76b9719d911017c592',	2,	1);
+(1,	'Hello',	'f7ff9e8b7bb2e09b70935a5d785e0cc5d9d0abf0',	1,	10);
 
 DROP TABLE IF EXISTS `user`;
 CREATE TABLE `user` (
@@ -182,4 +210,4 @@ INSERT INTO `user` (`id`, `password`, `name`, `email`, `group_id`, `profile`, `s
 (10,	'96b9369f55be479d63a8ef366966a03a607657e4',	'AikChun',	'aikchun616@gmail.com',	1,	'I am the main user.',	'',	'2f8c70400f525af8a1801c590056c2fdd6b757db',	'2014-03-28 01:36:02',	'2014-04-09 23:11:24'),
 (11,	'96b9369f55be479d63a8ef366966a03a607657e4',	'dude',	'dude@gmail.com',	3,	'',	'',	'',	'2014-04-05 00:20:03',	'2014-04-05 00:20:03');
 
--- 2014-04-14 19:48:21
+-- 2014-04-15 01:16:59
