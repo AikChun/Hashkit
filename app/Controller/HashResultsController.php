@@ -106,7 +106,6 @@ class HashResultsController extends AppController {
 
 	public function basic_hashing_result() {
 		$output = $this->Session->read('output');
-        $this->log($output);
 		if(!empty($output)) {
 			$this->set("output", $output);
 			$this->HashResult->create();

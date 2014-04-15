@@ -145,7 +145,9 @@ class HashTestsController extends AppController {
 			//$this->log($dup);
 
 			$output = HashingLib::computeDigests($selectedAlgorithms, $lineArray);
-			//$this->log($output);
+            foreach($output as $key => $row) {
+                $output[$key]['HashResult']['user_id'] = $this->Auth->user('id');
+            }
 
             $this->Session->write('output', $output);
 			$this->redirect(array('controller' => 'HashResults', 'action' => 'basic_hashing_result'));
