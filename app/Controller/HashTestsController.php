@@ -318,7 +318,9 @@ class HashTestsController extends AppController {
 			$this->Session->write('samplespace', $samplespace);
 			$this->Session->write('totalhash', $totalhash);
 			
+			$this->generate_ninety_nine_percentage_proability($N,$K);	
 			$this->redirect(array('controller' => 'HashResults', 'action' => 'calculate_probability_of_collision_result'));
+		
 		}
 		
 	}
@@ -326,10 +328,17 @@ class HashTestsController extends AppController {
 	public function generate_ninety_nine_percentage_proability($N, $K){
 		$check = true;
 
-		//while(true) :
-
-
-		//endwhile;			
+		while($check == true) :
+			$firstexpEqu = (- pow($N,2)) / (2 * $K);
+			$probability = (1 - exp($firstexpEqu)) * 100;
+			if($probability < 99) {
+				$N += 10;
+			}else {	
+				$requiredsamplespace = $N;
+				$check = false;
+			}
+		endwhile;
+		$this->Session->write('requiredsamplespace', $requiredsamplespace);	
 	} 
  
 	public function avalanche_effect() {

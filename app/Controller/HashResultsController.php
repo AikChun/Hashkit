@@ -133,8 +133,11 @@ class HashResultsController extends AppController {
 		$probability = $this->Session->read('probability');
 		$samplespace = $this->Session->read('samplespace');
 		$totalhash = $this->Session->read('totalhash');
+		$requiredsamplespace = $this->Session->read('requiredsamplespace');
+
 		$this->set('probability',$probability);
 		$this->set('samplespace',$samplespace);
 		$this->set('totalhash', $totalhash);
+		$this->set('requiredsamplespace', $requiredsamplespace);
 	}
 }

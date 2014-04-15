@@ -6,4 +6,7 @@
 	<?php echo "the probability of getting a collision in numbers of tries: " . round($probability,2) . " %"; ?>
 	<br>
 
+	<?php echo "the required sample space to get 99% probability of getting a collision: " . $requiredsamplespace . " hashes"; ?>
+	<br>
+
 </div>
