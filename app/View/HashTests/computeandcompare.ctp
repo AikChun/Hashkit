@@ -1,6 +1,6 @@
 
 <div class="hashTests view">
-	<?php echo $this->Form->create('HashTests', array('action' => 'computeAndCompare'));?>
+	<?php echo $this->Form->create('HashTests', array('action' => 'computeandcompare'));?>
 	<?php 
 		$algorithms = array();
 		foreach($data as $key => $model ) : 

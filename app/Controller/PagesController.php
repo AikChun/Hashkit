@@ -104,4 +104,9 @@ class PagesController extends AppController {
 	public function begin_test() {
 
 	}
+
+	public function hash_function_properties() {
+
+	}
+
 }

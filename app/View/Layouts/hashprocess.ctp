@@ -78,6 +78,7 @@ $cakeDescription = __d('cake_dev', 'FYP: Hashkit');
 				<ul>
 					<li> <?php echo $this->Html->link('Home', '/'); ?> </li>
 					<?php if(!empty($authUser)) :?>
+					<li><?php echo $this->Html->link('Hash functions and properties', '/pages/hash_function_properties');?></li>	
 					<li><?php echo $this->Html->link('Begin a Test', '/pages/begin_test');?></li>
 					<li><?php echo $this->Html->link('My Test Results', array('controller' => 'HashResults', 'action' => 'show_my_test_results'))?></li>
 					<?php endif;?>

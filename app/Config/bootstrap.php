@@ -103,3 +103,8 @@ CakeLog::config('error', array(
 	'types' => array('warning', 'error', 'critical', 'alert', 'emergency'),
 	'file' => 'error',
 ));
+
+// this it sot call the constnats.php file which defines all application constatns
+if (file_exists(APP . DS . 'Config' . DS . 'constants.php')) {
+    require_once(APP . DS . 'Config' . DS . 'constants.php');
+ }

@@ -129,4 +129,9 @@ class HashResultsController extends AppController {
 		$this->set('hashResults', $this->Paginator->paginate());
 	}
 
+	public function calculate_probability_of_collision_result()
+	{
+		$probability = $this->Session->read('probability');
+		$this->set('probability',$probability);
+	}
 }

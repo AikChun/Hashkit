@@ -1,7 +1,7 @@
 <div class="hashTests view">
 
 <?php
-echo $this->Form->create('HashTests', array('action' => 'reverseHashLookUp'));
+echo $this->Form->create('HashTests', array('action' => 'reversehashlookup'));
 ?>
 <fieldset>
 <legend> Enter Hash value.</legend>

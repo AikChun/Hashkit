@@ -56,6 +56,7 @@ class HashTestsController extends AppController {
 			$data = $this->request->data['HashTests'];
 			$HashAlgorithmModel = ClassRegistry::init('HashAlgorithm');
 			$selectedAlgorithms = array();
+			$this->log($data);
 			foreach ($data as $key => $hashId) {
 				$searchCondition = array(
 					'conditions' => array(
@@ -262,4 +263,62 @@ class HashTestsController extends AppController {
 	public function reverseHashLookUp() {
 
 	}
+
+/**
+ * To calcuate the probability of the collision occurence based on the birthday paradox
+ *
+ */
+	public function calculate_probability_of_collision() {
+		if($this->request->is('post')) {
+			$data = $this->request->data;
+			
+			if(empty($data['HashTests']['required_base']) || empty($data['HashTests']['required_exponent'])) {
+				if(empty($data['HashTests']['hash_value'])) {
+					$this->Session->setFlash('You did not enter either the base and exponent values or the amount of hash values.');
+					return $this->redirect(array('action' => 'calculate_probability_of_collision'));
+				}
+			}
+
+			if(!empty($data['HashTests']['required_base']) || !empty($data['HashTests']['required_exponent'])) {
+				if(!empty($data['HashTests']['hash_value'])) {
+					$this->Session->setFlash('Please enter only either the base and exponent values or the amount of hash values.');
+					return $this->redirect(array('action' => 'calculate_probability_of_collision'));
+				}
+			}
+
+			if(empty($data['HashTests']['customized_algorithm_base']) || empty($data['HashTests']['customized_algorithm_exponent'])) {
+					$this->Session->setFlash('Please enter both the base and exponent values for the hash function.');
+					return $this->redirect(array('action' => 'calculate_probability_of_collision'));
+			}
+
+			if(empty($data['HashTests']['required_base']) && empty($data['HashTests']['required_exponent'])) {
+				if(!empty($data['HashTests']['hash_value'])) {
+					$N = (int)$data['HashTests']['hash_value'];
+				}
+			}else{
+					//total sample space(number of people)
+					$N = pow((int)$data['HashTests']['required_base'],(int)$data['HashTests']['required_exponent']);	
+			}
+
+			//total of hash value which we want to match(birthday) 
+			$K = pow((int)$data['HashTests']['customized_algorithm_base'],(int)$data['HashTests']['customized_algorithm_exponent']);
+			//$firstexpEqu = ((- $N) * ($N - 1)) / (2 * $K); 
+			$firstexpEqu = (- pow($N,2)) / (2 * $K);
+			$probability = (1 - exp($firstexpEqu)) * 100;
+
+			$this->Session->write('probability', $probability);
+			$this->redirect(array('controller' => 'HashResults', 'action' => 'calculate_probability_of_collision_result'));
+		}
+		
+	}
+ 
+	public function avalanche_effect() {
+		if($this->request->is('post')) {
+			$data = $this->request->data;
+			$this->log($data);
+			$this->set('data', $data);
+		}
+			
+	}
+
 }
