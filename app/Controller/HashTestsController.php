@@ -129,8 +129,9 @@ class HashTestsController extends AppController {
 			if (!empty($data['HashTests']['plaintext'])) {
 
 				$output = HashingLib::computeDigests($selectedAlgorithms, $data['HashTests']['plaintext']);
+                $output[0]['HashResult']['user_id'] = $this->Auth->user('id');
 	            $this->Session->write('output', $output);
-				$this->redirect(array('controller' => 'HashResults', 'action' => 'basic_hashing_result'));			
+				$this->redirect(array('controller' => 'HashResults', 'action' => 'basic_hashing_result'));
 			}
 
 			elseif (!empty($data['HashTests']['file_upload']) && 
@@ -313,10 +314,15 @@ class HashTestsController extends AppController {
 	}
  
 	public function avalanche_effect() {
+        
+        $HashAlgorithmV1Model = ClassRegistry::init('HashAlgorithmV1');
+        $result = $HashAlgorithmV1Model->find('all');
+        $this->log($result);
+        $this->set('result', $result);
 		if($this->request->is('post')) {
 			$data = $this->request->data;
-			$this->log($data);
 			$this->set('data', $data);
+
 		}
 			
 	}
