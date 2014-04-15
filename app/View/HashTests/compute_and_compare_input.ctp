@@ -1,7 +1,7 @@
 <div class="hashTests view">
 
 <?php
-echo $this->Form->create('HashTests', array('action' => 'computeAndCompareInput'));
+echo $this->Form->create('HashTests', array('action' => 'compute_and_compare_input'));
 ?>
 <fieldset>
 <legend> Get Your Hashing Fun!</legend>
