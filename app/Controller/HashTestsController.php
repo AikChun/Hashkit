@@ -86,18 +86,72 @@ class HashTestsController extends AppController {
 	/**
 	 * Allow user to input plaintext that is to be hashed.
 	 */
+	public function checkDuplicatesInArray($array) {
+		$count = 0;
+		$dup = array();
+		$dupIndex = array();
+    	$duplicates=FALSE;
+    	foreach($array as $k=>$i) {
+        	if(!isset($value_{$i})) {
+          	  $value_{$i}=TRUE;
+        	}
+        	else {
+            	$duplicates|=TRUE; 
+            	array_push($dup, $i);    
+            	//array_push($dup, $count);  
+        	}
+    	}
+
+    	foreach ($dup as $q => $w) {
+    		foreach ($array as $a => $s) {
+    			$count += 1;
+    			if($w == $s) {
+    				array_push($dupIndex, $count);
+    			}
+    		}
+    		$count = 0;
+    	}
+
+    	if ($duplicates == TRUE) {
+    		return $dupIndex;
+   		} else {
+   			return ($duplicates);
+   		}
+	}
+
 	public function basic_hashing_input() {
 		$this->log("Enter basic hashing");
 		$selectedAlgorithms = $this->Session->read('selectedAlgorithms');
+
 		if($this->request->is('post')) {
 			$data = $this->request->data;
-			$output = HashingLib::computeDigests($selectedAlgorithms, $data['HashTests']);
 
-			$this->Session->write('output', $output);
+			if (!empty($data['HashTests']['plaintext'])) {
+
+				$output = HashingLib::computeDigests($selectedAlgorithms, $data['HashTests']['plaintext']);
+	            $this->Session->write('output', $output);
+				$this->redirect(array('controller' => 'HashResults', 'action' => 'basic_hashing_result'));			
+			}
+
+			elseif (!empty($data['HashTests']['file_upload']) && 
+	             is_uploaded_file($data['HashTests']['file_upload']['tmp_name']) &&
+	             ($data['HashTests']['file_upload']['type'] == 'text/plain')) 
+			{
+
+			$lineArray = file($data['HashTests']['file_upload']['tmp_name']);
+
+			$dup = HashTestsController::checkDuplicatesInArray($lineArray);
+			//$this->log($dup);
+
+			$output = HashingLib::computeDigests($selectedAlgorithms, $lineArray);
+			//$this->log($output);
+
+            $this->Session->write('output', $output);
 			$this->redirect(array('controller' => 'HashResults', 'action' => 'basic_hashing_result'));
-
+        
 		}
 	}
+}
 
 /**
  * To allow the user choose the algorithms that is to analyzed.
