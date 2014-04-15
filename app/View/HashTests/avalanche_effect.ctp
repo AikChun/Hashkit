@@ -16,9 +16,16 @@
 			$id = $model['HashAlgorithmV1']['id'];
 			$algorithms[$id] = $model['HashAlgorithmV1']['name'];
 		endforeach;
+<<<<<<< HEAD
 		echo $this->Form->input('HashAlgorithmV1', array(
 			'empty' => '(choose one)'
 			'options'=> array('Algorithms'=> $algorithms))
+=======
+		echo $this->Form->input('HashAlgorithm', array(
+			'empty' => '(choose one)',
+			'options'=> array('Algorithms'=> $algorithms)
+			)
+>>>>>>> 009bd913572ebe81282e4332ef8b1da898790207
 		);
 
 	?>
