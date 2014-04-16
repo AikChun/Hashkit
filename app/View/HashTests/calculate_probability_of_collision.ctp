@@ -60,5 +60,16 @@
 		));
 	?>
 
+	<div class="or" style="font-size:150%">OR</div>
+	<?php
+		echo $this->Form->input('hash_value1', array(
+			'type' => 'text',
+			'rule'    => 'numeric',
+			'message' => 'Only numbers allowed',
+			'div' => false,
+			'label' => 'Please enter the value of the hash:'
+			
+		));
+	?>
 	<?php echo $this->Form->end(__('Submit')); ?>
 </div>

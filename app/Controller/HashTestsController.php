@@ -310,7 +310,7 @@ class HashTestsController extends AppController {
 
 /**
  * To calcuate the probability of the collision occurence based on the birthday paradox
- *
+ *  
  */
 	public function calculate_probability_of_collision() {
 		if($this->request->is('post')) {
@@ -331,8 +331,17 @@ class HashTestsController extends AppController {
 			}
 
 			if(empty($data['HashTests']['customized_algorithm_base']) || empty($data['HashTests']['customized_algorithm_exponent'])) {
+				if(empty($data['HashTests']['hash_value1'])) {	
 					$this->Session->setFlash('Please enter both the base and exponent values for the hash function.');
 					return $this->redirect(array('action' => 'calculate_probability_of_collision'));
+				}
+			}
+
+			if(!empty($data['HashTests']['customized_algorithm_base']) || !empty($data['HashTests']['customized_algorithm_exponent'])) {
+				if(!empty($data['HashTests']['hash_value1'])) {
+					$this->Session->setFlash('Please enter only either the base and exponent values or the amount of hash values.');
+					return $this->redirect(array('action' => 'calculate_probability_of_collision'));
+				}
 			}
 
 			if(empty($data['HashTests']['required_base']) && empty($data['HashTests']['required_exponent'])) {
@@ -344,8 +353,17 @@ class HashTestsController extends AppController {
 					$N = pow((int)$data['HashTests']['required_base'],(int)$data['HashTests']['required_exponent']);	
 			}
 
-			//total of hash value which we want to match(birthday) 
-			$K = pow((int)$data['HashTests']['customized_algorithm_base'],(int)$data['HashTests']['customized_algorithm_exponent']);
+
+			if(empty($data['HashTests']['customized_algorithm_base']) && empty($data['HashTests']['customized_algorithm_exponent'])) {
+				if(!empty($data['HashTests']['hash_value1'])) {
+					$K = (int)$data['HashTests']['hash_value1'];
+				}
+			}else{
+					//total of hash value which we want to match(birthday) 
+					$K = pow((int)$data['HashTests']['customized_algorithm_base'],(int)$data['HashTests']['customized_algorithm_exponent']);	
+			}
+
+			
 
 			$firstexpEqu = (- pow($N,2)) / (2 * $K);
 			$probability = (1 - exp($firstexpEqu)) * 100;
