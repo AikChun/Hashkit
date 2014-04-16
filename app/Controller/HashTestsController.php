@@ -56,7 +56,7 @@ class HashTestsController extends AppController {
 			$data = $this->request->data['HashTests'];
 			$HashAlgorithmModel = ClassRegistry::init('HashAlgorithm');
 			$selectedAlgorithms = array();
-			$this->log($data);
+			//$this->log($data);
 			foreach ($data as $key => $hashId) {
 				$searchCondition = array(
 					'conditions' => array(
@@ -104,10 +104,10 @@ class HashTestsController extends AppController {
 
     	foreach ($dup as $q => $w) {
     		foreach ($array as $a => $s) {
-    			$count += 1;
     			if($w == $s) {
     				array_push($dupIndex, $count);
     			}
+    			$count += 1;
     		}
     		$count = 0;
     	}
@@ -125,6 +125,7 @@ class HashTestsController extends AppController {
 
 		if($this->request->is('post')) {
 			$data = $this->request->data;
+			//$this->log($data);
 
 			if (!empty($data['HashTests']['plaintext'])) {
 
@@ -141,17 +142,15 @@ class HashTestsController extends AppController {
 
 			$lineArray = file($data['HashTests']['file_upload']['tmp_name']);
 
-			$dup = HashTestsController::checkDuplicatesInArray($lineArray);
-			//$this->log($dup);
-
 			$output = HashingLib::computeDigests($selectedAlgorithms, $lineArray);
+
             foreach($output as $key => $row) {
                 $output[$key]['HashResult']['user_id'] = $this->Auth->user('id');
             }
 
             $this->Session->write('output', $output);
 			$this->redirect(array('controller' => 'HashResults', 'action' => 'basic_hashing_result'));
-        
+        	
 		}
 	}
 }
@@ -163,7 +162,7 @@ class HashTestsController extends AppController {
 		if($this->request->is('post')) {
 			if(empty($this->request->data['HashTests']['HashAlgorithm'])) {
 				$this->Session->setFlash('You did not select any algorithms!');
-				return $this->redirect(array('action' => 'computeAndCompare'));
+				return $this->redirect(array('action' => 'compute_and_compare'));
 			}
 			$data = $this->request->data['HashTests'];
 			$HashAlgorithmModel = ClassRegistry::init('HashAlgorithm');
@@ -178,7 +177,7 @@ class HashTestsController extends AppController {
 				$selectedAlgorithms = $HashAlgorithmModel->find('all', $searchCondition);
 			}
 			$this->Session->write('selectedAlgorithms' , $selectedAlgorithms);
-			return $this->redirect(array('controller' => 'HashTests' ,'action' => 'computeAndCompareInput'));
+			return $this->redirect(array('controller' => 'HashTests' ,'action' => 'compute_and_compare_input'));
 			
 		}
 		$conditions = array(
@@ -195,18 +194,45 @@ class HashTestsController extends AppController {
 /**
  * Input page of the compute and compare functionality of the project.
  */
-	public function computeAndCompareInput() {
+	public function compute_and_compare_input() {
 		$selectedAlgorithms = $this->Session->read('selectedAlgorithms');
 		if($this->request->is('post')) {
 			$data = $this->request->data;
-			$output = $this->computeDigests($selectedAlgorithms, $data['HashTests']);
+			//$this->log($data);
+
+			if (!empty($data['HashTests']['plaintext'])) {
+
+				$output = HashingLib::computeDigests($selectedAlgorithms, $data['HashTests']['plaintext']);
+                $output[0]['HashResult']['user_id'] = $this->Auth->user('id');
+
+                $outputResult = $this->compareDigests($output);
+				$this->log($outputResult);
+				$this->Session->write('output', $outputResult);
+				$this->redirect(array('controller' => 'HashResults', 'action' => 'compute_and_compare_result'));
+	            //$this->Session->write('output', $output);
+				//$this->redirect(array('controller' => 'HashResults', 'action' => 'compute_and_compare_result'));
+			}
+
+			elseif (!empty($data['HashTests']['file_upload']) && 
+	             is_uploaded_file($data['HashTests']['file_upload']['tmp_name']) &&
+	             ($data['HashTests']['file_upload']['type'] == 'text/plain')) 
+			{
+
+			$lineArray = file($data['HashTests']['file_upload']['tmp_name']);
+
+			$output = HashingLib::computeDigests($selectedAlgorithms, $lineArray);
+
+            foreach($output as $key => $row) {
+                $output[$key]['HashResult']['user_id'] = $this->Auth->user('id');
+            }
+
 			$outputResult = $this->compareDigests($output);
-
+			$this->log($outputResult);
 			$this->Session->write('output', $outputResult);
-			$this->redirect(array('controller' => 'HashResults', 'action' => 'computeAndCompareResult'));
+			$this->redirect(array('controller' => 'HashResults', 'action' => 'compute_and_compare_result'));
 
+			}
 		}
-
 	}
 
 /**
@@ -239,6 +265,16 @@ class HashTestsController extends AppController {
 	protected function compareDigests($output) {
 		$hashResultModel = ClassRegistry::init('HashResult');
 		$analysis = array();
+
+		//foreach($output as $key => $row) {
+		$mdline = explode("\n",$output[0]['HashResult']['message_digest']);
+		//$this->log($mdline);
+
+		$dup = HashTestsController::checkDuplicatesInArray($mdline);
+		//$this->log($dup);
+
+		//}
+
 		foreach($output as $key => $hashResult) {
 			$conditions = array(
 				'conditions' => array('HashResult.message_digest' => $hashResult['HashResult']['message_digest']),
@@ -246,7 +282,7 @@ class HashTestsController extends AppController {
 			);
 			$result = $hashResultModel->find('first', $conditions);
 			$this->log('This is result.');
-			$this->log($result);
+			//$this->log($result);
 
 
 			if(!empty($result['HashResult']['id'])) {
@@ -305,28 +341,65 @@ class HashTestsController extends AppController {
 
 			//total of hash value which we want to match(birthday) 
 			$K = pow((int)$data['HashTests']['customized_algorithm_base'],(int)$data['HashTests']['customized_algorithm_exponent']);
-			//$firstexpEqu = ((- $N) * ($N - 1)) / (2 * $K); 
+
 			$firstexpEqu = (- pow($N,2)) / (2 * $K);
 			$probability = (1 - exp($firstexpEqu)) * 100;
+			$samplespace = $N;
+			$totalhash = $K;
 
 			$this->Session->write('probability', $probability);
+			$this->Session->write('samplespace', $samplespace);
+			$this->Session->write('totalhash', $totalhash);
+			
+			$this->generate_ninety_nine_percentage_proability($N,$K);	
 			$this->redirect(array('controller' => 'HashResults', 'action' => 'calculate_probability_of_collision_result'));
+		
 		}
 		
 	}
+
+	public function generate_ninety_nine_percentage_proability($N, $K){
+		$check = true;
+
+		while($check == true) :
+			$firstexpEqu = (- pow($N,2)) / (2 * $K);
+			$probability = (1 - exp($firstexpEqu)) * 100;
+			if($probability < 99) {
+				$N += 10;
+			}else {	
+				$requiredsamplespace = $N;
+				$check = false;
+			}
+		endwhile;
+		$this->Session->write('requiredsamplespace', $requiredsamplespace);	
+	} 
  
 	public function avalanche_effect() {
         
         $HashAlgorithmV1Model = ClassRegistry::init('HashAlgorithmV1');
         $result = $HashAlgorithmV1Model->find('all');
-        $this->log($result);
+        //$this->log($result);
         $this->set('result', $result);
+
 		if($this->request->is('post')) {
 			$data = $this->request->data;
-			$this->set('data', $data);
-
-		}
 			
+			$dataInput = array();
+			$output = array();
+
+			$this->set('data', $data);
+			$this->log($data);
+			//$messageDigest = hash(strtolower($algorithms['HashAlgorithm']['name']), $data['HashTests']['plaintext']);
+
+			//foreach($selectedAlgorithms as $key => $algorithm ) {
+
+				
+			//$computed['HashResult']['plaintext'] = $hashTestForm['plaintext'];
+
+			//array_push($output, $computed);
+			//}
+		}		
 	}
+
 
 }
