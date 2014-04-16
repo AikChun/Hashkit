@@ -384,15 +384,16 @@ class HashTestsController extends AppController {
         $this->set('result', $result);
 		if($this->request->is('post')) {
 			$data = $this->request->data;
-			$this->log($data);
 			$dataInput = array();
 			$output = array();
 
 			$this->set('data', $data);
 			//$this->log($data);
 			//$messageDigest = hash(strtolower($algorithms['HashAlgorithm']['name']), $data['HashTests']['plaintext']);
-			
+			//$binary_output = $this->text2bin($data['HashTests']['plaintext']);
+			//$this->log($binary_output);
 			$messageDigest = hash(strtolower($data['HashTests']['HashAlgorithm']), $data['HashTests']['plaintext']);
+			
 			//$this->log($messageDigest);
 			//foreach($selectedAlgorithms as $key => $algorithm ) {
 
@@ -403,6 +404,5 @@ class HashTestsController extends AppController {
 			//}
 		}		
 	}
-
 
 }
