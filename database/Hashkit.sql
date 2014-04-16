@@ -2,7 +2,7 @@
 
 SET NAMES utf8;
 SET foreign_key_checks = 0;
-SET time_zone = '-07:00';
+SET time_zone = '+08:00';
 SET sql_mode = 'NO_AUTO_VALUE_ON_ZERO';
 
 DROP DATABASE IF EXISTS `Hashkit`;
@@ -22,7 +22,7 @@ CREATE TABLE `acos` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 INSERT INTO `acos` (`id`, `parent_id`, `model`, `foreign_key`, `alias`, `lft`, `rght`) VALUES
-(1,	NULL,	NULL,	NULL,	'controllers',	1,	118),
+(1,	NULL,	NULL,	NULL,	'controllers',	1,	122),
 (2,	1,	NULL,	NULL,	'Groups',	2,	13),
 (3,	2,	NULL,	NULL,	'index',	3,	4),
 (4,	2,	NULL,	NULL,	'view',	5,	6),
@@ -38,49 +38,51 @@ INSERT INTO `acos` (`id`, `parent_id`, `model`, `foreign_key`, `alias`, `lft`, `
 (14,	8,	NULL,	NULL,	'basicHashingResult',	25,	26),
 (15,	8,	NULL,	NULL,	'computeAndCompareResult',	27,	28),
 (16,	8,	NULL,	NULL,	'showMyTestResults',	29,	30),
-(17,	1,	NULL,	NULL,	'HashTests',	40,	63),
+(17,	1,	NULL,	NULL,	'HashTests',	40,	67),
 (18,	17,	NULL,	NULL,	'basicHashing',	41,	42),
 (19,	17,	NULL,	NULL,	'basicHashingInput',	43,	44),
 (20,	17,	NULL,	NULL,	'computeAndCompare',	45,	46),
 (21,	17,	NULL,	NULL,	'computeAndCompareInput',	47,	48),
 (22,	17,	NULL,	NULL,	'reverseHashLookUp',	49,	50),
-(23,	1,	NULL,	NULL,	'Pages',	64,	77),
-(24,	23,	NULL,	NULL,	'display',	65,	66),
-(25,	23,	NULL,	NULL,	'index',	67,	68),
-(26,	23,	NULL,	NULL,	'computeAndCompare',	69,	70),
-(27,	23,	NULL,	NULL,	'sendEmailNotification',	71,	72),
-(28,	1,	NULL,	NULL,	'Users',	78,	105),
-(29,	28,	NULL,	NULL,	'index',	79,	80),
-(30,	28,	NULL,	NULL,	'view',	81,	82),
-(31,	28,	NULL,	NULL,	'add',	83,	84),
-(32,	28,	NULL,	NULL,	'edit',	85,	86),
-(33,	28,	NULL,	NULL,	'delete',	87,	88),
-(34,	28,	NULL,	NULL,	'login',	89,	90),
-(35,	28,	NULL,	NULL,	'logoff',	91,	92),
-(36,	28,	NULL,	NULL,	'register',	93,	94),
-(37,	28,	NULL,	NULL,	'forget_password',	95,	96),
-(38,	28,	NULL,	NULL,	'home',	97,	98),
-(39,	1,	NULL,	NULL,	'AclExtras',	106,	107),
-(40,	1,	NULL,	NULL,	'DebugKit',	108,	115),
-(41,	40,	NULL,	NULL,	'ToolbarAccess',	109,	114),
-(42,	41,	NULL,	NULL,	'history_state',	110,	111),
-(43,	41,	NULL,	NULL,	'sql_explain',	112,	113),
-(44,	1,	NULL,	NULL,	'PermissionsExtras',	116,	117),
-(45,	28,	NULL,	NULL,	'admin_add',	99,	100),
-(46,	28,	NULL,	NULL,	'logout',	101,	102),
+(23,	1,	NULL,	NULL,	'Pages',	68,	81),
+(24,	23,	NULL,	NULL,	'display',	69,	70),
+(25,	23,	NULL,	NULL,	'index',	71,	72),
+(26,	23,	NULL,	NULL,	'computeAndCompare',	73,	74),
+(27,	23,	NULL,	NULL,	'sendEmailNotification',	75,	76),
+(28,	1,	NULL,	NULL,	'Users',	82,	109),
+(29,	28,	NULL,	NULL,	'index',	83,	84),
+(30,	28,	NULL,	NULL,	'view',	85,	86),
+(31,	28,	NULL,	NULL,	'add',	87,	88),
+(32,	28,	NULL,	NULL,	'edit',	89,	90),
+(33,	28,	NULL,	NULL,	'delete',	91,	92),
+(34,	28,	NULL,	NULL,	'login',	93,	94),
+(35,	28,	NULL,	NULL,	'logoff',	95,	96),
+(36,	28,	NULL,	NULL,	'register',	97,	98),
+(37,	28,	NULL,	NULL,	'forget_password',	99,	100),
+(38,	28,	NULL,	NULL,	'home',	101,	102),
+(39,	1,	NULL,	NULL,	'AclExtras',	110,	111),
+(40,	1,	NULL,	NULL,	'DebugKit',	112,	119),
+(41,	40,	NULL,	NULL,	'ToolbarAccess',	113,	118),
+(42,	41,	NULL,	NULL,	'history_state',	114,	115),
+(43,	41,	NULL,	NULL,	'sql_explain',	116,	117),
+(44,	1,	NULL,	NULL,	'PermissionsExtras',	120,	121),
+(45,	28,	NULL,	NULL,	'admin_add',	103,	104),
+(46,	28,	NULL,	NULL,	'logout',	105,	106),
 (47,	17,	NULL,	NULL,	'basic_hashing',	51,	52),
 (48,	17,	NULL,	NULL,	'basic_hashing_input',	53,	54),
 (49,	8,	NULL,	NULL,	'basic_hashing_result',	31,	32),
 (50,	8,	NULL,	NULL,	'compute_and_compare_result',	33,	34),
 (51,	8,	NULL,	NULL,	'show_my_test_results',	35,	36),
 (52,	17,	NULL,	NULL,	'compute_and_compare',	55,	56),
-(53,	23,	NULL,	NULL,	'begin_test',	73,	74),
+(53,	23,	NULL,	NULL,	'begin_test',	77,	78),
 (54,	8,	NULL,	NULL,	'calculate_probability_of_collision_result',	37,	38),
 (55,	17,	NULL,	NULL,	'checkDuplicatesInArray',	57,	58),
 (56,	17,	NULL,	NULL,	'calculate_probability_of_collision',	59,	60),
 (57,	17,	NULL,	NULL,	'avalanche_effect',	61,	62),
-(58,	23,	NULL,	NULL,	'hash_function_properties',	75,	76),
-(59,	28,	NULL,	NULL,	'reset_password',	103,	104);
+(58,	23,	NULL,	NULL,	'hash_function_properties',	79,	80),
+(59,	28,	NULL,	NULL,	'reset_password',	107,	108),
+(60,	17,	NULL,	NULL,	'compute_and_compare_input',	63,	64),
+(61,	17,	NULL,	NULL,	'generate_ninety_nine_percentage_proability',	65,	66);
 
 DROP TABLE IF EXISTS `aros`;
 CREATE TABLE `aros` (
@@ -120,6 +122,16 @@ INSERT INTO `aros_acos` (`id`, `aro_id`, `aco_id`, `_create`, `_read`, `_update`
 (5,	3,	23,	'1',	'1',	'1',	'1'),
 (6,	3,	17,	'1',	'1',	'1',	'1'),
 (7,	3,	8,	'1',	'1',	'1',	'1');
+
+DROP TABLE IF EXISTS `Description`;
+CREATE TABLE `Description` (
+  `id` int(10) NOT NULL AUTO_INCREMENT,
+  `user_id` int(10) NOT NULL,
+  `description` text NOT NULL,
+  `created` datetime NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
 
 DROP TABLE IF EXISTS `group`;
 CREATE TABLE `group` (
@@ -187,7 +199,13 @@ CREATE TABLE `hash_result` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 INSERT INTO `hash_result` (`id`, `plaintext`, `message_digest`, `hash_algorithm_id`, `user_id`) VALUES
-(1,	'Hello',	'f7ff9e8b7bb2e09b70935a5d785e0cc5d9d0abf0',	1,	10);
+(1,	'Hello',	'f7ff9e8b7bb2e09b70935a5d785e0cc5d9d0abf0',	1,	10),
+(2,	'asd',	'688787d8ff144c502c7f5cffaafe2cc588d86079f9de88304c26b0cb99ce91c6',	5,	11),
+(3,	'asd',	'688787d8ff144c502c7f5cffaafe2cc588d86079f9de88304c26b0cb99ce91c6',	5,	11),
+(4,	'asd',	'688787d8ff144c502c7f5cffaafe2cc588d86079f9de88304c26b0cb99ce91c6',	5,	11),
+(5,	'hello\n\nasd\n\nbye\n\nhello\n\nhey\n\nasd\n\n',	'5891b5b522d5df086d0ff0b110fbd9d21bb4fc7163af34d08286a2e846f6be03\ndc460da4ad72c482231e28e688e01f2778a88ce31a08826899d54ef7183998b5\nabc6fd595fc079d3114d4b71a4d84b1d1d0f79df1e70f8813212f2a65d8916df\n5891b5b522d5df086d0ff0b110fbd9d21bb4fc7163af34d08286a2e846f6be03\n4e955fea0268518cbaa500409dfbec88f0ecebad28d84ecbe250baed97dba889\ndc460da4ad72c482231e28e688e01f2778a88ce31a08826899d54ef7183998b5\n',	5,	11),
+(6,	'asdqwe',	'f9a7c6df341325822e3ea264cfe39e5ef8c73aa4',	1,	11),
+(7,	'asdqwe',	'501bb865d4a92532cfebb65ee059e4889363eeb28a22ca6fb82165bb17432724',	5,	0);
 
 DROP TABLE IF EXISTS `user`;
 CREATE TABLE `user` (
@@ -208,6 +226,7 @@ CREATE TABLE `user` (
 INSERT INTO `user` (`id`, `password`, `name`, `email`, `group_id`, `profile`, `status`, `token`, `created`, `modified`) VALUES
 (5,	'96b9369f55be479d63a8ef366966a03a607657e4',	'yong',	'yong24@gmail.com',	1,	'I am yong',	'',	'',	'2014-03-28 01:05:48',	'2014-03-28 01:05:48'),
 (10,	'96b9369f55be479d63a8ef366966a03a607657e4',	'AikChun',	'aikchun616@gmail.com',	1,	'I am the main user.',	'',	'2f8c70400f525af8a1801c590056c2fdd6b757db',	'2014-03-28 01:36:02',	'2014-04-09 23:11:24'),
-(11,	'96b9369f55be479d63a8ef366966a03a607657e4',	'dude',	'dude@gmail.com',	3,	'',	'',	'',	'2014-04-05 00:20:03',	'2014-04-05 00:20:03');
+(11,	'96b9369f55be479d63a8ef366966a03a607657e4',	'dude',	'dude@gmail.com',	3,	'',	'',	'',	'2014-04-05 00:20:03',	'2014-04-05 00:20:03'),
+(12,	'1fda6ac901aee9291e9ef40a02e86367bb6da06d',	'ian',	'ian@gmail.com',	1,	'super user',	'',	'',	'2014-04-16 15:29:25',	'2014-04-16 15:29:25');
 
--- 2014-04-15 01:16:59
+-- 2014-04-16 15:37:39
