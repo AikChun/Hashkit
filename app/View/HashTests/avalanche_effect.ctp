@@ -15,12 +15,12 @@
 		$algorithms = array();
         foreach($result as $key => $model) {
             $id = $model['HashAlgorithmV1']['id'];
-            $algorithms = $model['HashAlgorithmV1']['name'];
+            $algorithms[$id] = $model['HashAlgorithmV1']['name'];
         }
 
-        echo $this->Form->input('HashAlgorithmV1', array(
+        echo $this->Form->input('HashAlgorithm', array(
 			'empty' => '(choose one)',
-			'options'=> array('HashAlgorithm' => $algorithms))
+			'options'=> array($algorithms))
 		);
 
 	?>

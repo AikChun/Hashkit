@@ -383,11 +383,23 @@ class HashTestsController extends AppController {
 
 		if($this->request->is('post')) {
 			$data = $this->request->data;
-			$this->set('data', $data);
-
-		}
 			
+			$dataInput = array();
+			$output = array();
+
+			$this->set('data', $data);
+			$this->log($data);
+			//$messageDigest = hash(strtolower($algorithms['HashAlgorithm']['name']), $data['HashTests']['plaintext']);
+
+			//foreach($selectedAlgorithms as $key => $algorithm ) {
+
+				
+			//$computed['HashResult']['plaintext'] = $hashTestForm['plaintext'];
+
+			//array_push($output, $computed);
+			//}
+		}		
 	}
-	
+
 
 }
