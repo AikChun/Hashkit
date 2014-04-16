@@ -121,7 +121,7 @@ class HashResultsController extends AppController {
 		$outputResult = $this->Session->read('output');
 		$this->log($outputResult);
 		$this->set('output', $outputResult);
-		$this->Session->destroy();
+		$this->Session->write('output', '');
 	}
 
 	public function show_my_test_results() {

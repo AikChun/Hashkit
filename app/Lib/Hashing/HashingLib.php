@@ -34,9 +34,9 @@ class HashingLib {
 					$messageDigest = hash(strtolower($algorithm['HashAlgorithm']['name']), $line);
 
 					if(empty($computed['HashResult']['plaintext'])){
-						$computed['HashResult']['plaintext'] = $line . "\n";	
+						$computed['HashResult']['plaintext'] = $line; //. "\n";	
 					} else {
-						$computed['HashResult']['plaintext'] .= $line . "\n";
+						$computed['HashResult']['plaintext'] .= $line; //. "\n";
 					}
 
 					if(empty($computed['HashResult']['message_digest'])){
