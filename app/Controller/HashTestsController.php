@@ -237,6 +237,9 @@ class HashTestsController extends AppController {
 
 /**
  * Compute the hashed value of the input plaintext.
+ * @param Array $selectedAlgorithms array-type $key => algorithm name
+ * @param String $hashTestForm plaintext from the user
+ * @return Array $output $key => array('HashAlgorithm' column names => value)
  */
 	protected function computeDigests($selectedAlgorithms, $hashTestForm) {
 		$computed = array();
@@ -380,7 +383,7 @@ class HashTestsController extends AppController {
         
         $HashAlgorithmV1Model = ClassRegistry::init('HashAlgorithmV1');
         $result = $HashAlgorithmV1Model->find('all');
-        //$this->log($result);
+        $this->log($result);
         $this->set('result', $result);
 		if($this->request->is('post')) {
 			$data = $this->request->data;
