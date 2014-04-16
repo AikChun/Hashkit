@@ -101,4 +101,30 @@ class DictionariesController extends AppController {
 			$this->Session->setFlash(__('The dictionary could not be deleted. Please, try again.'));
 		}
 		return $this->redirect(array('action' => 'index'));
-	}}
+    }
+
+/**
+ * Read plaintext from textfile and insert them into database
+ */
+    public function read_and_insert() {
+		$data = array();
+		$handle = fopen(WWW_ROOT."/dictionaryfiles/dictionary1.txt", "r");
+		if ($handle) {
+		$this->log('able to read file.');
+		while (($line = fgets($handle, 4096)) !== false) {
+			// process the line read.
+			$fileLineArray = array(
+				'plaintext' => $line
+			);
+			array_push($data, $fileLineArray);
+		}
+		} else {
+			// error opening the file.
+		} 
+		fclose($handle);
+		$this->log($data);
+		$this->log(WWW_ROOT);
+	
+    }
+}
+
