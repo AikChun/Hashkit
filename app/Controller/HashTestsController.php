@@ -382,17 +382,18 @@ class HashTestsController extends AppController {
         $result = $HashAlgorithmV1Model->find('all');
         //$this->log($result);
         $this->set('result', $result);
-
 		if($this->request->is('post')) {
 			$data = $this->request->data;
-			
+			$this->log($data);
 			$dataInput = array();
 			$output = array();
 
 			$this->set('data', $data);
 			//$this->log($data);
 			//$messageDigest = hash(strtolower($algorithms['HashAlgorithm']['name']), $data['HashTests']['plaintext']);
-
+			
+			$messageDigest = hash(strtolower($data['HashTests']['HashAlgorithm']), $data['HashTests']['plaintext']);
+			$this->log($messageDigest);
 			//foreach($selectedAlgorithms as $key => $algorithm ) {
 
 				

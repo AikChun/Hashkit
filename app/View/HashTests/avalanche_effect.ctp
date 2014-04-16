@@ -1,4 +1,4 @@
-<div class="hashTests view">
+<div class="HashTests view">
 	Avalanche effect Test
 	<?php echo $this->Form->create('HashTests',array('action' => 'avalanche_effect'));?>
 	
@@ -12,15 +12,22 @@
 	<br>
 
 	<?php 
-		$algorithms = array();
+		$algorithms = array();	
+
         foreach($result as $key => $model) {
-            $id = $model['HashAlgorithmV1']['id'];
-            $algorithms[$id] = $model['HashAlgorithmV1']['name'];
+        	$entry = array(
+        		$model['HashAlgorithmV1']['name'] => $model['HashAlgorithmV1']['name'] 
+        		);
+            // $id = $model['HashAlgorithmV1']['id'];
+            // $algorithms[$id] = $model['HashAlgorithmV1']['name'];
+        	$algorithms = array_merge($algorithms, $entry);
         }
+        // array('id' => 'algorithm');
 
         echo $this->Form->input('HashAlgorithm', array(
 			'empty' => '(choose one)',
-			'options'=> array($algorithms))
+			'options'=> $algorithms
+			)
 		);
 
 	?>

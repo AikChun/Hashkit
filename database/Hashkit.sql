@@ -2,7 +2,7 @@
 
 SET NAMES utf8;
 SET foreign_key_checks = 0;
-SET time_zone = '+08:00';
+SET time_zone = '-07:00';
 SET sql_mode = 'NO_AUTO_VALUE_ON_ZERO';
 
 DROP DATABASE IF EXISTS `Hashkit`;
@@ -174,17 +174,15 @@ INSERT INTO `hash_algorithm_v1` (`id`, `name`, `base`, `exponent`) VALUES
 (1,	'MD2',	2,	128),
 (2,	'MD4',	2,	128),
 (3,	'MD5',	2,	128),
-(4,	'Panama',	2,	256),
 (5,	'ripemd',	2,	128),
-(6,	'ripemd-128',	2,	128),
-(7,	'ripemd-256',	2,	256),
-(8,	'ripemd-160',	2,	160),
-(9,	'ripemd-320',	2,	320),
-(10,	'rtr0',	2,	160),
-(11,	'SHA-0',	2,	160),
-(12,	'SHA-1',	2,	160),
-(13,	'SHA-224',	2,	224),
-(14,	'SHA-256',	2,	256),
+(6,	'ripemd128',	2,	128),
+(7,	'ripemd256',	2,	256),
+(8,	'ripemd160',	2,	160),
+(9,	'ripemd320',	2,	320),
+(11,	'SHA0',	2,	160),
+(12,	'SHA1',	2,	160),
+(13,	'SHA224',	2,	224),
+(14,	'SHA256',	2,	256),
 (15,	'whirlpool',	2,	512);
 
 DROP TABLE IF EXISTS `hash_result`;
@@ -229,4 +227,4 @@ INSERT INTO `user` (`id`, `password`, `name`, `email`, `group_id`, `profile`, `s
 (11,	'96b9369f55be479d63a8ef366966a03a607657e4',	'dude',	'dude@gmail.com',	3,	'',	'',	'',	'2014-04-05 00:20:03',	'2014-04-05 00:20:03'),
 (12,	'1fda6ac901aee9291e9ef40a02e86367bb6da06d',	'ian',	'ian@gmail.com',	1,	'super user',	'',	'',	'2014-04-16 15:29:25',	'2014-04-16 15:29:25');
 
--- 2014-04-16 15:37:39
+-- 2014-04-16 01:10:36
