@@ -393,7 +393,7 @@ class HashTestsController extends AppController {
 			//$messageDigest = hash(strtolower($algorithms['HashAlgorithm']['name']), $data['HashTests']['plaintext']);
 			
 			$messageDigest = hash(strtolower($data['HashTests']['HashAlgorithm']), $data['HashTests']['plaintext']);
-			$this->log($messageDigest);
+			//$this->log($messageDigest);
 			//foreach($selectedAlgorithms as $key => $algorithm ) {
 
 				
