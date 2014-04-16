@@ -12,6 +12,7 @@
 /app/Plugin/AclExtras
 /app/Plugin/PermissionsExtras
 /app/Vendor/*
+/app/webroot/dictionaryfiles
 
 # OS generated files #
 ######################

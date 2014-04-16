@@ -56,7 +56,7 @@ class HashTestsController extends AppController {
 			$data = $this->request->data['HashTests'];
 			$HashAlgorithmModel = ClassRegistry::init('HashAlgorithm');
 			$selectedAlgorithms = array();
-			$this->log($data);
+			//$this->log($data);
 			foreach ($data as $key => $hashId) {
 				$searchCondition = array(
 					'conditions' => array(
@@ -125,6 +125,7 @@ class HashTestsController extends AppController {
 
 		if($this->request->is('post')) {
 			$data = $this->request->data;
+			//$this->log($data);
 
 			if (!empty($data['HashTests']['plaintext'])) {
 
@@ -143,11 +144,6 @@ class HashTestsController extends AppController {
 
 			$output = HashingLib::computeDigests($selectedAlgorithms, $lineArray);
 
-			$mdline = explode("\n",$output[0]['HashResult']['message_digest']);
-			//$this->log($mdline);
-
-			$dup = HashTestsController::checkDuplicatesInArray($mdline);
-			//$this->log($dup);
             foreach($output as $key => $row) {
                 $output[$key]['HashResult']['user_id'] = $this->Auth->user('id');
             }
@@ -166,7 +162,7 @@ class HashTestsController extends AppController {
 		if($this->request->is('post')) {
 			if(empty($this->request->data['HashTests']['HashAlgorithm'])) {
 				$this->Session->setFlash('You did not select any algorithms!');
-				return $this->redirect(array('action' => 'computeAndCompare'));
+				return $this->redirect(array('action' => 'compute_and_compare'));
 			}
 			$data = $this->request->data['HashTests'];
 			$HashAlgorithmModel = ClassRegistry::init('HashAlgorithm');
@@ -181,7 +177,7 @@ class HashTestsController extends AppController {
 				$selectedAlgorithms = $HashAlgorithmModel->find('all', $searchCondition);
 			}
 			$this->Session->write('selectedAlgorithms' , $selectedAlgorithms);
-			return $this->redirect(array('controller' => 'HashTests' ,'action' => 'computeAndCompareInput'));
+			return $this->redirect(array('controller' => 'HashTests' ,'action' => 'compute_and_compare_input'));
 			
 		}
 		$conditions = array(
@@ -198,18 +194,45 @@ class HashTestsController extends AppController {
 /**
  * Input page of the compute and compare functionality of the project.
  */
-	public function computeAndCompareInput() {
+	public function compute_and_compare_input() {
 		$selectedAlgorithms = $this->Session->read('selectedAlgorithms');
 		if($this->request->is('post')) {
 			$data = $this->request->data;
-			$output = $this->computeDigests($selectedAlgorithms, $data['HashTests']);
+			//$this->log($data);
+
+			if (!empty($data['HashTests']['plaintext'])) {
+
+				$output = HashingLib::computeDigests($selectedAlgorithms, $data['HashTests']['plaintext']);
+                $output[0]['HashResult']['user_id'] = $this->Auth->user('id');
+
+                $outputResult = $this->compareDigests($output);
+				$this->log($outputResult);
+				$this->Session->write('output', $outputResult);
+				$this->redirect(array('controller' => 'HashResults', 'action' => 'compute_and_compare_result'));
+	            //$this->Session->write('output', $output);
+				//$this->redirect(array('controller' => 'HashResults', 'action' => 'compute_and_compare_result'));
+			}
+
+			elseif (!empty($data['HashTests']['file_upload']) && 
+	             is_uploaded_file($data['HashTests']['file_upload']['tmp_name']) &&
+	             ($data['HashTests']['file_upload']['type'] == 'text/plain')) 
+			{
+
+			$lineArray = file($data['HashTests']['file_upload']['tmp_name']);
+
+			$output = HashingLib::computeDigests($selectedAlgorithms, $lineArray);
+
+            foreach($output as $key => $row) {
+                $output[$key]['HashResult']['user_id'] = $this->Auth->user('id');
+            }
+
 			$outputResult = $this->compareDigests($output);
-
+			$this->log($outputResult);
 			$this->Session->write('output', $outputResult);
-			$this->redirect(array('controller' => 'HashResults', 'action' => 'computeAndCompareResult'));
+			$this->redirect(array('controller' => 'HashResults', 'action' => 'compute_and_compare_result'));
 
+			}
 		}
-
 	}
 
 /**
@@ -242,6 +265,16 @@ class HashTestsController extends AppController {
 	protected function compareDigests($output) {
 		$hashResultModel = ClassRegistry::init('HashResult');
 		$analysis = array();
+
+		//foreach($output as $key => $row) {
+		$mdline = explode("\n",$output[0]['HashResult']['message_digest']);
+		//$this->log($mdline);
+
+		$dup = HashTestsController::checkDuplicatesInArray($mdline);
+		//$this->log($dup);
+
+		//}
+
 		foreach($output as $key => $hashResult) {
 			$conditions = array(
 				'conditions' => array('HashResult.message_digest' => $hashResult['HashResult']['message_digest']),
@@ -249,7 +282,7 @@ class HashTestsController extends AppController {
 			);
 			$result = $hashResultModel->find('first', $conditions);
 			$this->log('This is result.');
-			$this->log($result);
+			//$this->log($result);
 
 
 			if(!empty($result['HashResult']['id'])) {
