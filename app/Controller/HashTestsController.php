@@ -206,7 +206,7 @@ class HashTestsController extends AppController {
                 $output[0]['HashResult']['user_id'] = $this->Auth->user('id');
 
                 $outputResult = $this->compareDigests($output);
-				$this->log($outputResult);
+				//$this->log($outputResult);
 				$this->Session->write('output', $outputResult);
 				$this->redirect(array('controller' => 'HashResults', 'action' => 'compute_and_compare_result'));
 	            //$this->Session->write('output', $output);
@@ -227,7 +227,7 @@ class HashTestsController extends AppController {
             }
 
 			$outputResult = $this->compareDigests($output);
-			$this->log($outputResult);
+			//$this->log($outputResult);
 			$this->Session->write('output', $outputResult);
 			$this->redirect(array('controller' => 'HashResults', 'action' => 'compute_and_compare_result'));
 
@@ -268,10 +268,12 @@ class HashTestsController extends AppController {
 
 		//foreach($output as $key => $row) {
 		$mdline = explode("\n",$output[0]['HashResult']['message_digest']);
-		//$this->log($mdline);
+		$ptline = explode("\n",$output[0]['HashResult']['plaintext']);
+		$this->log($mdline);
+		$this->log($ptline);
 
 		$dup = HashTestsController::checkDuplicatesInArray($mdline);
-		//$this->log($dup);
+		//$this->log($output);
 
 		//}
 
@@ -388,7 +390,7 @@ class HashTestsController extends AppController {
 			$output = array();
 
 			$this->set('data', $data);
-			$this->log($data);
+			//$this->log($data);
 			//$messageDigest = hash(strtolower($algorithms['HashAlgorithm']['name']), $data['HashTests']['plaintext']);
 
 			//foreach($selectedAlgorithms as $key => $algorithm ) {
