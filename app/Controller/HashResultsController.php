@@ -119,8 +119,14 @@ class HashResultsController extends AppController {
 
 	public function compute_and_compare_result() {
 		$outputResult = $this->Session->read('output');
-		$this->log($outputResult);
-		$this->set('output', $outputResult);
+		if(!empty($outputResult)) {
+			$this->set("output", $outputResult);
+			$this->HashResult->create();
+			$this->HashResult->saveMany($outputResult);
+		} else {
+			$output = '';
+			$this->set('output', $outputResult);
+		}
 		$this->Session->write('output', '');
 	}
 
