@@ -38,6 +38,24 @@
 
 	<div class="or" style="font-size:200%">THEN</div>
 
+	<?php 
+		$algorithms = array();	
+
+        foreach($result as $key => $model) {
+        	$entry = array(
+        		$model['HashAlgorithmV1']['name'] => $model['HashAlgorithmV1']['name'],
+        		);
+        	$algorithms = array_merge($algorithms, $entry);
+        }
+
+        echo $this->Form->input('HashAlgorithm', array(
+			'empty' => '(choose one)',
+			'options'=> $algorithms
+			)
+		);
+
+	?>
+
 	<div class="or" style="font-size:150%">please enter the base and expontial of the total number of hashes for the hash function</div>
 	
 	<?php	
@@ -60,5 +78,16 @@
 		));
 	?>
 
+	<div class="or" style="font-size:150%">OR</div>
+	<?php
+		echo $this->Form->input('hash_value1', array(
+			'type' => 'text',
+			'rule'    => 'numeric',
+			'message' => 'Only numbers allowed',
+			'div' => false,
+			'label' => 'Please enter the value of the hash:'
+			
+		));
+	?>
 	<?php echo $this->Form->end(__('Submit')); ?>
 </div>

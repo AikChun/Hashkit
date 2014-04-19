@@ -237,6 +237,9 @@ class HashTestsController extends AppController {
 
 /**
  * Compute the hashed value of the input plaintext.
+ * @param Array $selectedAlgorithms array-type $key => algorithm name
+ * @param String $hashTestForm plaintext from the user
+ * @return Array $output $key => array('HashAlgorithm' column names => value)
  */
 	protected function computeDigests($selectedAlgorithms, $hashTestForm) {
 		$computed = array();
@@ -314,12 +317,54 @@ class HashTestsController extends AppController {
 
 /**
  * To calcuate the probability of the collision occurence based on the birthday paradox
- *
+ *  
  */
 	public function calculate_probability_of_collision() {
+		
+		$HashAlgorithmV1Model = ClassRegistry::init('HashAlgorithmV1');
+        $result = $HashAlgorithmV1Model->find('all');
+        $this->set('result', $result);
+		
 		if($this->request->is('post')) {
-			$data = $this->request->data;
 			
+			$data = $this->request->data;
+			//$this->log($data);
+			
+			$conditions = array(
+				'conditions' => array('HashAlgorithmV1.name'=> $data['HashTests']['HashAlgorithm'])
+			);
+			$resultfromdatabase = $HashAlgorithmV1Model->find('first', $conditions);
+
+			//$this->log($resultfromdatabase['HashAlgorithmV1']['name']);
+			
+			 if((int)$resultfromdatabase['HashAlgorithmV1']['base'] > 1 ){
+			 		$K = bcpow((int)$resultfromdatabase['HashAlgorithmV1']['base'],(int)$resultfromdatabase['HashAlgorithmV1']['exponent']);
+			 }else{
+
+					if(empty($data['HashTests']['customized_algorithm_base']) || empty($data['HashTests']['customized_algorithm_exponent'])) {
+						if(empty($data['HashTests']['hash_value1'])) {	
+							$this->Session->setFlash('Please enter both the base and exponent values for the hash function.');
+							return $this->redirect(array('action' => 'calculate_probability_of_collision'));
+						}
+					}
+
+					if(!empty($data['HashTests']['customized_algorithm_base']) || !empty($data['HashTests']['customized_algorithm_exponent'])) {
+						if(!empty($data['HashTests']['hash_value1'])) {
+							$this->Session->setFlash('Please enter only either the base and exponent values or the amount of hash values.');
+							return $this->redirect(array('action' => 'calculate_probability_of_collision'));
+						}
+					}
+
+					if(empty($data['HashTests']['customized_algorithm_base']) && empty($data['HashTests']['customized_algorithm_exponent'])) {
+						if(!empty($data['HashTests']['hash_value1'])) {
+							$K = (int)$data['HashTests']['hash_value1'];
+						}
+					}else{
+						//total of hash value which we want to match(birthday) 
+						$K = pow((int)$data['HashTests']['customized_algorithm_base'],(int)$data['HashTests']['customized_algorithm_exponent']);	
+					}
+			}
+
 			if(empty($data['HashTests']['required_base']) || empty($data['HashTests']['required_exponent'])) {
 				if(empty($data['HashTests']['hash_value'])) {
 					$this->Session->setFlash('You did not enter either the base and exponent values or the amount of hash values.');
@@ -334,11 +379,6 @@ class HashTestsController extends AppController {
 				}
 			}
 
-			if(empty($data['HashTests']['customized_algorithm_base']) || empty($data['HashTests']['customized_algorithm_exponent'])) {
-					$this->Session->setFlash('Please enter both the base and exponent values for the hash function.');
-					return $this->redirect(array('action' => 'calculate_probability_of_collision'));
-			}
-
 			if(empty($data['HashTests']['required_base']) && empty($data['HashTests']['required_exponent'])) {
 				if(!empty($data['HashTests']['hash_value'])) {
 					$N = (int)$data['HashTests']['hash_value'];
@@ -348,10 +388,10 @@ class HashTestsController extends AppController {
 					$N = pow((int)$data['HashTests']['required_base'],(int)$data['HashTests']['required_exponent']);	
 			}
 
-			//total of hash value which we want to match(birthday) 
-			$K = pow((int)$data['HashTests']['customized_algorithm_base'],(int)$data['HashTests']['customized_algorithm_exponent']);
+			$this->log($K);	
 
 			$firstexpEqu = (- pow($N,2)) / (2 * $K);
+			//$this->log($firstexpEqu);
 			$probability = (1 - exp($firstexpEqu)) * 100;
 			$samplespace = $N;
 			$totalhash = $K;
@@ -374,7 +414,17 @@ class HashTestsController extends AppController {
 			$firstexpEqu = (- pow($N,2)) / (2 * $K);
 			$probability = (1 - exp($firstexpEqu)) * 100;
 			if($probability < 99) {
-				$N += 10;
+				if($K < 100){
+					$N += 1;
+				}else if($K < 1000){
+					$N += 10;
+				}else if($K < 10000){
+					$N += 100;
+				}else if($K < 100000){
+					$N += 1000;
+				}else{
+					$N += 1000000;	
+				}
 			}else {	
 				$requiredsamplespace = $N;
 				$check = false;
@@ -387,19 +437,20 @@ class HashTestsController extends AppController {
         
         $HashAlgorithmV1Model = ClassRegistry::init('HashAlgorithmV1');
         $result = $HashAlgorithmV1Model->find('all');
-        //$this->log($result);
+        $this->log($result);
         $this->set('result', $result);
 		if($this->request->is('post')) {
 			$data = $this->request->data;
-			$this->log($data);
 			$dataInput = array();
 			$output = array();
 
 			$this->set('data', $data);
 			//$this->log($data);
 			//$messageDigest = hash(strtolower($algorithms['HashAlgorithm']['name']), $data['HashTests']['plaintext']);
-			
+			//$binary_output = $this->text2bin($data['HashTests']['plaintext']);
+			//$this->log($binary_output);
 			$messageDigest = hash(strtolower($data['HashTests']['HashAlgorithm']), $data['HashTests']['plaintext']);
+			
 			//$this->log($messageDigest);
 			//foreach($selectedAlgorithms as $key => $algorithm ) {
 
@@ -410,6 +461,5 @@ class HashTestsController extends AppController {
 			//}
 		}		
 	}
-
 
 }
