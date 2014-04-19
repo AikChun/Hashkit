@@ -266,16 +266,10 @@ class HashTestsController extends AppController {
 		$hashResultModel = ClassRegistry::init('HashResult');
 		$analysis = array();
 
-		//foreach($output as $key => $row) {
 		$mdline = explode("\n",$output[0]['HashResult']['message_digest']);
 		$ptline = explode("\n",$output[0]['HashResult']['plaintext']);
-		$this->log($mdline);
-		$this->log($ptline);
 
 		$dup = HashTestsController::checkDuplicatesInArray($mdline);
-		//$this->log($output);
-
-		//}
 
 		foreach($output as $key => $hashResult) {
 			$conditions = array(
@@ -286,12 +280,25 @@ class HashTestsController extends AppController {
 			$this->log('This is result.');
 			//$this->log($result);
 
+			$collision = '';
+			foreach($dup as $key => $num) {
+			$collision .= $ptline[$num] . " " . $mdline[$num] . "\n";
+			}
+			$this->log($collision);
 
 			if(!empty($result['HashResult']['id'])) {
-				$hashResult['HashResult']['analysis'] = 'This input is a very common hash value for the algorithm: '. $hashResult['HashResult']['hash_algorithm_name'];
-			} else {
-				$hashResult['HashResult']['analysis'] = 'This is not a common hash value for algorithm: '. $hashResult['HashResult']['hash_algorithm_name'];
+				if($dup != FALSE) {
+					$hashResult['HashResult']['analysis'] = 'There is collision detected at: ' . "\n" . $collision;
+				} else {
+					$hashResult['HashResult']['analysis'] = 'No collision detected';
+				}
 			}
+
+			//if(!empty($result['HashResult']['id'])) {
+			//	$hashResult['HashResult']['analysis'] = 'This input is a very common hash value for the algorithm: '. $hashResult['HashResult']['hash_algorithm_name'];
+			//} else {
+			//	$hashResult['HashResult']['analysis'] = 'This is not a common hash value for algorithm: '. $hashResult['HashResult']['hash_algorithm_name'];
+			//}
 			array_push($analysis, $hashResult);
 		}
 		return $analysis;
