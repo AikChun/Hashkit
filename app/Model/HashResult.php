@@ -21,6 +21,10 @@ class HashResult extends AppModel {
 			'className' => 'User',
 			'foreignKey' => 'id',
 			'counterCache' => true
+		),
+		'Description' => array(
+			'className' => 'Description',
+			'foreignKey' => 'id',
 		)
 	);
 

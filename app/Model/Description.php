@@ -13,17 +13,10 @@ class Description extends AppModel {
  */
 	public $useTable = 'description';
 
-	public $hasOne = array(
-		'User' => array(
-			'className' => 'User',
-			'foreignKey' => 'id',
-		)
-	);
-
 	public $hasMany = array(
 		'HashResult' => array(
 			'className' => 'HashResult',
-			'foreignKey' => 'id',
+			'foreignKey' => 'user_id',
 		)
 	);
 
