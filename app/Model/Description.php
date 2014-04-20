@@ -11,7 +11,7 @@ class Description extends AppModel {
  *
  * @var mixed False or table name
  */
-	public $useTable = 'description';
+	public $useTable = 'Description';
 
 	public $hasMany = array(
 		'HashResult' => array(
