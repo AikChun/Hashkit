@@ -448,36 +448,26 @@ class HashTestsController extends AppController {
 
 			$bin = $this->textToBinary($data['HashTests']['plaintext']);
 			echo $bin;
-			//$this->log($data);
-			//$messageDigest = hash(strtolower($algorithms['HashAlgorithm']['name']), $data['HashTests']['plaintext']);
-			//$binary_output = $this->text2bin($data['HashTests']['plaintext']);
-			//$this->log($binary_output);
+
 			$messageDigest = hash(strtolower($data['HashTests']['HashAlgorithm']), $data['HashTests']['plaintext']);
-			
-			//$this->log($messageDigest);
-			//foreach($selectedAlgorithms as $key => $algorithm ) {
-
-				
-			//$computed['HashResult']['plaintext'] = $hashTestForm['plaintext'];
-
-			//array_push($output, $computed);
-			//}
 		}		
 	}
 
-	/**
- 	* Compute the hashed value of the input plaintext.
- 	* @param String $txt_str plaintext from the user
- 	* @return String binary string
- 	*/
-	public function textToBinary ($txt_str) {
-    	$len = strlen($txt_str); 
-   		$bin = ''; 
-    	for($i = 0; $i < $len; $i++) 
-    	{ 
-        	$bin .= strlen(decbin(ord($txt_str[$i]))) < 8 ? str_pad(decbin(ord($txt_str[$i])), 8, 0, STR_PAD_LEFT) : decbin(ord($txt_str[$i])); 
-    	} 
-    	return $bin; 
-	}
+	// /**
+ // 	* Compute the hashed value of the input plaintext.
+ // 	* @param String $txt_str plaintext from the user
+ // 	* @return String binary string
+ // 	*/
+ 	
+	// public function textToBinary ($txt_str) {
+ //    	$len = strlen($txt_str); 
+ //   		$bin = ''; 
+ //    	for($i = 0; $i < $len; $i++) 
+ //    	{ 
+ //        	$bin .= strlen(decbin(ord($txt_str[$i]))) < 8 ? str_pad(decbin(ord($txt_str[$i])), 8, 0, STR_PAD_LEFT) : decbin(ord($txt_str[$i])); 
+ //    	} 
+ //    	return $bin; 
+	// }
+
 
 }
