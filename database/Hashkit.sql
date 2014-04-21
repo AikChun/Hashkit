@@ -2,7 +2,7 @@
 
 SET NAMES utf8;
 SET foreign_key_checks = 0;
-SET time_zone = '+08:00';
+SET time_zone = '-07:00';
 SET sql_mode = 'NO_AUTO_VALUE_ON_ZERO';
 
 DROP DATABASE IF EXISTS `Hashkit`;
@@ -22,7 +22,7 @@ CREATE TABLE `acos` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 INSERT INTO `acos` (`id`, `parent_id`, `model`, `foreign_key`, `alias`, `lft`, `rght`) VALUES
-(1,	NULL,	NULL,	NULL,	'controllers',	1,	122),
+(1,	NULL,	NULL,	NULL,	'controllers',	1,	148),
 (2,	1,	NULL,	NULL,	'Groups',	2,	13),
 (3,	2,	NULL,	NULL,	'index',	3,	4),
 (4,	2,	NULL,	NULL,	'view',	5,	6),
@@ -82,7 +82,20 @@ INSERT INTO `acos` (`id`, `parent_id`, `model`, `foreign_key`, `alias`, `lft`, `
 (58,	23,	NULL,	NULL,	'hash_function_properties',	79,	80),
 (59,	28,	NULL,	NULL,	'reset_password',	107,	108),
 (60,	17,	NULL,	NULL,	'compute_and_compare_input',	63,	64),
-(61,	17,	NULL,	NULL,	'generate_ninety_nine_percentage_proability',	65,	66);
+(61,	17,	NULL,	NULL,	'generate_ninety_nine_percentage_proability',	65,	66),
+(62,	1,	NULL,	NULL,	'Descriptions',	122,	133),
+(63,	62,	NULL,	NULL,	'index',	123,	124),
+(64,	62,	NULL,	NULL,	'view',	125,	126),
+(65,	62,	NULL,	NULL,	'add',	127,	128),
+(66,	62,	NULL,	NULL,	'edit',	129,	130),
+(67,	62,	NULL,	NULL,	'delete',	131,	132),
+(68,	1,	NULL,	NULL,	'Dictionaries',	134,	147),
+(69,	68,	NULL,	NULL,	'index',	135,	136),
+(70,	68,	NULL,	NULL,	'view',	137,	138),
+(71,	68,	NULL,	NULL,	'add',	139,	140),
+(72,	68,	NULL,	NULL,	'edit',	141,	142),
+(73,	68,	NULL,	NULL,	'delete',	143,	144),
+(74,	68,	NULL,	NULL,	'read_and_insert',	145,	146);
 
 DROP TABLE IF EXISTS `aros`;
 CREATE TABLE `aros` (
@@ -123,15 +136,21 @@ INSERT INTO `aros_acos` (`id`, `aro_id`, `aco_id`, `_create`, `_read`, `_update`
 (6,	3,	17,	'1',	'1',	'1',	'1'),
 (7,	3,	8,	'1',	'1',	'1',	'1');
 
-DROP TABLE IF EXISTS `Description`;
-CREATE TABLE `Description` (
+DROP TABLE IF EXISTS `description`;
+CREATE TABLE `description` (
   `id` int(10) NOT NULL AUTO_INCREMENT,
   `user_id` int(10) NOT NULL,
   `description` text NOT NULL,
   `created` datetime NOT NULL,
+  `modified` datetime NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
+INSERT INTO `description` (`id`, `user_id`, `description`, `created`, `modified`) VALUES
+(1,	10,	'testing analysis',	'2014-04-21 04:56:16',	'2014-04-21 04:56:16'),
+(2,	10,	'testing analysis',	'2014-04-21 05:02:57',	'2014-04-21 05:02:57'),
+(3,	10,	'testing analysis',	'2014-04-21 05:09:02',	'2014-04-21 05:09:02'),
+(4,	10,	'testing analysis',	'2014-04-21 05:12:32',	'2014-04-21 05:12:32');
 
 DROP TABLE IF EXISTS `group`;
 CREATE TABLE `group` (
@@ -194,34 +213,23 @@ CREATE TABLE `hash_result` (
   `message_digest` text NOT NULL,
   `hash_algorithm_id` int(10) NOT NULL,
   `user_id` int(10) NOT NULL,
+  `description_id` int(10) NOT NULL,
+  `created` date NOT NULL,
+  `modified` date NOT NULL,
   PRIMARY KEY (`id`),
-  KEY `user_id` (`user_id`)
+  KEY `user_id` (`user_id`),
+  KEY `description_id` (`description_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
-INSERT INTO `hash_result` (`id`, `plaintext`, `message_digest`, `hash_algorithm_id`, `user_id`) VALUES
-(1,	'Hello',	'f7ff9e8b7bb2e09b70935a5d785e0cc5d9d0abf0',	1,	10),
-(2,	'asd',	'688787d8ff144c502c7f5cffaafe2cc588d86079f9de88304c26b0cb99ce91c6',	5,	11),
-(3,	'asd',	'688787d8ff144c502c7f5cffaafe2cc588d86079f9de88304c26b0cb99ce91c6',	5,	11),
-(4,	'asd',	'688787d8ff144c502c7f5cffaafe2cc588d86079f9de88304c26b0cb99ce91c6',	5,	11),
-(5,	'hello\n\nasd\n\nbye\n\nhello\n\nhey\n\nasd\n\n',	'5891b5b522d5df086d0ff0b110fbd9d21bb4fc7163af34d08286a2e846f6be03\ndc460da4ad72c482231e28e688e01f2778a88ce31a08826899d54ef7183998b5\nabc6fd595fc079d3114d4b71a4d84b1d1d0f79df1e70f8813212f2a65d8916df\n5891b5b522d5df086d0ff0b110fbd9d21bb4fc7163af34d08286a2e846f6be03\n4e955fea0268518cbaa500409dfbec88f0ecebad28d84ecbe250baed97dba889\ndc460da4ad72c482231e28e688e01f2778a88ce31a08826899d54ef7183998b5\n',	5,	11),
-(6,	'asdqwe',	'f9a7c6df341325822e3ea264cfe39e5ef8c73aa4',	1,	11),
-(7,	'asdqwe',	'501bb865d4a92532cfebb65ee059e4889363eeb28a22ca6fb82165bb17432724',	5,	0),
-(8,	'zxcsd',	'de0d680cf8164bdfd1d83d929a1f9ea9a9b37bac08f095618c5347f4ff9261e1',	5,	12),
-(9,	'hello\n\nasd\n\nbye\n\nhello\n\nhey\n\nasd\n\n',	'5891b5b522d5df086d0ff0b110fbd9d21bb4fc7163af34d08286a2e846f6be03\ndc460da4ad72c482231e28e688e01f2778a88ce31a08826899d54ef7183998b5\nabc6fd595fc079d3114d4b71a4d84b1d1d0f79df1e70f8813212f2a65d8916df\n5891b5b522d5df086d0ff0b110fbd9d21bb4fc7163af34d08286a2e846f6be03\n4e955fea0268518cbaa500409dfbec88f0ecebad28d84ecbe250baed97dba889\ndc460da4ad72c482231e28e688e01f2778a88ce31a08826899d54ef7183998b5\n',	5,	12),
-(10,	'hello\nasd\nbye\nhello\nhey\nasd\n',	'5891b5b522d5df086d0ff0b110fbd9d21bb4fc7163af34d08286a2e846f6be03\ndc460da4ad72c482231e28e688e01f2778a88ce31a08826899d54ef7183998b5\nabc6fd595fc079d3114d4b71a4d84b1d1d0f79df1e70f8813212f2a65d8916df\n5891b5b522d5df086d0ff0b110fbd9d21bb4fc7163af34d08286a2e846f6be03\n4e955fea0268518cbaa500409dfbec88f0ecebad28d84ecbe250baed97dba889\ndc460da4ad72c482231e28e688e01f2778a88ce31a08826899d54ef7183998b5\n',	5,	12),
-(11,	'hello\nasd\nbye\nhello\nhey\nasd\n',	'5891b5b522d5df086d0ff0b110fbd9d21bb4fc7163af34d08286a2e846f6be03\ndc460da4ad72c482231e28e688e01f2778a88ce31a08826899d54ef7183998b5\nabc6fd595fc079d3114d4b71a4d84b1d1d0f79df1e70f8813212f2a65d8916df\n5891b5b522d5df086d0ff0b110fbd9d21bb4fc7163af34d08286a2e846f6be03\n4e955fea0268518cbaa500409dfbec88f0ecebad28d84ecbe250baed97dba889\ndc460da4ad72c482231e28e688e01f2778a88ce31a08826899d54ef7183998b5\n',	5,	12),
-(12,	'hello\nasd\nbye\nhello\nhey\nasd\n',	'5891b5b522d5df086d0ff0b110fbd9d21bb4fc7163af34d08286a2e846f6be03\ndc460da4ad72c482231e28e688e01f2778a88ce31a08826899d54ef7183998b5\nabc6fd595fc079d3114d4b71a4d84b1d1d0f79df1e70f8813212f2a65d8916df\n5891b5b522d5df086d0ff0b110fbd9d21bb4fc7163af34d08286a2e846f6be03\n4e955fea0268518cbaa500409dfbec88f0ecebad28d84ecbe250baed97dba889\ndc460da4ad72c482231e28e688e01f2778a88ce31a08826899d54ef7183998b5\n',	5,	12),
-(13,	'hello\nasd\nbye\nhello\nhey\nasd\n',	'5891b5b522d5df086d0ff0b110fbd9d21bb4fc7163af34d08286a2e846f6be03\ndc460da4ad72c482231e28e688e01f2778a88ce31a08826899d54ef7183998b5\nabc6fd595fc079d3114d4b71a4d84b1d1d0f79df1e70f8813212f2a65d8916df\n5891b5b522d5df086d0ff0b110fbd9d21bb4fc7163af34d08286a2e846f6be03\n4e955fea0268518cbaa500409dfbec88f0ecebad28d84ecbe250baed97dba889\ndc460da4ad72c482231e28e688e01f2778a88ce31a08826899d54ef7183998b5\n',	5,	12),
-(14,	'hello\nasd\nbye\nhello\nhey\nasd\n',	'5891b5b522d5df086d0ff0b110fbd9d21bb4fc7163af34d08286a2e846f6be03\ndc460da4ad72c482231e28e688e01f2778a88ce31a08826899d54ef7183998b5\nabc6fd595fc079d3114d4b71a4d84b1d1d0f79df1e70f8813212f2a65d8916df\n5891b5b522d5df086d0ff0b110fbd9d21bb4fc7163af34d08286a2e846f6be03\n4e955fea0268518cbaa500409dfbec88f0ecebad28d84ecbe250baed97dba889\ndc460da4ad72c482231e28e688e01f2778a88ce31a08826899d54ef7183998b5\n',	5,	12),
-(15,	'hello\nasd\nbye\nhello\nhey\nasd\n',	'5891b5b522d5df086d0ff0b110fbd9d21bb4fc7163af34d08286a2e846f6be03\ndc460da4ad72c482231e28e688e01f2778a88ce31a08826899d54ef7183998b5\nabc6fd595fc079d3114d4b71a4d84b1d1d0f79df1e70f8813212f2a65d8916df\n5891b5b522d5df086d0ff0b110fbd9d21bb4fc7163af34d08286a2e846f6be03\n4e955fea0268518cbaa500409dfbec88f0ecebad28d84ecbe250baed97dba889\ndc460da4ad72c482231e28e688e01f2778a88ce31a08826899d54ef7183998b5\n',	5,	12),
-(16,	'hello\nasd\nbye\nhello\nhey\nasd\n',	'f572d396fae9206628714fb2ce00f72e94f2258f\nc85320d9ddb90c13f4a215f1f0a87b531ab33310\nee9e51458f4642f48efe956962058245ee7127b1\nf572d396fae9206628714fb2ce00f72e94f2258f\n7aea02175315cd3541b03ffe78aa1ccc40d2e98a\nc85320d9ddb90c13f4a215f1f0a87b531ab33310\n',	1,	12),
-(17,	'hello\nasd\nbye\nhello\nhey\nasd\n',	'5891b5b522d5df086d0ff0b110fbd9d21bb4fc7163af34d08286a2e846f6be03\ndc460da4ad72c482231e28e688e01f2778a88ce31a08826899d54ef7183998b5\nabc6fd595fc079d3114d4b71a4d84b1d1d0f79df1e70f8813212f2a65d8916df\n5891b5b522d5df086d0ff0b110fbd9d21bb4fc7163af34d08286a2e846f6be03\n4e955fea0268518cbaa500409dfbec88f0ecebad28d84ecbe250baed97dba889\ndc460da4ad72c482231e28e688e01f2778a88ce31a08826899d54ef7183998b5\n',	5,	12),
-(18,	'hello\nasd\nbye\nhello\nhey\nasd\n',	'5891b5b522d5df086d0ff0b110fbd9d21bb4fc7163af34d08286a2e846f6be03\ndc460da4ad72c482231e28e688e01f2778a88ce31a08826899d54ef7183998b5\nabc6fd595fc079d3114d4b71a4d84b1d1d0f79df1e70f8813212f2a65d8916df\n5891b5b522d5df086d0ff0b110fbd9d21bb4fc7163af34d08286a2e846f6be03\n4e955fea0268518cbaa500409dfbec88f0ecebad28d84ecbe250baed97dba889\ndc460da4ad72c482231e28e688e01f2778a88ce31a08826899d54ef7183998b5\n',	5,	12),
-(19,	'hello\nasd\nbye\nhello\nhey\nasd\n',	'5891b5b522d5df086d0ff0b110fbd9d21bb4fc7163af34d08286a2e846f6be03\ndc460da4ad72c482231e28e688e01f2778a88ce31a08826899d54ef7183998b5\nabc6fd595fc079d3114d4b71a4d84b1d1d0f79df1e70f8813212f2a65d8916df\n5891b5b522d5df086d0ff0b110fbd9d21bb4fc7163af34d08286a2e846f6be03\n4e955fea0268518cbaa500409dfbec88f0ecebad28d84ecbe250baed97dba889\ndc460da4ad72c482231e28e688e01f2778a88ce31a08826899d54ef7183998b5\n',	5,	12),
-(20,	'hello\nasd\nbye\nhello\nhey\nasd\n',	'5891b5b522d5df086d0ff0b110fbd9d21bb4fc7163af34d08286a2e846f6be03\ndc460da4ad72c482231e28e688e01f2778a88ce31a08826899d54ef7183998b5\nabc6fd595fc079d3114d4b71a4d84b1d1d0f79df1e70f8813212f2a65d8916df\n5891b5b522d5df086d0ff0b110fbd9d21bb4fc7163af34d08286a2e846f6be03\n4e955fea0268518cbaa500409dfbec88f0ecebad28d84ecbe250baed97dba889\ndc460da4ad72c482231e28e688e01f2778a88ce31a08826899d54ef7183998b5\n',	5,	12),
-(21,	'hello\nasd\nbye\nhello\nhey\nasd\n',	'5891b5b522d5df086d0ff0b110fbd9d21bb4fc7163af34d08286a2e846f6be03\ndc460da4ad72c482231e28e688e01f2778a88ce31a08826899d54ef7183998b5\nabc6fd595fc079d3114d4b71a4d84b1d1d0f79df1e70f8813212f2a65d8916df\n5891b5b522d5df086d0ff0b110fbd9d21bb4fc7163af34d08286a2e846f6be03\n4e955fea0268518cbaa500409dfbec88f0ecebad28d84ecbe250baed97dba889\ndc460da4ad72c482231e28e688e01f2778a88ce31a08826899d54ef7183998b5\n',	5,	12),
-(22,	'hello\nasd\nbye\nhello\nhey\nasd\n',	'5891b5b522d5df086d0ff0b110fbd9d21bb4fc7163af34d08286a2e846f6be03\ndc460da4ad72c482231e28e688e01f2778a88ce31a08826899d54ef7183998b5\nabc6fd595fc079d3114d4b71a4d84b1d1d0f79df1e70f8813212f2a65d8916df\n5891b5b522d5df086d0ff0b110fbd9d21bb4fc7163af34d08286a2e846f6be03\n4e955fea0268518cbaa500409dfbec88f0ecebad28d84ecbe250baed97dba889\ndc460da4ad72c482231e28e688e01f2778a88ce31a08826899d54ef7183998b5\n',	5,	12),
-(23,	'hello\nasd\nbye\nhello\nhey\nasd\n',	'5891b5b522d5df086d0ff0b110fbd9d21bb4fc7163af34d08286a2e846f6be03\ndc460da4ad72c482231e28e688e01f2778a88ce31a08826899d54ef7183998b5\nabc6fd595fc079d3114d4b71a4d84b1d1d0f79df1e70f8813212f2a65d8916df\n5891b5b522d5df086d0ff0b110fbd9d21bb4fc7163af34d08286a2e846f6be03\n4e955fea0268518cbaa500409dfbec88f0ecebad28d84ecbe250baed97dba889\ndc460da4ad72c482231e28e688e01f2778a88ce31a08826899d54ef7183998b5\n',	5,	12);
+INSERT INTO `hash_result` (`id`, `plaintext`, `message_digest`, `hash_algorithm_id`, `user_id`, `description_id`, `created`, `modified`) VALUES
+(1,	'Hello There\nGood bye \nScarified\nHello There\n',	'a82fadb196cba39eb884736dcca303a6\nb6c04e616709a7f69811b17e2e020de4\n4ead5ef207c79e1dabda04bddf7c60f2\na82fadb196cba39eb884736dcca303a6\n',	2,	10,	0,	'2014-04-21',	'2014-04-21'),
+(2,	'',	'',	0,	10,	0,	'2014-04-21',	'2014-04-21'),
+(3,	'Hello There\nGood bye \nScarified\nHello There\n',	'a82fadb196cba39eb884736dcca303a6\nb6c04e616709a7f69811b17e2e020de4\n4ead5ef207c79e1dabda04bddf7c60f2\na82fadb196cba39eb884736dcca303a6\n',	2,	10,	0,	'2014-04-21',	'2014-04-21'),
+(4,	'',	'',	0,	10,	0,	'2014-04-21',	'2014-04-21'),
+(5,	'Hello There\nGood bye \nScarified\nHello There\n',	'a82fadb196cba39eb884736dcca303a6\nb6c04e616709a7f69811b17e2e020de4\n4ead5ef207c79e1dabda04bddf7c60f2\na82fadb196cba39eb884736dcca303a6\n',	2,	10,	0,	'2014-04-21',	'2014-04-21'),
+(6,	'',	'',	0,	10,	0,	'2014-04-21',	'2014-04-21'),
+(7,	'Hello There\nGood bye \nScarified\nHello There\n',	'a82fadb196cba39eb884736dcca303a6\nb6c04e616709a7f69811b17e2e020de4\n4ead5ef207c79e1dabda04bddf7c60f2\na82fadb196cba39eb884736dcca303a6\n',	2,	10,	0,	'2014-04-21',	'2014-04-21'),
+(8,	'Hello There\nGood bye \nScarified\nHello There\n',	'a82fadb196cba39eb884736dcca303a6\nb6c04e616709a7f69811b17e2e020de4\n4ead5ef207c79e1dabda04bddf7c60f2\na82fadb196cba39eb884736dcca303a6\n',	2,	10,	4,	'2014-04-21',	'2014-04-21');
 
 DROP TABLE IF EXISTS `user`;
 CREATE TABLE `user` (
@@ -245,4 +253,4 @@ INSERT INTO `user` (`id`, `password`, `name`, `email`, `group_id`, `profile`, `s
 (11,	'96b9369f55be479d63a8ef366966a03a607657e4',	'dude',	'dude@gmail.com',	3,	'',	'',	'',	'2014-04-05 00:20:03',	'2014-04-05 00:20:03'),
 (12,	'1fda6ac901aee9291e9ef40a02e86367bb6da06d',	'ian',	'ian@gmail.com',	1,	'super user',	'',	'',	'2014-04-16 15:29:25',	'2014-04-16 15:29:25');
 
--- 2014-04-21 13:31:46
+-- 2014-04-21 06:51:15
