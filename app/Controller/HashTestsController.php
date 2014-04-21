@@ -445,11 +445,12 @@ class HashTestsController extends AppController {
 			$output = array();
 
 			$this->set('data', $data);
+			$originalMD = hash(strtolower($data['HashTests']['HashAlgorithm']), $data['HashTests']['plaintext']);
+			$secondMD = hash(strtolower($data['HashTests']['HashAlgorithm']), ++$data['HashTests']['plaintext']);
 
-			$bin = $this->textToBinary($data['HashTests']['plaintext']);
-			echo $bin;
+			echo $originalMD."<br>";
 
-			$messageDigest = hash(strtolower($data['HashTests']['HashAlgorithm']), $data['HashTests']['plaintext']);
+			echo $secondMD;
 		}		
 	}
 
