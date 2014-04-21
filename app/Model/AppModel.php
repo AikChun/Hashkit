@@ -30,4 +30,7 @@ App::uses('Model', 'Model');
  * @package       app.Model
  */
 class AppModel extends Model {
+	protected function _getUser($key = null) {
+		return AuthComponent::user($key);
+	}
 }
