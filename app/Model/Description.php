@@ -11,13 +11,33 @@ class Description extends AppModel {
  *
  * @var mixed False or table name
  */
-	public $useTable = 'Description';
+	public $useTable = 'description';
 
 	public $hasMany = array(
 		'HashResult' => array(
 			'className' => 'HashResult',
-			'foreignKey' => 'user_id',
+			'foreignKey' => 'id',
 		)
 	);
+	public $belongsTo = array('User');
 
+/**
+ * Saving analyis
+ * @param String $analysis contains analysis of test in string value.
+ * @return boolean true if successful, false otherwise.
+ */
+	public function saveAnalysis($analysis) {
+		$data = array(
+			'Description' => array(
+				'user_id' => $this->_getUser('id'),
+				'description' => $analysis
+			)
+		
+		);
+		$this->create();
+		if($this->save($data)) {
+			return true;
+		}
+		return false;
+	}
 }
