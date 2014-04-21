@@ -67,7 +67,7 @@ class HashTestsController extends AppController {
 				$selectedAlgorithms = $HashAlgorithmModel->find('all', $searchCondition);
 			}
 			$this->Session->write('selectedAlgorithms' , $selectedAlgorithms);
-			$this->log("before basic hashing");
+			//$this->log("before basic hashing");
 			return $this->redirect(array('controller' => 'HashTests' ,'action' => 'basic_hashing_input'));
 			
 		}
@@ -120,7 +120,7 @@ class HashTestsController extends AppController {
 	}
 
 	public function basic_hashing_input() {
-		$this->log("Enter basic hashing");
+		//$this->log("Enter basic hashing");
 		$selectedAlgorithms = $this->Session->read('selectedAlgorithms');
 
 		if($this->request->is('post')) {
@@ -280,7 +280,7 @@ class HashTestsController extends AppController {
 				'fields' => 'id'
 			);
 			$result = $hashResultModel->find('first', $conditions);
-			$this->log('This is result.');
+			//$this->log('This is result.');
 			//$this->log($result);
 
 			$collision = '';
