@@ -67,7 +67,7 @@ class HashTestsController extends AppController {
 				$selectedAlgorithms = $HashAlgorithmModel->find('all', $searchCondition);
 			}
 			$this->Session->write('selectedAlgorithms' , $selectedAlgorithms);
-			$this->log("before basic hashing");
+			//$this->log("before basic hashing");
 			return $this->redirect(array('controller' => 'HashTests' ,'action' => 'basic_hashing_input'));
 			
 		}
@@ -120,7 +120,7 @@ class HashTestsController extends AppController {
 	}
 
 	public function basic_hashing_input() {
-		$this->log("Enter basic hashing");
+		//$this->log("Enter basic hashing");
 		$selectedAlgorithms = $this->Session->read('selectedAlgorithms');
 
 		if($this->request->is('post')) {
@@ -269,16 +269,10 @@ class HashTestsController extends AppController {
 		$hashResultModel = ClassRegistry::init('HashResult');
 		$analysis = array();
 
-		//foreach($output as $key => $row) {
 		$mdline = explode("\n",$output[0]['HashResult']['message_digest']);
 		$ptline = explode("\n",$output[0]['HashResult']['plaintext']);
-		$this->log($mdline);
-		$this->log($ptline);
 
 		$dup = HashTestsController::checkDuplicatesInArray($mdline);
-		//$this->log($output);
-
-		//}
 
 		foreach($output as $key => $hashResult) {
 			$conditions = array(
@@ -286,15 +280,28 @@ class HashTestsController extends AppController {
 				'fields' => 'id'
 			);
 			$result = $hashResultModel->find('first', $conditions);
-			$this->log('This is result.');
+			//$this->log('This is result.');
 			//$this->log($result);
 
+			$collision = '';
+			foreach($dup as $key => $num) {
+			$collision .= $ptline[$num] . " " . $mdline[$num] . "\n";
+			}
+			//$this->log($collision);
 
 			if(!empty($result['HashResult']['id'])) {
-				$hashResult['HashResult']['analysis'] = 'This input is a very common hash value for the algorithm: '. $hashResult['HashResult']['hash_algorithm_name'];
-			} else {
-				$hashResult['HashResult']['analysis'] = 'This is not a common hash value for algorithm: '. $hashResult['HashResult']['hash_algorithm_name'];
+				if($dup != FALSE) {
+					$hashResult['HashResult']['description'] = 'There is collision detected at: ' . "\n" . $collision;
+				} else {
+					$hashResult['HashResult']['description'] = 'No collision detected';
+				}
 			}
+
+			//if(!empty($result['HashResult']['id'])) {
+			//	$hashResult['HashResult']['analysis'] = 'This input is a very common hash value for the algorithm: '. $hashResult['HashResult']['hash_algorithm_name'];
+			//} else {
+			//	$hashResult['HashResult']['analysis'] = 'This is not a common hash value for algorithm: '. $hashResult['HashResult']['hash_algorithm_name'];
+			//}
 			array_push($analysis, $hashResult);
 		}
 		return $analysis;
@@ -456,20 +463,12 @@ class HashTestsController extends AppController {
 			$output = array();
 
 			$this->set('data', $data);
-			//$this->log($data);
-			//$messageDigest = hash(strtolower($algorithms['HashAlgorithm']['name']), $data['HashTests']['plaintext']);
-			//$binary_output = $this->text2bin($data['HashTests']['plaintext']);
-			//$this->log($binary_output);
-			$messageDigest = hash(strtolower($data['HashTests']['HashAlgorithm']), $data['HashTests']['plaintext']);
-			
-			//$this->log($messageDigest);
-			//foreach($selectedAlgorithms as $key => $algorithm ) {
+			$originalMD = hash(strtolower($data['HashTests']['HashAlgorithm']), $data['HashTests']['plaintext']);
+			$secondMD = hash(strtolower($data['HashTests']['HashAlgorithm']), ++$data['HashTests']['plaintext']);
 
-				
-			//$computed['HashResult']['plaintext'] = $hashTestForm['plaintext'];
+			echo $originalMD."<br>";
 
-			//array_push($output, $computed);
-			//}
+			echo $secondMD;
 		}		
 	}
 /**

@@ -15,7 +15,7 @@ class HashResult extends AppModel {
 	public $hasOne = array(
 		'HashAlgorithm' => array(
 			'className' => 'HashAlgorithm',
-			'foreignKey' => 'id',
+			'foreignKey' => 'id'
 		),
 		'User' => array(
 			'className' => 'User',
@@ -23,5 +23,25 @@ class HashResult extends AppModel {
 			'counterCache' => true
 		)
 	);
+    public $belongsTo = array('Description');
 
+/**
+ * Saving hash result with its description
+ * @param array $data contains array('HashResult' => array('fields' => ), 'Description' => array())
+ * @return boolean true when save correctly. False otherwise.
+ */
+	public function saveWithDescription($data) {
+		$descriptionModel = ClassRegistry::init('Description');
+		$analysis = $data[0]['HashResult']['description'];
+		$saveDescriptionSuccessful = $descriptionModel->saveAnalysis($analysis);
+		if($saveDescriptionSuccessful) {
+			$descriptionId = $descriptionModel->getLastInsertID();
+			foreach($data as $key => $result) {
+				$data[$key]['HashResult']['description_id'] = $descriptionId;
+			}
+			$this->create();
+			$this->saveMany($data);
+		}
+		return true; 
+	}
 }
