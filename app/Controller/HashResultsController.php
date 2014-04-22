@@ -108,9 +108,9 @@ class HashResultsController extends AppController {
 		$output = $this->Session->read('output');
 		if(!empty($output)) {
 			$this->set("output", $output);
-			$saveSuccessful = $this->HashResult->saveWithDescription($output);
-			// $this->HashResult->create();
-			// $this->HashResult->saveMany($output);
+			//$saveSuccessful = $this->HashResult->saveWithDescription($output);
+			 $this->HashResult->create();
+			 $this->HashResult->saveMany($output);
 		} else {
 			$output = '';
 			$this->set('output', $output);
@@ -122,8 +122,9 @@ class HashResultsController extends AppController {
 		$outputResult = $this->Session->read('output');
 		if(!empty($outputResult)) {
 			$this->set("output", $outputResult);
-			$this->HashResult->create();
-			$this->HashResult->saveMany($outputResult);
+			$saveSuccessful = $this->HashResult->saveWithDescription($outputResult);
+			//$this->HashResult->create();
+			//$this->HashResult->saveMany($outputResult);
 		} else {
 			$output = '';
 			$this->set('output', $outputResult);

@@ -5,7 +5,7 @@
 <?php foreach($output as $key => $data): ?>
 	Selected Algorithm: <?php echo $data['HashResult']['hash_algorithm_name'];?> <br>
 	Digest: <?php echo $data['HashResult']['message_digest'];?> <br>
-	Analysis: <?php echo $data['HashResult']['analysis'];?> <br> 
+	Analysis: <?php echo $data['HashResult']['description'];?> <br> 
 	<br><br>
 <?php endforeach;?>	
 

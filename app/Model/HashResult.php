@@ -32,7 +32,7 @@ class HashResult extends AppModel {
  */
 	public function saveWithDescription($data) {
 		$descriptionModel = ClassRegistry::init('Description');
-		$analysis = 'testing analysis';
+		$analysis = $data[0]['HashResult']['description'];
 		$saveDescriptionSuccessful = $descriptionModel->saveAnalysis($analysis);
 		if($saveDescriptionSuccessful) {
 			$descriptionId = $descriptionModel->getLastInsertID();

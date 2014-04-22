@@ -227,7 +227,7 @@ class HashTestsController extends AppController {
             }
 
 			$outputResult = $this->compareDigests($output);
-			//$this->log($outputResult);
+			$this->log($outputResult);
 			$this->Session->write('output', $outputResult);
 			$this->redirect(array('controller' => 'HashResults', 'action' => 'compute_and_compare_result'));
 
@@ -287,13 +287,13 @@ class HashTestsController extends AppController {
 			foreach($dup as $key => $num) {
 			$collision .= $ptline[$num] . " " . $mdline[$num] . "\n";
 			}
-			$this->log($collision);
+			//$this->log($collision);
 
 			if(!empty($result['HashResult']['id'])) {
 				if($dup != FALSE) {
-					$hashResult['HashResult']['analysis'] = 'There is collision detected at: ' . "\n" . $collision;
+					$hashResult['HashResult']['description'] = 'There is collision detected at: ' . "\n" . $collision;
 				} else {
-					$hashResult['HashResult']['analysis'] = 'No collision detected';
+					$hashResult['HashResult']['description'] = 'No collision detected';
 				}
 			}
 
