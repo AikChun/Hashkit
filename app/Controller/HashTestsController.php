@@ -227,7 +227,7 @@ class HashTestsController extends AppController {
             }
 
 			$outputResult = $this->compareDigests($output);
-			$this->log($outputResult);
+			//$this->log($outputResult);
 			$this->Session->write('output', $outputResult);
 			$this->redirect(array('controller' => 'HashResults', 'action' => 'compute_and_compare_result'));
 
