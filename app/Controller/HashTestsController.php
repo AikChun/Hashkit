@@ -469,7 +469,10 @@ class HashTestsController extends AppController {
 	public function avalanche_effect() {
         
         $HashAlgorithmV1Model = ClassRegistry::init('HashAlgorithmV1');
-        $result = $HashAlgorithmV1Model->find('all');
+        $condition = array (
+        	'conditions' => array('HashAlgorithmV1.base ' => 2)
+        	);
+        $result = $HashAlgorithmV1Model->find('all', $conditions);
         $this->log($result);
         $this->set('result', $result);
 		if($this->request->is('post')) {
@@ -479,11 +482,16 @@ class HashTestsController extends AppController {
 
 			$this->set('data', $data);
 			$originalMD = hash(strtolower($data['HashTests']['HashAlgorithm']), $data['HashTests']['plaintext']);
-			$secondMD = hash(strtolower($data['HashTests']['HashAlgorithm']), ++$data['HashTests']['plaintext']);
+			//$secondMD = hash(strtolower($data['HashTests']['HashAlgorithm']), ++$data['HashTests']['plaintext']);
+
 
 			echo $originalMD."<br>";
 
-			echo $secondMD;
+			//echo $secondMD."<br>";
+
+			$teststring = $data['HashTests']['plaintext'];
+			echo $teststring."<br>";
+			echo decbin(ord($teststring));
 		}		
 	}
 /**
