@@ -293,14 +293,17 @@ class HashTestsController extends AppController {
 				}
 			}
 			//$this->log($collision);
+			CakeLog::write('debug',print_r($result,true));
 
-			if(!empty($result['HashResult']['id'])) {
+			//if(!empty($result['HashResult']['id'])) {
 				if($dup != FALSE) {
+					CakeLog::write('debug',print_r('HERE',true));
 					$hashResult['HashResult']['description'] = 'There is collision detected at: ' . "\n" . $collision;
-				} else {
+				} elseif ($dup == FALSE) {
+					CakeLog::write('debug',print_r('THERE',true));
 					$hashResult['HashResult']['description'] = 'No collision detected';
 				}
-			}
+			//}
 
 			//if(!empty($result['HashResult']['id'])) {
 			//	$hashResult['HashResult']['analysis'] = 'This input is a very common hash value for the algorithm: '. $hashResult['HashResult']['hash_algorithm_name'];
