@@ -331,11 +331,6 @@ class HashTestsController extends AppController {
 		
 		$HashAlgorithmV1Model = ClassRegistry::init('HashAlgorithmV1');
 		
-		// $conditionsforresult = array(
-		// 	'conditions' => array('HashAlgorithmV1.base !=' => 1)
-		// );
-
-       // $result = $HashAlgorithmV1Model->find('all', $conditionsforresult);
 		$findConditions = array(
 			'conditions' => array('HashAlgorithmV1.name !=' => 'customised' ),
 			'order' => 'HashAlgorithmV1.name ASC'
