@@ -11,5 +11,6 @@ What is a hash function ?
 <br>
 <?php echo $this->Html->link('Avalanche effect', array('controller' => 'HashTests','action' => 'avalanche_effect'));?>
 <br>
+<?php echo $this->Html->link('Hash analyser', array('controller' => 'HashTests','action' => 'hash_analyser'));?>
 </div>
 </div>

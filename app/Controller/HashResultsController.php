@@ -148,4 +148,10 @@ class HashResultsController extends AppController {
 		$this->set('totalhash', $totalhash);
 		$this->set('requiredsamplespace', $requiredsamplespace);
 	}
+
+	public function hash_analyser_result() {
+		$arrayofhashalgorithms = $this->Session->read('resultfromdatabase');
+		$this->set('arrayofhashalgorithms', $arrayofhashalgorithms);
+
+	}
 }
