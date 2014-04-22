@@ -333,7 +333,14 @@ class HashTestsController extends AppController {
 		// );
 
        // $result = $HashAlgorithmV1Model->find('all', $conditionsforresult);
-        $result = $HashAlgorithmV1Model->find('all');
+		$findConditions = array(
+			'conditions' => array('HashAlgorithmV1.name !=' => 'customised' ),
+			'order' => 'HashAlgorithmV1.name ASC'
+		);
+        $result = $HashAlgorithmV1Model->find('all', $findConditions);
+        $findCustomize = $HashAlgorithmV1Model->find('first', array('conditions' => array('HashAlgorithmV1.name' => 'customised')));
+        array_push($result, $findCustomize);
+        $this->log($result);
         $this->set('result', $result);
 	
 		if($this->request->is('post')) {
@@ -503,5 +510,6 @@ class HashTestsController extends AppController {
 			$this->redirect(array('controller' => 'HashResults', 'action' => 'hash_analyser_result'));
 		}	
 	}
+
 }
 	
