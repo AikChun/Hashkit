@@ -21,18 +21,21 @@
 	<tr>
 	<td>Speed</td>
 	<?php foreach($output as $key => $data):?>
+	<td><?php echo $data['HashResult']['speed'];?></td>
 	<?php endforeach;?>
 	</tr>
 
 	<tr>
 	<td>Collision Resistence</td>
 	<?php foreach($output as $key => $data):?>
+	<td><?php echo $data['HashResult']['collision_resistance'];?></td>
 	<?php endforeach;?>
 	</tr>
 
 	<tr>
 	<td>preimage Resistence</td>
 	<?php foreach($output as $key => $data):?>
+	<td><?php echo $data['HashResult']['preimage_resistance'];?></td>
 	<?php endforeach;?>
 	</tr>
 
@@ -40,6 +43,7 @@
 	<tr>
 	<td>2nd preimage Resistence</td>
 	<?php foreach($output as $key => $data):?>
+	<td><?php echo $data['HashResult']['2nd_preimage_resistance'];?></td>
 	<?php endforeach;?>
 	</tr>
 </table>

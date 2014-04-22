@@ -230,7 +230,7 @@ class HashTestsController extends AppController {
             }
 
 			$outputResult = $this->compareDigests($output);
-			//$this->log($outputResult);
+			$this->log($outputResult);
 			$this->Session->write('output', $outputResult);
 			$this->redirect(array('controller' => 'HashResults', 'action' => 'compute_and_compare_result'));
 
@@ -270,6 +270,7 @@ class HashTestsController extends AppController {
  */
 	protected function compareDigests($output) {
 		$hashResultModel = ClassRegistry::init('HashResult');
+		$hashAlgorithmModel = ClassRegistry::init("HashAlgorithm");
 		$analysis = array();
 
 		$mdline = explode("\n",$output[0]['HashResult']['message_digest']);
@@ -292,18 +293,32 @@ class HashTestsController extends AppController {
 					$collision .= $ptline[$num] . " " . $mdline[$num] . "\n";
 				}
 			}
-			//$this->log($collision);
-			CakeLog::write('debug',print_r($result,true));
 
-			//if(!empty($result['HashResult']['id'])) {
-				if($dup != FALSE) {
-					CakeLog::write('debug',print_r('HERE',true));
-					$hashResult['HashResult']['description'] = 'There is collision detected at: ' . "\n" . $collision;
-				} elseif ($dup == FALSE) {
-					CakeLog::write('debug',print_r('THERE',true));
-					$hashResult['HashResult']['description'] = 'No collision detected';
-				}
-			//}
+			if($dup != FALSE) {
+				$hashResult['HashResult']['description'] = 'There is collision detected at: ' . "\n" . $collision;
+			} elseif ($dup == FALSE) {
+				$hashResult['HashResult']['description'] = 'No collision detected';
+			}
+
+			$options = array(
+				'conditions' => array(
+					'HashAlgorithm.id' => $hashResult['HashResult']['hash_algorithm_id']
+					),
+				'fields' => array('HashAlgorithm.speed','HashAlgorithm.security',
+					'HashAlgorithm.collision_resistance','HashAlgorithm.preimage_resistance',
+					'HashAlgorithm.2nd_preimage_resistance')
+
+				);
+			$searchResult = array();
+			$searchResult = $hashAlgorithmModel->find('first', $options);
+
+			$this->log($searchResult);
+	
+			$hashResult['HashResult']['speed'] = $searchResult['HashAlgorithm']['speed'];
+			$hashResult['HashResult']['security'] = $searchResult['HashAlgorithm']['security'];
+			$hashResult['HashResult']['collision_resistance'] = $searchResult['HashAlgorithm']['collision_resistance'];
+			$hashResult['HashResult']['preimage_resistance'] = $searchResult['HashAlgorithm']['preimage_resistance'];
+			$hashResult['HashResult']['2nd_preimage_resistance'] = $searchResult['HashAlgorithm']['2nd_preimage_resistance'];
 
 			//if(!empty($result['HashResult']['id'])) {
 			//	$hashResult['HashResult']['analysis'] = 'This input is a very common hash value for the algorithm: '. $hashResult['HashResult']['hash_algorithm_name'];
@@ -464,7 +479,10 @@ class HashTestsController extends AppController {
 	public function avalanche_effect() {
         
         $HashAlgorithmV1Model = ClassRegistry::init('HashAlgorithmV1');
-        $result = $HashAlgorithmV1Model->find('all');
+        $condition = array (
+        	'conditions' => array('HashAlgorithmV1.base ' => 2)
+        	);
+        $result = $HashAlgorithmV1Model->find('all', $conditions);
         $this->log($result);
         $this->set('result', $result);
 		if($this->request->is('post')) {
@@ -474,11 +492,16 @@ class HashTestsController extends AppController {
 
 			$this->set('data', $data);
 			$originalMD = hash(strtolower($data['HashTests']['HashAlgorithm']), $data['HashTests']['plaintext']);
-			$secondMD = hash(strtolower($data['HashTests']['HashAlgorithm']), ++$data['HashTests']['plaintext']);
+			//$secondMD = hash(strtolower($data['HashTests']['HashAlgorithm']), ++$data['HashTests']['plaintext']);
+
 
 			echo $originalMD."<br>";
 
-			echo $secondMD;
+			//echo $secondMD."<br>";
+
+			$teststring = $data['HashTests']['plaintext'];
+			echo $teststring."<br>";
+			echo decbin(ord($teststring));
 		}		
 	}
 /**

@@ -21,6 +21,7 @@
 
 App::uses('Model', 'Model');
 
+
 /**
  * Application model for Cake.
  *
@@ -30,6 +31,8 @@ App::uses('Model', 'Model');
  * @package       app.Model
  */
 class AppModel extends Model {
+	public $recursive = -1;
+
 	protected function _getUser($key = null) {
 		return AuthComponent::user($key);
 	}
