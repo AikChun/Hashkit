@@ -315,9 +315,15 @@ class HashTestsController extends AppController {
 	public function calculate_probability_of_collision() {
 		
 		$HashAlgorithmV1Model = ClassRegistry::init('HashAlgorithmV1');
+		
+		// $conditionsforresult = array(
+		// 	'conditions' => array('HashAlgorithmV1.base !=' => 1)
+		// );
+
+       // $result = $HashAlgorithmV1Model->find('all', $conditionsforresult);
         $result = $HashAlgorithmV1Model->find('all');
         $this->set('result', $result);
-		
+	
 		if($this->request->is('post')) {
 			
 			$data = $this->request->data;
@@ -331,7 +337,15 @@ class HashTestsController extends AppController {
 			//$this->log($resultfromdatabase['HashAlgorithmV1']['name']);
 			
 			 if((int)$resultfromdatabase['HashAlgorithmV1']['base'] > 1 ){
-			 		$K = bcpow((int)$resultfromdatabase['HashAlgorithmV1']['base'],(int)$resultfromdatabase['HashAlgorithmV1']['exponent']);
+
+			 		if(!empty($data['HashTests']['customized_algorithm_base']) || !empty($data['HashTests']['customized_algorithm_exponent'])) {
+						if(!empty($data['HashTests']['hash_value1'])) {
+							$this->Session->setFlash('Please choose a hash algorithm in the drop down list or choose customized and enter the required values');
+							return $this->redirect(array('action' => 'calculate_probability_of_collision'));
+						}
+					}else{
+							$K = bcpow((int)$resultfromdatabase['HashAlgorithmV1']['base'],(int)$resultfromdatabase['HashAlgorithmV1']['exponent']);
+					}		
 			 }else{
 
 					if(empty($data['HashTests']['customized_algorithm_base']) || empty($data['HashTests']['customized_algorithm_exponent'])) {
@@ -400,6 +414,10 @@ class HashTestsController extends AppController {
 		
 	}
 
+/**
+ * To calcuate the number of hashes needed to get a 99% probability of getting a collision 
+ *  
+ */
 	public function generate_ninety_nine_percentage_proability($N, $K){
 		$check = true;
 
@@ -454,5 +472,32 @@ class HashTestsController extends AppController {
 			//}
 		}		
 	}
+/**
+ * To read in user's input and get the hash algorithms can produce the same output. 
+ *  
+ */
+	public function hash_analyser() {
+		if($this->request->is('post')) {
 
+			$data = $this->request->data;
+			$this->set('data', $data);
+			
+			$messagedigestlength = strlen ($data['HashTests']['messagedigest']);
+			
+			//$this->log($messagedigestlength);
+
+			$HashAlgorithmV1Model = ClassRegistry::init('HashAlgorithmV1');
+
+			$conditions = array(
+				'conditions' => array('HashAlgorithmV1.exponent' => (int)$messagedigestlength * 4)
+			);
+
+			$resultfromdatabase = $HashAlgorithmV1Model->find('all', $conditions);
+
+			//$this->log($resultfromdatabase);
+        	$this->Session->write('resultfromdatabase', $resultfromdatabase);
+			$this->redirect(array('controller' => 'HashResults', 'action' => 'hash_analyser_result'));
+		}	
+	}
 }
+	
