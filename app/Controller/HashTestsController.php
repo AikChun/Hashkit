@@ -351,7 +351,14 @@ class HashTestsController extends AppController {
 		// );
 
        // $result = $HashAlgorithmV1Model->find('all', $conditionsforresult);
-        $result = $HashAlgorithmV1Model->find('all');
+		$findConditions = array(
+			'conditions' => array('HashAlgorithmV1.name !=' => 'customised' ),
+			'order' => 'HashAlgorithmV1.name ASC'
+		);
+        $result = $HashAlgorithmV1Model->find('all', $findConditions);
+        $findCustomize = $HashAlgorithmV1Model->find('first', array('conditions' => array('HashAlgorithmV1.name' => 'customised')));
+        array_push($result, $findCustomize);
+        $this->log($result);
         $this->set('result', $result);
 	
 		if($this->request->is('post')) {
@@ -477,7 +484,10 @@ class HashTestsController extends AppController {
 	public function avalanche_effect() {
         
         $HashAlgorithmV1Model = ClassRegistry::init('HashAlgorithmV1');
-        $result = $HashAlgorithmV1Model->find('all');
+        $condition = array (
+        	'conditions' => array('HashAlgorithmV1.base ' => 2)
+        	);
+        $result = $HashAlgorithmV1Model->find('all', $conditions);
         $this->log($result);
         $this->set('result', $result);
 		if($this->request->is('post')) {
@@ -487,11 +497,16 @@ class HashTestsController extends AppController {
 
 			$this->set('data', $data);
 			$originalMD = hash(strtolower($data['HashTests']['HashAlgorithm']), $data['HashTests']['plaintext']);
-			$secondMD = hash(strtolower($data['HashTests']['HashAlgorithm']), ++$data['HashTests']['plaintext']);
+			//$secondMD = hash(strtolower($data['HashTests']['HashAlgorithm']), ++$data['HashTests']['plaintext']);
+
 
 			echo $originalMD."<br>";
 
-			echo $secondMD;
+			//echo $secondMD."<br>";
+
+			$teststring = $data['HashTests']['plaintext'];
+			echo $teststring."<br>";
+			echo decbin(ord($teststring));
 		}		
 	}
 /**
@@ -521,5 +536,6 @@ class HashTestsController extends AppController {
 			$this->redirect(array('controller' => 'HashResults', 'action' => 'hash_analyser_result'));
 		}	
 	}
+
 }
 	
