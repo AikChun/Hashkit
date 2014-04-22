@@ -29,7 +29,7 @@ class HashingLib {
 
 				foreach($fileData as $key => $line) {
 					//CakeLog::write('debug',print_r('in array compute',true));
-					CakeLog::write('debug',print_r($line,true));
+					//CakeLog::write('debug',print_r($line,true));
 
 					$messageDigest = hash(strtolower($algorithm['HashAlgorithm']['name']), $line);
 
