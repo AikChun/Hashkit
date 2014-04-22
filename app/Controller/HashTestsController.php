@@ -163,6 +163,9 @@ class HashTestsController extends AppController {
 			if(empty($this->request->data['HashTests']['HashAlgorithm'])) {
 				$this->Session->setFlash('You did not select any algorithms!');
 				return $this->redirect(array('action' => 'compute_and_compare'));
+			} elseif (count($this->request->data['HashTests']['HashAlgorithm']) == 1) {
+				$this->Session->setFlash('Please select more than one algorithmn');
+				return $this->redirect(array('action' => 'compute_and_compare'));
 			}
 			$data = $this->request->data['HashTests'];
 			$HashAlgorithmModel = ClassRegistry::init('HashAlgorithm');
@@ -284,8 +287,10 @@ class HashTestsController extends AppController {
 			//$this->log($result);
 
 			$collision = '';
-			foreach($dup as $key => $num) {
-			$collision .= $ptline[$num] . " " . $mdline[$num] . "\n";
+			if($dup != FALSE) {
+				foreach($dup as $key => $num) {
+					$collision .= $ptline[$num] . " " . $mdline[$num] . "\n";
+				}
 			}
 			//$this->log($collision);
 
