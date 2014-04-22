@@ -27,6 +27,9 @@ class User extends AppModel {
 	public $hashMany = array(
 		'HashResult' => array(
 			'className' => 'HashResult'
+		),
+		'Description' => array(
+			'className' => 'Description'
 		)
 	);
 
