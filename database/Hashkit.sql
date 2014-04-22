@@ -2,10 +2,9 @@
 
 SET NAMES utf8;
 SET foreign_key_checks = 0;
-SET time_zone = '+08:00';
+SET time_zone = '-07:00';
 SET sql_mode = 'NO_AUTO_VALUE_ON_ZERO';
 
-DROP DATABASE IF EXISTS `Hashkit`;
 CREATE DATABASE `Hashkit` /*!40100 DEFAULT CHARACTER SET utf8 */;
 USE `Hashkit`;
 
@@ -209,18 +208,27 @@ INSERT INTO `hash_algorithm_v1` (`id`, `name`, `base`, `exponent`) VALUES
 (1,	'MD2',	2,	128),
 (2,	'MD4',	2,	128),
 (3,	'MD5',	2,	128),
-(4,	'Panama',	2,	256),
 (5,	'ripemd',	2,	128),
-(6,	'ripemd-128',	2,	128),
-(7,	'ripemd-256',	2,	256),
-(8,	'ripemd-160',	2,	160),
-(9,	'ripemd-320',	2,	320),
-(10,	'rtr0',	2,	160),
-(11,	'SHA-0',	2,	160),
-(12,	'SHA-1',	2,	160),
-(13,	'SHA-224',	2,	224),
-(14,	'SHA-256',	2,	256),
-(15,	'whirlpool',	2,	512);
+(6,	'ripemd128',	2,	128),
+(7,	'ripemd256',	2,	256),
+(8,	'ripemd160',	2,	160),
+(9,	'ripemd320',	2,	320),
+(12,	'SHA1',	2,	160),
+(13,	'SHA224',	2,	224),
+(14,	'SHA256',	2,	256),
+(15,	'whirlpool',	2,	512),
+(16,	'customised',	0,	0),
+(17,	'tiger128,3',	2,	32),
+(18,	'SHA384',	2,	384),
+(19,	'SHA512',	2,	512),
+(20,	'tiger160,3',	2,	160),
+(21,	'tiger192,3',	2,	192),
+(22,	'snefru',	2,	256),
+(23,	'crc32',	2,	32),
+(24,	'crc32b',	2,	32),
+(25,	'haval128,3',	2,	128),
+(26,	'haval160,3',	2,	160),
+(27,	'haval192,3',	2,	192);
 
 DROP TABLE IF EXISTS `hash_result`;
 CREATE TABLE `hash_result` (
@@ -260,4 +268,4 @@ INSERT INTO `user` (`id`, `password`, `name`, `email`, `group_id`, `profile`, `s
 (11,	'96b9369f55be479d63a8ef366966a03a607657e4',	'dude',	'dude@gmail.com',	3,	'',	'',	'',	'2014-04-05 00:20:03',	'2014-04-05 00:20:03'),
 (12,	'1fda6ac901aee9291e9ef40a02e86367bb6da06d',	'ian',	'ian@gmail.com',	1,	'super user',	'',	'',	'2014-04-16 15:29:25',	'2014-04-16 15:29:25');
 
--- 2014-04-22 16:59:13
+-- 2014-04-22 05:10:42
