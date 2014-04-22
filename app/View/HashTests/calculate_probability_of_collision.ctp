@@ -8,8 +8,6 @@
 	<?php
 		echo $this->Form->input('required_base', array(
 			'type' => 'text',
-			'rule'    => 'numeric',
-			'message' => 'Only numbers allowed',
 			'div' => false,
 			'label' => 'Please enter the base:'
 			
@@ -17,8 +15,6 @@
 
 		echo $this->Form->input('required_exponent', array(
 			'type' => 'text',
-			'rule'    => 'numeric',
-			'message' => 'Only numbers allowed',
 			'div' => false,
 			'label' => 'Please enter the exponent:'
 			
@@ -28,8 +24,6 @@
 	<?php
 		echo $this->Form->input('hash_value', array(
 			'type' => 'text',
-			'rule'    => 'numeric',
-			'message' => 'Only numbers allowed',
 			'div' => false,
 			'label' => 'Please enter the value of the hash:'
 			
@@ -61,8 +55,6 @@
 	<?php	
 		echo $this->Form->input('customized_algorithm_base', array(
 			'type' => 'text',
-			'rule'    => 'numeric',
-			'message' => 'Only numbers allowed',
 			'div' => false,
 			'label' => 'Please enter the base:'
 			
@@ -70,8 +62,6 @@
 
 		echo $this->Form->input('customized_algorithm_exponent', array(
 			'type' => 'text',
-			'rule'    => 'numeric',
-			'message' => 'Only numbers allowed',
 			'div' => false,
 			'label' => 'Please enter the exponent:'
 			
@@ -82,8 +72,6 @@
 	<?php
 		echo $this->Form->input('hash_value1', array(
 			'type' => 'text',
-			'rule'    => 'numeric',
-			'message' => 'Only numbers allowed',
 			'div' => false,
 			'label' => 'Please enter the value of the hash:'
 			
