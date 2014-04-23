@@ -4,13 +4,31 @@
 ?>
 <?php foreach($output as $key => $data): ?>
 	Selected Algorithm: <?php echo $data['HashResult']['hash_algorithm_name'];?> <br>
-	Digest: <?php echo $data['HashResult']['message_digest'];?> <br>
+	Message Digest: <?php echo $data['HashResult']['message_digest'];?> <br>
 	<br>
 <?php endforeach;?>	
 
-	Analysis: <?php echo $output[0]['HashResult']['description'];?> <br><br> 
+	Analysis: <?php echo $output[0]['HashResult']['description'];?> <br>
+<table>
+	<?php 
+	$collision_pt = $output[0]['HashResult']['collision_pt'];
+	$collision_md = $output[0]['HashResult']['collision_md'];
+	?>
+
+	<?php foreach($output[0]['HashResult']['collision_pt'] as $key => $data):?>
+	<tr>
+	<td><?php echo $collision_pt[$key];?></td>
+	<td><?php echo $collision_md[$key];?></td>
+	<?php endforeach;?>
+	</tr>
+	
+</table>
 
 <table>
+	<tr>
+	<td>Comparing between selected algorithmn:</td>
+	</tr>
+
 	<tr>
 	<td>Algorithm</td>
 	<?php foreach($output as $key => $data):?>

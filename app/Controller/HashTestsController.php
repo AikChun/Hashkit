@@ -289,15 +289,26 @@ class HashTestsController extends AppController {
 			//$this->log('This is result.');
 			//$this->log($result);
 
+			//$collision = '';
+			//if($dup != FALSE) {
+			//	foreach($dup as $key => $num) {
+			//		$collision .= $ptline[$num] . " " . $mdline[$num] . "\n";
+			//	}
+			//}
+			$collision_pt = array();
+			$collision_md = array();
 			$collision = '';
 			if($dup != FALSE) {
 				foreach($dup as $key => $num) {
-					$collision .= $ptline[$num] . " " . $mdline[$num] . "\n";
+					array_push($collision_pt,$ptline[$num]);
+				 	array_push($collision_md,$mdline[$num]);
 				}
 			}
 
 			if($dup != FALSE) {
 				$hashResult['HashResult']['description'] = 'There is collision detected at: ' . "\n" . $collision;
+				$hashResult['HashResult']['collision_pt'] = $collision_pt;
+				$hashResult['HashResult']['collision_md'] = $collision_md;
 			} elseif ($dup == FALSE) {
 				$hashResult['HashResult']['description'] = 'No collision detected';
 			}
@@ -313,8 +324,6 @@ class HashTestsController extends AppController {
 				);
 			$searchResult = array();
 			$searchResult = $hashAlgorithmModel->find('first', $options);
-
-			//$this->log($searchResult);
 	
 			$hashResult['HashResult']['speed'] = $searchResult['HashAlgorithm']['speed'];
 			$hashResult['HashResult']['security'] = $searchResult['HashAlgorithm']['security'];
@@ -341,9 +350,11 @@ class HashTestsController extends AppController {
 			//}
 			array_push($analysis, $hashResult);
 		}
-		$this->log($analysis);
-		//$this->log($recommendAlgo);
-
+		//$qwe = array();
+		//$qwe = array_slice($analysis[0]['HashResult']['collision_pt'], 0);
+		$qwe = $analysis[0]['HashResult']['collision_pt'];
+		$this->log($qwe);
+		//$this->log($analysis);
 		return $analysis;
 	}
 
