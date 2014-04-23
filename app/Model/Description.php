@@ -16,10 +16,16 @@ class Description extends AppModel {
 	public $hasMany = array(
 		'HashResult' => array(
 			'className' => 'HashResult',
-			'foreignKey' => 'id',
+			'foreignKey' => 'description_id',
+			'dependent' => true
 		)
 	);
-	public $belongsTo = array('User');
+	public $belongsTo = array(
+		'User' => array(
+			'className' => 'User',
+			'foreignKey' => 'user_id'
+		)
+	);
 
 /**
  * Saving analyis
@@ -39,5 +45,17 @@ class Description extends AppModel {
 			return true;
 		}
 		return false;
+	}
+
+/**
+ * Delete all child results
+ */
+	public function beforeDelete($cascade = true) {
+		$conditions = array(
+				'HashResult.description_id' => $this->id
+
+		);
+		$this->HashResult->deleteAll($conditions);
+		return true;
 	}
 }
