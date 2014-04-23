@@ -132,7 +132,6 @@ class HashTestsController extends AppController {
 			if (!empty($data['HashTests']['plaintext'])) {
 
 				$output = HashingLib::computeDigests($selectedAlgorithms, $data['HashTests']['plaintext']);
-				$this->log($output);
 	            $this->Session->write('output', $output);
 				$this->redirect(array('controller' => 'HashResults', 'action' => 'basic_hashing_result'));
 			}
@@ -145,10 +144,6 @@ class HashTestsController extends AppController {
 			$lineArray = file($data['HashTests']['file_upload']['tmp_name']);
 
 			$output = HashingLib::computeDigests($selectedAlgorithms, $lineArray);
-
-            foreach($output as $key => $row) {
-                $output[$key]['HashResult']['user_id'] = $this->Auth->user('id');
-            }
 
             $this->Session->write('output', $output);
 			$this->redirect(array('controller' => 'HashResults', 'action' => 'basic_hashing_result'));
