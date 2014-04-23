@@ -109,8 +109,8 @@ class HashResultsController extends AppController {
 		if(!empty($output)) {
 			$this->set("output", $output);
 			//$saveSuccessful = $this->HashResult->saveWithDescription($output);
-			 $this->HashResult->create();
-			 $this->HashResult->saveMany($output);
+			 /* $this->HashResult->create(); */
+			 $this->HashResult->savingWithDescription($output);
 		} else {
 			$output = '';
 			$this->set('output', $output);

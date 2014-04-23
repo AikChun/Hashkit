@@ -48,26 +48,25 @@ class HashTestsController extends AppController {
  * User is to choose the algorithms that he/she wants to hash the plaintext.
  */
 	public function basic_hashing() {
+		$HashAlgorithmModel = ClassRegistry::init('HashAlgorithm');
 		if($this->request->is('post')) {
 			if(empty($this->request->data['HashTests']['HashAlgorithm'])) {
 				$this->Session->setFlash('You did not select any algorithms!');
 				return $this->redirect(array('action' => 'basic_hashing'));
 			}
-			$data = $this->request->data['HashTests'];
-			$HashAlgorithmModel = ClassRegistry::init('HashAlgorithm');
-			$selectedAlgorithms = array();
-			//$this->log($data);
-			foreach ($data as $key => $hashId) {
-				$searchCondition = array(
-					'conditions' => array(
-						'HashAlgorithm.id' => $data['HashAlgorithm'] 
-					),
-					'fields' => array('id','name')
-				);
-				$selectedAlgorithms = $HashAlgorithmModel->find('all', $searchCondition);
-			}
-			$this->Session->write('selectedAlgorithms' , $selectedAlgorithms);
-			//$this->log("before basic hashing");
+			$postData = $this->request->data['HashTests']['HashAlgorithm'];
+
+			$conditions = array(
+				'conditions' => array(
+						'HashAlgorithm.name' => $postData
+				),
+				'fields' => array(
+					'HashAlgorithm.id',
+					'HashAlgorithm.name'
+				)
+			);
+			$retrievedData = $HashAlgorithmModel->find('all', $conditions);
+			$this->Session->write('selectedAlgorithms' , $retrievedData);
 			return $this->redirect(array('controller' => 'HashTests' ,'action' => 'basic_hashing_input'));
 			
 		}
@@ -78,8 +77,12 @@ class HashTestsController extends AppController {
 			
 
 		$this->Session->write('selectedAlgorithms' , '');
-		$HashAlgorithmModel = ClassRegistry::init('HashAlgorithm');
-		$data = $HashAlgorithmModel->find('all', $conditions);
+		$retrievedData = $HashAlgorithmModel->find('all', $conditions);
+		
+		$data = array();
+		foreach($retrievedData as $key => $hashAlgorithm) {
+			$data[$hashAlgorithm['HashAlgorithm']['name']] = $hashAlgorithm['HashAlgorithm']['name'];
+		}
 		$this->set('data', $data);
 	}
 
@@ -120,7 +123,6 @@ class HashTestsController extends AppController {
 	}
 
 	public function basic_hashing_input() {
-		//$this->log("Enter basic hashing");
 		$selectedAlgorithms = $this->Session->read('selectedAlgorithms');
 
 		if($this->request->is('post')) {
@@ -130,7 +132,7 @@ class HashTestsController extends AppController {
 			if (!empty($data['HashTests']['plaintext'])) {
 
 				$output = HashingLib::computeDigests($selectedAlgorithms, $data['HashTests']['plaintext']);
-                $output[0]['HashResult']['user_id'] = $this->Auth->user('id');
+				$this->log($output);
 	            $this->Session->write('output', $output);
 				$this->redirect(array('controller' => 'HashResults', 'action' => 'basic_hashing_result'));
 			}
