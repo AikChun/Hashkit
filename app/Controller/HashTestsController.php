@@ -509,6 +509,7 @@ class HashTestsController extends AppController {
  *  
  */
 	public function hash_analyser() {
+
 		if($this->request->is('post')) {
 
 			$data = $this->request->data;
@@ -529,6 +530,105 @@ class HashTestsController extends AppController {
 			//$this->log($resultfromdatabase);
         	$this->Session->write('resultfromdatabase', $resultfromdatabase);
 			$this->redirect(array('controller' => 'HashResults', 'action' => 'hash_analyser_result'));
+		}	
+	}
+
+	function crypto_rand_secure($min, $max) {
+        $range = $max - $min;
+        if ($range < 0) return $min; // not so random...
+        $log = log($range, 2);
+        $bytes = (int) ($log / 8) + 1; // length in bytes
+        $bits = (int) $log + 1; // length in bits
+        $filter = (int) (1 << $bits) - 1; // set all lower bits to 1
+        do {
+            $rnd = hexdec(bin2hex(openssl_random_pseudo_bytes($bytes)));
+            $rnd = $rnd & $filter; // discard irrelevant bits
+        } while ($rnd >= $range);
+        return $min + $rnd;
+	}
+
+	public function get_a_string($length){
+	    $token = "";
+	    $codeAlphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+	    $codeAlphabet.= "abcdefghijklmnopqrstuvwxyz";
+	    $codeAlphabet.= "0123456789";
+	    $codeAlphabet.= "!@#$^&*()";
+	    for($i=0;$i<$length;$i++){
+	        $token .= $codeAlphabet[$this->crypto_rand_secure(0,strlen($codeAlphabet))];
+	    }
+	    return $token;
+	}
+
+	public function generate_array($amount,$hash_algorithm_name) {
+		$wordhashlist = array();
+
+		//pow(2,$amount/2)
+		for ($i = 1; $i <= $amount; $i++ ){
+			$alphanumeric = $this->get_a_string(64);
+			$singlehash = hash(strtolower($hash_algorithm_name), $alphanumeric);
+			$wordhashlist[$i]['word'] = $alphanumeric;
+			$wordhashlist[$i]['hash'] = $singlehash;
+			//array_push($wordhashlist["hash"], $singlehash);
+		}
+		//array_multisort($wordhashlist[]["hash"],SORT_STRING);
+		//array_multisort($wordhashlist["hash"],SORT_STRING);
+		return $wordhashlist;
+
+	}
+
+	public function compare_array($count, $array1, $array2) {
+		$found = 0;
+		for($i = 1; $i <= $count; $i++ ){
+			for($j = 1; $j <= $count; $j++){
+				$this->log($array1[$i]["hash"]);
+				$this->log($array2[$j]["hash"]);
+				if($array1[$i]["hash"] == $array2[$i]["hash"]){
+					$found += 1;
+				}
+			}
+		}
+		return $found;
+	}
+
+	public function birthday_attack() {
+		
+		$HashAlgorithmV1Model = ClassRegistry::init('HashAlgorithmV1');
+		
+		$findConditions = array(
+			'conditions' => array('HashAlgorithmV1.name !=' => 'customised' ),
+			'order' => 'HashAlgorithmV1.name ASC'
+		);
+
+        $result1 = $HashAlgorithmV1Model->find('all', $findConditions);
+        $this->set('result1', $result1);
+		
+		if($this->request->is('post')) {
+			$data = $this->request->data;
+			$this->set('data', $data);
+			$choice = $data['HashTests']['HashAlgorithm'];
+
+			$newConditions = array(
+				'conditions' => array('HashAlgorithmV1.name' => $choice)
+			);
+
+        	$information = $HashAlgorithmV1Model->find('first', $newConditions);
+
+			switch ($information['HashAlgorithmV1']['exponent']) {
+			    case 32:
+    					$listOfhashes = $this->generate_array(32,$information['HashAlgorithmV1']['name']);
+        				$this->log($listOfhashes);
+        				$secondlistOfhashes = $this->generate_array(32,$information['HashAlgorithmV1']['name']);
+        				$this->log($secondlistOfhashes);
+        				$this->log($this->compare_array(32, $listOfhashes, $secondlistOfhashes));	
+        				break;
+    			case 64:
+        				
+        				break;
+    			case 128:
+        				
+        				break;
+			}
+			
 		}	
 	}
 

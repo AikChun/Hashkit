@@ -56,13 +56,5 @@ class HashAlgorithmV1 extends AppModel {
 				//'on' => 'create', // Limit validation to 'create' or 'update' operations
 			),
 		),
-		// 'required_base' => array(
-		// 	'Numeric' => array(
-		// 		'rule'	=> 'numeric',
-		// 		'required' => true,
-		// 		'message'  => 'only numbers'
-		// 	),
-		// ),
-
 	);
 }
