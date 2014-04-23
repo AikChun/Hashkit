@@ -156,6 +156,7 @@ class HashTestsController extends AppController {
  * To allow the user choose the algorithms that is to analyzed.
  */
 	public function compute_and_compare() {
+		$HashAlgorithmModel = ClassRegistry::init('HashAlgorithm');
 		if($this->request->is('post')) {
 			if(empty($this->request->data['HashTests']['HashAlgorithm'])) {
 				$this->Session->setFlash('You did not select any algorithms!');
@@ -164,18 +165,14 @@ class HashTestsController extends AppController {
 				$this->Session->setFlash('Please select more than one algorithmn');
 				return $this->redirect(array('action' => 'compute_and_compare'));
 			}
-			$data = $this->request->data['HashTests'];
-			$HashAlgorithmModel = ClassRegistry::init('HashAlgorithm');
+			
+			$data = $this->request->data['HashTests']['HashAlgorithm'];
 			$selectedAlgorithms = array();
-			foreach ($data as $key => $hashId) {
-				$searchCondition = array(
-					'conditions' => array(
-						'HashAlgorithm.id' => $data['HashAlgorithm'] 
-					),
-					'fields' => array('id','name')
-				);
-				$selectedAlgorithms = $HashAlgorithmModel->find('all', $searchCondition);
-			}
+			$conditions = array(
+				'conditions' => array('HashAlgorithm.name' => $data),
+				'fields' => array('HashAlgorithm.id', 'HashAlgorithm.name')
+			);
+			$selectedAlgorithms = $HashAlgorithmModel->find('all', $conditions);
 			$this->Session->write('selectedAlgorithms' , $selectedAlgorithms);
 			return $this->redirect(array('controller' => 'HashTests' ,'action' => 'compute_and_compare_input'));
 			
@@ -186,8 +183,11 @@ class HashTestsController extends AppController {
 		);
 
 		$this->Session->write('selectedAlgorithms' , '');
-		$HashAlgorithmModel = ClassRegistry::init('HashAlgorithm');
-		$data = $HashAlgorithmModel->find('all', $conditions);
+		$searchData = $HashAlgorithmModel->find('all', $conditions);
+		$data = array();
+		foreach($searchData as $key => $algorithm) {
+			$data[$algorithm['HashAlgorithm']['name']] = $algorithm['HashAlgorithm']['name'];
+		}
 		$this->set('data', $data);
 	}
 
@@ -203,7 +203,6 @@ class HashTestsController extends AppController {
 			if (!empty($data['HashTests']['plaintext'])) {
 
 				$output = HashingLib::computeDigests($selectedAlgorithms, $data['HashTests']['plaintext']);
-                $output[0]['HashResult']['user_id'] = $this->Auth->user('id');
 
                 $outputResult = $this->compareDigests($output);
 				//$this->log($outputResult);
@@ -658,4 +657,3 @@ class HashTestsController extends AppController {
 	}
 
 }
-	
