@@ -19,7 +19,7 @@
 	</tr>
 
 	<tr>
-	<td>Speed</td>
+	<td>Speed(MB/s)</td>
 	<?php foreach($output as $key => $data):?>
 	<td><?php echo $data['HashResult']['speed'];?></td>
 	<?php endforeach;?>
@@ -47,4 +47,6 @@
 	<?php endforeach;?>
 	</tr>
 </table>
+<?php $last = end($output);?>
+<br>Recommended Hash Function: <?php echo $last['HashResult']['recommendation'];?> <br>
 </div>

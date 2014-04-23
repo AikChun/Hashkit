@@ -230,7 +230,7 @@ class HashTestsController extends AppController {
             }
 
 			$outputResult = $this->compareDigests($output);
-			$this->log($outputResult);
+			//$this->log($outputResult);
 			$this->Session->write('output', $outputResult);
 			$this->redirect(array('controller' => 'HashResults', 'action' => 'compute_and_compare_result'));
 
@@ -272,6 +272,8 @@ class HashTestsController extends AppController {
 		$hashResultModel = ClassRegistry::init('HashResult');
 		$hashAlgorithmModel = ClassRegistry::init("HashAlgorithm");
 		$analysis = array();
+		$security = 0;
+		$speed = 0;
 
 		$mdline = explode("\n",$output[0]['HashResult']['message_digest']);
 		$ptline = explode("\n",$output[0]['HashResult']['plaintext']);
@@ -312,7 +314,7 @@ class HashTestsController extends AppController {
 			$searchResult = array();
 			$searchResult = $hashAlgorithmModel->find('first', $options);
 
-			$this->log($searchResult);
+			//$this->log($searchResult);
 	
 			$hashResult['HashResult']['speed'] = $searchResult['HashAlgorithm']['speed'];
 			$hashResult['HashResult']['security'] = $searchResult['HashAlgorithm']['security'];
@@ -320,6 +322,18 @@ class HashTestsController extends AppController {
 			$hashResult['HashResult']['preimage_resistance'] = $searchResult['HashAlgorithm']['preimage_resistance'];
 			$hashResult['HashResult']['2nd_preimage_resistance'] = $searchResult['HashAlgorithm']['2nd_preimage_resistance'];
 
+			
+			if ($hashResult['HashResult']['security'] > $security) {
+				$security = $hashResult['HashResult']['security'];
+				$recommendAlgo = $hashResult['HashResult']['hash_algorithm_name'];
+				$speed = $hashResult['HashResult']['speed'];
+			} elseif ($hashResult['HashResult']['security'] == $security) {
+				if($hashResult['HashResult']['speed'] > $speed) {
+					$recommendAlgo = $hashResult['HashResult']['hash_algorithm_name'];
+				}
+			}
+
+			$hashResult['HashResult']['recommendation'] = $recommendAlgo;
 			//if(!empty($result['HashResult']['id'])) {
 			//	$hashResult['HashResult']['analysis'] = 'This input is a very common hash value for the algorithm: '. $hashResult['HashResult']['hash_algorithm_name'];
 			//} else {
@@ -327,6 +341,9 @@ class HashTestsController extends AppController {
 			//}
 			array_push($analysis, $hashResult);
 		}
+		$this->log($analysis);
+		//$this->log($recommendAlgo);
+
 		return $analysis;
 	}
 
