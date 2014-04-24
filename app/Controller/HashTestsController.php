@@ -508,25 +508,25 @@ class HashTestsController extends AppController {
         	'conditions' => array('HashAlgorithmV1.base ' => 2)
         	);
         $result = $HashAlgorithmV1Model->find('all', $conditions);
-        $this->log($result);
         $this->set('result', $result);
 		if($this->request->is('post')) {
 			$data = $this->request->data;
-			$dataInput = array();
 			$output = array();
 
 			$this->set('data', $data);
-			$originalMD = hash(strtolower($data['HashTests']['HashAlgorithm']), $data['HashTests']['plaintext']);
-			//$secondMD = hash(strtolower($data['HashTests']['HashAlgorithm']), ++$data['HashTests']['plaintext']);
+			$helloMD = hash(strtolower($data['HashTests']['HashAlgorithm']), 'hello');
+			$hellpMD = hash(strtolower($data['HashTests']['HashAlgorithm']), 'hellp');
+			$worldMD = hash(strtolower($data['HashTests']['HashAlgorithm']), 'world');
+			$worleMD = hash(strtolower($data['HashTests']['HashAlgorithm']), 'worle');
 
+			array_push($output, $helloMD);
+			array_push($output, $hellpMD);
+			array_push($output, $worldMD);
+			array_push($output, $worleMD);
 
-			echo $originalMD."<br>";
-
-			//echo $secondMD."<br>";
-
-			$teststring = $data['HashTests']['plaintext'];
-			echo $teststring."<br>";
-			echo decbin(ord($teststring));
+			$this -> log($output);
+			
+			
 		}		
 	}
 /**
