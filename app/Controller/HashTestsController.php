@@ -504,30 +504,50 @@ class HashTestsController extends AppController {
 	public function avalanche_effect() {
         
         $HashAlgorithmV1Model = ClassRegistry::init('HashAlgorithmV1');
-        $condition = array (
-        	'conditions' => array('HashAlgorithmV1.base ' => 2)
-        	);
+     
+        $conditions = array(
+			'conditions' => array('HashAlgorithmV1.name !=' => 'customised' ),
+			'order' => 'HashAlgorithmV1.name ASC'
+		);
+
         $result = $HashAlgorithmV1Model->find('all', $conditions);
         $this->set('result', $result);
 		if($this->request->is('post')) {
 			$data = $this->request->data;
 			$output = array();
 
-			$this->set('data', $data);
-			$helloMD = hash(strtolower($data['HashTests']['HashAlgorithm']), 'hello');
-			$hellpMD = hash(strtolower($data['HashTests']['HashAlgorithm']), 'hellp');
-			$worldMD = hash(strtolower($data['HashTests']['HashAlgorithm']), 'world');
-			$worleMD = hash(strtolower($data['HashTests']['HashAlgorithm']), 'worle');
-
-			array_push($output, $helloMD);
-			array_push($output, $hellpMD);
-			array_push($output, $worldMD);
-			array_push($output, $worleMD);
-
-			$this -> log($output);
 			
+			$HelloMD = hash(strtolower($data['HashTests']['HashAlgorithm']), 'Hello');
+			$HellpMD = hash(strtolower($data['HashTests']['HashAlgorithm']), 'Hellp');
+
+	
+			$percent = $this -> compute_avalanche($HelloMD, $HellpMD);
+			
+			array_push($output, $data);
+			array_push($output, $HelloMD);
+			array_push($output, $HellpMD);
+			array_push($output, $percent);
+
+			$this->set('data', $data);
+			
+			
+			$this->Session->write('output', $output);
+			$this->redirect(array('controller' => 'HashResults', 'action' => 'avalanche_effect_result'));
 			
 		}		
+	}
+
+	public function compute_avalanche($firstMD, $secondMD){
+		$lengthOfMD = strlen ($firstMD);
+		$count = 0;
+		for ($i = 0; $i < $lengthOfMD; $i++){
+			if (strcmp($firstMD[$i], $secondMD[$i]) != 0) {
+				$count++;
+			}
+		}
+		$this -> log($count);
+		$percent = $count / $lengthOfMD * 100;
+		return $percent;
 	}
 /**
  * To read in user's input and get the hash algorithms can produce the same output. 

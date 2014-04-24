@@ -163,4 +163,12 @@ class HashResultsController extends AppController {
 		$arrayofhashesandwords = $this->Session->read('birthdayattackresult');
 		$this->set('arrayofhashesandwords', $arrayofhashesandwords);
 	}
+
+	public function avalanche_effect_result() {
+		$output = $this->Session->read('output');
+
+		if(!empty($output)) {
+			$this->set ('output', $output);
+		}
+	}
 }
