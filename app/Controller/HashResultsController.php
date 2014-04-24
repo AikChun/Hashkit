@@ -143,6 +143,10 @@ class HashResultsController extends AppController {
 		);
 		$this->set('hashResults', $this->Paginator->paginate());
 	}
+	public function reverse() {
+		$data = $this->Session->read('data');
+		$this->set('data', $data);
+	}
 
 	public function calculate_probability_of_collision_result() {
 		$probability = $this->Session->read('probability');
@@ -175,3 +179,4 @@ class HashResultsController extends AppController {
 		}
 	}
 }
+

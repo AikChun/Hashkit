@@ -356,8 +356,23 @@ class HashTestsController extends AppController {
  * To look up plaintext equivalent when entering message digest
  *
  */
-	public function reverseHashLookUp() {
+	public function reverse_look_up() {
+		$hashAlgorithmModel = ClassRegistry::init('HashAlgorithm');
+		$searchResult = $hashAlgorithmModel->find('all', array('fields' => array('HashAlgorithm.name')));
+		$preparedData = Hash::extract($searchResult, '{n}.HashAlgorithm.name');
+		$data = array();
+		foreach($preparedData as $key => $algorithm) {
+			$data[strtolower($algorithm)] = $algorithm;
+		}
 
+		$this->set('data', $data);
+
+		if($this->request->is('post')) {
+			$data = $this->request->data['HashTests'];
+			$result = HashingLib::checkDictionary($data);
+			$this->Session->write('reverseData', $result );
+			$this->redirect('/HashResults/reverse');
+		}
 	}
 
 /**

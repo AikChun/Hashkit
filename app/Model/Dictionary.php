@@ -14,3 +14,4 @@ class Dictionary extends AppModel {
 	public $useTable = 'dictionary';
 
 }
+

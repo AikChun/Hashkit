@@ -95,6 +95,26 @@ class HashingLib {
    		}
 	}
 
+/**
+ * reverse look up
+ */
+	public static function checkDictionary($data) {
+		$dictionaryModel = ClassRegistry::init('Dictionary');
+		$conditions = array(
+			'conditions' => array(
+				'Dictionary.'.$data['hash_algorithm'] => $data['message_digest']
+			)
+		);
+		$checkDictionaryResult = $dictionaryModel->find('all', $conditions);
+
+		if(empty($checkDictionaryResult)) {
+			return false;
+		}
+
+		return $checkDictionaryResult;
+		
+
+	}
 }
 
 ?>
