@@ -221,10 +221,6 @@ class HashTestsController extends AppController {
 
 			$output = HashingLib::computeDigests($selectedAlgorithms, $lineArray);
 
-            foreach($output as $key => $row) {
-                $output[$key]['HashResult']['user_id'] = $this->Auth->user('id');
-            }
-
 			$outputResult = $this->compareDigests($output);
 			//$this->log($outputResult);
 			$this->Session->write('output', $outputResult);
