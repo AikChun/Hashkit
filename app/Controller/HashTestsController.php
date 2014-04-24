@@ -48,26 +48,25 @@ class HashTestsController extends AppController {
  * User is to choose the algorithms that he/she wants to hash the plaintext.
  */
 	public function basic_hashing() {
+		$HashAlgorithmModel = ClassRegistry::init('HashAlgorithm');
 		if($this->request->is('post')) {
 			if(empty($this->request->data['HashTests']['HashAlgorithm'])) {
 				$this->Session->setFlash('You did not select any algorithms!');
 				return $this->redirect(array('action' => 'basic_hashing'));
 			}
-			$data = $this->request->data['HashTests'];
-			$HashAlgorithmModel = ClassRegistry::init('HashAlgorithm');
-			$selectedAlgorithms = array();
-			//$this->log($data);
-			foreach ($data as $key => $hashId) {
-				$searchCondition = array(
-					'conditions' => array(
-						'HashAlgorithm.id' => $data['HashAlgorithm'] 
-					),
-					'fields' => array('id','name')
-				);
-				$selectedAlgorithms = $HashAlgorithmModel->find('all', $searchCondition);
-			}
-			$this->Session->write('selectedAlgorithms' , $selectedAlgorithms);
-			//$this->log("before basic hashing");
+			$postData = $this->request->data['HashTests']['HashAlgorithm'];
+
+			$conditions = array(
+				'conditions' => array(
+						'HashAlgorithm.name' => $postData
+				),
+				'fields' => array(
+					'HashAlgorithm.id',
+					'HashAlgorithm.name'
+				)
+			);
+			$retrievedData = $HashAlgorithmModel->find('all', $conditions);
+			$this->Session->write('selectedAlgorithms' , $retrievedData);
 			return $this->redirect(array('controller' => 'HashTests' ,'action' => 'basic_hashing_input'));
 			
 		}
@@ -78,8 +77,12 @@ class HashTestsController extends AppController {
 			
 
 		$this->Session->write('selectedAlgorithms' , '');
-		$HashAlgorithmModel = ClassRegistry::init('HashAlgorithm');
-		$data = $HashAlgorithmModel->find('all', $conditions);
+		$retrievedData = $HashAlgorithmModel->find('all', $conditions);
+		
+		$data = array();
+		foreach($retrievedData as $key => $hashAlgorithm) {
+			$data[$hashAlgorithm['HashAlgorithm']['name']] = $hashAlgorithm['HashAlgorithm']['name'];
+		}
 		$this->set('data', $data);
 	}
 
@@ -120,7 +123,6 @@ class HashTestsController extends AppController {
 	}
 
 	public function basic_hashing_input() {
-		//$this->log("Enter basic hashing");
 		$selectedAlgorithms = $this->Session->read('selectedAlgorithms');
 
 		if($this->request->is('post')) {
@@ -130,7 +132,6 @@ class HashTestsController extends AppController {
 			if (!empty($data['HashTests']['plaintext'])) {
 
 				$output = HashingLib::computeDigests($selectedAlgorithms, $data['HashTests']['plaintext']);
-                $output[0]['HashResult']['user_id'] = $this->Auth->user('id');
 	            $this->Session->write('output', $output);
 				$this->redirect(array('controller' => 'HashResults', 'action' => 'basic_hashing_result'));
 			}
@@ -144,10 +145,6 @@ class HashTestsController extends AppController {
 
 			$output = HashingLib::computeDigests($selectedAlgorithms, $lineArray);
 
-            foreach($output as $key => $row) {
-                $output[$key]['HashResult']['user_id'] = $this->Auth->user('id');
-            }
-
             $this->Session->write('output', $output);
 			$this->redirect(array('controller' => 'HashResults', 'action' => 'basic_hashing_result'));
         	
@@ -159,6 +156,7 @@ class HashTestsController extends AppController {
  * To allow the user choose the algorithms that is to analyzed.
  */
 	public function compute_and_compare() {
+		$HashAlgorithmModel = ClassRegistry::init('HashAlgorithm');
 		if($this->request->is('post')) {
 			if(empty($this->request->data['HashTests']['HashAlgorithm'])) {
 				$this->Session->setFlash('You did not select any algorithms!');
@@ -167,18 +165,14 @@ class HashTestsController extends AppController {
 				$this->Session->setFlash('Please select more than one algorithmn');
 				return $this->redirect(array('action' => 'compute_and_compare'));
 			}
-			$data = $this->request->data['HashTests'];
-			$HashAlgorithmModel = ClassRegistry::init('HashAlgorithm');
+			
+			$data = $this->request->data['HashTests']['HashAlgorithm'];
 			$selectedAlgorithms = array();
-			foreach ($data as $key => $hashId) {
-				$searchCondition = array(
-					'conditions' => array(
-						'HashAlgorithm.id' => $data['HashAlgorithm'] 
-					),
-					'fields' => array('id','name')
-				);
-				$selectedAlgorithms = $HashAlgorithmModel->find('all', $searchCondition);
-			}
+			$conditions = array(
+				'conditions' => array('HashAlgorithm.name' => $data),
+				'fields' => array('HashAlgorithm.id', 'HashAlgorithm.name')
+			);
+			$selectedAlgorithms = $HashAlgorithmModel->find('all', $conditions);
 			$this->Session->write('selectedAlgorithms' , $selectedAlgorithms);
 			return $this->redirect(array('controller' => 'HashTests' ,'action' => 'compute_and_compare_input'));
 			
@@ -189,8 +183,11 @@ class HashTestsController extends AppController {
 		);
 
 		$this->Session->write('selectedAlgorithms' , '');
-		$HashAlgorithmModel = ClassRegistry::init('HashAlgorithm');
-		$data = $HashAlgorithmModel->find('all', $conditions);
+		$searchData = $HashAlgorithmModel->find('all', $conditions);
+		$data = array();
+		foreach($searchData as $key => $algorithm) {
+			$data[$algorithm['HashAlgorithm']['name']] = $algorithm['HashAlgorithm']['name'];
+		}
 		$this->set('data', $data);
 	}
 
@@ -206,7 +203,6 @@ class HashTestsController extends AppController {
 			if (!empty($data['HashTests']['plaintext'])) {
 
 				$output = HashingLib::computeDigests($selectedAlgorithms, $data['HashTests']['plaintext']);
-                $output[0]['HashResult']['user_id'] = $this->Auth->user('id');
 
                 $outputResult = $this->compareDigests($output);
 				//$this->log($outputResult);
@@ -397,13 +393,15 @@ class HashTestsController extends AppController {
 			$resultfromdatabase = $HashAlgorithmV1Model->find('first', $conditions);
 
 			//$this->log($resultfromdatabase['HashAlgorithmV1']['name']);
-			
+			try{	
+			 
 			 if((int)$resultfromdatabase['HashAlgorithmV1']['base'] > 1 ){
 
 			 		if(!empty($data['HashTests']['customized_algorithm_base']) || !empty($data['HashTests']['customized_algorithm_exponent'])) {
 						if(!empty($data['HashTests']['hash_value1'])) {
-							$this->Session->setFlash('Please choose a hash algorithm in the drop down list or choose customized and enter the required values');
-							return $this->redirect(array('action' => 'calculate_probability_of_collision'));
+							//$this->Session->setFlash('Please choose a hash algorithm in the drop down list or choose customized and enter the required values');
+							//return $this->redirect(array('action' => 'calculate_probability_of_collision'));
+							throw new Exception ('Please choose a hash algorithm in the drop down list or choose customized and enter the required values');
 						}
 					}else{
 							$K = bcpow((int)$resultfromdatabase['HashAlgorithmV1']['base'],(int)$resultfromdatabase['HashAlgorithmV1']['exponent']);
@@ -411,16 +409,14 @@ class HashTestsController extends AppController {
 			 }else{
 
 					if(empty($data['HashTests']['customized_algorithm_base']) || empty($data['HashTests']['customized_algorithm_exponent'])) {
-						if(empty($data['HashTests']['hash_value1'])) {	
-							$this->Session->setFlash('Please enter both the base and exponent values for the hash function.');
-							return $this->redirect(array('action' => 'calculate_probability_of_collision'));
+						if(empty($data['HashTests']['hash_value1'])) {
+							throw new Exception ('Please enter both the base and exponent values for the hash function.');
 						}
 					}
 
 					if(!empty($data['HashTests']['customized_algorithm_base']) || !empty($data['HashTests']['customized_algorithm_exponent'])) {
 						if(!empty($data['HashTests']['hash_value1'])) {
-							$this->Session->setFlash('Please enter only either the base and exponent values or the amount of hash values.');
-							return $this->redirect(array('action' => 'calculate_probability_of_collision'));
+							throw new Exception ('You did not enter either the base and exponent values or the amount of hash values');
 						}
 					}
 
@@ -432,19 +428,17 @@ class HashTestsController extends AppController {
 						//total of hash value which we want to match(birthday) 
 						$K = pow((int)$data['HashTests']['customized_algorithm_base'],(int)$data['HashTests']['customized_algorithm_exponent']);	
 					}
-			}
+				}
 
 			if(empty($data['HashTests']['required_base']) || empty($data['HashTests']['required_exponent'])) {
 				if(empty($data['HashTests']['hash_value'])) {
-					$this->Session->setFlash('You did not enter either the base and exponent values or the amount of hash values.');
-					return $this->redirect(array('action' => 'calculate_probability_of_collision'));
+					throw new Exception ('You did not enter either the base and exponent values or the amount of hash values');	
 				}
 			}
 
 			if(!empty($data['HashTests']['required_base']) || !empty($data['HashTests']['required_exponent'])) {
 				if(!empty($data['HashTests']['hash_value'])) {
-					$this->Session->setFlash('Please enter only either the base and exponent values or the amount of hash values.');
-					return $this->redirect(array('action' => 'calculate_probability_of_collision'));
+					throw new Exception ('You did not enter either the base and exponent values or the amount of hash values');
 				}
 			}
 
@@ -457,10 +451,7 @@ class HashTestsController extends AppController {
 					$N = pow((int)$data['HashTests']['required_base'],(int)$data['HashTests']['required_exponent']);	
 			}
 
-			$this->log($K);	
-
 			$firstexpEqu = (- pow($N,2)) / (2 * $K);
-			//$this->log($firstexpEqu);
 			$probability = (1 - exp($firstexpEqu)) * 100;
 			$samplespace = $N;
 			$totalhash = $K;
@@ -471,6 +462,12 @@ class HashTestsController extends AppController {
 			
 			$this->generate_ninety_nine_percentage_proability($N,$K);	
 			$this->redirect(array('controller' => 'HashResults', 'action' => 'calculate_probability_of_collision_result'));
+			
+
+		}catch(Exception $e) {
+			$this->Session->setFlash($e->getMessage());
+			$this->redirect(array('action' => 'calculate_probability_of_collision'));
+		}
 		
 		}
 		
@@ -509,30 +506,50 @@ class HashTestsController extends AppController {
 	public function avalanche_effect() {
         
         $HashAlgorithmV1Model = ClassRegistry::init('HashAlgorithmV1');
-        $condition = array (
-        	'conditions' => array('HashAlgorithmV1.base ' => 2)
-        	);
+     
+        $conditions = array(
+			'conditions' => array('HashAlgorithmV1.name !=' => 'customised' ),
+			'order' => 'HashAlgorithmV1.name ASC'
+		);
+
         $result = $HashAlgorithmV1Model->find('all', $conditions);
-        $this->log($result);
         $this->set('result', $result);
 		if($this->request->is('post')) {
 			$data = $this->request->data;
-			$dataInput = array();
 			$output = array();
 
+			
+			$HelloMD = hash(strtolower($data['HashTests']['HashAlgorithm']), 'Hello');
+			$HellpMD = hash(strtolower($data['HashTests']['HashAlgorithm']), 'Hellp');
+
+	
+			$percent = $this -> compute_avalanche($HelloMD, $HellpMD);
+			
+			array_push($output, $data);
+			array_push($output, $HelloMD);
+			array_push($output, $HellpMD);
+			array_push($output, $percent);
+
 			$this->set('data', $data);
-			$originalMD = hash(strtolower($data['HashTests']['HashAlgorithm']), $data['HashTests']['plaintext']);
-			//$secondMD = hash(strtolower($data['HashTests']['HashAlgorithm']), ++$data['HashTests']['plaintext']);
-
-
-			echo $originalMD."<br>";
-
-			//echo $secondMD."<br>";
-
-			$teststring = $data['HashTests']['plaintext'];
-			echo $teststring."<br>";
-			echo decbin(ord($teststring));
+			
+			
+			$this->Session->write('output', $output);
+			$this->redirect(array('controller' => 'HashResults', 'action' => 'avalanche_effect_result'));
+			
 		}		
+	}
+
+	public function compute_avalanche($firstMD, $secondMD){
+		$lengthOfMD = strlen ($firstMD);
+		$count = 0;
+		for ($i = 0; $i < $lengthOfMD; $i++){
+			if (strcmp($firstMD[$i], $secondMD[$i]) != 0) {
+				$count++;
+			}
+		}
+		$this -> log($count);
+		$percent = $count / $lengthOfMD * 100;
+		return $percent;
 	}
 /**
  * To read in user's input and get the hash algorithms can produce the same output. 
@@ -608,16 +625,34 @@ class HashTestsController extends AppController {
 
 	public function compare_array($count, $array1, $array2) {
 		$found = 0;
+		$check = array();
+		$k = 0;
+		$j = 0;
 		for($i = 1; $i <= $count; $i++ ){
 			for($j = 1; $j <= $count; $j++){
-				$this->log($array1[$i]["hash"]);
-				$this->log($array2[$j]["hash"]);
+				// $this->log($array1[$i]["hash"]);
+				// $this->log($array2[$j]["hash"]);
 				if($array1[$i]["hash"] == $array2[$i]["hash"]){
+					$k += 1;
+					$check[$k]["hash"] = $array1[$i]["hash"];
+					$check[$k]["word"] = $array1[$i]["word"];
+					$k += 1;
+					$check[$j]["hash"] = $array2[$i]["hash"];
+					$check[$j]["word"] = $array2[$i]["word"];
 					$found += 1;
 				}
 			}
 		}
-		return $found;
+		return $check;
+	}
+
+	public function generate_array_and_compare($size, $hash_algorithm_name) {
+		$listOfhashes = $this->generate_array($size,$hash_algorithm_name);
+       	//$this->log($listOfhashes);
+        $secondlistOfhashes = $this->generate_array($size,$hash_algorithm_name);
+        //$this->log($secondlistOfhashes);
+       	$result = $this->compare_array($size, $listOfhashes, $secondlistOfhashes);	
+		return $result;
 	}
 
 	public function birthday_attack() {
@@ -645,22 +680,30 @@ class HashTestsController extends AppController {
 
 			switch ($information['HashAlgorithmV1']['exponent']) {
 			    case 32:
-    					$listOfhashes = $this->generate_array(32,$information['HashAlgorithmV1']['name']);
-        				$this->log($listOfhashes);
-        				$secondlistOfhashes = $this->generate_array(32,$information['HashAlgorithmV1']['name']);
-        				$this->log($secondlistOfhashes);
-        				$this->log($this->compare_array(32, $listOfhashes, $secondlistOfhashes));	
+    					$birthdayattackresult = $this->generate_array_and_compare(32, $information['HashAlgorithmV1']['name']);	
         				break;
     			case 64:
-        				
+        				$birthdayattackresult = $this->generate_array_and_compare(64, $information['HashAlgorithmV1']['name']);	
         				break;
     			case 128:
-        				
+						$birthdayattackresult = $this->generate_array_and_compare(128, $information['HashAlgorithmV1']['name']);	
         				break;
+        		case 256:
+        				$birthdayattackresult = $this->generate_array_and_compare(256, $information['HashAlgorithmV1']['name']);	
+        				break;
+        		case 384:
+        				$birthdayattackresult = $this->generate_array_and_compare(384, $information['HashAlgorithmV1']['name']);	
+        				break;
+        		default;
+        				$this->Session->setFlash("please choose a hash algorithm");
+						$this->redirect(array('action' => 'birthday_attack'));
+    					break;
 			}
+
+			$this->Session->write('birthdayattackresult', $birthdayattackresult);
+			$this->redirect(array('controller' => 'HashResults', 'action' => 'birthday_attack_result'));
 			
 		}	
 	}
 
 }
-	

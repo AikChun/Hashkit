@@ -27,6 +27,11 @@ $cakeDescription = __d('cake_dev', 'CakePHP: the rapid development php framework
 		<?php echo $title_for_layout; ?>
 	</title>
 	<?php
+		echo $this->Html->meta(array("name"=>"viewport",
+      "content"=>"width=device-width,  initial-scale=1.0"));
+
+		echo $this->Html->css('bootstrap');
+    	echo $this->Html->css('bootstrap-responsive');
 		echo $this->Html->meta('icon');
 
 		echo $this->Html->css('cake.generic');

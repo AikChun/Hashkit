@@ -109,8 +109,8 @@ class HashResultsController extends AppController {
 		if(!empty($output)) {
 			$this->set("output", $output);
 			//$saveSuccessful = $this->HashResult->saveWithDescription($output);
-			 $this->HashResult->create();
-			 $this->HashResult->saveMany($output);
+			 /* $this->HashResult->create(); */
+			 $this->HashResult->savingWithDescription($output);
 		} else {
 			$output = '';
 			$this->set('output', $output);
@@ -161,5 +161,18 @@ class HashResultsController extends AppController {
 		$arrayofhashalgorithms = $this->Session->read('resultfromdatabase');
 		$this->set('arrayofhashalgorithms', $arrayofhashalgorithms);
 
+	}
+
+	public function birthday_attack() {
+		$arrayofhashesandwords = $this->Session->read('birthdayattackresult');
+		$this->set('arrayofhashesandwords', $arrayofhashesandwords);
+	}
+
+	public function avalanche_effect_result() {
+		$output = $this->Session->read('output');
+
+		if(!empty($output)) {
+			$this->set ('output', $output);
+		}
 	}
 }
