@@ -629,7 +629,7 @@ class HashTestsController extends AppController {
        	//$this->log($listOfhashes);
         $secondlistOfhashes = $this->generate_array($size,$hash_algorithm_name);
         //$this->log($secondlistOfhashes);
-       	$result = $this->compare_array($size, $listOfhashes, $secondlistOfhashes));	
+       	$result = $this->compare_array($size, $listOfhashes, $secondlistOfhashes);	
 		return $result;
 	}
 
