@@ -154,4 +154,9 @@ class HashResultsController extends AppController {
 		$this->set('arrayofhashalgorithms', $arrayofhashalgorithms);
 
 	}
+
+	public function birthday_attack() {
+		$arrayofhashesandwords = $this->Session->read('birthdayattackresult');
+		$this->set('arrayofhashesandwords', $arrayofhashesandwords);
+	}
 }
