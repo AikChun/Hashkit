@@ -302,13 +302,15 @@ class HashTestsController extends AppController {
 				foreach($dup as $key => $num) {
 					array_push($collision_pt,$ptline[$num]);
 				 	array_push($collision_md,$mdline[$num]);
+				 	$collision .= $ptline[$num] . " " . $mdline[$num] . "\n";
 				}
 			}
 
 			if($dup != FALSE) {
-				$hashResult['HashResult']['description'] = 'There is collision detected at: ' . "\n" . $collision;
+				$hashResult['HashResult']['description'] = 'There is collision detected at: ' . "\n";
 				$hashResult['HashResult']['collision_pt'] = $collision_pt;
 				$hashResult['HashResult']['collision_md'] = $collision_md;
+				$hashResult['HashResult']['collision'] = $collision;
 			} elseif ($dup == FALSE) {
 				$hashResult['HashResult']['description'] = 'No collision detected';
 			}
@@ -352,9 +354,9 @@ class HashTestsController extends AppController {
 		}
 		//$qwe = array();
 		//$qwe = array_slice($analysis[0]['HashResult']['collision_pt'], 0);
-		$qwe = $analysis[0]['HashResult']['collision_pt'];
-		$this->log($qwe);
-		//$this->log($analysis);
+		//$qwe = $analysis[0]['HashResult']['collision_pt'];
+		//$this->log($qwe);
+		$this->log($analysis);
 		return $analysis;
 	}
 

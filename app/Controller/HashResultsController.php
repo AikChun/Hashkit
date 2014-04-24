@@ -122,6 +122,10 @@ class HashResultsController extends AppController {
 		$outputResult = $this->Session->read('output');
 		if(!empty($outputResult)) {
 			$this->set("output", $outputResult);
+			//$this->log($outputResult[0]['HashResult']['collision_pt']);
+			//foreach($outputResult[0]['HashResult']['collision_pt'] as $key => $col) {
+			$outputResult[0]['HashResult']['description'] .= $outputResult[0]['HashResult']['collision'];
+			//}
 			$saveSuccessful = $this->HashResult->saveWithDescription($outputResult);
 			//$this->HashResult->create();
 			//$this->HashResult->saveMany($outputResult);
