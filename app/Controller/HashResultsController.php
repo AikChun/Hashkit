@@ -109,8 +109,8 @@ class HashResultsController extends AppController {
 		if(!empty($output)) {
 			$this->set("output", $output);
 			//$saveSuccessful = $this->HashResult->saveWithDescription($output);
-			 $this->HashResult->create();
-			 $this->HashResult->saveMany($output);
+			 /* $this->HashResult->create(); */
+			 $this->HashResult->savingWithDescription($output);
 		} else {
 			$output = '';
 			$this->set('output', $output);
@@ -134,6 +134,10 @@ class HashResultsController extends AppController {
 
 	public function show_my_test_results() {
 		$this->HashResult->recursive = 0;
+		$this->Paginator->settings = array(
+			'conditions' => array('HashResult.user_id' => $this->Auth->user('id')
+			)
+		);
 		$this->set('hashResults', $this->Paginator->paginate());
 	}
 

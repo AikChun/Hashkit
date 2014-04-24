@@ -48,26 +48,25 @@ class HashTestsController extends AppController {
  * User is to choose the algorithms that he/she wants to hash the plaintext.
  */
 	public function basic_hashing() {
+		$HashAlgorithmModel = ClassRegistry::init('HashAlgorithm');
 		if($this->request->is('post')) {
 			if(empty($this->request->data['HashTests']['HashAlgorithm'])) {
 				$this->Session->setFlash('You did not select any algorithms!');
 				return $this->redirect(array('action' => 'basic_hashing'));
 			}
-			$data = $this->request->data['HashTests'];
-			$HashAlgorithmModel = ClassRegistry::init('HashAlgorithm');
-			$selectedAlgorithms = array();
-			//$this->log($data);
-			foreach ($data as $key => $hashId) {
-				$searchCondition = array(
-					'conditions' => array(
-						'HashAlgorithm.id' => $data['HashAlgorithm'] 
-					),
-					'fields' => array('id','name')
-				);
-				$selectedAlgorithms = $HashAlgorithmModel->find('all', $searchCondition);
-			}
-			$this->Session->write('selectedAlgorithms' , $selectedAlgorithms);
-			//$this->log("before basic hashing");
+			$postData = $this->request->data['HashTests']['HashAlgorithm'];
+
+			$conditions = array(
+				'conditions' => array(
+						'HashAlgorithm.name' => $postData
+				),
+				'fields' => array(
+					'HashAlgorithm.id',
+					'HashAlgorithm.name'
+				)
+			);
+			$retrievedData = $HashAlgorithmModel->find('all', $conditions);
+			$this->Session->write('selectedAlgorithms' , $retrievedData);
 			return $this->redirect(array('controller' => 'HashTests' ,'action' => 'basic_hashing_input'));
 			
 		}
@@ -78,8 +77,12 @@ class HashTestsController extends AppController {
 			
 
 		$this->Session->write('selectedAlgorithms' , '');
-		$HashAlgorithmModel = ClassRegistry::init('HashAlgorithm');
-		$data = $HashAlgorithmModel->find('all', $conditions);
+		$retrievedData = $HashAlgorithmModel->find('all', $conditions);
+		
+		$data = array();
+		foreach($retrievedData as $key => $hashAlgorithm) {
+			$data[$hashAlgorithm['HashAlgorithm']['name']] = $hashAlgorithm['HashAlgorithm']['name'];
+		}
 		$this->set('data', $data);
 	}
 
@@ -120,7 +123,6 @@ class HashTestsController extends AppController {
 	}
 
 	public function basic_hashing_input() {
-		//$this->log("Enter basic hashing");
 		$selectedAlgorithms = $this->Session->read('selectedAlgorithms');
 
 		if($this->request->is('post')) {
@@ -130,7 +132,6 @@ class HashTestsController extends AppController {
 			if (!empty($data['HashTests']['plaintext'])) {
 
 				$output = HashingLib::computeDigests($selectedAlgorithms, $data['HashTests']['plaintext']);
-                $output[0]['HashResult']['user_id'] = $this->Auth->user('id');
 	            $this->Session->write('output', $output);
 				$this->redirect(array('controller' => 'HashResults', 'action' => 'basic_hashing_result'));
 			}
@@ -144,10 +145,6 @@ class HashTestsController extends AppController {
 
 			$output = HashingLib::computeDigests($selectedAlgorithms, $lineArray);
 
-            foreach($output as $key => $row) {
-                $output[$key]['HashResult']['user_id'] = $this->Auth->user('id');
-            }
-
             $this->Session->write('output', $output);
 			$this->redirect(array('controller' => 'HashResults', 'action' => 'basic_hashing_result'));
         	
@@ -159,6 +156,7 @@ class HashTestsController extends AppController {
  * To allow the user choose the algorithms that is to analyzed.
  */
 	public function compute_and_compare() {
+		$HashAlgorithmModel = ClassRegistry::init('HashAlgorithm');
 		if($this->request->is('post')) {
 			if(empty($this->request->data['HashTests']['HashAlgorithm'])) {
 				$this->Session->setFlash('You did not select any algorithms!');
@@ -167,18 +165,14 @@ class HashTestsController extends AppController {
 				$this->Session->setFlash('Please select more than one algorithmn');
 				return $this->redirect(array('action' => 'compute_and_compare'));
 			}
-			$data = $this->request->data['HashTests'];
-			$HashAlgorithmModel = ClassRegistry::init('HashAlgorithm');
+			
+			$data = $this->request->data['HashTests']['HashAlgorithm'];
 			$selectedAlgorithms = array();
-			foreach ($data as $key => $hashId) {
-				$searchCondition = array(
-					'conditions' => array(
-						'HashAlgorithm.id' => $data['HashAlgorithm'] 
-					),
-					'fields' => array('id','name')
-				);
-				$selectedAlgorithms = $HashAlgorithmModel->find('all', $searchCondition);
-			}
+			$conditions = array(
+				'conditions' => array('HashAlgorithm.name' => $data),
+				'fields' => array('HashAlgorithm.id', 'HashAlgorithm.name')
+			);
+			$selectedAlgorithms = $HashAlgorithmModel->find('all', $conditions);
 			$this->Session->write('selectedAlgorithms' , $selectedAlgorithms);
 			return $this->redirect(array('controller' => 'HashTests' ,'action' => 'compute_and_compare_input'));
 			
@@ -189,8 +183,11 @@ class HashTestsController extends AppController {
 		);
 
 		$this->Session->write('selectedAlgorithms' , '');
-		$HashAlgorithmModel = ClassRegistry::init('HashAlgorithm');
-		$data = $HashAlgorithmModel->find('all', $conditions);
+		$searchData = $HashAlgorithmModel->find('all', $conditions);
+		$data = array();
+		foreach($searchData as $key => $algorithm) {
+			$data[$algorithm['HashAlgorithm']['name']] = $algorithm['HashAlgorithm']['name'];
+		}
 		$this->set('data', $data);
 	}
 
@@ -206,7 +203,6 @@ class HashTestsController extends AppController {
 			if (!empty($data['HashTests']['plaintext'])) {
 
 				$output = HashingLib::computeDigests($selectedAlgorithms, $data['HashTests']['plaintext']);
-                $output[0]['HashResult']['user_id'] = $this->Auth->user('id');
 
                 $outputResult = $this->compareDigests($output);
 				//$this->log($outputResult);
@@ -230,7 +226,7 @@ class HashTestsController extends AppController {
             }
 
 			$outputResult = $this->compareDigests($output);
-			$this->log($outputResult);
+			//$this->log($outputResult);
 			$this->Session->write('output', $outputResult);
 			$this->redirect(array('controller' => 'HashResults', 'action' => 'compute_and_compare_result'));
 
@@ -272,6 +268,8 @@ class HashTestsController extends AppController {
 		$hashResultModel = ClassRegistry::init('HashResult');
 		$hashAlgorithmModel = ClassRegistry::init("HashAlgorithm");
 		$analysis = array();
+		$security = 0;
+		$speed = 0;
 
 		$mdline = explode("\n",$output[0]['HashResult']['message_digest']);
 		$ptline = explode("\n",$output[0]['HashResult']['plaintext']);
@@ -287,15 +285,26 @@ class HashTestsController extends AppController {
 			//$this->log('This is result.');
 			//$this->log($result);
 
+			//$collision = '';
+			//if($dup != FALSE) {
+			//	foreach($dup as $key => $num) {
+			//		$collision .= $ptline[$num] . " " . $mdline[$num] . "\n";
+			//	}
+			//}
+			$collision_pt = array();
+			$collision_md = array();
 			$collision = '';
 			if($dup != FALSE) {
 				foreach($dup as $key => $num) {
-					$collision .= $ptline[$num] . " " . $mdline[$num] . "\n";
+					array_push($collision_pt,$ptline[$num]);
+				 	array_push($collision_md,$mdline[$num]);
 				}
 			}
 
 			if($dup != FALSE) {
 				$hashResult['HashResult']['description'] = 'There is collision detected at: ' . "\n" . $collision;
+				$hashResult['HashResult']['collision_pt'] = $collision_pt;
+				$hashResult['HashResult']['collision_md'] = $collision_md;
 			} elseif ($dup == FALSE) {
 				$hashResult['HashResult']['description'] = 'No collision detected';
 			}
@@ -311,8 +320,6 @@ class HashTestsController extends AppController {
 				);
 			$searchResult = array();
 			$searchResult = $hashAlgorithmModel->find('first', $options);
-
-			$this->log($searchResult);
 	
 			$hashResult['HashResult']['speed'] = $searchResult['HashAlgorithm']['speed'];
 			$hashResult['HashResult']['security'] = $searchResult['HashAlgorithm']['security'];
@@ -320,6 +327,18 @@ class HashTestsController extends AppController {
 			$hashResult['HashResult']['preimage_resistance'] = $searchResult['HashAlgorithm']['preimage_resistance'];
 			$hashResult['HashResult']['2nd_preimage_resistance'] = $searchResult['HashAlgorithm']['2nd_preimage_resistance'];
 
+			
+			if ($hashResult['HashResult']['security'] > $security) {
+				$security = $hashResult['HashResult']['security'];
+				$recommendAlgo = $hashResult['HashResult']['hash_algorithm_name'];
+				$speed = $hashResult['HashResult']['speed'];
+			} elseif ($hashResult['HashResult']['security'] == $security) {
+				if($hashResult['HashResult']['speed'] > $speed) {
+					$recommendAlgo = $hashResult['HashResult']['hash_algorithm_name'];
+				}
+			}
+
+			$hashResult['HashResult']['recommendation'] = $recommendAlgo;
 			//if(!empty($result['HashResult']['id'])) {
 			//	$hashResult['HashResult']['analysis'] = 'This input is a very common hash value for the algorithm: '. $hashResult['HashResult']['hash_algorithm_name'];
 			//} else {
@@ -327,6 +346,11 @@ class HashTestsController extends AppController {
 			//}
 			array_push($analysis, $hashResult);
 		}
+		//$qwe = array();
+		//$qwe = array_slice($analysis[0]['HashResult']['collision_pt'], 0);
+		$qwe = $analysis[0]['HashResult']['collision_pt'];
+		$this->log($qwe);
+		//$this->log($analysis);
 		return $analysis;
 	}
 
@@ -661,4 +685,3 @@ class HashTestsController extends AppController {
 	}
 
 }
-	
