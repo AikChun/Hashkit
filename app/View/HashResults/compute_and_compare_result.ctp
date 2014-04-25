@@ -1,24 +1,42 @@
 <div class="hashResults view">
-<?php
-	echo 'Plaintext entered: '. $output[0]['HashResult']['plaintext']. '<br><br>';
-?>
+
 <table>
-<?php foreach($output as $key => $data): ?>
 	<tr>
-	<td>Selected Algorithm: <?php echo $data['HashResult']['hash_algorithm_name'];?> <br>
+	<td><B>Plaintext entered: </B></td>
+	</tr>
+	<?php $ptline = explode("\n",$output[0]['HashResult']['plaintext']);?>
+	<?php foreach($ptline as $key => $data):?>
+	<tr>
+	<td><?php echo $data; ?></td>
+	<?php endforeach;?>
+	</tr>
+</table>
+
+<table>
+	<?php $mdline = explode("\n",$output[0]['HashResult']['message_digest']);?>
+	<?php foreach($output as $key1 => $data1):?>
+	<tr>
+	<td><B>Selected Algorithm: <B><?php echo $data1['HashResult']['hash_algorithm_name'];?>
 	</td>
 	</tr>
 	<tr>
-	<td>Message Digest: <br><?php echo $data['HashResult']['message_digest'];?> <br></td>
-	<br>
+	<td><B>Message Digest: <B></td>
 	</tr>
-<?php endforeach;?>	
+	<?php foreach($mdline as $key2 => $data2): ?>
+	<tr>
+	<td><?php echo $data2;?> </td>
+	<?php endforeach;?>
+	<?php endforeach;?>	
+	</tr>
 </table>
 
 	
 <table>
 	<tr>
-	<td>Analysis: <?php echo $output[0]['HashResult']['description'];?> <br></td>
+	<td><B>Analysis: <B></td>
+	</tr>
+	<tr>
+	<td><?php echo $output[0]['HashResult']['description'];?> <br></td>
 	</tr>
 	<?php 
 	$collision_pt = $output[0]['HashResult']['collision_pt'];
@@ -31,12 +49,11 @@
 	<td><?php echo $collision_md[$key];?></td>
 	<?php endforeach;?>
 	</tr>
-	
 </table>
 
 <table>
 	<tr>
-	<td>Comparing between selected algorithmn:</td>
+	<td><B>Comparing between selected algorithmn:<B></td>
 	</tr>
 
 	<tr>
@@ -76,5 +93,12 @@
 	</tr>
 </table>
 <?php $last = end($output);?>
-<br>Recommended Hash Function: <?php echo $last['HashResult']['recommendation'];?> <br>
+<table>
+	<tr>
+	<td><B>Recommended Hash Function: <B></td>
+	</tr>
+	<tr>
+	<td><?php echo $last['HashResult']['recommendation'];?></td>
+	</tr>
+</table>
 </div>
