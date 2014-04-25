@@ -38,13 +38,7 @@ class HashResult extends AppModel {
 		}
 		return true; 
 	}
-/**
- * before saving data
- *
- */
-	public function beforeSave() {
 
-	}
 
 /**
  * Saving hash result with its description

@@ -221,10 +221,6 @@ class HashTestsController extends AppController {
 
 			$output = HashingLib::computeDigests($selectedAlgorithms, $lineArray);
 
-            foreach($output as $key => $row) {
-                $output[$key]['HashResult']['user_id'] = $this->Auth->user('id');
-            }
-
 			$outputResult = $this->compareDigests($output);
 			//$this->log($outputResult);
 			$this->Session->write('output', $outputResult);
@@ -298,13 +294,15 @@ class HashTestsController extends AppController {
 				foreach($dup as $key => $num) {
 					array_push($collision_pt,$ptline[$num]);
 				 	array_push($collision_md,$mdline[$num]);
+				 	$collision .= $ptline[$num] . " " . $mdline[$num] . "\n";
 				}
 			}
 
 			if($dup != FALSE) {
-				$hashResult['HashResult']['description'] = 'There is collision detected at: ' . "\n" . $collision;
+				$hashResult['HashResult']['description'] = 'There is collision detected at: ' . "\n";
 				$hashResult['HashResult']['collision_pt'] = $collision_pt;
 				$hashResult['HashResult']['collision_md'] = $collision_md;
+				$hashResult['HashResult']['collision'] = $collision;
 			} elseif ($dup == FALSE) {
 				$hashResult['HashResult']['description'] = 'No collision detected';
 			}
@@ -348,9 +346,9 @@ class HashTestsController extends AppController {
 		}
 		//$qwe = array();
 		//$qwe = array_slice($analysis[0]['HashResult']['collision_pt'], 0);
-		$qwe = $analysis[0]['HashResult']['collision_pt'];
-		$this->log($qwe);
-		//$this->log($analysis);
+		//$qwe = $analysis[0]['HashResult']['collision_pt'];
+		//$this->log($qwe);
+		$this->log($analysis);
 		return $analysis;
 	}
 
@@ -358,8 +356,23 @@ class HashTestsController extends AppController {
  * To look up plaintext equivalent when entering message digest
  *
  */
-	public function reverseHashLookUp() {
+	public function reverse_look_up() {
+		$hashAlgorithmModel = ClassRegistry::init('HashAlgorithm');
+		$searchResult = $hashAlgorithmModel->find('all', array('fields' => array('HashAlgorithm.name')));
+		$preparedData = Hash::extract($searchResult, '{n}.HashAlgorithm.name');
+		$data = array();
+		foreach($preparedData as $key => $algorithm) {
+			$data[strtolower($algorithm)] = $algorithm;
+		}
 
+		$this->set('data', $data);
+
+		if($this->request->is('post')) {
+			$data = $this->request->data['HashTests'];
+			$result = HashingLib::checkDictionary($data);
+			$this->Session->write('reverseData', $result );
+			$this->redirect('/HashResults/reverse');
+		}
 	}
 
 /**

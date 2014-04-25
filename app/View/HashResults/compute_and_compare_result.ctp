@@ -2,14 +2,24 @@
 <?php
 	echo 'Plaintext entered: '. $output[0]['HashResult']['plaintext']. '<br><br>';
 ?>
-<?php foreach($output as $key => $data): ?>
-	Selected Algorithm: <?php echo $data['HashResult']['hash_algorithm_name'];?> <br>
-	Message Digest: <?php echo $data['HashResult']['message_digest'];?> <br>
-	<br>
-<?php endforeach;?>	
-
-	Analysis: <?php echo $output[0]['HashResult']['description'];?> <br>
 <table>
+<?php foreach($output as $key => $data): ?>
+	<tr>
+	<td>Selected Algorithm: <?php echo $data['HashResult']['hash_algorithm_name'];?> <br>
+	</td>
+	</tr>
+	<tr>
+	<td>Message Digest: <br><?php echo $data['HashResult']['message_digest'];?> <br></td>
+	<br>
+	</tr>
+<?php endforeach;?>	
+</table>
+
+	
+<table>
+	<tr>
+	<td>Analysis: <?php echo $output[0]['HashResult']['description'];?> <br></td>
+	</tr>
 	<?php 
 	$collision_pt = $output[0]['HashResult']['collision_pt'];
 	$collision_md = $output[0]['HashResult']['collision_md'];

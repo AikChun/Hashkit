@@ -9,4 +9,5 @@ Begin a Test
 <br>
 <?php echo $this->Html->link('Compute and Compare', array('controller' => 'HashTests','action' => 'compute_and_compare'));?>
 <br>
+	<?php echo $this->Html->link('Reverse Hash Look up', array('controller' => 'HashTests', 'action' => 'reverse_look_up'));?>
 </div>
