@@ -98,7 +98,7 @@ p {
 	text-decoration: underline;
 }
 #content{
-	background: #003d4c;
+	background: #fff;
 	clear: both;
 	color: #333;
 	padding: 10px 20px 40px 20px;
@@ -121,6 +121,7 @@ div.view {
 	width:76%;
 	border-left:1px solid #666;
 	padding:10px 2%;
+	background:#fff;
 }
 div.actions {
 	float:left;
