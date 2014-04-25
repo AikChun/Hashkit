@@ -59,7 +59,7 @@ $cakeDescription = __d('cake_dev', 'FYP: Hashkit');
 						echo "</div>";
 		?>
 			</h1>
-		</div>
+		</div>	
 		<div id="content">
 
 			<?php echo $this->Session->flash(); ?>
@@ -94,4 +94,3 @@ $cakeDescription = __d('cake_dev', 'FYP: Hashkit');
 	<?php echo $this->element('sql_dump'); ?>
 </body>
 </html>
-
