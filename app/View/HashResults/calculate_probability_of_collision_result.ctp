@@ -9,4 +9,6 @@
 	<?php echo "the required sample space to get 99% probability of getting a collision: " . $requiredsamplespace . " hashes"; ?>
 	<br>
 
+	<?php echo $this->Form->button('<-',array('controller' => 'HashTests', 'action' => 'calculate_probability_of_collision'));?>
+	<?php echo $this->Form->button('home',array('controller' => 'HashTests', 'action' => 'hash_function_properties'));?>
 </div>

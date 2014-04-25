@@ -390,95 +390,96 @@ class HashTestsController extends AppController {
         $result = $HashAlgorithmV1Model->find('all', $findConditions);
         $findCustomize = $HashAlgorithmV1Model->find('first', array('conditions' => array('HashAlgorithmV1.name' => 'customised')));
         array_push($result, $findCustomize);
-        $this->log($result);
         $this->set('result', $result);
 	
 		if($this->request->is('post')) {
 			
 			$data = $this->request->data;
-			//$this->log($data);
+			$this->log($data);
 			
-			$conditions = array(
-				'conditions' => array('HashAlgorithmV1.name'=> $data['HashTests']['HashAlgorithm'])
-			);
-			$resultfromdatabase = $HashAlgorithmV1Model->find('first', $conditions);
+			
 
 			//$this->log($resultfromdatabase['HashAlgorithmV1']['name']);
 			try{	
+				
+				 if(empty($data['HashTests']['HashAlgorithm'])){
+				 	throw new Exception ('Please choose a hash algorithm in the drop down list or choose customized and enter the required values');
+				 }else{
+					$conditions = array(
+						'conditions' => array('HashAlgorithmV1.name'=> $data['HashTests']['HashAlgorithm'])
+					);
+					$resultfromdatabase = $HashAlgorithmV1Model->find('first', $conditions);
 			 
-			 if((int)$resultfromdatabase['HashAlgorithmV1']['base'] > 1 ){
+					if((int)$resultfromdatabase['HashAlgorithmV1']['base'] > 0 ){
 
-			 		if(!empty($data['HashTests']['customized_algorithm_base']) || !empty($data['HashTests']['customized_algorithm_exponent'])) {
-						if(!empty($data['HashTests']['hash_value1'])) {
-							//$this->Session->setFlash('Please choose a hash algorithm in the drop down list or choose customized and enter the required values');
-							//return $this->redirect(array('action' => 'calculate_probability_of_collision'));
-							throw new Exception ('Please choose a hash algorithm in the drop down list or choose customized and enter the required values');
-						}
+				 		if(empty($data['HashTests']['customized_algorithm_base']) && empty($data['HashTests']['customized_algorithm_exponent'])) {
+							if(empty($data['HashTests']['hash_value1'])) {
+								$K = bcpow((int)$resultfromdatabase['HashAlgorithmV1']['base'],(int)$resultfromdatabase['HashAlgorithmV1']['exponent']);
+							}
+						}else {throw new Exception ('Please choose a hash algorithm in the drop down list or choose customized and enter the required values');}	
 					}else{
-							$K = bcpow((int)$resultfromdatabase['HashAlgorithmV1']['base'],(int)$resultfromdatabase['HashAlgorithmV1']['exponent']);
-					}		
-			 }else{
 
-					if(empty($data['HashTests']['customized_algorithm_base']) || empty($data['HashTests']['customized_algorithm_exponent'])) {
-						if(empty($data['HashTests']['hash_value1'])) {
-							throw new Exception ('Please enter both the base and exponent values for the hash function.');
+						if(empty($data['HashTests']['customized_algorithm_base']) || empty($data['HashTests']['customized_algorithm_exponent'])) {
+							if(empty($data['HashTests']['hash_value1'])) {
+								throw new Exception ('Please enter both the base and exponent values for the hash function.');
+							}
+						}
+
+						if(!empty($data['HashTests']['customized_algorithm_base']) || !empty($data['HashTests']['customized_algorithm_exponent'])) {
+							if(!empty($data['HashTests']['hash_value1'])) {
+								throw new Exception ('You did not enter either the base and exponent values or the amount of hash values');
+							}
+						}
+
+						if(empty($data['HashTests']['customized_algorithm_base']) && empty($data['HashTests']['customized_algorithm_exponent'])) {
+							if(!empty($data['HashTests']['hash_value1'])) {
+								$K = (int)$data['HashTests']['hash_value1'];
+							}
+						}else{
+							//total of hash value which we want to match(birthday) 
+							$K = pow((int)$data['HashTests']['customized_algorithm_base'],(int)$data['HashTests']['customized_algorithm_exponent']);	
 						}
 					}
 
-					if(!empty($data['HashTests']['customized_algorithm_base']) || !empty($data['HashTests']['customized_algorithm_exponent'])) {
-						if(!empty($data['HashTests']['hash_value1'])) {
+					if(empty($data['HashTests']['required_base']) || empty($data['HashTests']['required_exponent'])) {
+						if(empty($data['HashTests']['hash_value'])) {
+							throw new Exception ('You did not enter either the base and exponent values or the amount of hash values');	
+						}
+					}
+
+					if(!empty($data['HashTests']['required_base']) || !empty($data['HashTests']['required_exponent'])) {
+						if(!empty($data['HashTests']['hash_value'])) {
 							throw new Exception ('You did not enter either the base and exponent values or the amount of hash values');
 						}
 					}
 
-					if(empty($data['HashTests']['customized_algorithm_base']) && empty($data['HashTests']['customized_algorithm_exponent'])) {
-						if(!empty($data['HashTests']['hash_value1'])) {
-							$K = (int)$data['HashTests']['hash_value1'];
+					if(empty($data['HashTests']['required_base']) && empty($data['HashTests']['required_exponent'])) {
+						if(!empty($data['HashTests']['hash_value'])) {
+							$N = (int)$data['HashTests']['hash_value'];
 						}
 					}else{
-						//total of hash value which we want to match(birthday) 
-						$K = pow((int)$data['HashTests']['customized_algorithm_base'],(int)$data['HashTests']['customized_algorithm_exponent']);	
+							//total sample space(number of people)
+							$N = pow((int)$data['HashTests']['required_base'],(int)$data['HashTests']['required_exponent']);	
 					}
-				}
 
-			if(empty($data['HashTests']['required_base']) || empty($data['HashTests']['required_exponent'])) {
-				if(empty($data['HashTests']['hash_value'])) {
-					throw new Exception ('You did not enter either the base and exponent values or the amount of hash values');	
-				}
-			}
+					$firstexpEqu = (- pow($N,2)) / (2 * $K);
+					$probability = (1 - exp($firstexpEqu)) * 100;
+					$samplespace = $N;
+					$totalhash = $K;
 
-			if(!empty($data['HashTests']['required_base']) || !empty($data['HashTests']['required_exponent'])) {
-				if(!empty($data['HashTests']['hash_value'])) {
-					throw new Exception ('You did not enter either the base and exponent values or the amount of hash values');
-				}
-			}
-
-			if(empty($data['HashTests']['required_base']) && empty($data['HashTests']['required_exponent'])) {
-				if(!empty($data['HashTests']['hash_value'])) {
-					$N = (int)$data['HashTests']['hash_value'];
-				}
-			}else{
-					//total sample space(number of people)
-					$N = pow((int)$data['HashTests']['required_base'],(int)$data['HashTests']['required_exponent']);	
-			}
-
-			$firstexpEqu = (- pow($N,2)) / (2 * $K);
-			$probability = (1 - exp($firstexpEqu)) * 100;
-			$samplespace = $N;
-			$totalhash = $K;
-
-			$this->Session->write('probability', $probability);
-			$this->Session->write('samplespace', $samplespace);
-			$this->Session->write('totalhash', $totalhash);
+					$this->Session->write('probability', $probability);
+					$this->Session->write('samplespace', $samplespace);
+					$this->Session->write('totalhash', $totalhash);
+					
+					$this->generate_ninety_nine_percentage_proability($N,$K);	
+					$this->redirect(array('controller' => 'HashResults', 'action' => 'calculate_probability_of_collision_result'));
+				 }//end of if else 
+					
 			
-			$this->generate_ninety_nine_percentage_proability($N,$K);	
-			$this->redirect(array('controller' => 'HashResults', 'action' => 'calculate_probability_of_collision_result'));
-			
-
-		}catch(Exception $e) {
-			$this->Session->setFlash($e->getMessage());
-			$this->redirect(array('action' => 'calculate_probability_of_collision'));
-		}
+			}catch(Exception $e) {
+					$this->Session->setFlash($e->getMessage());
+					$this->redirect(array('action' => 'calculate_probability_of_collision'));
+			}
 		
 		}
 		
@@ -648,7 +649,13 @@ class HashTestsController extends AppController {
 			for($j = 0; $j < $count; $j++){
 				// $this->log($array1[$i]["hash"]);
 				// $this->log($array2[$j]["hash"]);
-				if($array1[$i]["hash"] === $array2[$j]["hash"]){
+				$firstletterinarray2 = $array2[$j]["hash"][0];
+				$firstletterinarray1 = $array2[$i]["hash"][0];
+				
+				if($firstletterinarray2 != $firstletterinarray1){
+						break 1;
+				}else{
+					if($array1[$i]["hash"] === $array2[$j]["hash"]){
 					// $k += 1;
 					// $check[$k]["hash"] = $array1[$i]["hash"];
 					// $check[$k]["word"] = $array1[$i]["word"];
@@ -656,6 +663,7 @@ class HashTestsController extends AppController {
 					// $check[$j]["hash"] = $array2[$i]["hash"];
 					// $check[$j]["word"] = $array2[$i]["word"];
 					$found += 1;
+					}	
 				}
 			}
 		}

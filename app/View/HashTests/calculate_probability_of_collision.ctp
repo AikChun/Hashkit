@@ -13,6 +13,7 @@
 			
 		));
 
+
 		echo $this->Form->input('required_exponent', array(
 			'type' => 'text',
 			'div' => false,
@@ -20,6 +21,7 @@
 			
 		));
 	?>
+
 	<div class="or" style="font-size:150%">OR</div>
 	<?php
 		echo $this->Form->input('hash_value', array(
