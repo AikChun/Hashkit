@@ -63,7 +63,7 @@ class AppController extends Controller {
 	}
 
 	protected function _determinedTheme() {
-		$this->layout = 'layout';
+		$this->layout = 'hashprocess';
 	}
 
 	protected function _prepareLogin() {

@@ -39,7 +39,7 @@ $cakeDescription = __d('cake_dev', 'FYP: Hashkit');
 </head>
 <body>
 	<div id="container">
-		<!--<div id="header">
+		<div id="header">
 			<h1><?php echo $this->Html->link($cakeDescription, '/'); ?>
 
 		<?php 
@@ -59,14 +59,14 @@ $cakeDescription = __d('cake_dev', 'FYP: Hashkit');
 						echo "</div>";
 		?>
 			</h1>
-		</div>-->	
+		</div>	
 		<div id="content">
 
 			<?php echo $this->Session->flash(); ?>
 
 			<?php echo $this->fetch('content'); ?>
 
-			<!--<div class="actions">
+			<div class="actions">
 				<?php  if($authUser['group_id'] == 1) :?>
 				<h3><?php echo __('Admin Actions'); ?></h3>
 				<ul>
@@ -85,7 +85,7 @@ $cakeDescription = __d('cake_dev', 'FYP: Hashkit');
 					<?php endif;?>
 					<li><?php echo $this->Html->link('Blog', 'http://hashkitproject.blogspot.sg/')?></li>
 				</ul>
-			</div-->
+			</div>
 
 		</div>
 		<div id="footer">
