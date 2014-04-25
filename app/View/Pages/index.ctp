@@ -8,7 +8,7 @@ echo 'function displayInfo(){
 echo '</script>';
 
 ?>
-
+<div class="users view">
 <p style='font-size:165%'>Welcome</p>
 
 <br>This is a project done by a group of University of Wollongong (UOW) students. </br>
@@ -41,3 +41,4 @@ endif;
 <br/>
 <br/>
 <input type="submit" value="More Information!" onClick="displayInfo()" style="height:30px; width:165px" /><br/>
+</div>
