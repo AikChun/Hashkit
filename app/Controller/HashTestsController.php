@@ -617,26 +617,31 @@ class HashTestsController extends AppController {
 		}
 		//array_multisort($wordhashlist[]["hash"],SORT_STRING);
 		//array_multisort($wordhashlist["hash"],SORT_STRING);
+		//$this->array_sort_by_column($wordhashlist, 'hash');
+		usort($wordhashlist, function($a, $b) {
+   			 return strcasecmp($a['hash'], $b['hash']);
+		});
+		$this->log($wordhashlist);
 		return $wordhashlist;
 
 	}
 
 	public function compare_array($count, $array1, $array2) {
 		$found = 0;
-		$check = array();
+		$check = array(array());
 		$k = 0;
 		$j = 0;
-		for($i = 1; $i <= $count; $i++ ){
-			for($j = 1; $j <= $count; $j++){
+		for($i = 0; $i < $count; $i++ ){
+			for($j = 0; $j < $count; $j++){
 				// $this->log($array1[$i]["hash"]);
 				// $this->log($array2[$j]["hash"]);
-				if($array1[$i]["hash"] == $array2[$i]["hash"]){
-					$k += 1;
-					$check[$k]["hash"] = $array1[$i]["hash"];
-					$check[$k]["word"] = $array1[$i]["word"];
-					$k += 1;
-					$check[$j]["hash"] = $array2[$i]["hash"];
-					$check[$j]["word"] = $array2[$i]["word"];
+				if($array1[$i]["hash"] === $array2[$j]["hash"]){
+					// $k += 1;
+					// $check[$k]["hash"] = $array1[$i]["hash"];
+					// $check[$k]["word"] = $array1[$i]["word"];
+					// $k += 1;
+					// $check[$j]["hash"] = $array2[$i]["hash"];
+					// $check[$j]["word"] = $array2[$i]["word"];
 					$found += 1;
 				}
 			}
@@ -697,7 +702,7 @@ class HashTestsController extends AppController {
 						$this->redirect(array('action' => 'birthday_attack'));
     					break;
 			}
-
+			$this->Session->write('algorithmname', $information['HashAlgorithmV1']['name']);
 			$this->Session->write('birthdayattackresult', $birthdayattackresult);
 			$this->redirect(array('controller' => 'HashResults', 'action' => 'birthday_attack_result'));
 			

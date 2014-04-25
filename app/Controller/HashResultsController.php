@@ -159,9 +159,12 @@ class HashResultsController extends AppController {
 
 	}
 
-	public function birthday_attack() {
+	public function birthday_attack_result() {
 		$arrayofhashesandwords = $this->Session->read('birthdayattackresult');
+		$algorithmname = $this->Session->read('algorithmname');
+	
 		$this->set('arrayofhashesandwords', $arrayofhashesandwords);
+		$this->set('algorithmname', $algorithmname);
 	}
 
 	public function avalanche_effect_result() {
