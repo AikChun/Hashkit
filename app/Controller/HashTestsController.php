@@ -201,11 +201,10 @@ class HashTestsController extends AppController {
 			//$this->log($data);
 
 			if (!empty($data['HashTests']['plaintext'])) {
-
+				
 				$output = HashingLib::computeDigests($selectedAlgorithms, $data['HashTests']['plaintext']);
-
+				
                 $outputResult = $this->compareDigests($output);
-				//$this->log($outputResult);
 				$this->Session->write('output', $outputResult);
 				$this->redirect(array('controller' => 'HashResults', 'action' => 'compute_and_compare_result'));
 	            //$this->Session->write('output', $output);
@@ -217,14 +216,13 @@ class HashTestsController extends AppController {
 	             ($data['HashTests']['file_upload']['type'] == 'text/plain')) 
 			{
 
-			$lineArray = file($data['HashTests']['file_upload']['tmp_name']);
+				$lineArray = file($data['HashTests']['file_upload']['tmp_name']);
 
-			$output = HashingLib::computeDigests($selectedAlgorithms, $lineArray);
+				$output = HashingLib::computeDigests($selectedAlgorithms, $lineArray);
 
-			$outputResult = $this->compareDigests($output);
-			//$this->log($outputResult);
-			$this->Session->write('output', $outputResult);
-			$this->redirect(array('controller' => 'HashResults', 'action' => 'compute_and_compare_result'));
+				$outputResult = $this->compareDigests($output);
+				$this->Session->write('output', $outputResult);
+				$this->redirect(array('controller' => 'HashResults', 'action' => 'compute_and_compare_result'));
 
 			}
 		}
@@ -272,6 +270,10 @@ class HashTestsController extends AppController {
 
 		$dup = HashTestsController::checkDuplicatesInArray($mdline);
 
+		//$this->log($ptline);
+		//$asd = count($output[0]['HashResult']['plaintext']);
+		//$this->log($asd);
+
 		foreach($output as $key => $hashResult) {
 			$conditions = array(
 				'conditions' => array('HashResult.message_digest' => $hashResult['HashResult']['message_digest']),
@@ -287,6 +289,7 @@ class HashTestsController extends AppController {
 			//		$collision .= $ptline[$num] . " " . $mdline[$num] . "\n";
 			//	}
 			//}
+
 			$collision_pt = array();
 			$collision_md = array();
 			$collision = '';
@@ -344,11 +347,8 @@ class HashTestsController extends AppController {
 			//}
 			array_push($analysis, $hashResult);
 		}
-		//$qwe = array();
-		//$qwe = array_slice($analysis[0]['HashResult']['collision_pt'], 0);
-		//$qwe = $analysis[0]['HashResult']['collision_pt'];
-		//$this->log($qwe);
-		$this->log($analysis);
+		
+		//$this->log($analysis);
 		return $analysis;
 	}
 
@@ -395,7 +395,7 @@ class HashTestsController extends AppController {
 		if($this->request->is('post')) {
 			
 			$data = $this->request->data;
-			$this->log($data);
+			//$this->log($data);
 			
 			//$this->log($resultfromdatabase['HashAlgorithmV1']['name']);
 			try{	

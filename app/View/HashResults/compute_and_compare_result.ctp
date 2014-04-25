@@ -5,16 +5,23 @@
 	<td><B>Plaintext entered: </B></td>
 	</tr>
 	<?php $ptline = explode("\n",$output[0]['HashResult']['plaintext']);?>
-	<?php foreach($ptline as $key => $data):?>
+	<?php if(count($ptline > 1)) { ?>
 	<tr>
-	<td><?php echo $data; ?></td>
-	<?php endforeach;?>
+	<?php foreach($ptline as $key1 => $data1):?>
+	<td><?php echo $data1; ?></td>
 	</tr>
+	<?php endforeach; ?>
+	<?php }else{ ?>
+	<tr>
+	<td><?php echo $output[0]['HashResult']['plaintext']; ?></td>
+	</tr>
+	<?php } ?>
 </table>
 
 <table>
-	<?php $mdline = explode("\n",$output[0]['HashResult']['message_digest']);?>
+	
 	<?php foreach($output as $key1 => $data1):?>
+	<?php $mdline = explode("\n",$data1['HashResult']['message_digest']);?>
 	<tr>
 	<td><B>Selected Algorithm: <B><?php echo $data1['HashResult']['hash_algorithm_name'];?>
 	</td>
@@ -39,6 +46,7 @@
 	<td><?php echo $output[0]['HashResult']['description'];?> <br></td>
 	</tr>
 	<?php 
+	if(count($ptline) > 1) {
 	$collision_pt = $output[0]['HashResult']['collision_pt'];
 	$collision_md = $output[0]['HashResult']['collision_md'];
 	?>
@@ -48,6 +56,7 @@
 	<td><?php echo $collision_pt[$key];?></td>
 	<td><?php echo $collision_md[$key];?></td>
 	<?php endforeach;?>
+	<?php } ?>
 	</tr>
 </table>
 
