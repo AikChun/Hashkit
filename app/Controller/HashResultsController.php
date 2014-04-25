@@ -108,9 +108,8 @@ class HashResultsController extends AppController {
 		$output = $this->Session->read('output');
 		if(!empty($output)) {
 			$this->set("output", $output);
-			//$saveSuccessful = $this->HashResult->saveWithDescription($output);
-			 $this->HashResult->create();
-			 $this->HashResult->saveMany($output);
+			$analysis = 'Basic Hashing Test';
+			 $this->HashResult->savingWithDescription($output, $analysis);
 		} else {
 			$output = '';
 			$this->set('output', $output);
@@ -122,6 +121,10 @@ class HashResultsController extends AppController {
 		$outputResult = $this->Session->read('output');
 		if(!empty($outputResult)) {
 			$this->set("output", $outputResult);
+			//$this->log($outputResult[0]['HashResult']['collision_pt']);
+			//foreach($outputResult[0]['HashResult']['collision_pt'] as $key => $col) {
+			$outputResult[0]['HashResult']['description'] .= $outputResult[0]['HashResult']['collision'];
+			//}
 			$saveSuccessful = $this->HashResult->saveWithDescription($outputResult);
 			//$this->HashResult->create();
 			//$this->HashResult->saveMany($outputResult);
@@ -134,7 +137,15 @@ class HashResultsController extends AppController {
 
 	public function show_my_test_results() {
 		$this->HashResult->recursive = 0;
+		$this->Paginator->settings = array(
+			'conditions' => array('HashResult.user_id' => $this->Auth->user('id')
+			)
+		);
 		$this->set('hashResults', $this->Paginator->paginate());
+	}
+	public function reverse() {
+		$data = $this->Session->read('data');
+		$this->set('data', $data);
 	}
 
 	public function calculate_probability_of_collision_result() {
@@ -154,4 +165,21 @@ class HashResultsController extends AppController {
 		$this->set('arrayofhashalgorithms', $arrayofhashalgorithms);
 
 	}
+
+	public function birthday_attack_result() {
+		$arrayofhashesandwords = $this->Session->read('birthdayattackresult');
+		$algorithmname = $this->Session->read('algorithmname');
+	
+		$this->set('arrayofhashesandwords', $arrayofhashesandwords);
+		$this->set('algorithmname', $algorithmname);
+	}
+
+	public function avalanche_effect_result() {
+		$output = $this->Session->read('output');
+
+		if(!empty($output)) {
+			$this->set ('output', $output);
+		}
+	}
 }
+

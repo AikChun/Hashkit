@@ -14,12 +14,9 @@ echo $this->Form->create('User');
 		echo $this->Form->input('confirm_password', array('type' => 'password', 'required'));
 		echo $this->Form->input('profile');
 	?>
+	<font color="grey">By clicking 'Sign up', you argee to the </font>
+	<font color="blue"><u>Terms and Conditions</u></font>
 	</fieldset>
 
-<?php
-
-echo $this->Form->end(__('Submit'));
-
-?>
-
+<?php echo $this->Form->end(__('Sign up')); ?>
 </div>

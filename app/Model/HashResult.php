@@ -12,18 +12,12 @@ class HashResult extends AppModel {
  * @var mixed False or table name
  */
 	public $useTable = 'hash_result';
-	public $hasOne = array(
-		'HashAlgorithm' => array(
-			'className' => 'HashAlgorithm',
-			'foreignKey' => 'id'
-		),
-		'User' => array(
-			'className' => 'User',
-			'foreignKey' => 'id',
-			'counterCache' => true
+	public $belongsTo = array(
+		'Description' => array(
+			'className' => 'Description',
+			'foreignKey' => 'description_id'
 		)
 	);
-    public $belongsTo = array('Description');
 
 /**
  * Saving hash result with its description
@@ -36,6 +30,26 @@ class HashResult extends AppModel {
 		$saveDescriptionSuccessful = $descriptionModel->saveAnalysis($analysis);
 		if($saveDescriptionSuccessful) {
 			$descriptionId = $descriptionModel->getLastInsertID();
+			foreach($data as $key => $result) {
+				$data[$key]['HashResult']['description_id'] = $descriptionId;
+			}
+			$this->create();
+			$this->saveMany($data);
+		}
+		return true; 
+	}
+
+
+/**
+ * Saving hash result with its description
+ * @param array data contains HashResult 
+ * @param array analysis is a string value of the actual analysis
+ * @return boolean true when save correctly. False otherwise.
+ */
+	public function savingWithDescription($data, $analysis) {
+		$saveDescriptionSuccessful = $this->Description->saveAnalysis($analysis);
+		if($saveDescriptionSuccessful) {
+			$descriptionId = $this->Description->getLastInsertID();
 			foreach($data as $key => $result) {
 				$data[$key]['HashResult']['description_id'] = $descriptionId;
 			}

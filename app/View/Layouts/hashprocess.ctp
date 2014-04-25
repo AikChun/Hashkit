@@ -30,11 +30,12 @@ $cakeDescription = __d('cake_dev', 'FYP: Hashkit');
 		echo $this->Html->meta('icon');
 
 		echo $this->Html->css('cake.generic');
-
+		//echo $this->Html->css('Bootstrap');
 		echo $this->fetch('meta');
 		echo $this->fetch('css');
 		echo $this->fetch('script');
 	?>
+	
 </head>
 <body>
 	<div id="container">

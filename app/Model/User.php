@@ -24,12 +24,11 @@ class User extends AppModel {
 
 	public $belongsTo = array('Group');
 	public $actsAs = array('Acl' => array('type' => 'requester'));
-	public $hashMany = array(
-		'HashResult' => array(
-			'className' => 'HashResult'
-		),
+	public $hasMany = array(
 		'Description' => array(
-			'className' => 'Description'
+			'className' => 'Description',
+			'foreignKey' => 'user_id',
+			'dependent' => true
 		)
 	);
 
@@ -68,6 +67,13 @@ class User extends AppModel {
 			CakeSession::write('Auth.User', $user);
 		}
 		$this->Behaviors->enable('Acl');
+		return true;
+	}
+
+	public function beforeDelete($cascade = true) {
+		$user_id = $this->_getUser('id');
+		$conditions = array('Description.user_id' => $user_id);
+		$this->Description->deleteAll($conditions);
 		return true;
 	}
 
@@ -206,5 +212,6 @@ class User extends AppModel {
 		}
 	}
 // end of password related function
+
 
 }
