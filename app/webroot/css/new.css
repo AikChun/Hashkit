@@ -23,8 +23,8 @@
 
 /** General Style Info **/
 body {
-	background: #003d4c;
-	color: #fff;
+	background: #ffffff;
+	color: #000000;
 	font-family:'lucida grande',verdana,helvetica,arial,sans-serif;
 	font-size:90%;
 	margin: 0;
@@ -121,7 +121,6 @@ div.view {
 	width:76%;
 	border-left:1px solid #666;
 	padding:10px 2%;
-	background:#fff;
 }
 div.actions {
 	float:left;
@@ -132,19 +131,6 @@ div.actions h3 {
 	padding-top:0;
 	color:#777;
 }
-
-div.nowrap{
-	float:right;
-	width:76%;
-	border-left:1px solid #666;
-	padding:10px 2%;
-	background:#fff;
-	white-space:nowrap;
-}
-
-
-
-
 
 
 /** Tables **/
@@ -753,8 +739,4 @@ pre {
 /** Elements **/
 #url-rewriting-warning {
 	display:none;
-}
-.digests {
-	font-family: Consolas;
-	font-size: 140%;
 }

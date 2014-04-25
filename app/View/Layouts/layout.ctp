@@ -24,195 +24,196 @@ $cakeDescription = __d('cake_dev', 'FYP: Hashkit');
 <!DOCTYPE html>
 <html>
 
-<head>
+	<head>
 
-  <?php echo $this->Html->charset(); ?>
+	  	<?php 
 
-  <title>
-	<?php echo $cakeDescription ?>
-	<?php echo $title_for_layout; ?>
-  </title>
-  
-  <?php
-	echo $this->Html->meta('icon');
+	  		echo $this->Html->charset(); 
+			echo $this->Html->meta('icon');
+			echo $this->Html->css('new');
+			echo $this->fetch('meta');
+			echo $this->fetch('css');
+			echo $this->fetch('script');
 
-	echo $this->Html->css('cake.generic');
+	  	?>
 
-	echo $this->fetch('meta');
-	echo $this->fetch('css');
-	echo $this->fetch('script');
-  ?>
+	  	<title>
+			<?php echo $cakeDescription ?>
+			<?php echo $title_for_layout; ?>
+	  	</title>
 
-<!--
-@import url(http://fonts.googleapis.com/css?family=Open+Sans:700);
--->
+		<style>
 
-<style>
+			#cssmenu {
+			  background: #000000;
+			  width: auto;
+			}
+			#cssmenu ul {
+			  list-style: none;
+			  margin: 0;
+			  padding: 0;
+			  line-height: 1;
+			  display: block;
+			  zoom: 1;
+			}
+			#cssmenu ul:after {
+			  content: ' ';
+			  display: block;
+			  font-size: 0;
+			  height: 0;
+			  clear: both;
+			  visibility: hidden;
+			}
+			#cssmenu ul li {
+			  float: left;
+			  display: block;
+			  padding: 0;
+			}
+			#cssmenu ul li a {
+			  color: #ffffff;
+			  text-decoration: none;
+			  display: block;
+			  padding: 15px 25px;
+			  font-family: 'Open Sans', sans-serif;
+			  font-weight: 700;
+			  text-transform: uppercase;
+			  font-size: 14px;
+			  position: relative;
+			  -webkit-transition: color .25s;
+			  -moz-transition: color .25s;
+			  -ms-transition: color .25s;
+			  -o-transition: color .25s;
+			  transition: color .25s;
+			}
+			#cssmenu ul li a:hover {
+			  color: #333333;
+			}
+			#cssmenu ul li a:hover:before {
+			  width: 100%;
+			}
+			#cssmenu ul li a:after {
+			  content: '';
+			  display: block;
+			  position: absolute;
+			  right: -3px;
+			  top: 19px;
+			  height: 6px;
+			  width: 6px;
+			  background: #ffffff;
+			  opacity: .5;
+			}
+			#cssmenu ul li a:before {
+			  content: '';
+			  display: block;
+			  position: absolute;
+			  left: 0;
+			  bottom: 0;
+			  height: 3px;
+			  width: 0;
+			  background: #333333;
+			  -webkit-transition: width .25s;
+			  -moz-transition: width .25s;
+			  -ms-transition: width .25s;
+			  -o-transition: width .25s;
+			  transition: width .25s;
+			}
+			#cssmenu ul li.last > a:after,
+			#cssmenu ul li:last-child > a:after {
+			  display: none;
+			}
+			#cssmenu ul li.active a {
+			  color: #333333;
+			}
+			#cssmenu ul li.active a:before {
+			  width: 100%;
+			}
 
-#cssmenu {
-  background: #000000;
-  width: auto;
-}
-#cssmenu ul {
-  list-style: none;
-  margin: 0;
-  padding: 0;
-  line-height: 1;
-  display: block;
-  zoom: 1;
-}
-#cssmenu ul:after {
-  content: ' ';
-  display: block;
-  font-size: 0;
-  height: 0;
-  clear: both;
-  visibility: hidden;
-}
-#cssmenu ul li {
-  float: left;
-  display: block;
-  padding: 0;
-}
-#cssmenu ul li a {
-  color: #ffffff;
-  text-decoration: none;
-  display: block;
-  padding: 15px 25px;
-  font-family: 'Open Sans', sans-serif;
-  font-weight: 700;
-  text-transform: uppercase;
-  font-size: 14px;
-  position: relative;
-  -webkit-transition: color .25s;
-  -moz-transition: color .25s;
-  -ms-transition: color .25s;
-  -o-transition: color .25s;
-  transition: color .25s;
-}
-#cssmenu ul li a:hover {
-  color: #333333;
-}
-#cssmenu ul li a:hover:before {
-  width: 100%;
-}
-#cssmenu ul li a:after {
-  content: '';
-  display: block;
-  position: absolute;
-  right: -3px;
-  top: 19px;
-  height: 6px;
-  width: 6px;
-  background: #ffffff;
-  opacity: .5;
-}
-#cssmenu ul li a:before {
-  content: '';
-  display: block;
-  position: absolute;
-  left: 0;
-  bottom: 0;
-  height: 3px;
-  width: 0;
-  background: #333333;
-  -webkit-transition: width .25s;
-  -moz-transition: width .25s;
-  -ms-transition: width .25s;
-  -o-transition: width .25s;
-  transition: width .25s;
-}
-#cssmenu ul li.last > a:after,
-#cssmenu ul li:last-child > a:after {
-  display: none;
-}
-#cssmenu ul li.active a {
-  color: #333333;
-}
-#cssmenu ul li.active a:before {
-  width: 100%;
-}
+			@media screen and (max-width: 768px) {
+			  #cssmenu ul li {
+				float: none;
+			  }
+			  #cssmenu ul li a {
+				width: 100%;
+				-moz-box-sizing: border-box;
+				-webkit-box-sizing: border-box;
+				box-sizing: border-box;
+			  }
+			  #cssmenu ul li a:after {
+				display: none;
+			  }
+			  #cssmenu ul li a:before {
+				height: 1px;
+				background: #ffffff;
+				width: 100%;
+				opacity: .2;
+			  }
+			  #cssmenu ul li.last > a:before,
+			  #cssmenu ul li:last-child > a:before {
+				display: none;
+			  }
 
-@media screen and (max-width: 768px) {
-  #cssmenu ul li {
-	float: none;
-  }
-  #cssmenu ul li a {
-	width: 100%;
-	-moz-box-sizing: border-box;
-	-webkit-box-sizing: border-box;
-	box-sizing: border-box;
-  }
-  #cssmenu ul li a:after {
-	display: none;
-  }
-  #cssmenu ul li a:before {
-	height: 1px;
-	background: #ffffff;
-	width: 100%;
-	opacity: .2;
-  }
-  #cssmenu ul li.last > a:before,
-  #cssmenu ul li:last-child > a:before {
-	display: none;
-  }
+			}
 
-}
+			 #wrap { 
+			  width: 900px; 
+			  margin: 0 auto; 
+			 }
 
- #wrap { 
-  width: 900px; 
-  margin: 0 auto; 
- }
+		</style>
 
-</style>
+	</head>
 
-</head>
+	<body>
 
-<body>
+		<div id='wrap'>
 
-<div id='wrap'>
+		<div id='header'>
 
-<div>
+			<hr/>
+			<p align='center'> MAYBE OUR LOGO HERE </p>
+			<hr/>
 
-<hr/>
-<p align='center' style='color:#000000'> MAYBE OUR LOGO HERE </p>
-<hr/>
-<br/>
+		</div>
 
-</div>
+		<div id='cssmenu'>
 
-<div id='cssmenu'>
+			<ul>
 
-<ul>
+				<li class='active'><a href='/'><span>Home</span></a></li>
+				<li><a href='http://hashkitproject.blogspot.sg/'><span>Blog</span></a></li>
+				<li><a href='/Users/HelpfulInformation'><span>Helpful Information</span></a></li>
+				<li><a href='/Users/AboutUs'><span>About Us</span></a></li>
+				<li class='last'><a href='/Users/ContactUs'><span>Contact Us</span></a></li>
 
-	<li class='active'><a href='/'><span>Home</span></a></li>
-	<li><a href='http://hashkitproject.blogspot.sg/'><span>Blog</span></a></li>
-	<li><a href='/Users/HelpfulInformation'><span>Helpful Information</span></a></li>
-	<li><a href='/Users/AboutUs'><span>About Us</span></a></li>
-	<li class='last'><a href='/Users/ContactUs'><span>Contact Us</span></a></li>
+			</ul>
 
-</ul>
+		</div>
 
-</div>
-<p align='right'>
-<?php if($authUser):?>
-	<a href="/"> <?php echo $authUser['name'];?> </a>
-	<a> | </a>
-	<a href="/Users/logout"> Logout</a>
+		<p align='right'>
 
-<?php endif;?>
+			<?php if($authUser):?>
 
-<?php if(!$authUser):?>
-	<a href="/Users/Login">Sign In </a>
-	<a> | </a>
-	<a href="/Users/Register"> Register</a>
-<?php endif;?>
-</p>
+				<a href="/"> <?php echo $authUser['name'];?> </a>
+				<a> | </a>
+				<a href="/Users/Logout"> Logout</a>
 
-	<?php echo $this->Session->flash(); ?>
-	<?php echo $this->fetch('content'); ?>
+			<?php endif;?>
 
-</div>
+			<?php if(!$authUser):?>
 
-</body>
+				<a href="/Users/Login">Sign In</a>
+				<a> | </a>
+				<a href="/Users/Register"> Register</a>
+
+			<?php endif;?>
+
+		</p>
+
+		<?php echo $this->Session->flash(); ?>
+		<?php echo $this->fetch('content'); ?>
+
+		</div>
+
+	</body>
+
 </html>

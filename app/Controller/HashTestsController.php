@@ -397,11 +397,16 @@ class HashTestsController extends AppController {
 			$data = $this->request->data;
 			//$this->log($data);
 			
-			
-
 			//$this->log($resultfromdatabase['HashAlgorithmV1']['name']);
 			try{	
 				
+				$base = 0;
+				$exponent = 0;	
+				$requiredbase = 0;
+				$requiredexponent = 0;
+				$customizedalgorithmbase = 0;
+				$customizedalgorithmexponent = 0;
+
 				 if(empty($data['HashTests']['HashAlgorithm'])){
 				 	throw new Exception ('Please choose a hash algorithm in the drop down list or choose customized and enter the required values');
 				 }else{
@@ -437,7 +442,7 @@ class HashTestsController extends AppController {
 							}
 						}else{
 							//total of hash value which we want to match(birthday) 
-							$K = pow((int)$data['HashTests']['customized_algorithm_base'],(int)$data['HashTests']['customized_algorithm_exponent']);	
+							$K = bcpow((int)$data['HashTests']['customized_algorithm_base'],(int)$data['HashTests']['customized_algorithm_exponent']);	
 						}
 					}
 
@@ -459,19 +464,34 @@ class HashTestsController extends AppController {
 						}
 					}else{
 							//total sample space(number of people)
-							$N = pow((int)$data['HashTests']['required_base'],(int)$data['HashTests']['required_exponent']);	
+							$N = bcpow((int)$data['HashTests']['required_base'],(int)$data['HashTests']['required_exponent']);	
 					}
 
 					$firstexpEqu = (- pow($N,2)) / (2 * $K);
 					$probability = (1 - exp($firstexpEqu)) * 100;
+					$total_sample_size_ninety_nine_percentage = (bcsqrt(log(1 - 99/100) * - 2 * $K));
 					$samplespace = $N;
 					$totalhash = $K;
-
+					
+					$base = (int)$resultfromdatabase['HashAlgorithmV1']['base'];
+					$exponent = (int)$resultfromdatabase['HashAlgorithmV1']['exponent'];	
+					$requiredbase = (int)$data['HashTests']['required_base'];
+					$requiredexponent = (int)$data['HashTests']['required_exponent'];
+					$customizedalgorithmbase = (int)$data['HashTests']['customized_algorithm_base'];
+					$customizedalgorithmexponent = (int)$data['HashTests']['customized_algorithm_exponent'];
+					
+					$this->Session->write('base',$base);
+					$this->Session->write('exponent',$exponent);
+					$this->Session->write('requiredbase',$requiredbase);
+					$this->Session->write('requiredexponent',$requiredexponent);
+					$this->Session->write('customizedalgorithmbase',$customizedalgorithmbase);
+					$this->Session->write('customizedalgorithmexponent',$customizedalgorithmexponent);
+					
 					$this->Session->write('probability', $probability);
 					$this->Session->write('samplespace', $samplespace);
 					$this->Session->write('totalhash', $totalhash);
-					
-					$this->generate_ninety_nine_percentage_proability($N,$K);	
+					$this->Session->write('requiredsamplespace', $total_sample_size_ninety_nine_percentage);	
+					//$this->generate_ninety_nine_percentage_proability($N,$K);	
 					$this->redirect(array('controller' => 'HashResults', 'action' => 'calculate_probability_of_collision_result'));
 				 }//end of if else 
 					
@@ -493,7 +513,7 @@ class HashTestsController extends AppController {
 		$check = true;
 
 		while($check == true) :
-			$firstexpEqu = (- pow($N,2)) / (2 * $K);
+			$firstexpEqu = (- bcpow($N,2)) / (2 * $K);
 			$probability = (1 - exp($firstexpEqu)) * 100;
 			if($probability < 99) {
 				if($K < 100){
@@ -505,7 +525,7 @@ class HashTestsController extends AppController {
 				}else if($K < 100000){
 					$N += 1000;
 				}else{
-					$N += 1000000;	
+					$N += 100000000000000000000000000;	
 				}
 			}else {	
 				$requiredsamplespace = $N;
@@ -530,20 +550,20 @@ class HashTestsController extends AppController {
 			$data = $this->request->data;
 			$output = array();
 
-			
+			if(empty($data['HashTests']['HashAlgorithm'])) {
+				$this->Session->setFlash('You did not select any algorithms!');
+				return $this->redirect(array('action' => 'avalanche_effect'));
+			}
+		
 			$HelloMD = hash(strtolower($data['HashTests']['HashAlgorithm']), 'Hello');
-			$HellpMD = hash(strtolower($data['HashTests']['HashAlgorithm']), 'Hellp');
+			$HellnMD = hash(strtolower($data['HashTests']['HashAlgorithm']), 'Helln');
 
-	
-			$percent = $this -> compute_avalanche($HelloMD, $HellpMD);
+			$percent = $this -> compute_avalanche($HelloMD, $HellnMD);
 			
 			array_push($output, $data);
 			array_push($output, $HelloMD);
-			array_push($output, $HellpMD);
+			array_push($output, $HellnMD);
 			array_push($output, $percent);
-
-			$this->set('data', $data);
-			
 			
 			$this->Session->write('output', $output);
 			$this->redirect(array('controller' => 'HashResults', 'action' => 'avalanche_effect_result'));
@@ -561,7 +581,7 @@ class HashTestsController extends AppController {
 		}
 		$this -> log($count);
 		$percent = $count / $lengthOfMD * 100;
-		return $percent;
+		return round($percent, 2);
 	}
 /**
  * To read in user's input and get the hash algorithms can produce the same output. 

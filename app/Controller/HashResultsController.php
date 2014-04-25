@@ -146,6 +146,14 @@ class HashResultsController extends AppController {
 	}
 
 	public function calculate_probability_of_collision_result() {
+
+		$base =	$this->Session->read('base');
+		$exponent = $this->Session->read('exponent');
+		$requiredbase =	$this->Session->read('requiredbase');
+		$requiredexponent = $this->Session->read('requiredexponent');
+		$customizedalgorithmbase = $this->Session->read('customizedalgorithmbase');
+		$customizedalgorithmexponent = $this->Session->read('customizedalgorithmexponent');
+
 		$probability = $this->Session->read('probability');
 		$samplespace = $this->Session->read('samplespace');
 		$totalhash = $this->Session->read('totalhash');
@@ -155,6 +163,13 @@ class HashResultsController extends AppController {
 		$this->set('samplespace',$samplespace);
 		$this->set('totalhash', $totalhash);
 		$this->set('requiredsamplespace', $requiredsamplespace);
+		
+		$this->set('base',$base);
+		$this->set('exponent',$exponent);
+		$this->set('requiredbase',$requiredbase);
+		$this->set('requiredexponent',$requiredexponent);
+		$this->set('customizedalgorithmbase',$customizedalgorithmbase);
+		$this->set('customizedalgorithmexponent',$customizedalgorithmexponent);
 	}
 
 	public function hash_analyser_result() {

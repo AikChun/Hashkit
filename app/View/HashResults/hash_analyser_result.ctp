@@ -6,4 +6,7 @@ Algorithms which may match with the input message digest :
 	<?php echo $data['HashAlgorithmV1']['name'];?> 
 <?php endforeach;?>	
 
+<button> <a href="/HashTests/hash_analyser"> <- </a> </button>
+<button> <a href="/pages/hash_function_properties"> home </a> </button>
+
 </div>
