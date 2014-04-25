@@ -2,7 +2,7 @@
 
 SET NAMES utf8;
 SET foreign_key_checks = 0;
-SET time_zone = '-07:00';
+SET time_zone = '+08:00';
 SET sql_mode = 'NO_AUTO_VALUE_ON_ZERO';
 
 DROP DATABASE IF EXISTS `Hashkit`;
@@ -201,11 +201,11 @@ CREATE TABLE `hash_algorithm` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 INSERT INTO `hash_algorithm` (`id`, `name`, `speed`, `security`, `collision_resistance`, `preimage_resistance`, `2nd_preimage_resistance`) VALUES
-(1,	'SHA1',	'192',	'2',	'No',	'Yes',	'Yes'),
-(2,	'MD5',	'335',	'1',	'No',	'No',	'Yes'),
-(3,	'MD2',	'',	'1',	'No',	'No',	'Yes'),
-(4,	'MD4',	'',	'0',	'No',	'No',	'No'),
-(5,	'SHA256',	'139',	'3',	'Yes',	'Yes',	'Yes');
+(1,	'SHA1',	'333.29',	'2',	'No',	'Yes',	'Yes'),
+(2,	'MD5',	'392.32',	'1',	'No',	'No',	'Yes'),
+(3,	'MD2',	'5.43',	'1',	'No',	'No',	'Yes'),
+(4,	'MD4',	'540.87',	'0',	'No',	'No',	'No'),
+(5,	'SHA256',	'169.49',	'3',	'Yes',	'Yes',	'Yes');
 
 DROP TABLE IF EXISTS `hash_algorithm_v1`;
 CREATE TABLE `hash_algorithm_v1` (
@@ -285,4 +285,4 @@ INSERT INTO `user` (`id`, `password`, `name`, `email`, `group_id`, `profile`, `s
 (11,	'96b9369f55be479d63a8ef366966a03a607657e4',	'dude',	'dude@gmail.com',	3,	'',	'',	'',	'2014-04-05 00:20:03',	'2014-04-05 00:20:03'),
 (12,	'1fda6ac901aee9291e9ef40a02e86367bb6da06d',	'ian',	'ian@gmail.com',	1,	'super user',	'',	'',	'2014-04-16 15:29:25',	'2014-04-16 15:29:25');
 
--- 2014-04-24 15:54:49
+-- 2014-04-25 12:29:03
