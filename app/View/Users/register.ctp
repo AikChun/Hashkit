@@ -1,5 +1,10 @@
-<div class="users form">
-<?php echo $this->Form->create('User'); ?>
+<div>
+
+<?php
+
+echo $this->Form->create('User');
+
+?>
 	<fieldset>
 		<legend><?php echo __('Registration'); ?></legend>
 	<?php
@@ -12,5 +17,6 @@
 	<font color="grey">By clicking 'Sign up', you argee to the </font>
 	<font color="blue"><u>Terms and Conditions</u></font>
 	</fieldset>
+
 <?php echo $this->Form->end(__('Sign up')); ?>
 </div>

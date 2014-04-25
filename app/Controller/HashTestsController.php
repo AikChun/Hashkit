@@ -550,20 +550,20 @@ class HashTestsController extends AppController {
 			$data = $this->request->data;
 			$output = array();
 
-			
+			if(empty($data['HashTests']['HashAlgorithm'])) {
+				$this->Session->setFlash('You did not select any algorithms!');
+				return $this->redirect(array('action' => 'avalanche_effect'));
+			}
+		
 			$HelloMD = hash(strtolower($data['HashTests']['HashAlgorithm']), 'Hello');
-			$HellpMD = hash(strtolower($data['HashTests']['HashAlgorithm']), 'Hellp');
+			$HellnMD = hash(strtolower($data['HashTests']['HashAlgorithm']), 'Helln');
 
-	
-			$percent = $this -> compute_avalanche($HelloMD, $HellpMD);
+			$percent = $this -> compute_avalanche($HelloMD, $HellnMD);
 			
 			array_push($output, $data);
 			array_push($output, $HelloMD);
-			array_push($output, $HellpMD);
+			array_push($output, $HellnMD);
 			array_push($output, $percent);
-
-			$this->set('data', $data);
-			
 			
 			$this->Session->write('output', $output);
 			$this->redirect(array('controller' => 'HashResults', 'action' => 'avalanche_effect_result'));
@@ -581,7 +581,7 @@ class HashTestsController extends AppController {
 		}
 		$this -> log($count);
 		$percent = $count / $lengthOfMD * 100;
-		return $percent;
+		return round($percent, 2);
 	}
 /**
  * To read in user's input and get the hash algorithms can produce the same output. 
