@@ -1,5 +1,10 @@
-<div class="users form">
-<?php echo $this->Form->create('User'); ?>
+<div>
+
+<?php
+
+echo $this->Form->create('User');
+
+?>
 	<fieldset>
 		<legend><?php echo __('Registration'); ?></legend>
 	<?php
@@ -10,5 +15,11 @@
 		echo $this->Form->input('profile');
 	?>
 	</fieldset>
-<?php echo $this->Form->end(__('Submit')); ?>
+
+<?php
+
+echo $this->Form->end(__('Submit'));
+
+?>
+
 </div>
