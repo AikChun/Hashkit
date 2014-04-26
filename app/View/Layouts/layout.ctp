@@ -34,7 +34,14 @@ $cakeDescription = __d('cake_dev', 'FYP: Hashkit');
 			echo $this->fetch('meta');
 			echo $this->fetch('css');
 			echo $this->fetch('script');
+			echo $this->Html->script('bootstrap.js');
+			echo $this->Html->script('jquery-2.1.0.js');
 
+			$this->Js->JqueryEngine->jQueryObject = '$j';
+			echo $this->Html->scriptBlock(
+    			'var $j = jQuery.noConflict();',
+    			array('inline' => false)
+			);
 	  	?>
 
 	  	<title>
@@ -214,6 +221,7 @@ $cakeDescription = __d('cake_dev', 'FYP: Hashkit');
 
 		</div>
 
+	<?php echo $this->Js->writeBuffer(); ?>// Write cached scripts	
 	</body>
 
 </html>
