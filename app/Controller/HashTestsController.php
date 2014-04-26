@@ -595,9 +595,17 @@ class HashTestsController extends AppController {
 
 			$resultfromdatabase = $HashAlgorithmV1Model->find('all', $conditions);
 
-			//$this->log($resultfromdatabase);
-        	$this->Session->write('resultfromdatabase', $resultfromdatabase);
-			$this->redirect(array('controller' => 'HashResults', 'action' => 'hash_analyser_result'));
+			if(!empty($resultfromdatabase) && $messagedigestlength != 0) {
+	        	$this->Session->write('resultfromdatabase', $resultfromdatabase);
+	        	$this->Session->write('messagedigestlength', $messagedigestlength);
+				$this->redirect(array('controller' => 'HashResults', 'action' => 'hash_analyser_result'));
+			}
+			else{
+				$messagedigestlength = 0;
+				$this->Session->write('messagedigestlength', $messagedigestlength);
+				$this->redirect(array('controller' => 'HashResults', 'action' => 'hash_analyser_result'));
+			}
+
 		}	
 	}
 

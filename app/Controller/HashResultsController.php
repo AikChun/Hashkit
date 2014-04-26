@@ -172,7 +172,9 @@ class HashResultsController extends AppController {
 
 	public function hash_analyser_result() {
 		$arrayofhashalgorithms = $this->Session->read('resultfromdatabase');
+		$messagedigestlength = $this->Session->read ('messagedigestlength');
 		$this->set('arrayofhashalgorithms', $arrayofhashalgorithms);
+		$this->set('messagedigestlength', $messagedigestlength);
 
 	}
 	public function avalanche_effect_result() {
