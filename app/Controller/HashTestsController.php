@@ -270,25 +270,12 @@ class HashTestsController extends AppController {
 
 		$dup = HashTestsController::checkDuplicatesInArray($mdline);
 
-		//$this->log($ptline);
-		//$asd = count($output[0]['HashResult']['plaintext']);
-		//$this->log($asd);
-
 		foreach($output as $key => $hashResult) {
 			$conditions = array(
 				'conditions' => array('HashResult.message_digest' => $hashResult['HashResult']['message_digest']),
 				'fields' => 'id'
 			);
 			$result = $hashResultModel->find('first', $conditions);
-			//$this->log('This is result.');
-			//$this->log($result);
-
-			//$collision = '';
-			//if($dup != FALSE) {
-			//	foreach($dup as $key => $num) {
-			//		$collision .= $ptline[$num] . " " . $mdline[$num] . "\n";
-			//	}
-			//}
 
 			$collision_pt = array();
 			$collision_md = array();

@@ -122,8 +122,6 @@ class HashResultsController extends AppController {
 		$outputResult = $this->Session->read('output');
 		if (!empty($outputResult)) {
 			$this->set("output", $outputResult);
-			CakeLog::write('debug',print_r('zxcvb',true));
-			//$this->log($outputResult[0s]['HashResult']['collision_pt']);
 			$outputResult[0]['HashResult']['description'] .= $outputResult[0]['HashResult']['collision'];
 			//}
 			$saveSuccessful = $this->HashResult->saveWithDescription($outputResult);
