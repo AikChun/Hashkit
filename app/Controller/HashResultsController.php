@@ -177,4 +177,12 @@ class HashResultsController extends AppController {
 		$this->set('arrayofhashalgorithms', $arrayofhashalgorithms);
 
 	}
+	public function avalanche_effect_result() {
+		$output = $this->Session->read('output');
+
+		if(!empty($output)) {
+			$this->set ('output', $output);
+		}
+	}
+
 }
