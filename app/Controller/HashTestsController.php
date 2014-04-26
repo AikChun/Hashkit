@@ -294,6 +294,7 @@ class HashTestsController extends AppController {
 				$hashResult['HashResult']['collision_md'] = $collision_md;
 				$hashResult['HashResult']['collision'] = $collision;
 			} elseif ($dup == FALSE) {
+				$hashResult['HashResult']['collision'] = $collision;
 				$hashResult['HashResult']['description'] = 'No collision detected';
 			}
 
@@ -336,7 +337,7 @@ class HashTestsController extends AppController {
 			array_push($analysis, $hashResult);
 		}
 		
-		//$this->log($analysis);
+		$this->log($analysis);
 		return $analysis;
 	}
 
