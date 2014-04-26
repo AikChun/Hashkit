@@ -73,6 +73,13 @@
 	</tr>
 
 	<tr>
+	<td>Output Length(bits)</td>
+	<?php foreach($output as $key => $data):?>
+	<td><?php echo $data['HashResult']['output_length'];?></td>
+	<?php endforeach;?>
+	</tr>
+
+	<tr>
 	<td>Speed(MB/s)</td>
 	<?php foreach($output as $key => $data):?>
 	<td><?php echo $data['HashResult']['speed'];?></td>
@@ -100,6 +107,7 @@
 	<td><?php echo $data['HashResult']['2nd_preimage_resistance'];?></td>
 	<?php endforeach;?>
 	</tr>
+
 </table>
 <?php $last = end($output);?>
 <table>
