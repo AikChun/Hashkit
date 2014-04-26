@@ -2,9 +2,7 @@
 
 	<?php echo $this->Form->create('HashTests',array('action' => 'avalanche_effect'));?>
 	<div class="Title" style="font-size:150%">
-		<?php
-			echo 'Avalanche Effect<br>';
-		?>
+			Avalanche Effect
 	</div>
 
 	<?php 
