@@ -122,8 +122,6 @@ class HashResultsController extends AppController {
 		$outputResult = $this->Session->read('output');
 		if (!empty($outputResult)) {
 			$this->set("output", $outputResult);
-			CakeLog::write('debug',print_r('zxcvb',true));
-			//$this->log($outputResult[0s]['HashResult']['collision_pt']);
 			$outputResult[0]['HashResult']['description'] .= $outputResult[0]['HashResult']['collision'];
 			//}
 			$saveSuccessful = $this->HashResult->saveWithDescription($outputResult);
@@ -174,7 +172,17 @@ class HashResultsController extends AppController {
 
 	public function hash_analyser_result() {
 		$arrayofhashalgorithms = $this->Session->read('resultfromdatabase');
+		$messagedigestlength = $this->Session->read ('messagedigestlength');
 		$this->set('arrayofhashalgorithms', $arrayofhashalgorithms);
+		$this->set('messagedigestlength', $messagedigestlength);
 
 	}
+	public function avalanche_effect_result() {
+		$output = $this->Session->read('output');
+
+		if(!empty($output)) {
+			$this->set ('output', $output);
+		}
+	}
+
 }

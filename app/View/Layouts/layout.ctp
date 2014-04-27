@@ -27,14 +27,28 @@ $cakeDescription = __d('cake_dev', 'FYP: Hashkit');
 	<head>
 
 	  	<?php 
+	  		echo $this->Html->script('jquery-2.1.0.js');
+	  		echo $this->Html->script('bootstrap.js');
+			//$this->Js->JqueryEngine->jQueryObject = '$j';
+			// echo $this->Html->scriptBlock(
+   //  			'var $j = jQuery.noConflict();',
+   //  			array('inline' => false)
+			// );
 
-	  		echo $this->Html->charset(); 
-			echo $this->Html->meta('icon');
-			echo $this->Html->css('new');
+			echo $this->Html->meta(
+    			'viewport',
+    			'width=device-width, initial-scale=1.0'
+			);
+
+	  		//echo $this->Html->charset(); 
+			//echo $this->Html->meta('icon');
+			//echo $this->Html->css('new');
+			echo $this->Html->css(array('bootstrap','styles'));
+			echo $this->fetch('script');
 			echo $this->fetch('meta');
 			echo $this->fetch('css');
-			echo $this->fetch('script');
-
+			
+			
 	  	?>
 
 	  	<title>
@@ -42,129 +56,60 @@ $cakeDescription = __d('cake_dev', 'FYP: Hashkit');
 			<?php echo $title_for_layout; ?>
 	  	</title>
 
-		<style>
-
-			#cssmenu {
-			  background: #000000;
-			  width: auto;
-			}
-			#cssmenu ul {
-			  list-style: none;
-			  margin: 0;
-			  padding: 0;
-			  line-height: 1;
-			  display: block;
-			  zoom: 1;
-			}
-			#cssmenu ul:after {
-			  content: ' ';
-			  display: block;
-			  font-size: 0;
-			  height: 0;
-			  clear: both;
-			  visibility: hidden;
-			}
-			#cssmenu ul li {
-			  float: left;
-			  display: block;
-			  padding: 0;
-			}
-			#cssmenu ul li a {
-			  color: #ffffff;
-			  text-decoration: none;
-			  display: block;
-			  padding: 15px 25px;
-			  font-family: 'Open Sans', sans-serif;
-			  font-weight: 700;
-			  text-transform: uppercase;
-			  font-size: 14px;
-			  position: relative;
-			  -webkit-transition: color .25s;
-			  -moz-transition: color .25s;
-			  -ms-transition: color .25s;
-			  -o-transition: color .25s;
-			  transition: color .25s;
-			}
-			#cssmenu ul li a:hover {
-			  color: #333333;
-			}
-			#cssmenu ul li a:hover:before {
-			  width: 100%;
-			}
-			#cssmenu ul li a:after {
-			  content: '';
-			  display: block;
-			  position: absolute;
-			  right: -3px;
-			  top: 19px;
-			  height: 6px;
-			  width: 6px;
-			  background: #ffffff;
-			  opacity: .5;
-			}
-			#cssmenu ul li a:before {
-			  content: '';
-			  display: block;
-			  position: absolute;
-			  left: 0;
-			  bottom: 0;
-			  height: 3px;
-			  width: 0;
-			  background: #333333;
-			  -webkit-transition: width .25s;
-			  -moz-transition: width .25s;
-			  -ms-transition: width .25s;
-			  -o-transition: width .25s;
-			  transition: width .25s;
-			}
-			#cssmenu ul li.last > a:after,
-			#cssmenu ul li:last-child > a:after {
-			  display: none;
-			}
-			#cssmenu ul li.active a {
-			  color: #333333;
-			}
-			#cssmenu ul li.active a:before {
-			  width: 100%;
-			}
-
-			@media screen and (max-width: 768px) {
-			  #cssmenu ul li {
-				float: none;
-			  }
-			  #cssmenu ul li a {
-				width: 100%;
-				-moz-box-sizing: border-box;
-				-webkit-box-sizing: border-box;
-				box-sizing: border-box;
-			  }
-			  #cssmenu ul li a:after {
-				display: none;
-			  }
-			  #cssmenu ul li a:before {
-				height: 1px;
-				background: #ffffff;
-				width: 100%;
-				opacity: .2;
-			  }
-			  #cssmenu ul li.last > a:before,
-			  #cssmenu ul li:last-child > a:before {
-				display: none;
-			  }
-
-			}
-
-			 #wrap { 
-			  width: 900px; 
-			  margin: 0 auto; 
-			 }
-
-		</style>
+		
 
 	</head>
 
 	<body>
 
+		<div class = "navbar navbar-inverse navbar-static-top">
+			<div class = "container">
+				<a href = "$" class = "navbar-brand">Hashkit</a>
+				<button class = "navbar-toggle" data-toggle = "collapse" data-target = ".navHeaderCollapse">
+					<span class = "icon-bar"></span>
+					<span class = "icon-bar"></span>
+					<span class = "icon-bar"></span>
+				</button>
+				<div class = "collapse navbar-collapse navHeaderCollapse">
+				<ul class = "nav navbar-nav navbar-left">
+						<li class = "active"><a href = "#">Home</a></li>
+						<?php if(!empty($authUser)) :?>
+						<li class = "dropdown">
+								<a href="#" class = "dropdown-toggle" data-toggle = "dropdown">Hash functions <b class = "caret"></b></a>
+								<ul class = "dropdown-menu">
+									<li><a href="#">Begin a Test</a></li>
+									<li><a href="/pages/hash_function_properties">Security properties</a></li>
+								</ul>
+						</li>
+						<li><a href = "#">Sources</a></li>
+						<?php endif;?>
+						<li><a href = "#">About Us</a></li>
+						<li><a href = "#">Contact</a></li>
+						<li><a href = "#">Help</a></li>
+						<li><a href = "http://hashkitproject.blogspot.sg">Blog</a></li>
+				</ul>
+				<ul class = "nav navbar-nav navbar-right">
+
+						<?php if($authUser):?>
+						
+							<li style="float:right;"><a href="/Users/Logout"> Logout</a></li>
+							<li style="float:right;"><a> | </a></li>
+							<li style="float:right;"><a href="/"><?php echo $authUser['name'];?></a></li>
+						
+						<?php endif;?> 
+						
+
+						<?php if(!$authUser):?>
+							<li style="float:right;"><a href="/Users/Login">Login</a></li>
+							<li style="float:right;"><a> | </a></li>
+							<li style="float:right;"><a href="/Users/Register">Register</a></li> 
+						<?php endif;?>
+				</ul>
+				</div>
+			</div>
+
+		</div>
+		
 		<div id='wrap'>
 
 		<div id='header'>
@@ -175,7 +120,7 @@ $cakeDescription = __d('cake_dev', 'FYP: Hashkit');
 
 		</div>
 
-		<div id='cssmenu'>
+		<!-- <div id='cssmenu'>
 
 			<ul>
 
@@ -187,9 +132,9 @@ $cakeDescription = __d('cake_dev', 'FYP: Hashkit');
 
 			</ul>
 
-		</div>
+		</div> -->
 
-		<p align='right'>
+		<!-- <p align='right'>
 
 			<?php if($authUser):?>
 
@@ -207,13 +152,26 @@ $cakeDescription = __d('cake_dev', 'FYP: Hashkit');
 
 			<?php endif;?>
 
-		</p>
+		</p> -->
 
 		<?php echo $this->Session->flash(); ?>
 		<?php echo $this->fetch('content'); ?>
 
 		</div>
 
+		<div class = "navbar navbar-default navbar-fixed-bottom">
+			<a href ="$" class = "navbar-button navbar-text ">Hashkit</a>
+			<a href="%" class = "navbar-button navbar-text">Home</a>
+			<a href="%" class = "navbar-button navbar-text">Hash functions</a>
+			<a href="%" class = "navbar-button navbar-text">Sources</a>
+			<a href="%" class = "navbar-button navbar-text">About Us</a>
+			<a href="%" class = "navbar-button navbar-text">Contact</a>
+			<a href="%" class = "navbar-button navbar-text">Help</a>
+			<a href="%" class = "navbar-button navbar-text">Blog</a>
+			<li class ="navbar-text" style="float:right;"><p>2014 HashKit project</p></li>
+		</div>
+	
+	<?php echo $this->Js->writeBuffer(); ?>
 	</body>
 
 </html>

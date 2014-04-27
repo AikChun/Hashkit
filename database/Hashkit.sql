@@ -160,9 +160,6 @@ CREATE TABLE `description` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
-INSERT INTO `description` (`id`, `user_id`, `description`, `created`, `modified`) VALUES
-(1,	10,	'There is collision detected at: \nHello There a82fadb196cba39eb884736dcca303a6\nHello There a82fadb196cba39eb884736dcca303a6\n',	'2014-04-24 09:21:06',	'2014-04-24 09:21:06'),
-(2,	10,	'There is collision detected at: \nHello There 511e244bc359ba18b82112cd9c0a631244ba58b8\nHello There 511e244bc359ba18b82112cd9c0a631244ba58b8\n',	'2014-04-24 09:29:13',	'2014-04-24 09:29:13');
 
 DROP TABLE IF EXISTS `dictionary`;
 CREATE TABLE `dictionary` (
@@ -197,15 +194,16 @@ CREATE TABLE `hash_algorithm` (
   `collision_resistance` text NOT NULL,
   `preimage_resistance` text NOT NULL,
   `2nd_preimage_resistance` text NOT NULL,
+  `output_length` text NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
-INSERT INTO `hash_algorithm` (`id`, `name`, `speed`, `security`, `collision_resistance`, `preimage_resistance`, `2nd_preimage_resistance`) VALUES
-(1,	'SHA1',	'333.29',	'2',	'No',	'Yes',	'Yes'),
-(2,	'MD5',	'392.32',	'1',	'No',	'No',	'Yes'),
-(3,	'MD2',	'5.43',	'1',	'No',	'No',	'Yes'),
-(4,	'MD4',	'540.87',	'0',	'No',	'No',	'No'),
-(5,	'SHA256',	'169.49',	'3',	'Yes',	'Yes',	'Yes');
+INSERT INTO `hash_algorithm` (`id`, `name`, `speed`, `security`, `collision_resistance`, `preimage_resistance`, `2nd_preimage_resistance`, `output_length`) VALUES
+(1,	'SHA1',	'333.29',	'2',	'No',	'Yes',	'Yes',	'160'),
+(2,	'MD5',	'392.32',	'1',	'No',	'No',	'Yes',	'128'),
+(3,	'MD2',	'5.43',	'1',	'No',	'No',	'Yes',	'128'),
+(4,	'MD4',	'540.87',	'0',	'No',	'No',	'No',	'128'),
+(5,	'SHA256',	'169.49',	'3',	'Yes',	'Yes',	'Yes',	'256');
 
 DROP TABLE IF EXISTS `hash_algorithm_v1`;
 CREATE TABLE `hash_algorithm_v1` (
@@ -255,13 +253,6 @@ CREATE TABLE `hash_result` (
   KEY `description_id` (`description_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
-INSERT INTO `hash_result` (`id`, `plaintext`, `message_digest`, `hash_algorithm_id`, `description_id`, `created`, `modified`) VALUES
-(1,	'Hello There\nGood bye \nScarified\nHello There\n',	'a82fadb196cba39eb884736dcca303a6\nb6c04e616709a7f69811b17e2e020de4\n4ead5ef207c79e1dabda04bddf7c60f2\na82fadb196cba39eb884736dcca303a6\n',	2,	1,	'2014-04-24',	'2014-04-24'),
-(2,	'Hello There\nGood bye \nScarified\nHello There\n',	'00688350913f2f292943a274b57019d58889eda272370af261c84e78e204743c\n63acdc81a39dbb63564acf60fd4f0a2aeca647504a60346bbbdd645d49f1c3a1\nae5961a69782a38f5154ccd959771e3bba637907e645f9e5f060d023e6fe2cf9\n00688350913f2f292943a274b57019d58889eda272370af261c84e78e204743c\n',	5,	1,	'2014-04-24',	'2014-04-24'),
-(3,	'Hello There\nGood bye \nScarified\nHello There\n',	'511e244bc359ba18b82112cd9c0a631244ba58b8\nbc24ed72118bc47e7263f01931bea904c6b17fdc\n8f24d46d22ab4ccae213224ba4a1118f6e652ee5\n511e244bc359ba18b82112cd9c0a631244ba58b8\n',	1,	2,	'2014-04-24',	'2014-04-24'),
-(4,	'Hello There\nGood bye \nScarified\nHello There\n',	'a82fadb196cba39eb884736dcca303a6\nb6c04e616709a7f69811b17e2e020de4\n4ead5ef207c79e1dabda04bddf7c60f2\na82fadb196cba39eb884736dcca303a6\n',	2,	2,	'2014-04-24',	'2014-04-24'),
-(5,	'Hello There\nGood bye \nScarified\nHello There\n',	'fb6f87177f3596b7c221ca3eb629724f\n7222f0525962d59393138be3e579e092\n1b68d78a04ed5c088b7c73bc69be3d78\nfb6f87177f3596b7c221ca3eb629724f\n',	4,	2,	'2014-04-24',	'2014-04-24'),
-(6,	'Hello There\nGood bye \nScarified\nHello There\n',	'00688350913f2f292943a274b57019d58889eda272370af261c84e78e204743c\n63acdc81a39dbb63564acf60fd4f0a2aeca647504a60346bbbdd645d49f1c3a1\nae5961a69782a38f5154ccd959771e3bba637907e645f9e5f060d023e6fe2cf9\n00688350913f2f292943a274b57019d58889eda272370af261c84e78e204743c\n',	5,	2,	'2014-04-24',	'2014-04-24');
 
 DROP TABLE IF EXISTS `user`;
 CREATE TABLE `user` (
@@ -285,4 +276,4 @@ INSERT INTO `user` (`id`, `password`, `name`, `email`, `group_id`, `profile`, `s
 (11,	'96b9369f55be479d63a8ef366966a03a607657e4',	'dude',	'dude@gmail.com',	3,	'',	'',	'',	'2014-04-05 00:20:03',	'2014-04-05 00:20:03'),
 (12,	'1fda6ac901aee9291e9ef40a02e86367bb6da06d',	'ian',	'ian@gmail.com',	1,	'super user',	'',	'',	'2014-04-16 15:29:25',	'2014-04-16 15:29:25');
 
--- 2014-04-25 12:29:03
+-- 2014-04-26 20:04:23

@@ -270,25 +270,12 @@ class HashTestsController extends AppController {
 
 		$dup = HashTestsController::checkDuplicatesInArray($mdline);
 
-		//$this->log($ptline);
-		//$asd = count($output[0]['HashResult']['plaintext']);
-		//$this->log($asd);
-
 		foreach($output as $key => $hashResult) {
 			$conditions = array(
 				'conditions' => array('HashResult.message_digest' => $hashResult['HashResult']['message_digest']),
 				'fields' => 'id'
 			);
 			$result = $hashResultModel->find('first', $conditions);
-			//$this->log('This is result.');
-			//$this->log($result);
-
-			//$collision = '';
-			//if($dup != FALSE) {
-			//	foreach($dup as $key => $num) {
-			//		$collision .= $ptline[$num] . " " . $mdline[$num] . "\n";
-			//	}
-			//}
 
 			$collision_pt = array();
 			$collision_md = array();
@@ -307,6 +294,7 @@ class HashTestsController extends AppController {
 				$hashResult['HashResult']['collision_md'] = $collision_md;
 				$hashResult['HashResult']['collision'] = $collision;
 			} elseif ($dup == FALSE) {
+				$hashResult['HashResult']['collision'] = $collision;
 				$hashResult['HashResult']['description'] = 'No collision detected';
 			}
 
@@ -316,7 +304,7 @@ class HashTestsController extends AppController {
 					),
 				'fields' => array('HashAlgorithm.speed','HashAlgorithm.security',
 					'HashAlgorithm.collision_resistance','HashAlgorithm.preimage_resistance',
-					'HashAlgorithm.2nd_preimage_resistance')
+					'HashAlgorithm.2nd_preimage_resistance','HashAlgorithm.output_length')
 
 				);
 			$searchResult = array();
@@ -327,6 +315,7 @@ class HashTestsController extends AppController {
 			$hashResult['HashResult']['collision_resistance'] = $searchResult['HashAlgorithm']['collision_resistance'];
 			$hashResult['HashResult']['preimage_resistance'] = $searchResult['HashAlgorithm']['preimage_resistance'];
 			$hashResult['HashResult']['2nd_preimage_resistance'] = $searchResult['HashAlgorithm']['2nd_preimage_resistance'];
+			$hashResult['HashResult']['output_length'] = $searchResult['HashAlgorithm']['output_length'];
 
 			
 			if ($hashResult['HashResult']['security'] > $security) {
@@ -348,7 +337,7 @@ class HashTestsController extends AppController {
 			array_push($analysis, $hashResult);
 		}
 		
-		//$this->log($analysis);
+		$this->log($analysis);
 		return $analysis;
 	}
 
@@ -558,12 +547,28 @@ class HashTestsController extends AppController {
 			$HelloMD = hash(strtolower($data['HashTests']['HashAlgorithm']), 'Hello');
 			$HellnMD = hash(strtolower($data['HashTests']['HashAlgorithm']), 'Helln');
 
-			$percent = $this -> compute_avalanche($HelloMD, $HellnMD);
+			$ComputerMD = hash(strtolower($data['HashTests']['HashAlgorithm']), 'Computer');
+			$ComputesMD = hash(strtolower($data['HashTests']['HashAlgorithm']), 'Computes');
+
+			$ScienceMD = hash(strtolower($data['HashTests']['HashAlgorithm']), 'Science');
+			$SciencdMD = hash(strtolower($data['HashTests']['HashAlgorithm']), 'Sciencd');
+
+			$HelloPercent = $this -> compute_avalanche($HelloMD, $HellnMD);
+			$ComputerPercent = $this -> compute_avalanche($ComputerMD, $ComputesMD);
+			$SciencePercent = $this -> compute_avalanche($ScienceMD, $SciencdMD);
 			
 			array_push($output, $data);
 			array_push($output, $HelloMD);
 			array_push($output, $HellnMD);
-			array_push($output, $percent);
+			array_push($output, $HelloPercent);
+
+			array_push($output, $ComputerMD);
+			array_push($output, $ComputesMD);
+			array_push($output, $ComputerPercent);
+
+			array_push($output, $ScienceMD);
+			array_push($output, $SciencdMD);
+			array_push($output, $SciencePercent);
 			
 			$this->Session->write('output', $output);
 			$this->redirect(array('controller' => 'HashResults', 'action' => 'avalanche_effect_result'));
@@ -606,9 +611,17 @@ class HashTestsController extends AppController {
 
 			$resultfromdatabase = $HashAlgorithmV1Model->find('all', $conditions);
 
-			//$this->log($resultfromdatabase);
-        	$this->Session->write('resultfromdatabase', $resultfromdatabase);
-			$this->redirect(array('controller' => 'HashResults', 'action' => 'hash_analyser_result'));
+			if(!empty($resultfromdatabase) && $messagedigestlength != 0) {
+	        	$this->Session->write('resultfromdatabase', $resultfromdatabase);
+	        	$this->Session->write('messagedigestlength', $messagedigestlength);
+				$this->redirect(array('controller' => 'HashResults', 'action' => 'hash_analyser_result'));
+			}
+			else{
+				$messagedigestlength = 0;
+				$this->Session->write('messagedigestlength', $messagedigestlength);
+				$this->redirect(array('controller' => 'HashResults', 'action' => 'hash_analyser_result'));
+			}
+
 		}	
 	}
 
