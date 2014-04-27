@@ -1,38 +1,43 @@
-<div class="hashTests view">
-
+<!-- <div class="hashTests view"> -->
+<div class="container">
 	<?php echo $this->Form->create('HashTests',array('action' => 'calculate_probability_of_collision'));?>
 
-	<div class="or" style="font-size:200%">The Probability of obtaining a single collision for any hash function</div>
-	<div class="or" style="font-size:150%">please enter the base and expontial of the number of hashes which will be tested for the hash function</div>
-
+	<div class = "jumbotron">
+	<center><h2>Hash Collision Probability (Using Birthday Paradox)</h2>
+	<p>A method to calcuate the likeliness of a occurence of collisions when the hash function is generating multiple message digests.</p></center>
+	</div>
+ 	
+ 	
+	<p>please enter the base and expontial of the number of hashes which will be tested for the hash function</p>
 	<?php
 		echo $this->Form->input('required_base', array(
 			'type' => 'text',
 			'div' => false,
-			'label' => 'Enter the base of the amount of hashes which need to be tested with :'
+			'label' => 'Base :'
 			
 		));
-
-
+	?>
+	<br>	
+	<?php	
 		echo $this->Form->input('required_exponent', array(
 			'type' => 'text',
 			'div' => false,
-			'label' => 'Enter the exponent of the amount of hashes which need to be tested with :'
+			'label' => 'Exponent :'
 			
 		));
 	?>
 
-	<div class="or" style="font-size:150%">OR</div>
+	<div style="font-size:100%">OR</div>
 	<?php
 		echo $this->Form->input('hash_value', array(
 			'type' => 'text',
 			'div' => false,
-			'label' => 'Enter the amount of the hashes which needs to be tested with :'
+			'label' => 'Number of hashes :'
 			
 		));
 	?>
 
-	<div class="or" style="font-size:200%">THEN</div>
+	<div style="font-size:200%">THEN</div>
 
 	<?php 
 		$algorithms = array();	
@@ -55,7 +60,7 @@
 
 	<script type="text/javascript">
 
-		function CheckForAlgorithm() {
+		public function CheckForAlgorithm() {
     		if (document.getElementById('customised').checked) {
         		//document.getElementById('ifYes').style.visibility = 'visible';
         		<?php echo "true" ?>
@@ -63,9 +68,9 @@
        			//document.getElementById('ifYes').style.visibility = 'hidden';
     	}
 
-</script>
+	</script>
 
-	<div class="or" style="font-size:150%">please enter the base and expontial of the total number of hashes for the hash function</div>
+	<div style="font-size:150%">please enter the base and expontial of the total number of hashes for the hash function</div>
 	
 	<?php	
 		echo $this->Form->input('customized_algorithm_base', array(
@@ -83,7 +88,7 @@
 		));
 	?>
 
-	<div class="or" style="font-size:150%">OR</div>
+	<div style="font-size:150%">OR</div>
 	<?php
 		echo $this->Form->input('hash_value1', array(
 			'type' => 'text',
