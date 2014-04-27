@@ -14,7 +14,7 @@ class HashingLib {
 				$computed['HashResult']['message_digest'] = $messageDigest;
 				$computed['HashResult']['hash_algorithm_id'] = $algorithm['HashAlgorithm']['id'];
 				$computed['HashResult']['hash_algorithm_name'] = $algorithm['HashAlgorithm']['name'];
-				//$computed['HashResult']['user_id'] = $authUser['group_id'];
+				HashingLib::checkDictionary($computed['HashResult']);
 				array_push($output, $computed);
 
 				// $output['HashAlgorithm'] = $selectedAlgorithms['HashAlgorithm'];
@@ -102,16 +102,17 @@ class HashingLib {
 		$dictionaryModel = ClassRegistry::init('Dictionary');
 		$conditions = array(
 			'conditions' => array(
-				'Dictionary.'.$data['hash_algorithm'] => $data['message_digest']
+				'Dictionary.'.$data['hash_algorithm_name'] => $data['message_digest']
 			)
 		);
 		$checkDictionaryResult = $dictionaryModel->find('all', $conditions);
 
 		if(empty($checkDictionaryResult)) {
-			return false;
+			$savingData = $dictionaryModel
+		} elseif (is_array($checkDictionaryResult)) {
+
 		}
 
-		return $checkDictionaryResult;
 		
 
 	}
