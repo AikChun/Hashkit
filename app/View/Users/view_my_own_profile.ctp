@@ -27,5 +27,6 @@
 			&nbsp;
 		</dd>
 	</dl>
+	<a href="/users/edit_my_own_profile/<?php echo $authUser['id']?>"><button class="edit profile">Edit Profile</button></a>
 </div>
 
