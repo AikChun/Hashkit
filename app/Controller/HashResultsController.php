@@ -185,4 +185,10 @@ class HashResultsController extends AppController {
 		}
 	}
 
+	public function reverse_look_up_result() {
+		$data = $this->Session->read('reverseData');
+		$this->Session->write('reverseData', '');
+		$this->set('data',$data);
+	}
+
 }

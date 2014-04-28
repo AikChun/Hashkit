@@ -122,8 +122,8 @@ class DictionariesController extends AppController {
 			// error opening the file.
 		} 
 		fclose($handle);
-		$this->log($data);
-		$this->log(WWW_ROOT);
+		// $this->log($data);
+		// $this->log(WWW_ROOT);
 	
     }
 }

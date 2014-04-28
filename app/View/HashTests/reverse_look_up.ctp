@@ -1,7 +1,7 @@
 <div class="hashTests view">
 <?php
 echo $this->Form->create('HashTests');
-	echo $this->Form->input('hash_algorithm', array(
+	echo $this->Form->input('hash_algorithm_name', array(
     'options' => $data 
 	));
 echo $this->Form->input('message_digest', array(
