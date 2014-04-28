@@ -1,46 +1,64 @@
 <!-- <div class="hashTests view"> -->
 <div class="container">
-	<?php echo $this->Form->create('HashTests',array('action' => 'calculate_probability_of_collision'));?>
+	<?php echo $this->Form->create('HashTests',array('action' => 'calculate_probability_of_collision'));?> 
 
 	<div class = "jumbotron">
 	<center><h2>Hash Collision Probability (Using Birthday Paradox)</h2>
-	<p>A method to calcuate the likeliness of a occurence of collisions when the hash function is generating multiple message digests.</p></center>
+	<p>A method to calcuate the likeliness of a occurence of collisions when the hash function generates multiple message digests.</p></center>
 	</div>
  	
- 	
+ 	<p>Based on the birthday paradox which in theory can calculate the probability that, in a set of n randomly chosen people, some pair of them will have the same birthday, this method uses a probabilistic model to reduce the complexity of cracking a hash function.	
+ 	</p>
+ 	<br>
+ 	<img src="/img/part1.jpg" />
+ 	<br>
+ 	<img src="/img/part2 .jpg" />
+ 	<br>
+ 	<p> By using the above mathematical expression, we can help you to do the math for the probability of getting a collision and the required amount of hashes before getting a 99% probability.
+ 	</p>
+
 	<p>please enter the base and expontial of the number of hashes which will be tested for the hash function</p>
-	<?php
-		echo $this->Form->input('required_base', array(
-			'type' => 'text',
-			'div' => false,
-			'label' => 'Base :'
-			
-		));
-	?>
-	<br>	
-	<?php	
-		echo $this->Form->input('required_exponent', array(
-			'type' => 'text',
-			'div' => false,
-			'label' => 'Exponent :'
-			
-		));
-	?>
+	
+	<fieldset>
+			<?php
+			echo $this->Form->input('required_base', array(
+				'type' => 'text',
+				'div' => false,
+				'label' => 'Base :',
+				'size' => 10,
+				'id' => 'required_base'
+				));
+			?>
+		
+		<br>	
+		
+			<?php	
+				echo $this->Form->input('required_exponent', array(
+					'type' => 'text',
+					'div' => false,
+					'label' => 'Exponent :',
+					'size' => 10,
+					'id' => 'required_exponent',
+					'onchange' => "checkform()"
+				));
+			?>
 
-	<div style="font-size:100%">OR</div>
-	<?php
-		echo $this->Form->input('hash_value', array(
-			'type' => 'text',
-			'div' => false,
-			'label' => 'Number of hashes :'
-			
-		));
-	?>
-
-	<div style="font-size:200%">THEN</div>
+		<br>
+		
+			<?php
+				echo $this->Form->input('hash_value', array(
+					'type' => 'text',
+					'div' => false,
+					'label' => 'Number of hashes :',
+					'size' => 30,
+					'id' => 'hash_value'
+				));
+			?>
+	</fieldset>
+	
 
 	<?php 
-		$algorithms = array();	
+		$algorithms = array();
 
         foreach($result as $key => $model) {
         	$entry = array(
@@ -52,50 +70,81 @@
         echo $this->Form->input('HashAlgorithm', array(
 			'empty' => '(choose one)',
 			'options'=> $algorithms,
-			'onclick' => 'javascript:CheckForAlgorithm();'
+			'id' => 'HashAlgorithm',
+			'onchange' => 'checkform1()'
 			)
 		);
 
 	?>
-
-	<script type="text/javascript">
-
-		public function CheckForAlgorithm() {
-    		if (document.getElementById('customised').checked) {
-        		//document.getElementById('ifYes').style.visibility = 'visible';
-        		<?php echo "true" ?>
-    	} else {
-       			//document.getElementById('ifYes').style.visibility = 'hidden';
-    	}
-
-	</script>
-
-	<div style="font-size:150%">please enter the base and expontial of the total number of hashes for the hash function</div>
+	
+	<div id="customizedoptions" style="display: none"><fieldset>
+	<div style="font-size =100%">Enter the base and expontial or just the total number of hashes for the hash function </div>
 	
 	<?php	
 		echo $this->Form->input('customized_algorithm_base', array(
 			'type' => 'text',
 			'div' => false,
-			'label' => 'Please enter the base for the total number of the hashes which the hash function can generate:'
-			
+			'label' => 'Base:',
+			'id' => 'customized_algorithm_base'
 		));
 
 		echo $this->Form->input('customized_algorithm_exponent', array(
 			'type' => 'text',
 			'div' => false,
-			'label' => 'Enter the exponent for the total number of the hashes which the hash function can generate:'
-			
+			'label' => 'Exponent:',
+			'id' => 'customized_algorithm_exponent'
 		));
 	?>
 
-	<div style="font-size:150%">OR</div>
 	<?php
 		echo $this->Form->input('hash_value1', array(
 			'type' => 'text',
 			'div' => false,
-			'label' => 'Enter the total number of the hashes which the hash function can generate:'
-			
+			'label' => 'total amount of the hashes:',
+			'id' => 'hash_value1'
 		));
 	?>
-	<?php echo $this->Form->end(__('Submit')); ?>
+	</div>
+	</fieldset>
+	<?php echo $this->Form->end(__('Submit'));?>
 </div>
+
+<script type="text/javascript">
+
+		function checkform() {
+ 			
+ 			var x = document.getElementById('required_base').value;
+ 			var y = document.getElementById('required_exponent').value;
+
+ 			if (x == "" || isNaN(x)){
+     			alert("invalid input");
+     		}else{
+     			if (x > 0 && y > 0){
+ 					document.getElementById('hash_value').disabled = true;
+ 				}else{
+ 					document.getElementById('hash_value').disabled = false;
+ 				}	
+     		}	
+     	}
+
+     	function checkform1() {
+     		var selected = document.getElementById('HashAlgorithm').value;
+			if(selected == 'customised') {
+				document.getElementById('customizedoptions').style.display = 'block';
+				var a = document.getElementById('customized_algorithm_base').value;
+				var b = document.getElementById('customized_algorithm_exponent').value;
+				if (isNaN(a) || isNaN(b)){
+     				alert("invalid input");
+     			}else{
+     				if (a > 0 || b > 0){
+ 						document.getElementById('hash_value1').disabled = true;
+ 					}else{
+ 						document.getElementById('hash_value1').disabled = false;
+ 					}	
+     			}
+			}else {
+				document.getElementById('customizedoptions').style.display = 'none';
+			}
+     	}
+
+</script>

@@ -64,7 +64,7 @@ $cakeDescription = __d('cake_dev', 'FYP: Hashkit');
 
 		<div class = "navbar navbar-inverse navbar-static-top">
 			<div class = "container">
-				<a href = "$" class = "navbar-brand">Hashkit</a>
+				<a href = "/pages/index" class = "navbar-brand">Hashkit</a>
 				<button class = "navbar-toggle" data-toggle = "collapse" data-target = ".navHeaderCollapse">
 					<span class = "icon-bar"></span>
 					<span class = "icon-bar"></span>
@@ -84,7 +84,7 @@ $cakeDescription = __d('cake_dev', 'FYP: Hashkit');
 						<li><a href = "#">Sources</a></li>
 						<?php endif;?>
 						<li><a href = "#">About Us</a></li>
-						<li><a href = "#">Contact</a></li>
+						<li><a href = "#">Contact Us</a></li>
 						<li><a href = "#">Help</a></li>
 						<li><a href = "http://hashkitproject.blogspot.sg">Blog</a></li>
 				</ul>
@@ -160,8 +160,8 @@ $cakeDescription = __d('cake_dev', 'FYP: Hashkit');
 		</div>
 
 		<div class = "navbar navbar-default navbar-fixed-bottom">
-			<a href ="$" class = "navbar-button navbar-text ">Hashkit</a>
-			<a href="%" class = "navbar-button navbar-text">Home</a>
+			<a href ="/pages/index" class = "navbar-button navbar-text ">Hashkit</a>
+			<a href="/pages/index" class = "navbar-button navbar-text">Home</a>
 			<a href="%" class = "navbar-button navbar-text">Hash functions</a>
 			<a href="%" class = "navbar-button navbar-text">Sources</a>
 			<a href="%" class = "navbar-button navbar-text">About Us</a>
