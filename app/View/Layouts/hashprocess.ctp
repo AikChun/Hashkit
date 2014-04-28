@@ -52,7 +52,7 @@ $cakeDescription = __d('cake_dev', 'FYP: Hashkit');
 						}
 						//echo $this->Html->link(('Logout'), array('controller' => 'users', 'action' => 'logout'));
 						else {
-							echo $this->Html->link($authUser['name'], '/');
+							echo $this->Html->link($authUser['name'],array ('controller' => 'users', 'action' => 'view_my_own_profile' ));
 							echo " | ";
 							echo $this->Html->link(('Logout'), array('controller' => 'users', 'action' => 'logout'));
 						}

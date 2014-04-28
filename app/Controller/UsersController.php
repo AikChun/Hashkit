@@ -238,4 +238,18 @@ class UsersController extends AppController {
 		}
 	}
 
+/**
+ * View for users profile
+ */
+	public function view_my_own_profile() {
+		$conditions = array(
+			'conditions' => array(
+				'User.id' => $this->Auth->user('id')
+			)
+		);
+
+		$data = $this->User->find('first', $conditions);
+		$this->log($data);
+		$this->set('data', $data);
+	}
 }
