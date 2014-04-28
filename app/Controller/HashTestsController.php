@@ -130,7 +130,6 @@ class HashTestsController extends AppController {
 			//$this->log($data);
 
 			if (!empty($data['HashTests']['plaintext'])) {
-
 				$output = HashingLib::computeDigests($selectedAlgorithms, $data['HashTests']['plaintext']);
 	            $this->Session->write('output', $output);
 				$this->redirect(array('controller' => 'HashResults', 'action' => 'basic_hashing_result'));
@@ -358,9 +357,10 @@ class HashTestsController extends AppController {
 
 		if($this->request->is('post')) {
 			$data = $this->request->data['HashTests'];
-			$result = HashingLib::checkDictionary($data);
+			$result = HashingLib::matchPlaintextWithMessageDigest($data);
+			$this->log($result);
 			$this->Session->write('reverseData', $result );
-			$this->redirect('/HashResults/reverse');
+			$this->redirect('/HashResults/reverse_look_up_result');
 		}
 	}
 
@@ -547,12 +547,28 @@ class HashTestsController extends AppController {
 			$HelloMD = hash(strtolower($data['HashTests']['HashAlgorithm']), 'Hello');
 			$HellnMD = hash(strtolower($data['HashTests']['HashAlgorithm']), 'Helln');
 
-			$percent = $this -> compute_avalanche($HelloMD, $HellnMD);
+			$ComputerMD = hash(strtolower($data['HashTests']['HashAlgorithm']), 'Computer');
+			$ComputesMD = hash(strtolower($data['HashTests']['HashAlgorithm']), 'Computes');
+
+			$ScienceMD = hash(strtolower($data['HashTests']['HashAlgorithm']), 'Science');
+			$SciencdMD = hash(strtolower($data['HashTests']['HashAlgorithm']), 'Sciencd');
+
+			$HelloPercent = $this -> compute_avalanche($HelloMD, $HellnMD);
+			$ComputerPercent = $this -> compute_avalanche($ComputerMD, $ComputesMD);
+			$SciencePercent = $this -> compute_avalanche($ScienceMD, $SciencdMD);
 			
 			array_push($output, $data);
 			array_push($output, $HelloMD);
 			array_push($output, $HellnMD);
-			array_push($output, $percent);
+			array_push($output, $HelloPercent);
+
+			array_push($output, $ComputerMD);
+			array_push($output, $ComputesMD);
+			array_push($output, $ComputerPercent);
+
+			array_push($output, $ScienceMD);
+			array_push($output, $SciencdMD);
+			array_push($output, $SciencePercent);
 			
 			$this->Session->write('output', $output);
 			$this->redirect(array('controller' => 'HashResults', 'action' => 'avalanche_effect_result'));

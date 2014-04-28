@@ -1,4 +1,4 @@
-<div >
+<div class="users form">
 
 <?php
 

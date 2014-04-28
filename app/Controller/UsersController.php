@@ -130,6 +130,7 @@ class UsersController extends AppController {
 		}
 		return $this->redirect(array('action' => 'index'));
 	}
+
 	public function login() {
 		if($this->request->is('post')) {
 			if($this->Auth->login()) {
@@ -237,4 +238,41 @@ class UsersController extends AppController {
 		}
 	}
 
+/**
+ * View for users profile
+ */
+	public function view_my_own_profile() {
+		$conditions = array(
+			'conditions' => array(
+				'User.id' => $this->Auth->user('id')
+			)
+		);
+
+		$data = $this->User->find('first', $conditions);
+		$this->set('data', $data);
+	}
+
+/**
+ * users edit method
+ *
+ * @throws NotFoundException
+ * @param string $id
+ * @return void
+ */
+	public function edit_my_own_profile($id = null) {
+		if (!$this->User->exists($id)) {
+			throw new NotFoundException(__('Invalid user'));
+		}
+		if ($this->request->is(array('post', 'put'))) {
+			if ($this->User->save($this->request->data)) {
+				$this->Session->setFlash(__('The user has been saved.'));
+				return $this->redirect(array('action' => 'index'));
+			} else {
+				$this->Session->setFlash(__('The user could not be saved. Please, try again.'));
+			}
+		} else {
+			$options = array('conditions' => array('User.' . $this->User->primaryKey => $id));
+			$this->request->data = $this->User->find('first', $options);
+		}
+	}
 }
