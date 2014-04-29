@@ -2,7 +2,7 @@
 
 SET NAMES utf8;
 SET foreign_key_checks = 0;
-SET time_zone = '+08:00';
+SET time_zone = '-07:00';
 SET sql_mode = 'NO_AUTO_VALUE_ON_ZERO';
 
 DROP DATABASE IF EXISTS `Hashkit`;
@@ -170,6 +170,24 @@ CREATE TABLE `dictionary` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
+INSERT INTO `dictionary` (`id`, `plaintext`, `SHA1`, `MD5`) VALUES
+(1,	'hello\n',	'f572d396fae9206628714fb2ce00f72e94f2258f',	'b1946ac92492d2347c6235b4d2611184'),
+(2,	'asd\n',	'c85320d9ddb90c13f4a215f1f0a87b531ab33310',	'e07910a06a086c83ba41827aa00b26ed'),
+(3,	'bye\n',	'ee9e51458f4642f48efe956962058245ee7127b1',	'91fc14ad02afd60985bb8165bda320a6'),
+(4,	'hey\n',	'7aea02175315cd3541b03ffe78aa1ccc40d2e98a',	'081ecc5e6dd6ba0d150fc4bc0e62ec50'),
+(5,	'bhjcj',	'78299f0f82789e0cd234036a2126817266918884',	'803e80bb05bf6dd43ea57635efc1c958'),
+(6,	'bhjcj gcg',	'2cb69432a0037e85a1c0b06dc4bd364ff390e9ae',	'7b555d405e5c721455e9ed1cefdd70e5'),
+(7,	' hvjb',	'ee06b2a1f9f1fa8b2b20d6f78d8c7a62084ee8dc',	'930fff91e4b2368ba116f04e816fff64'),
+(8,	' ',	'b858cb282617fb0956d960215c8e84d1ccf909c6',	'7215ee9c7d9dc229d2921a40e899ec5f'),
+(9,	'jbi',	'a4344de0a9dd89e3862b78f9fe9bbaedc1f8a8b1',	'215c051ba023f13ec68d0119f48a88ad'),
+(10,	'vui ubiu',	'104c71b711995cb55135f92624d13b14c93ace52',	'9801bfeb4465d0110b5cfe98f01b160b'),
+(11,	'dasdqwd',	'968f3565521ced719ada1e28f58d9ce75a537eef',	'9399cabe8b025274435dc7bbd3221da6'),
+(12,	'fsdf',	'44cef431f67acb94eea6b80b7160b5e9d82e0bcc',	'7d70663568cac5af684503681e3a4d41'),
+(13,	'ugivh',	'e0083af1cb26ed34f8813d51caa08a66ae65d1b5',	'1dcf86c0c05ee7eceb71ad0c00764e1d'),
+(14,	'ubiu',	'7c8d6753b5bd435d3637f99d8509175ba1fbf25a',	'431c0d66f8e9020b2eff56c8535ae209'),
+(15,	'juigviu',	'7bfa299dac7689bfe33dc6d47f5883167a63c09f',	'b4bbc8687e9ca0337d57c4a2122ab651'),
+(16,	'iuvu',	'5e544c3c1434f2ea7c8c895fdc3e333300e6c74c',	'393bdd2f3a16579a857170e86dbe151a'),
+(17,	'hello',	'aaf4c61ddcc5e8a2dabede0f3b482cd9aea9434d',	'5d41402abc4b2a76b9719d911017c592');
 
 DROP TABLE IF EXISTS `group`;
 CREATE TABLE `group` (
@@ -194,16 +212,19 @@ CREATE TABLE `hash_algorithm` (
   `collision_resistance` text NOT NULL,
   `preimage_resistance` text NOT NULL,
   `2nd_preimage_resistance` text NOT NULL,
+  `collision_bka` text NOT NULL,
+  `preimage_bka` text NOT NULL,
+  `2nd_preimage_bka` text NOT NULL,
   `output_length` text NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
-INSERT INTO `hash_algorithm` (`id`, `name`, `speed`, `security`, `collision_resistance`, `preimage_resistance`, `2nd_preimage_resistance`, `output_length`) VALUES
-(1,	'SHA1',	'333.29',	'2',	'No',	'Yes',	'Yes',	'160'),
-(2,	'MD5',	'392.32',	'1',	'No',	'No',	'Yes',	'128'),
-(3,	'MD2',	'5.43',	'1',	'No',	'No',	'Yes',	'128'),
-(4,	'MD4',	'540.87',	'0',	'No',	'No',	'No',	'128'),
-(5,	'SHA256',	'169.49',	'3',	'Yes',	'Yes',	'Yes',	'256');
+INSERT INTO `hash_algorithm` (`id`, `name`, `speed`, `security`, `collision_resistance`, `preimage_resistance`, `2nd_preimage_resistance`, `collision_bka`, `preimage_bka`, `2nd_preimage_bka`, `output_length`) VALUES
+(1,	'SHA1',	'333.29',	'2',	'Broken',	'Unbroken',	'Unbroken',	'2^60',	'Nil',	'Nil',	'160'),
+(2,	'MD5',	'392.32',	'1',	'Broken',	'Broken',	'Unbroken',	'2^20.96',	'2^123.4',	'Nil',	'128'),
+(3,	'MD2',	'5.43',	'1',	'Broken',	'Broken',	'Unbroken',	'2^63.3',	'2^73',	'Nil',	'128'),
+(4,	'MD4',	'540.87',	'0',	'Broken',	'Broken',	'Broken',	'3',	'2^69.4',	'2^78.4',	'128'),
+(5,	'SHA256',	'169.49',	'3',	'Unbroken',	'Unbroken',	'Unbroken',	'Nil',	'Nil',	'Nil',	'256');
 
 DROP TABLE IF EXISTS `hash_algorithm_v1`;
 CREATE TABLE `hash_algorithm_v1` (
@@ -218,27 +239,26 @@ INSERT INTO `hash_algorithm_v1` (`id`, `name`, `base`, `exponent`) VALUES
 (1,	'MD2',	2,	128),
 (2,	'MD4',	2,	128),
 (3,	'MD5',	2,	128),
-(5,	'ripemd',	2,	128),
-(6,	'ripemd128',	2,	128),
-(7,	'ripemd256',	2,	256),
-(8,	'ripemd160',	2,	160),
-(9,	'ripemd320',	2,	320),
+(6,	'RIPEMD128',	2,	128),
+(7,	'RIPEMD256',	2,	256),
+(8,	'RIPEMD160',	2,	160),
+(9,	'RIPEMD320',	2,	320),
 (12,	'SHA1',	2,	160),
 (13,	'SHA224',	2,	224),
 (14,	'SHA256',	2,	256),
-(15,	'whirlpool',	2,	512),
-(16,	'customised',	0,	0),
-(17,	'tiger128,3',	2,	32),
+(15,	'WHIRLPOOL',	2,	512),
+(16,	'CUSTOMISED',	0,	0),
+(17,	'TIGER128,3',	2,	32),
 (18,	'SHA384',	2,	384),
 (19,	'SHA512',	2,	512),
-(20,	'tiger160,3',	2,	160),
-(21,	'tiger192,3',	2,	192),
-(22,	'snefru',	2,	256),
-(23,	'crc32',	2,	32),
-(24,	'crc32b',	2,	32),
-(25,	'haval128,3',	2,	128),
-(26,	'haval160,3',	2,	160),
-(27,	'haval192,3',	2,	192);
+(20,	'TIGER160,3',	2,	160),
+(21,	'TIGER192,3',	2,	192),
+(22,	'SNEFRU',	2,	256),
+(23,	'CRC32',	2,	32),
+(24,	'CRC32B',	2,	32),
+(25,	'HAVAL128,3',	2,	128),
+(26,	'HAVAL160,3',	2,	160),
+(27,	'HAVAL192,3',	2,	192);
 
 DROP TABLE IF EXISTS `hash_result`;
 CREATE TABLE `hash_result` (
@@ -253,6 +273,9 @@ CREATE TABLE `hash_result` (
   KEY `description_id` (`description_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
+INSERT INTO `hash_result` (`id`, `plaintext`, `message_digest`, `hash_algorithm_id`, `description_id`, `created`, `modified`) VALUES
+(1,	'hello',	'5d41402abc4b2a76b9719d911017c592',	2,	0,	'2014-04-29',	'2014-04-29'),
+(2,	'hello',	'866437cb7a794bce2b727acc0362ee27',	4,	0,	'2014-04-29',	'2014-04-29');
 
 DROP TABLE IF EXISTS `user`;
 CREATE TABLE `user` (
@@ -276,4 +299,4 @@ INSERT INTO `user` (`id`, `password`, `name`, `email`, `group_id`, `profile`, `s
 (11,	'96b9369f55be479d63a8ef366966a03a607657e4',	'dude',	'dude@gmail.com',	3,	'',	'',	'',	'2014-04-05 00:20:03',	'2014-04-05 00:20:03'),
 (12,	'1fda6ac901aee9291e9ef40a02e86367bb6da06d',	'ian',	'ian@gmail.com',	1,	'super user',	'',	'',	'2014-04-16 15:29:25',	'2014-04-16 15:29:25');
 
--- 2014-04-26 20:04:23
+-- 2014-04-29 02:42:20
