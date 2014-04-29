@@ -48,7 +48,6 @@ $cakeDescription = __d('cake_dev', 'FYP: Hashkit');
 	</head>
 
 	<body>
-<<<<<<< HEAD
 	<div class="navbar-wrapper">
 		<div class = "navbar navbar-inverse navbar-static-top">
 			<div class = "container">
@@ -57,21 +56,7 @@ $cakeDescription = __d('cake_dev', 'FYP: Hashkit');
 					<span class = "icon-bar"></span>
 					<span class = "icon-bar"></span>
 					<span class = "icon-bar"></span>
-=======
 
-		<div class ="navbar navbar-inverse navbar-static-top">
-
-			<div class="container">
-
-				<a href="/" class="navbar-brand">Hashkit Project</a>
-
-				<button class="navbar-toggle" data-toggle="collapse" data-target=".navHeaderCollapse">
-					
-					<span class="icon-bar"></span>
-					<span class="icon-bar"></span>
-					<span class="icon-bar"></span>
-
->>>>>>> 6156e0c2754e5abd9d7e33ce3a0cd3c3f9ec615a
 				</button>
 
 				<div class="collapse navbar-collapse navHeaderCollapse">
@@ -80,18 +65,24 @@ $cakeDescription = __d('cake_dev', 'FYP: Hashkit');
 						
 						<li class="active"><a href="/">Home</a></li>
 						<li><a href="http://hashkitproject.blogspot.sg/">Blog</a></li>
+						<?php if($authUser):?>
 						<li class="dropdown">
 								
-							<a href="/" class="dropdown-toggle" data-toggle="dropdown">FAQs<b class="caret"></b></a>
+							<a href="/" class="dropdown-toggle" data-toggle="dropdown">Hash Functions<b class="caret"></b></a>
 
 								<ul class="dropdown-menu">
-									<li><a href="/">What is hash functions?</a></li>
-									<li><a href="/">What is the desired properties of hash functions?</a></li>
-									<li><a href="/">What is Message Digest?</a></li>
-									<li><a href="/">What is Birthday Paradox?</a></li>
+									<li><a href="/HashTests/basic_hashing">Hash generator</a></li>
+									<li><a href="/HashTests/compute_and_compare">Hash alogrithm recommendation</a></li>
+									<li><a href="/HashTests/hash_analyser">Message digest analyser</a></li>
+									<li><a href="/HashTests/calculate_probability_of_collision">Collision proability calculator</a></li>
+									<li><a href="/HashTests/birthday_attack">Collision generator</a></li>
+									<li><a href="/HashTests/reverse_look_up">Reverse look-up</a></li>
+									<li><a href="/HashTests/avalanche_effect">Avalanche effect checker</a></li>
 								</ul>
 
 						</li>
+						<li><a href="/Pages/hash_function">Hash information</a></li>
+						<?php endif;?>
 						<li><a href="/Users/AboutUs">About Us</a></li>
 						<li><a href="#contact" data-toggle="modal">Contact Us</a></li>
 
@@ -111,6 +102,7 @@ $cakeDescription = __d('cake_dev', 'FYP: Hashkit');
 						<li><a href="/Users/Login">Login</a></li>
 						<li><a href="/Users/Register">Register</a></li> 
 
+						
 						<?php endif;?>
 
 					</ul>
@@ -120,10 +112,6 @@ $cakeDescription = __d('cake_dev', 'FYP: Hashkit');
 			</div>
 
 		</div>
-<<<<<<< HEAD
-	</div>	
-		<?php echo $this->fetch('content'); ?>
-=======
 
 		<?php echo $this->fetch('content'); ?>
 
@@ -171,7 +159,6 @@ $cakeDescription = __d('cake_dev', 'FYP: Hashkit');
 								<label for="contact-email" class="col-lg-2 control-label">Email:</label>
 
 								<div class="col-lg-10">
->>>>>>> 6156e0c2754e5abd9d7e33ce3a0cd3c3f9ec615a
 
 									<input type="text" class="form-control" id="contact-email" placeholder="you@example.com">
 
@@ -205,26 +192,6 @@ $cakeDescription = __d('cake_dev', 'FYP: Hashkit');
 				</div>
 
 			</div>
-
-<<<<<<< HEAD
-		<nav class = "navbar navbar-default navbar-static-bottom" role ="navigation">
-			<div class = "container">
-				<a href ="/pages/index" class = "navbar-button navbar-text ">Hashkit</a>
-				<a href="/pages/index" class = "navbar-button navbar-text">Home</a>
-				<a href="%" class = "navbar-button navbar-text">Hash functions</a>
-				<a href="%" class = "navbar-button navbar-text">Sources</a>
-				<a href="%" class = "navbar-button navbar-text">About Us</a>
-				<a href="%" class = "navbar-button navbar-text">Contact</a>
-				<a href="%" class = "navbar-button navbar-text">Help</a>
-				<a href="%" class = "navbar-button navbar-text">Blog</a>
-				<li class ="navbar-text" style="float:right;"><p>2014 HashKit project</p></li>
-			</div>
-		</nav>
-	
-=======
-		</div>
-
->>>>>>> 6156e0c2754e5abd9d7e33ce3a0cd3c3f9ec615a
 	</body>
 
 </html>

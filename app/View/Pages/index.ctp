@@ -5,6 +5,7 @@
 		<center>
 					
 		<h2>Welcome To Hashkit Project!!!</h2>
+
 		<p>This is a project done by a group of University of Wollongong (UOW) students.
 		<br/>
 		The purpose of this project to provide the public with some tools for cryptographic application.</p>
