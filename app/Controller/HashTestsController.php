@@ -264,8 +264,9 @@ class HashTestsController extends AppController {
 		$hashResultModel = ClassRegistry::init('HashResult');
 		$hashAlgorithmModel = ClassRegistry::init("HashAlgorithm");
 		$analysis = array();
-		$security = 0;
+		$security = -1;
 		$speed = 0;
+		$recommendAlgo1 = '';
 
 		$mdline = explode("\n",$output[0]['HashResult']['message_digest']);
 		$ptline = explode("\n",$output[0]['HashResult']['plaintext']);
@@ -329,9 +330,10 @@ class HashTestsController extends AppController {
 				$recommendAlgo = $hashResult['HashResult']['hash_algorithm_name'];
 				$speed = $hashResult['HashResult']['speed'];
 			} elseif ($hashResult['HashResult']['security'] == $security) {
-				if($hashResult['HashResult']['speed'] > $speed) {
-					$recommendAlgo = $hashResult['HashResult']['hash_algorithm_name'];
-				}
+				//if($hashResult['HashResult']['speed'] > $speed) {
+					$recommendAlgo1 = $hashResult['HashResult']['hash_algorithm_name'];
+					$recommendAlgo .= ' ' . $recommendAlgo1;
+				//}
 			}
 
 			$hashResult['HashResult']['recommendation'] = $recommendAlgo;
@@ -343,7 +345,7 @@ class HashTestsController extends AppController {
 			array_push($analysis, $hashResult);
 		}
 		
-		$this->log($analysis);
+		//$this->log($analysis);
 		return $analysis;
 	}
 
