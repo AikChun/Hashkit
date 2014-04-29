@@ -61,8 +61,6 @@
 						'label' => false,
 						'required'
 					));?>
-					<!--<input type="text" class="form-control" id="login-email" placeholder="you@exampe.com" value="<?php echo $email;?>">-->
-					<!--<span class="error">* <?php echo $emailErr;?></span>-->
 
 				</div>
 
@@ -80,8 +78,6 @@
 					'label' => false,
 					'required'
 				));?>
-					<!--<input type="text" class="form-control" id="login-password" placeholder="Password" value="<?php echo $password;?>">-->
-					<!--<span class="error">* <?php echo $passwordErr;?></span>-->
 
 				</div>
 
