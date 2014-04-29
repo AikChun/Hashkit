@@ -64,7 +64,6 @@ class AppController extends Controller {
 
 	protected function _determinedTheme() {
 		$this->layout = 'layout';
-		//$this->layout = 'layout';
 	}
 
 	protected function _prepareLogin() {

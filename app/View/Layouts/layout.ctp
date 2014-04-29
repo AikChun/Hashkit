@@ -48,18 +48,14 @@ $cakeDescription = __d('cake_dev', 'FYP: Hashkit');
 	</head>
 
 	<body>
-
-		<div class ="navbar navbar-inverse navbar-static-top">
-
-			<div class="container">
-
-				<a href="/" class="navbar-brand">Hashkit Project</a>
-
-				<button class="navbar-toggle" data-toggle="collapse" data-target=".navHeaderCollapse">
-					
-					<span class="icon-bar"></span>
-					<span class="icon-bar"></span>
-					<span class="icon-bar"></span>
+	<div class="navbar-wrapper">
+		<div class = "navbar navbar-inverse navbar-static-top">
+			<div class = "container">
+				<a href = "/pages/index" class = "navbar-brand">Hashkit</a>
+				<button class = "navbar-toggle" data-toggle = "collapse" data-target = ".navHeaderCollapse">
+					<span class = "icon-bar"></span>
+					<span class = "icon-bar"></span>
+					<span class = "icon-bar"></span>
 
 				</button>
 
@@ -71,16 +67,20 @@ $cakeDescription = __d('cake_dev', 'FYP: Hashkit');
 						<li><a href="http://hashkitproject.blogspot.sg/">Blog</a></li>
 						<li class="dropdown">
 								
-							<a href="/" class="dropdown-toggle" data-toggle="dropdown">FAQs<b class="caret"></b></a>
+							<a href="/" class="dropdown-toggle" data-toggle="dropdown">Hash Functions<b class="caret"></b></a>
 
 								<ul class="dropdown-menu">
-									<li><a href="/">What is hash functions?</a></li>
-									<li><a href="/">What is the desired properties of hash functions?</a></li>
-									<li><a href="/">What is Message Digest?</a></li>
-									<li><a href="/">What is Birthday Paradox?</a></li>
+									<li><a href="/HashTests/basic_hashing">Hash generator</a></li>
+									<li><a href="/HashTests/compute_and_compare">Hash alogrithm recommendation</a></li>
+									<li><a href="/HashTests/hash_analyser">Message digest analyser</a></li>
+									<li><a href="/HashTests/calculate_probability_of_collision">collision proability calculator</a></li>
+									<li><a href="/HashTests/birthday_attack">collision generator</a></li>
+									<li><a href="/HashTests/reverse_look_up">reverse look-up</a></li>
+									
 								</ul>
 
 						</li>
+						<li><a href="/Pages/hash_function_properties">Hash information</a></li>
 						<li><a href="/Users/AboutUs">About Us</a></li>
 						<li><a href="#contact" data-toggle="modal">Contact Us</a></li>
 
@@ -190,9 +190,6 @@ $cakeDescription = __d('cake_dev', 'FYP: Hashkit');
 				</div>
 
 			</div>
-
-		</div>
-
 	</body>
 
 </html>
