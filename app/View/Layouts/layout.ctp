@@ -76,11 +76,11 @@ $cakeDescription = __d('cake_dev', 'FYP: Hashkit');
 									<li><a href="/HashTests/calculate_probability_of_collision">collision proability calculator</a></li>
 									<li><a href="/HashTests/birthday_attack">collision generator</a></li>
 									<li><a href="/HashTests/reverse_look_up">reverse look-up</a></li>
-									
+									<li><a href="/HashTests/avalanche_effect">avalanche effect checker</a></li>
 								</ul>
 
 						</li>
-						<li><a href="/Pages/hash_function_properties">Hash information</a></li>
+						<li><a href="/Pages/hash_function">Hash information</a></li>
 						<li><a href="/Users/AboutUs">About Us</a></li>
 						<li><a href="#contact" data-toggle="modal">Contact Us</a></li>
 

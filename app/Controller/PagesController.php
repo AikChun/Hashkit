@@ -109,4 +109,8 @@ class PagesController extends AppController {
 
 	}
 
+	public function hash_function() {
+
+	}
+
 }

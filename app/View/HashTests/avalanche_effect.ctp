@@ -1,4 +1,4 @@
-<div class="HashTests view">
+<div class="container">
 
 	<?php echo $this->Form->create('HashTests',array('action' => 'avalanche_effect'));?>
 	<div class="Title" style="font-size:150%">
