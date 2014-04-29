@@ -2,44 +2,50 @@
 
 <script type="text/javascript">
 
-		function checkform() {
- 			
- 			var x = document.getElementById('required_base').value;
- 			var y = document.getElementById('required_exponent').value;
+	function checkform() {
+			
+		var x = document.getElementById('required_base').value;
+		var y = document.getElementById('required_exponent').value;
 
- 			if (x == "" || isNaN(x)){
-     			alert("invalid input");
-     		}else{
-     			if (x > 0 && y > 0){
- 					document.getElementById('hash_value').disabled = true;
- 				}else{
- 					document.getElementById('hash_value').disabled = false;
- 				}	
-     		}	
-     	}
+		if (x == "" || isNaN(x)){
+			 //alert("invalid input");
+			$('.bs-example-modal-lg').modal('show')
+			var required_base = $('#required_base');
+			required_base.val('');
+			var required_exponent = $('#required_exponent');
+			required_exponent.val('');
+ 		}else{
+ 			if (x > 0 && y > 0){
+				document.getElementById('hash_value').disabled = true;
+			}else{
+				document.getElementById('hash_value').disabled = false;
+			}	
+ 		}	
+ 	}
 
-     	function checkform1() {
-     		var selected = document.getElementById('HashAlgorithm').value;
-			if(selected == 'customised') {
-				document.getElementById('customizedoptions').style.display = 'block';
-			}else {
-				document.getElementById('customizedoptions').style.display = 'none';
-			}
-     	}
+ 	function checkform1() {
+ 		var selected = document.getElementById('HashAlgorithm').value;
+		if(selected == 'CUSTOMISED') {
+			document.getElementById('customizedoptions').style.display = 'block';
+		}else {
+			document.getElementById('customizedoptions').style.display = 'none';
+		}
+ 	}
 
-     	function checkform2() {
-     		var a = document.getElementById('customized_algorithm_base').value;
-			var b = document.getElementById('customized_algorithm_exponent').value;
-			if (isNaN(a) || isNaN(b)){
-     				alert("invalid input");
-     		}else{
-     				if (a > 0 || b > 0){
- 						document.getElementById('hash_value1').disabled = true;
- 					}else{
- 						document.getElementById('hash_value1').disabled = false;
- 					}	
-     		}
-     	}
+ 	function checkform2() {
+ 		var a = document.getElementById('customized_algorithm_base').value;
+		var b = document.getElementById('customized_algorithm_exponent').value;
+		if (isNaN(a) || isNaN(b)){
+ 				//alert("invalid input");
+ 				$('.bs-example-modal-sm').modal('show')
+ 		}else{
+			if (a > 0 || b > 0){
+				document.getElementById('hash_value1').disabled = true;
+			}else{
+				document.getElementById('hash_value1').disabled = false;
+			}	
+ 		}
+ 	}
 
 </script>
 
@@ -155,7 +161,20 @@
 	?>
 	</div>
 	</fieldset>
+
+
 	<div id="submitbutton">
 		<?php echo $this->Form->submit('submitbutton1.jpg'); ?>
 	</div>	
+
+	 <button style="display: none;" class="btn btn-primary" data-toggle="modal" data-target=".bs-example-modal-sm">Small modal</button> 
+	
+	<div class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
+				<div class="modal-dialog modal-lg">
+					<div class="modal-content alert alert-danger">
+				      <CENTER><h3> Invalid input. Enter numeric digits only.</h3></CENTER>
+				    </div>
+				  </div>
+	</div>
+
 </div>
