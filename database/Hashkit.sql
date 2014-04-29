@@ -162,7 +162,10 @@ CREATE TABLE `description` (
 
 INSERT INTO `description` (`id`, `user_id`, `description`, `created`, `modified`) VALUES
 (1,	12,	'No collision detected',	'2014-04-29 23:23:40',	'2014-04-29 23:23:40'),
-(2,	12,	'There is collision detected at: \nhello b1946ac92492d2347c6235b4d2611184\nhello b1946ac92492d2347c6235b4d2611184\nasd e07910a06a086c83ba41827aa00b26ed\nasd e07910a06a086c83ba41827aa00b26ed\n',	'2014-04-29 23:23:52',	'2014-04-29 23:23:52');
+(2,	12,	'There is collision detected at: \nhello b1946ac92492d2347c6235b4d2611184\nhello b1946ac92492d2347c6235b4d2611184\nasd e07910a06a086c83ba41827aa00b26ed\nasd e07910a06a086c83ba41827aa00b26ed\n',	'2014-04-29 23:23:52',	'2014-04-29 23:23:52'),
+(3,	12,	'There is collision detected at: \nhello 8530cf1cb1524cd9fceeb0fa72ce7f23\nhello 8530cf1cb1524cd9fceeb0fa72ce7f23\nasd fc1d00273547dfe714bfa8384a68b460\nasd fc1d00273547dfe714bfa8384a68b460\n',	'2014-04-29 23:34:14',	'2014-04-29 23:34:14'),
+(4,	12,	'There is collision detected at: \nhello b1946ac92492d2347c6235b4d2611184\nhello b1946ac92492d2347c6235b4d2611184\nasd e07910a06a086c83ba41827aa00b26ed\nasd e07910a06a086c83ba41827aa00b26ed\n',	'2014-04-29 23:35:52',	'2014-04-29 23:35:52'),
+(5,	12,	'There is collision detected at: \nhello b1946ac92492d2347c6235b4d2611184\nhello b1946ac92492d2347c6235b4d2611184\nasd e07910a06a086c83ba41827aa00b26ed\nasd e07910a06a086c83ba41827aa00b26ed\n',	'2014-04-29 23:45:14',	'2014-04-29 23:45:14');
 
 DROP TABLE IF EXISTS `dictionary`;
 CREATE TABLE `dictionary` (
@@ -212,8 +215,8 @@ DROP TABLE IF EXISTS `hash_algorithm`;
 CREATE TABLE `hash_algorithm` (
   `id` int(10) NOT NULL AUTO_INCREMENT,
   `name` varchar(25) NOT NULL,
-  `speed` int(10) NOT NULL,
-  `security` int(10) NOT NULL,
+  `speed` double NOT NULL,
+  `security` int(11) NOT NULL,
   `collision_resistance` varchar(10) NOT NULL,
   `preimage_resistance` varchar(10) NOT NULL,
   `2nd_preimage_resistance` varchar(10) NOT NULL,
@@ -225,11 +228,11 @@ CREATE TABLE `hash_algorithm` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 INSERT INTO `hash_algorithm` (`id`, `name`, `speed`, `security`, `collision_resistance`, `preimage_resistance`, `2nd_preimage_resistance`, `collision_bka`, `preimage_bka`, `2nd_preimage_bka`, `output_length`) VALUES
-(1,	'SHA1',	333,	2,	'Broken',	'Unbroken',	'Unbroken',	'2^60',	'Nil',	'Nil',	160),
-(2,	'MD5',	392,	1,	'Broken',	'Broken',	'Unbroken',	'2^20.96',	'2^123.4',	'Nil',	128),
-(3,	'MD2',	5,	1,	'Broken',	'Broken',	'Unbroken',	'2^63.3',	'2^73',	'Nil',	128),
-(4,	'MD4',	541,	0,	'Broken',	'Broken',	'Broken',	'3',	'2^69.4',	'2^78.4',	128),
-(5,	'SHA256',	169,	3,	'Unbroken',	'Unbroken',	'Unbroken',	'Nil',	'Nil',	'Nil',	256);
+(1,	'SHA1',	333.29,	2,	'Broken',	'Unbroken',	'Unbroken',	'2^60',	'Nil',	'Nil',	160),
+(2,	'MD5',	392.32,	1,	'Broken',	'Broken',	'Unbroken',	'2^20.96',	'2^123.4',	'Nil',	128),
+(3,	'MD2',	5.43,	1,	'Broken',	'Broken',	'Unbroken',	'2^63.3',	'2^73',	'Nil',	128),
+(4,	'MD4',	540.87,	0,	'Broken',	'Broken',	'Broken',	'3',	'2^69.4',	'2^78.4',	128),
+(5,	'SHA256',	169.49,	3,	'Unbroken',	'Unbroken',	'Unbroken',	'Nil',	'Nil',	'Nil',	256);
 
 DROP TABLE IF EXISTS `hash_algorithm_v1`;
 CREATE TABLE `hash_algorithm_v1` (
@@ -288,7 +291,13 @@ INSERT INTO `hash_result` (`id`, `plaintext`, `message_digest`, `hash_algorithm_
 (7,	'knewf',	'3a101a990eb249b59b6240d6e85aaef3',	2,	1,	'2014-04-29',	'2014-04-29'),
 (8,	'knewf',	'eaee000b89a7a9439a4fb9275644531a',	4,	1,	'2014-04-29',	'2014-04-29'),
 (9,	'hello\nasd\nbye\nhello\nhey\nasd\n',	'b1946ac92492d2347c6235b4d2611184\ne07910a06a086c83ba41827aa00b26ed\n91fc14ad02afd60985bb8165bda320a6\nb1946ac92492d2347c6235b4d2611184\n081ecc5e6dd6ba0d150fc4bc0e62ec50\ne07910a06a086c83ba41827aa00b26ed\n',	2,	2,	'2014-04-29',	'2014-04-29'),
-(10,	'hello\nasd\nbye\nhello\nhey\nasd\n',	'63481c78ae04c201fa01ea9d2b1db56d\n5449a412bb27febdba1f76f80f8a1781\n2fd556fb9d48f459987b07735e870d81\n63481c78ae04c201fa01ea9d2b1db56d\ne9a00640d0763f3f2ff3181258dc63f5\n5449a412bb27febdba1f76f80f8a1781\n',	4,	2,	'2014-04-29',	'2014-04-29');
+(10,	'hello\nasd\nbye\nhello\nhey\nasd\n',	'63481c78ae04c201fa01ea9d2b1db56d\n5449a412bb27febdba1f76f80f8a1781\n2fd556fb9d48f459987b07735e870d81\n63481c78ae04c201fa01ea9d2b1db56d\ne9a00640d0763f3f2ff3181258dc63f5\n5449a412bb27febdba1f76f80f8a1781\n',	4,	2,	'2014-04-29',	'2014-04-29'),
+(11,	'hello\nasd\nbye\nhello\nhey\nasd\n',	'8530cf1cb1524cd9fceeb0fa72ce7f23\nfc1d00273547dfe714bfa8384a68b460\n1f8198a36f24ef11ae8569ee07315b76\n8530cf1cb1524cd9fceeb0fa72ce7f23\n2b2c38ff741ea37fd58ea26a50917526\nfc1d00273547dfe714bfa8384a68b460\n',	3,	3,	'2014-04-29',	'2014-04-29'),
+(12,	'hello\nasd\nbye\nhello\nhey\nasd\n',	'63481c78ae04c201fa01ea9d2b1db56d\n5449a412bb27febdba1f76f80f8a1781\n2fd556fb9d48f459987b07735e870d81\n63481c78ae04c201fa01ea9d2b1db56d\ne9a00640d0763f3f2ff3181258dc63f5\n5449a412bb27febdba1f76f80f8a1781\n',	4,	3,	'2014-04-29',	'2014-04-29'),
+(13,	'hello\nasd\nbye\nhello\nhey\nasd\n',	'b1946ac92492d2347c6235b4d2611184\ne07910a06a086c83ba41827aa00b26ed\n91fc14ad02afd60985bb8165bda320a6\nb1946ac92492d2347c6235b4d2611184\n081ecc5e6dd6ba0d150fc4bc0e62ec50\ne07910a06a086c83ba41827aa00b26ed\n',	2,	4,	'2014-04-29',	'2014-04-29'),
+(14,	'hello\nasd\nbye\nhello\nhey\nasd\n',	'63481c78ae04c201fa01ea9d2b1db56d\n5449a412bb27febdba1f76f80f8a1781\n2fd556fb9d48f459987b07735e870d81\n63481c78ae04c201fa01ea9d2b1db56d\ne9a00640d0763f3f2ff3181258dc63f5\n5449a412bb27febdba1f76f80f8a1781\n',	4,	4,	'2014-04-29',	'2014-04-29'),
+(15,	'hello\nasd\nbye\nhello\nhey\nasd\n',	'b1946ac92492d2347c6235b4d2611184\ne07910a06a086c83ba41827aa00b26ed\n91fc14ad02afd60985bb8165bda320a6\nb1946ac92492d2347c6235b4d2611184\n081ecc5e6dd6ba0d150fc4bc0e62ec50\ne07910a06a086c83ba41827aa00b26ed\n',	2,	5,	'2014-04-29',	'2014-04-29'),
+(16,	'hello\nasd\nbye\nhello\nhey\nasd\n',	'63481c78ae04c201fa01ea9d2b1db56d\n5449a412bb27febdba1f76f80f8a1781\n2fd556fb9d48f459987b07735e870d81\n63481c78ae04c201fa01ea9d2b1db56d\ne9a00640d0763f3f2ff3181258dc63f5\n5449a412bb27febdba1f76f80f8a1781\n',	4,	5,	'2014-04-29',	'2014-04-29');
 
 DROP TABLE IF EXISTS `user`;
 CREATE TABLE `user` (
@@ -312,4 +321,4 @@ INSERT INTO `user` (`id`, `password`, `name`, `email`, `group_id`, `profile`, `s
 (11,	'96b9369f55be479d63a8ef366966a03a607657e4',	'dude',	'dude@gmail.com',	3,	'',	'',	'',	'2014-04-05 00:20:03',	'2014-04-05 00:20:03'),
 (12,	'1fda6ac901aee9291e9ef40a02e86367bb6da06d',	'ian',	'ian@gmail.com',	1,	'super user',	'',	'',	'2014-04-16 15:29:25',	'2014-04-16 15:29:25');
 
--- 2014-04-29 23:28:58
+-- 2014-04-29 23:45:36
