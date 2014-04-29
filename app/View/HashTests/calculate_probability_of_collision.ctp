@@ -1,4 +1,48 @@
 <!-- <div class="hashTests view"> -->
+
+<script type="text/javascript">
+
+		function checkform() {
+ 			
+ 			var x = document.getElementById('required_base').value;
+ 			var y = document.getElementById('required_exponent').value;
+
+ 			if (x == "" || isNaN(x)){
+     			alert("invalid input");
+     		}else{
+     			if (x > 0 && y > 0){
+ 					document.getElementById('hash_value').disabled = true;
+ 				}else{
+ 					document.getElementById('hash_value').disabled = false;
+ 				}	
+     		}	
+     	}
+
+     	function checkform1() {
+     		var selected = document.getElementById('HashAlgorithm').value;
+			if(selected == 'customised') {
+				document.getElementById('customizedoptions').style.display = 'block';
+			}else {
+				document.getElementById('customizedoptions').style.display = 'none';
+			}
+     	}
+
+     	function checkform2() {
+     		var a = document.getElementById('customized_algorithm_base').value;
+			var b = document.getElementById('customized_algorithm_exponent').value;
+			if (isNaN(a) || isNaN(b)){
+     				alert("invalid input");
+     		}else{
+     				if (a > 0 || b > 0){
+ 						document.getElementById('hash_value1').disabled = true;
+ 					}else{
+ 						document.getElementById('hash_value1').disabled = false;
+ 					}	
+     		}
+     	}
+
+</script>
+
 <div class="container">
 	<?php echo $this->Form->create('HashTests',array('action' => 'calculate_probability_of_collision'));?> 
 
@@ -24,12 +68,12 @@
 			echo $this->Form->input('required_base', array(
 				'type' => 'text',
 				'div' => false,
-				'label' => 'Base :',
+				'label' => 'Base:',
 				'size' => 10,
-				'id' => 'required_base'
+				'id' => 'required_base',
+				'onchange' => "checkform()"
 				));
 			?>
-		
 		<br>	
 		
 			<?php	
@@ -77,7 +121,8 @@
 
 	?>
 	
-	<div id="customizedoptions" style="display: none"><fieldset>
+	<div id="customizedoptions" style="display: none">
+	<fieldset>
 	<div style="font-size =100%">Enter the base and expontial or just the total number of hashes for the hash function </div>
 	
 	<?php	
@@ -85,17 +130,21 @@
 			'type' => 'text',
 			'div' => false,
 			'label' => 'Base:',
-			'id' => 'customized_algorithm_base'
+			'id' => 'customized_algorithm_base',
+			'onchange' => 'checkform2()'
 		));
-
+	?>
+	<br>
+	<?php	
 		echo $this->Form->input('customized_algorithm_exponent', array(
 			'type' => 'text',
 			'div' => false,
 			'label' => 'Exponent:',
-			'id' => 'customized_algorithm_exponent'
+			'id' => 'customized_algorithm_exponent',
+			'onchange' => 'checkform2()'
 		));
 	?>
-
+	<br>
 	<?php
 		echo $this->Form->input('hash_value1', array(
 			'type' => 'text',
@@ -106,45 +155,7 @@
 	?>
 	</div>
 	</fieldset>
-	<?php echo $this->Form->end(__('Submit'));?>
+	<div id="submitbutton">
+		<?php echo $this->Form->submit('submitbutton1.jpg'); ?>
+	</div>	
 </div>
-
-<script type="text/javascript">
-
-		function checkform() {
- 			
- 			var x = document.getElementById('required_base').value;
- 			var y = document.getElementById('required_exponent').value;
-
- 			if (x == "" || isNaN(x)){
-     			alert("invalid input");
-     		}else{
-     			if (x > 0 && y > 0){
- 					document.getElementById('hash_value').disabled = true;
- 				}else{
- 					document.getElementById('hash_value').disabled = false;
- 				}	
-     		}	
-     	}
-
-     	function checkform1() {
-     		var selected = document.getElementById('HashAlgorithm').value;
-			if(selected == 'customised') {
-				document.getElementById('customizedoptions').style.display = 'block';
-				var a = document.getElementById('customized_algorithm_base').value;
-				var b = document.getElementById('customized_algorithm_exponent').value;
-				if (isNaN(a) || isNaN(b)){
-     				alert("invalid input");
-     			}else{
-     				if (a > 0 || b > 0){
- 						document.getElementById('hash_value1').disabled = true;
- 					}else{
- 						document.getElementById('hash_value1').disabled = false;
- 					}	
-     			}
-			}else {
-				document.getElementById('customizedoptions').style.display = 'none';
-			}
-     	}
-
-</script>
