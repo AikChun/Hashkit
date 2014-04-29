@@ -1,120 +1,84 @@
-<?php
-
-	// define variables and set to empty values
-	// $email = $password = "";
-	// $emailErr = $passwordErr = "";
-
-	// if ($_SERVER["REQUEST_METHOD"] == "POST") {
-
-	//    if (empty($_POST["email"])) {
-	//     	$emailErr = "Email is required";
-	//    } else {
-	//     	$email = test_input($_POST["email"]);
-	// 	    // check if e-mail address syntax is valid
-	// 	    if (!preg_match("/([\w\-]+\@[\w\-]+\.[\w\-]+)/",$email)) {
-	// 	    	$emailErr = "Invalid email format";
-	// 	    }
-	// 	}
-
-	//    if (empty($_POST["password"])) {
-	//     	$passwordErr = "Password is required";
-	//    } else {
-	//     	$password = test_input($_POST["password"]);
-	//    }
-
-	// }
-	//      
-	// function test_input($data) {
-
-	//    $data = trim($data);
-	//    $data = stripslashes($data);
-	//    $data = htmlspecialchars($data);
-	//    return $data;
-
-	// }
-
-?>
-
 <div class="container">
 			
 	<div class="jumbotron">
 
-			<?php echo $this->Form->create('User', array('action' => 'login', 'class' => 'form-horizontal'));?>
-
-			<div class="modal-header">
-
-				<h4>Login</h4>
-
-			</div>
+		<?php 
+		
+			echo $this->Form->create('User', array('action' => 'login', 'class' => 'form-horizontal'));
 			
-			<br/>
+		?>
 
-			<div class="form-group">
+		<div class="modal-header">
+
+			<h2>Login</h2>
+
+		</div>
+			
+		<br/>
+
+		<div class="form-group">
 								
-				<label for="login-email" class="col-lg-2 control-label">Email:</label>
+			<label for="login-email" class="col-lg-2 control-label">Email:</label>
 
-				<div class="col-lg-10">
+			<div class="col-lg-10">
 
-					<?php echo $this->Form->input('email', array(
+				<?php
+
+					echo $this->Form->input('email', array(
 						'class' => 'form-control',
 						'placeholder' => 'you@example.com',
 						'label' => false,
 						'required'
-					));?>
+					));
 
-				</div>
+				?>
 
 			</div>
 
-			<div class="form-group">
+		</div>
 
-				<label for="login-password" class="col-lg-2 control-label">Password:</label>
+		<div class="form-group">
 
-				<div class="col-lg-10">
+			<label for="login-password" class="col-lg-2 control-label">Password:</label>
 
-				<?php echo $this->Form->input('password', array(
+			<div class="col-lg-10">
+
+			<?php
+
+				echo $this->Form->input('password', array(
 					'class' => 'form-control',
-					'placeholder' => 'passwordx',
+					'placeholder' => 'Password',
 					'label' => false,
-					'required'
-				));?>
-
-				</div>
-
-			</div>
-
-			<div class="form-group">
-
-				<div class="col-lg-12">
-
-					<a href="/Users/forget_password" class="pull-right">Forgot your password?</a>
-					<br/>
-					<br/>
-					<?php
-						$options = array(
-							'class' => 'btn btn-primary pull-right',
-							'label' => 'Login'
-						);
-
-					?>
-
-				<!--<button class="btn btn-primary pull-right" name="submit" type="submit">Login</button>-->
-
-				</div>
+					'required'));
+				
+			?>
 
 			</div>
 
-			<?php echo $this->Form->end($options); ?>
+		</div>
 
-		<?php
+		<div class="form-group">
 
-			// echo "<h2>Your Input:</h2>";
-			// echo $password;
-			// echo "<br>";
-			// echo $email;
-			// echo "<br>";
+			<div class="col-lg-12">
 
-		?>
+				<a href="/Users/forget_password" class="pull-right">Forgot your password?</a>
+				<br/>
+				<br/>
+
+				<?php
+
+					$options = array(
+						'class' => 'btn btn-primary pull-right',
+						'label' => 'Login'
+					);
+
+				?>
+
+			</div>
+
+		</div>
+
+		<?php echo $this->Form->end($options); ?>
 
 	</div>
 

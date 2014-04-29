@@ -1,120 +1,147 @@
 <div class="container">
 			
 	<div class="jumbotron">
-			
+
 		<?php
 
-		echo $this->Form->create('User');
+			echo $this->Form->create('User', array('action' => 'register', 'class' => 'form-horizontal'));
 
 		?>
 
-		<fieldset>
+		<div class="modal-header">
 
-			<legend><?php echo __('Registration'); ?></legend>
+			<h2>Registration</h2>
 
-			<?php
+		</div>
 
-				echo $this->Form->input('name', array('required'));
-				echo $this->Form->input('email', array('required'));
-				echo $this->Form->input('password', array('type' => 'password', 'required'));
-				echo $this->Form->input('confirm_password', array('type' => 'password', 'required'));
-				echo $this->Form->input('profile');
+		<br/>
 
-			?>
-
-			<font color="grey">By clicking 'Sign up', you argee to the </font>
-			<font color="blue"><u>Terms and Conditions</u></font>
-
-		</fieldset>
-
-		<?php echo $this->Form->end(__('Sign up')); ?>
-
-		<form class="form-horizontal">
-
-			<div class="modal-header">
-
-				<h4>Registration</h4>
-
-			</div>
-
-			<br/>
-
-			<div class="form-group">
+		<div class="form-group">
 								
-				<label for="register-name" class="col-lg-2 control-label">Name:</label>
+			<label for="register-name" class="col-lg-2 control-label">Name:</label>
 
-				<div class="col-lg-10">
+			<div class="col-lg-10">
 
-					<input type="text" class="form-control" id="register-name" placeholder="Full Name">
+				<?php
 
-				</div>
+					echo $this->Form->input('name', array(
+						'class' => 'form-control',
+						'placeholder' => 'Full Name',
+						'label' => false,
+						'required'
+					));
+
+				?>
 
 			</div>
 
-			<div class="form-group">
+		</div>
+
+		<div class="form-group">
 								
-				<label for="register-email" class="col-lg-2 control-label">Email:</label>
+			<label for="register-email" class="col-lg-2 control-label">Email:</label>
 
-				<div class="col-lg-10">
+			<div class="col-lg-10">
 
-					<input type="text" class="form-control" id="register-email" placeholder="you@exampe.com">
+				<?php
+					echo $this->Form->input('email', array(
+						'class' => 'form-control',
+						'placeholder' => 'you@example.com',
+						'label' => false,
+						'required'
+					));
 
-				</div>
-
-			</div>
-
-			<div class="form-group">
-
-				<label for="register-password" class="col-lg-2 control-label">Password:</label>
-
-				<div class="col-lg-10">
-
-					<input type="text" class="form-control" id="register-password" placeholder="Password">
-
-				</div>
+				?>
 
 			</div>
 
-			<div class="form-group">
+		</div>
 
-				<label for="register-cPassword" class="col-lg-2 control-label">Confirm Password:</label>
+		<div class="form-group">
 
-				<div class="col-lg-10">
+			<label for="register-password" class="col-lg-2 control-label">Password:</label>
 
-					<input type="text" class="form-control" id="register-cPassword" placeholder="Password">
+			<div class="col-lg-10">
 
-				</div>
+				<?php
 
-			</div>
+					echo $this->Form->input('password', array(
+						'class' => 'form-control',
+						'placeholder' => 'Password',
+						'label' => false,
+						'required'
+					));
 
-			<div class="form-group">
-
-				<label for="register-profile" class="col-lg-2 control-label">Profile:</label>
-
-				<div class="col-lg-10">
-
-					<textarea type="text" class="form-control" id="register-profile" rows="8" placeholder="Your description"></textarea>
-
-				</div>
+				?>
 
 			</div>
 
-			<div class="form-group">
+		</div>
 
-				<div class="col-lg-12">
+		<div class="form-group">
 
-					<font color="grey" class="pull-right">By clicking 'Sign up', you argee to our 
-					<a href="/">Terms and Conditions</a>.
-					</font>
-					<br/>
-					<br/>
-					<button class="btn btn-primary pull-right" type="submit">Sign Up</button>
+			<label for="register-cPassword" class="col-lg-2 control-label">Confirm Password:</label>
 
-				</div>
+			<div class="col-lg-10">
+
+				<?php
+
+					echo $this->Form->input('confirm_password', array(
+						'class' => 'form-control',
+						'placeholder' => 'Password',
+						'label' => false,
+						'required'
+					));
+
+				?>
 
 			</div>
 
-		</form>
+		</div>
+
+		<div class="form-group">
+
+			<label for="register-profile" class="col-lg-2 control-label">Profile:</label>
+
+			<div class="col-lg-10">
+
+				<?php
+
+					echo $this->Form->input('profile', array(
+						'class' => 'form-control',
+						'placeholder' => 'Your description',
+						'label' => false,
+						'required'
+					));
+
+				?>
+
+			</div>
+
+		</div>
+
+		<div class="form-group">
+
+			<div class="col-lg-12">
+
+				<font color="grey" class="pull-right">By clicking 'Sign up', you argee to our <a href="/">Terms and Conditions</a>.
+				</font>
+				<br/>
+				<br/>
+				<?php
+
+					$options = array(
+						'class' => 'btn btn-primary pull-right',
+						'label' => 'Sign Up'
+					);
+
+				?>
+
+			</div>
+
+		</div>
+
+		<?php echo $this->Form->end($options); ?>
 
 	</div>
 		
