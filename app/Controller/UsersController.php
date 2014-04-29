@@ -275,4 +275,9 @@ class UsersController extends AppController {
 			$this->request->data = $this->User->find('first', $options);
 		}
 	}
+
+	
+	public function terms_and_conditions() {
+		
+	}
 }

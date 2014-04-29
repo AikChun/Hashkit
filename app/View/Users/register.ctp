@@ -128,7 +128,7 @@
 
 			<div class="col-lg-12">
 
-				<font color="grey" class="pull-right">By clicking 'Sign up', you argee to our <a href="/">Terms and Conditions</a>.
+				<font color="grey" class="pull-right">By clicking 'Sign up', you argee to our <a href='/Users/Terms_and_conditions'>Terms and Conditions</a>.
 				</font>
 				<br/>
 				<?php
