@@ -170,6 +170,23 @@ CREATE TABLE `dictionary` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
+INSERT INTO `dictionary` (`id`, `plaintext`, `SHA1`, `MD5`) VALUES
+(1,	'hello\n',	'f572d396fae9206628714fb2ce00f72e94f2258f',	'b1946ac92492d2347c6235b4d2611184'),
+(2,	'asd\n',	'c85320d9ddb90c13f4a215f1f0a87b531ab33310',	'e07910a06a086c83ba41827aa00b26ed'),
+(3,	'bye\n',	'ee9e51458f4642f48efe956962058245ee7127b1',	'91fc14ad02afd60985bb8165bda320a6'),
+(4,	'hey\n',	'7aea02175315cd3541b03ffe78aa1ccc40d2e98a',	'081ecc5e6dd6ba0d150fc4bc0e62ec50'),
+(5,	'bhjcj',	'78299f0f82789e0cd234036a2126817266918884',	'803e80bb05bf6dd43ea57635efc1c958'),
+(6,	'bhjcj gcg',	'2cb69432a0037e85a1c0b06dc4bd364ff390e9ae',	'7b555d405e5c721455e9ed1cefdd70e5'),
+(7,	' hvjb',	'ee06b2a1f9f1fa8b2b20d6f78d8c7a62084ee8dc',	'930fff91e4b2368ba116f04e816fff64'),
+(8,	' ',	'b858cb282617fb0956d960215c8e84d1ccf909c6',	'7215ee9c7d9dc229d2921a40e899ec5f'),
+(9,	'jbi',	'a4344de0a9dd89e3862b78f9fe9bbaedc1f8a8b1',	'215c051ba023f13ec68d0119f48a88ad'),
+(10,	'vui ubiu',	'104c71b711995cb55135f92624d13b14c93ace52',	'9801bfeb4465d0110b5cfe98f01b160b'),
+(11,	'dasdqwd',	'968f3565521ced719ada1e28f58d9ce75a537eef',	'9399cabe8b025274435dc7bbd3221da6'),
+(12,	'fsdf',	'44cef431f67acb94eea6b80b7160b5e9d82e0bcc',	'7d70663568cac5af684503681e3a4d41'),
+(13,	'ugivh',	'e0083af1cb26ed34f8813d51caa08a66ae65d1b5',	'1dcf86c0c05ee7eceb71ad0c00764e1d'),
+(14,	'ubiu',	'7c8d6753b5bd435d3637f99d8509175ba1fbf25a',	'431c0d66f8e9020b2eff56c8535ae209'),
+(15,	'juigviu',	'7bfa299dac7689bfe33dc6d47f5883167a63c09f',	'b4bbc8687e9ca0337d57c4a2122ab651'),
+(16,	'iuvu',	'5e544c3c1434f2ea7c8c895fdc3e333300e6c74c',	'393bdd2f3a16579a857170e86dbe151a');
 
 DROP TABLE IF EXISTS `group`;
 CREATE TABLE `group` (
@@ -194,16 +211,19 @@ CREATE TABLE `hash_algorithm` (
   `collision_resistance` text NOT NULL,
   `preimage_resistance` text NOT NULL,
   `2nd_preimage_resistance` text NOT NULL,
+  `collision_bka` text NOT NULL,
+  `preimage_bka` text NOT NULL,
+  `2nd_preimage_bka` text NOT NULL,
   `output_length` text NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
-INSERT INTO `hash_algorithm` (`id`, `name`, `speed`, `security`, `collision_resistance`, `preimage_resistance`, `2nd_preimage_resistance`, `output_length`) VALUES
-(1,	'SHA1',	'333.29',	'2',	'No',	'Yes',	'Yes',	'160'),
-(2,	'MD5',	'392.32',	'1',	'No',	'No',	'Yes',	'128'),
-(3,	'MD2',	'5.43',	'1',	'No',	'No',	'Yes',	'128'),
-(4,	'MD4',	'540.87',	'0',	'No',	'No',	'No',	'128'),
-(5,	'SHA256',	'169.49',	'3',	'Yes',	'Yes',	'Yes',	'256');
+INSERT INTO `hash_algorithm` (`id`, `name`, `speed`, `security`, `collision_resistance`, `preimage_resistance`, `2nd_preimage_resistance`, `collision_bka`, `preimage_bka`, `2nd_preimage_bka`, `output_length`) VALUES
+(1,	'SHA1',	'333.29',	'2',	'Broken',	'Unbroken',	'Unbroken',	'2^60',	'Nil',	'Nil',	'160'),
+(2,	'MD5',	'392.32',	'1',	'Broken',	'Broken',	'Unbroken',	'2^20.96',	'2^123.4',	'Nil',	'128'),
+(3,	'MD2',	'5.43',	'1',	'Broken',	'Broken',	'Unbroken',	'2^63.3',	'2^73',	'Nil',	'128'),
+(4,	'MD4',	'540.87',	'0',	'Broken',	'Broken',	'Broken',	'3',	'2^69.4',	'2^78.4',	'128'),
+(5,	'SHA256',	'169.49',	'3',	'Unbroken',	'Unbroken',	'Unbroken',	'Nil',	'Nil',	'Nil',	'256');
 
 DROP TABLE IF EXISTS `hash_algorithm_v1`;
 CREATE TABLE `hash_algorithm_v1` (
@@ -276,4 +296,4 @@ INSERT INTO `user` (`id`, `password`, `name`, `email`, `group_id`, `profile`, `s
 (11,	'96b9369f55be479d63a8ef366966a03a607657e4',	'dude',	'dude@gmail.com',	3,	'',	'',	'',	'2014-04-05 00:20:03',	'2014-04-05 00:20:03'),
 (12,	'1fda6ac901aee9291e9ef40a02e86367bb6da06d',	'ian',	'ian@gmail.com',	1,	'super user',	'',	'',	'2014-04-16 15:29:25',	'2014-04-16 15:29:25');
 
--- 2014-04-26 20:04:23
+-- 2014-04-29 17:24:44
