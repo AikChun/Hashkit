@@ -7,7 +7,18 @@
 			$email = array('');
 
 			echo $this->Form->create('HashTests');
-			echo '<h2>Algorithms</h2>';
+
+		?>
+
+		<div class="modal-header">
+
+			<h2>Hash Algorithms</h2>
+
+		</div>
+
+		<br/>
+
+		<?php
 			echo $this->Form->input('HashAlgorithm', array(
 				'type'=>'select',
 				'multiple'=>'checkbox',
@@ -21,11 +32,20 @@
 
 		<br/>
 		
+		<div class="modal-footer">
+
 		<?php
 
-			echo $this->Form->end(__('Next'));
+					$options = array(
+						'class' => 'btn btn-primary pull-right',
+						'label' => 'Next'
+					);
 
 		?>
+
+		<?php echo $this->Form->end($options); ?>
+
+		</div>
 
 	</div>
 		

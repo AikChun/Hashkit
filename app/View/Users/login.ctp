@@ -57,12 +57,15 @@
 
 		</div>
 
+		<div class="modal-footer">
+
+		</div>
+
 		<div class="form-group">
 
 			<div class="col-lg-12">
 
 				<a href="/Users/forget_password" class="pull-right">Forgot your password?</a>
-				<br/>
 				<br/>
 
 				<?php

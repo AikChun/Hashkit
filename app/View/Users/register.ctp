@@ -120,13 +120,16 @@
 
 		</div>
 
+		<div class="modal-footer">
+
+		</div>
+
 		<div class="form-group">
 
 			<div class="col-lg-12">
 
 				<font color="grey" class="pull-right">By clicking 'Sign up', you argee to our <a href="/">Terms and Conditions</a>.
 				</font>
-				<br/>
 				<br/>
 				<?php
 

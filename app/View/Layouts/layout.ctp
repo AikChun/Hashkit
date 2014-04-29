@@ -121,7 +121,6 @@ $cakeDescription = __d('cake_dev', 'FYP: Hashkit');
 			<div class="container">
 				
 				<p class="navbar-text pull-left">Site Built By FYP GROUP</p>
-				<a href="/Users/ContactUs" class="navbar-butoon btn-danger btn pull-right">Contact Us</a>
 
 			</div>
 
