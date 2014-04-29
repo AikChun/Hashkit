@@ -1,4 +1,4 @@
-<div class="avalanche nowrap">
+<div class="container nowrap">
 
 	<div class="selectedAlgorithm" style="font-size:200%">
 		<?php
