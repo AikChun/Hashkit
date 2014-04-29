@@ -304,7 +304,9 @@ class HashTestsController extends AppController {
 					),
 				'fields' => array('HashAlgorithm.speed','HashAlgorithm.security',
 					'HashAlgorithm.collision_resistance','HashAlgorithm.preimage_resistance',
-					'HashAlgorithm.2nd_preimage_resistance','HashAlgorithm.output_length')
+					'HashAlgorithm.2nd_preimage_resistance','HashAlgorithm.output_length',
+					'HashAlgorithm.collision_bka','HashAlgorithm.preimage_bka',
+					'HashAlgorithm.2nd_preimage_bka')
 
 				);
 			$searchResult = array();
@@ -316,7 +318,9 @@ class HashTestsController extends AppController {
 			$hashResult['HashResult']['preimage_resistance'] = $searchResult['HashAlgorithm']['preimage_resistance'];
 			$hashResult['HashResult']['2nd_preimage_resistance'] = $searchResult['HashAlgorithm']['2nd_preimage_resistance'];
 			$hashResult['HashResult']['output_length'] = $searchResult['HashAlgorithm']['output_length'];
-
+			$hashResult['HashResult']['collision_bka'] = $searchResult['HashAlgorithm']['collision_bka'];
+			$hashResult['HashResult']['preimage_bka'] = $searchResult['HashAlgorithm']['preimage_bka'];
+			$hashResult['HashResult']['2nd_preimage_bka'] = $searchResult['HashAlgorithm']['2nd_preimage_bka'];
 			
 			if ($hashResult['HashResult']['security'] > $security) {
 				$security = $hashResult['HashResult']['security'];
