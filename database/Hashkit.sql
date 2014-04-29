@@ -2,7 +2,7 @@
 
 SET NAMES utf8;
 SET foreign_key_checks = 0;
-SET time_zone = '+08:00';
+SET time_zone = '-07:00';
 SET sql_mode = 'NO_AUTO_VALUE_ON_ZERO';
 
 DROP DATABASE IF EXISTS `Hashkit`;
@@ -186,7 +186,8 @@ INSERT INTO `dictionary` (`id`, `plaintext`, `SHA1`, `MD5`) VALUES
 (13,	'ugivh',	'e0083af1cb26ed34f8813d51caa08a66ae65d1b5',	'1dcf86c0c05ee7eceb71ad0c00764e1d'),
 (14,	'ubiu',	'7c8d6753b5bd435d3637f99d8509175ba1fbf25a',	'431c0d66f8e9020b2eff56c8535ae209'),
 (15,	'juigviu',	'7bfa299dac7689bfe33dc6d47f5883167a63c09f',	'b4bbc8687e9ca0337d57c4a2122ab651'),
-(16,	'iuvu',	'5e544c3c1434f2ea7c8c895fdc3e333300e6c74c',	'393bdd2f3a16579a857170e86dbe151a');
+(16,	'iuvu',	'5e544c3c1434f2ea7c8c895fdc3e333300e6c74c',	'393bdd2f3a16579a857170e86dbe151a'),
+(17,	'hello',	'aaf4c61ddcc5e8a2dabede0f3b482cd9aea9434d',	'5d41402abc4b2a76b9719d911017c592');
 
 DROP TABLE IF EXISTS `group`;
 CREATE TABLE `group` (
@@ -238,27 +239,26 @@ INSERT INTO `hash_algorithm_v1` (`id`, `name`, `base`, `exponent`) VALUES
 (1,	'MD2',	2,	128),
 (2,	'MD4',	2,	128),
 (3,	'MD5',	2,	128),
-(5,	'ripemd',	2,	128),
-(6,	'ripemd128',	2,	128),
-(7,	'ripemd256',	2,	256),
-(8,	'ripemd160',	2,	160),
-(9,	'ripemd320',	2,	320),
+(6,	'RIPEMD128',	2,	128),
+(7,	'RIPEMD256',	2,	256),
+(8,	'RIPEMD160',	2,	160),
+(9,	'RIPEMD320',	2,	320),
 (12,	'SHA1',	2,	160),
 (13,	'SHA224',	2,	224),
 (14,	'SHA256',	2,	256),
-(15,	'whirlpool',	2,	512),
-(16,	'customised',	0,	0),
-(17,	'tiger128,3',	2,	32),
+(15,	'WHIRLPOOL',	2,	512),
+(16,	'CUSTOMISED',	0,	0),
+(17,	'TIGER128,3',	2,	32),
 (18,	'SHA384',	2,	384),
 (19,	'SHA512',	2,	512),
-(20,	'tiger160,3',	2,	160),
-(21,	'tiger192,3',	2,	192),
-(22,	'snefru',	2,	256),
-(23,	'crc32',	2,	32),
-(24,	'crc32b',	2,	32),
-(25,	'haval128,3',	2,	128),
-(26,	'haval160,3',	2,	160),
-(27,	'haval192,3',	2,	192);
+(20,	'TIGER160,3',	2,	160),
+(21,	'TIGER192,3',	2,	192),
+(22,	'SNEFRU',	2,	256),
+(23,	'CRC32',	2,	32),
+(24,	'CRC32B',	2,	32),
+(25,	'HAVAL128,3',	2,	128),
+(26,	'HAVAL160,3',	2,	160),
+(27,	'HAVAL192,3',	2,	192);
 
 DROP TABLE IF EXISTS `hash_result`;
 CREATE TABLE `hash_result` (
@@ -273,6 +273,9 @@ CREATE TABLE `hash_result` (
   KEY `description_id` (`description_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
+INSERT INTO `hash_result` (`id`, `plaintext`, `message_digest`, `hash_algorithm_id`, `description_id`, `created`, `modified`) VALUES
+(1,	'hello',	'5d41402abc4b2a76b9719d911017c592',	2,	0,	'2014-04-29',	'2014-04-29'),
+(2,	'hello',	'866437cb7a794bce2b727acc0362ee27',	4,	0,	'2014-04-29',	'2014-04-29');
 
 DROP TABLE IF EXISTS `user`;
 CREATE TABLE `user` (
@@ -296,4 +299,4 @@ INSERT INTO `user` (`id`, `password`, `name`, `email`, `group_id`, `profile`, `s
 (11,	'96b9369f55be479d63a8ef366966a03a607657e4',	'dude',	'dude@gmail.com',	3,	'',	'',	'',	'2014-04-05 00:20:03',	'2014-04-05 00:20:03'),
 (12,	'1fda6ac901aee9291e9ef40a02e86367bb6da06d',	'ian',	'ian@gmail.com',	1,	'super user',	'',	'',	'2014-04-16 15:29:25',	'2014-04-16 15:29:25');
 
--- 2014-04-29 17:24:44
+-- 2014-04-29 02:42:20
