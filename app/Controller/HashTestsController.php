@@ -1,4 +1,4 @@
-
+	
 <?php
 App::uses('AppController', 'Controller');
 App::uses('HashingLib', 'Lib/Hashing');
@@ -536,7 +536,7 @@ class HashTestsController extends AppController {
         $HashAlgorithmV1Model = ClassRegistry::init('HashAlgorithmV1');
      
         $conditions = array(
-			'conditions' => array('HashAlgorithmV1.name !=' => 'customised' ),
+			'conditions' => array('HashAlgorithmV1.name !=' => 'CUSTOMISED' ),
 			'order' => 'HashAlgorithmV1.name ASC'
 		);
 
