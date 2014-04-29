@@ -113,6 +113,7 @@ $cakeDescription = __d('cake_dev', 'FYP: Hashkit');
 
 		</div>
 
+		<?php echo $this->Session->flash(); ?>
 		<?php echo $this->fetch('content'); ?>
 
 		<div class="navbar navbar-default navbar-fixed-bottom">
