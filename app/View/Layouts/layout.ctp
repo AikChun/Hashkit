@@ -26,41 +26,29 @@ $cakeDescription = __d('cake_dev', 'FYP: Hashkit');
 
 	<head>
 
+		<title>Hashkit Project Home Page</title>
+
 	  	<?php 
+	  	
 	  		echo $this->Html->script('jquery-2.1.0.js');
 	  		echo $this->Html->script('bootstrap.js');
-			//$this->Js->JqueryEngine->jQueryObject = '$j';
-			// echo $this->Html->scriptBlock(
-   //  			'var $j = jQuery.noConflict();',
-   //  			array('inline' => false)
-			// );
 
 			echo $this->Html->meta(
     			'viewport',
     			'width=device-width, initial-scale=1.0'
 			);
 
-	  		//echo $this->Html->charset(); 
-			//echo $this->Html->meta('icon');
-			//echo $this->Html->css('new');
 			echo $this->Html->css(array('bootstrap','styles'));
 			echo $this->fetch('script');
 			echo $this->fetch('meta');
 			echo $this->fetch('css');
-			
-			
+
 	  	?>
-
-	  	<title>
-			<?php echo $cakeDescription ?>
-			<?php echo $title_for_layout; ?>
-	  	</title>
-
-		
 
 	</head>
 
 	<body>
+<<<<<<< HEAD
 	<div class="navbar-wrapper">
 		<div class = "navbar navbar-inverse navbar-static-top">
 			<div class = "container">
@@ -69,51 +57,156 @@ $cakeDescription = __d('cake_dev', 'FYP: Hashkit');
 					<span class = "icon-bar"></span>
 					<span class = "icon-bar"></span>
 					<span class = "icon-bar"></span>
+=======
+
+		<div class ="navbar navbar-inverse navbar-static-top">
+
+			<div class="container">
+
+				<a href="/" class="navbar-brand">Hashkit Project</a>
+
+				<button class="navbar-toggle" data-toggle="collapse" data-target=".navHeaderCollapse">
+					
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+
+>>>>>>> 6156e0c2754e5abd9d7e33ce3a0cd3c3f9ec615a
 				</button>
-				<div class = "collapse navbar-collapse navHeaderCollapse">
-				<ul class = "nav navbar-nav navbar-left">
-						<li class = "active"><a href = "#">Home</a></li>
-						<?php if(!empty($authUser)) :?>
-						<li class = "dropdown">
-								<a href="#" class = "dropdown-toggle" data-toggle = "dropdown">Hash functions <b class = "caret"></b></a>
-								<ul class = "dropdown-menu">
-									<li><a href="#">Begin a Test</a></li>
-									<li><a href="/pages/hash_function_properties">Security properties</a></li>
+
+				<div class="collapse navbar-collapse navHeaderCollapse">
+					
+					<ul class="nav navbar-nav navbar-left">
+						
+						<li class="active"><a href="/">Home</a></li>
+						<li><a href="http://hashkitproject.blogspot.sg/">Blog</a></li>
+						<li class="dropdown">
+								
+							<a href="/" class="dropdown-toggle" data-toggle="dropdown">FAQs<b class="caret"></b></a>
+
+								<ul class="dropdown-menu">
+									<li><a href="/">What is hash functions?</a></li>
+									<li><a href="/">What is the desired properties of hash functions?</a></li>
+									<li><a href="/">What is Message Digest?</a></li>
+									<li><a href="/">What is Birthday Paradox?</a></li>
 								</ul>
+
 						</li>
-						<li><a href = "#">Sources</a></li>
-						<?php endif;?>
-						<li><a href = "#">About Us</a></li>
-						<li><a href = "#">Contact Us</a></li>
-						<li><a href = "#">Help</a></li>
-						<li><a href = "http://hashkitproject.blogspot.sg">Blog</a></li>
-				</ul>
-				<ul class = "nav navbar-nav navbar-right">
+						<li><a href="/Users/AboutUs">About Us</a></li>
+						<li><a href="#contact" data-toggle="modal">Contact Us</a></li>
+
+					</ul>
+
+					<ul class = "nav navbar-nav navbar-right">
 
 						<?php if($authUser):?>
-						
-							<li style="float:right;"><a href="/Users/Logout"> Logout</a></li>
-							<li style="float:right;"><a> | </a></li>
-							<li style="float:right;"><a href="/"><?php echo $authUser['name'];?></a></li>
-						
-						<?php endif;?> 
-						
 
-						<?php if(!$authUser):?>
-							<li style="float:right;"><a href="/Users/Login">Login</a></li>
-							<li style="float:right;"><a> | </a></li>
-							<li style="float:right;"><a href="/Users/Register">Register</a></li> 
+						<li style="float:right;"><a href="/Users/Logout">Logout</a></li>
+						<li><a href="/"><?php echo $authUser['name'];?></a></li>
+						
 						<?php endif;?>
-				</ul>
+						
+						<?php if(!$authUser):?>
+
+						<li><a href="/Users/Login">Login</a></li>
+						<li><a href="/Users/Register">Register</a></li> 
+
+						<?php endif;?>
+
+					</ul>
+
 				</div>
+
 			</div>
 
 		</div>
+<<<<<<< HEAD
 	</div>	
 		<?php echo $this->fetch('content'); ?>
+=======
+
+		<?php echo $this->fetch('content'); ?>
+
+		<div class="navbar navbar-default navbar-fixed-bottom">
+			
+			<div class="container">
+				
+				<p class="navbar-text pull-left">Site Built By FYP GROUP</p>
+				<a href="/Users/ContactUs" class="navbar-butoon btn-danger btn pull-right">Contact Us</a>
+
+			</div>
 
 		</div>
 
+		<div class="modal fade" id="contact" role="dialog">
+			
+			<div class="modal-dialog">
+
+				<div class="modal-content">
+
+					<form class="form-horizontal">
+
+						<div class="modal-header">
+
+							<h4>Contact Us!</h4>
+
+						</div>
+
+						<div class="modal-body">
+							
+							<div class="form-group">
+								
+								<label for="contact-name" class="col-lg-2 control-label">Name:</label>
+
+								<div class="col-lg-10">
+
+									<input type="text" class="form-control" id="contact-name" placeholder="Full Name">
+
+								</div>
+
+							</div>
+
+							<div class="form-group">
+
+								<label for="contact-email" class="col-lg-2 control-label">Email:</label>
+
+								<div class="col-lg-10">
+>>>>>>> 6156e0c2754e5abd9d7e33ce3a0cd3c3f9ec615a
+
+									<input type="text" class="form-control" id="contact-email" placeholder="you@example.com">
+
+								</div>
+
+							</div>
+
+							<div class="form-group">
+
+								<label for="contact-message" class="col-lg-2 control-label">Message:</label>
+
+								<div class="col-lg-10">
+
+									<textarea class="form-control" rows="8"placeholder="Your message to us"></textarea>
+
+								</div>
+
+							</div>
+
+						</div>
+
+						<div class="modal-footer">
+
+							<button class="btn btn-primary" type="submit">Send</button>
+							<a class="btn btn-default" data-dismiss="modal">Close</a>
+
+						</div>
+
+					</form>
+
+				</div>
+
+			</div>
+
+<<<<<<< HEAD
 		<nav class = "navbar navbar-default navbar-static-bottom" role ="navigation">
 			<div class = "container">
 				<a href ="/pages/index" class = "navbar-button navbar-text ">Hashkit</a>
@@ -128,6 +221,10 @@ $cakeDescription = __d('cake_dev', 'FYP: Hashkit');
 			</div>
 		</nav>
 	
+=======
+		</div>
+
+>>>>>>> 6156e0c2754e5abd9d7e33ce3a0cd3c3f9ec615a
 	</body>
 
 </html>

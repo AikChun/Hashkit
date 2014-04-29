@@ -1,44 +1,56 @@
-<?php
+<div class="container">
+			
+	<div class="jumbotron">
+		
+		<center>
+					
+		<h2>Welcome To Hashkit Project!!!</h2>
+		<p>This is a project done by a group of University of Wollongong (UOW) students.
+		<br/>
+		The purpose of this project to provide the public with some tools for cryptographic application.</p>
 
-echo '<script language="javascript">';
-echo 'function displayInfo(){
-		var myWindow = window.open("","myWindow","width=200,height=100");
-		myWindow.document.write("<p>Hello User!</p>");
-	  }';
-echo '</script>';
+		</center>
 
-?>
-<div class="users view">
-<p style='font-size:165%'>Welcome</p>
+	</div>
+		
+</div>
 
-<br>This is a project done by a group of University of Wollongong (UOW) students. </br>
-<br>The purpose of this project to provide the public with some tools for cryptographic application.</br>
+<div class="container">
+			
+	<div class="row">
+				
+		<div class="col-md-3">
 
-<?php
+			<h3><a href="#">Hello World</a></h3>
+			<p>Sample Text</p>
+			<a href="#" class="btn btn-default">Read More</a>
 
-if(empty($authUser)): 
+		</div>
 
-echo $this->Html->link('Sign in', array('controller' => 'users', 'action' => 'login')); 
+		<div class="col-md-3">
+					
+		<h3><a href="#">Hello World</a></h3>
+		<p>Sample Text</p>
+		<a href="#" class="btn btn-default">Read More</a>
 
-?>
-	
- or 
+		</div>
 
-<?php
+		<div class="col-md-3">
+					
+		<h3><a href="#">Hello World</a></h3>
+		<p>Sample Text</p>
+		<a href="#" class="btn btn-default">Read More</a>
 
-echo $this->Html->link('Register', array('controller' => 'users', 'action' => 'register'));
+		</div>
 
-?>
+		<div class="col-md-3">
+				
+		<h3><a href="#">Hello World</a></h3>
+		<p>Sample Text</p>
+		<a href="#" class="btn btn-default">Read More</a>
 
-to begin using our product!
+		</div>
+		
+	</div>
 
-<?php
-
-endif;
-
-?>
-
-<br/>
-<br/>
-<input type="submit" value="More Information!" onClick="displayInfo()" style="height:30px; width:165px" /><br/>
 </div>

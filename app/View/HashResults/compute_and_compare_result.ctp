@@ -100,11 +100,31 @@
 	<?php endforeach;?>
 	</tr>
 
-
 	<tr>
 	<td>2nd preimage Resistence</td>
 	<?php foreach($output as $key => $data):?>
 	<td><?php echo $data['HashResult']['2nd_preimage_resistance'];?></td>
+	<?php endforeach;?>
+	</tr>
+
+	<tr>
+	<td>Collision Best Known Attack</td>
+	<?php foreach($output as $key => $data):?>
+	<td><?php echo $data['HashResult']['collision_bka'];?></td>
+	<?php endforeach;?>
+	</tr>
+
+	<tr>
+	<td>preimage Best Known Attack</td>
+	<?php foreach($output as $key => $data):?>
+	<td><?php echo $data['HashResult']['preimage_bka'];?></td>
+	<?php endforeach;?>
+	</tr>
+
+	<tr>
+	<td>2nd preimage Best Known Attack</td>
+	<?php foreach($output as $key => $data):?>
+	<td><?php echo $data['HashResult']['2nd_preimage_bka'];?></td>
 	<?php endforeach;?>
 	</tr>
 
