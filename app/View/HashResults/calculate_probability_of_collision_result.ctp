@@ -1,4 +1,4 @@
-<div class="hashResults view">
+<div class="container">
 
 	<?php 
 			//base - result from database (total hashes)
@@ -42,7 +42,4 @@
 
 	<?php echo "the required sample space to get 99% probability of getting a collision: " . $requiredsamplespace . " hashes" ?>
 	<br>
-	<button> <a href="/HashTests/calculate_probability_of_collision"> <- </a> </button>
-	<button> <a href="/pages/hash_function_properties"> home </a> </button>
-
 </div>
