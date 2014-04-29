@@ -61,7 +61,7 @@ $cakeDescription = __d('cake_dev', 'FYP: Hashkit');
 	</head>
 
 	<body>
-
+	<div class="navbar-wrapper">
 		<div class = "navbar navbar-inverse navbar-static-top">
 			<div class = "container">
 				<a href = "/pages/index" class = "navbar-brand">Hashkit</a>
@@ -109,69 +109,25 @@ $cakeDescription = __d('cake_dev', 'FYP: Hashkit');
 			</div>
 
 		</div>
-		
-		<div id='wrap'>
-
-		<div id='header'>
-
-			<hr/>
-			<p align='center'> MAYBE OUR LOGO HERE </p>
-			<hr/>
-
-		</div>
-
-		<!-- <div id='cssmenu'>
-
-			<ul>
-
-				<li class='active'><a href='/'><span>Home</span></a></li>
-				<li><a href='http://hashkitproject.blogspot.sg/'><span>Blog</span></a></li>
-				<li><a href='/Users/HelpfulInformation'><span>Helpful Information</span></a></li>
-				<li><a href='/Users/AboutUs'><span>About Us</span></a></li>
-				<li class='last'><a href='/Users/ContactUs'><span>Contact Us</span></a></li>
-
-			</ul>
-
-		</div> -->
-
-		<!-- <p align='right'>
-
-			<?php if($authUser):?>
-
-				<a href="/"> <?php echo $authUser['name'];?> </a>
-				<a> | </a>
-				<a href="/Users/Logout"> Logout</a>
-
-			<?php endif;?>
-
-			<?php if(!$authUser):?>
-
-				<a href="/Users/Login">Sign In</a>
-				<a> | </a>
-				<a href="/Users/Register"> Register</a>
-
-			<?php endif;?>
-
-		</p> -->
-
-		<?php echo $this->Session->flash(); ?>
+	</div>	
 		<?php echo $this->fetch('content'); ?>
 
 		</div>
 
-		<div class = "navbar navbar-default navbar-fixed-bottom">
-			<a href ="/pages/index" class = "navbar-button navbar-text ">Hashkit</a>
-			<a href="/pages/index" class = "navbar-button navbar-text">Home</a>
-			<a href="%" class = "navbar-button navbar-text">Hash functions</a>
-			<a href="%" class = "navbar-button navbar-text">Sources</a>
-			<a href="%" class = "navbar-button navbar-text">About Us</a>
-			<a href="%" class = "navbar-button navbar-text">Contact</a>
-			<a href="%" class = "navbar-button navbar-text">Help</a>
-			<a href="%" class = "navbar-button navbar-text">Blog</a>
-			<li class ="navbar-text" style="float:right;"><p>2014 HashKit project</p></li>
-		</div>
+		<nav class = "navbar navbar-default navbar-static-bottom" role ="navigation">
+			<div class = "container">
+				<a href ="/pages/index" class = "navbar-button navbar-text ">Hashkit</a>
+				<a href="/pages/index" class = "navbar-button navbar-text">Home</a>
+				<a href="%" class = "navbar-button navbar-text">Hash functions</a>
+				<a href="%" class = "navbar-button navbar-text">Sources</a>
+				<a href="%" class = "navbar-button navbar-text">About Us</a>
+				<a href="%" class = "navbar-button navbar-text">Contact</a>
+				<a href="%" class = "navbar-button navbar-text">Help</a>
+				<a href="%" class = "navbar-button navbar-text">Blog</a>
+				<li class ="navbar-text" style="float:right;"><p>2014 HashKit project</p></li>
+			</div>
+		</nav>
 	
-	<?php echo $this->Js->writeBuffer(); ?>
 	</body>
 
 </html>
