@@ -65,6 +65,7 @@ $cakeDescription = __d('cake_dev', 'FYP: Hashkit');
 						
 						<li class="active"><a href="/">Home</a></li>
 						<li><a href="http://hashkitproject.blogspot.sg/">Blog</a></li>
+						<?php if($authUser):?>
 						<li class="dropdown">
 								
 							<a href="/" class="dropdown-toggle" data-toggle="dropdown">Hash Functions<b class="caret"></b></a>
@@ -81,6 +82,7 @@ $cakeDescription = __d('cake_dev', 'FYP: Hashkit');
 
 						</li>
 						<li><a href="/Pages/hash_function">Hash information</a></li>
+						<?php endif;?>
 						<li><a href="/Users/AboutUs">About Us</a></li>
 						<li><a href="#contact" data-toggle="modal">Contact Us</a></li>
 
