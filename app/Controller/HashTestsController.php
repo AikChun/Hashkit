@@ -50,7 +50,7 @@ class HashTestsController extends AppController {
 	public function basic_hashing() {
 		$HashAlgorithmModel = ClassRegistry::init('HashAlgorithm');
 
-		$this->Session->setFlash("HELLO WORLD", "flash_custom");
+		//$this->Session->setFlash("HELLO WORLD", "flash_custom");
 
 		if($this->request->is('post')) {
 			if(empty($this->request->data['HashTests']['HashAlgorithm'])) {

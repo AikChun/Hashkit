@@ -106,7 +106,7 @@
         },
         "time": "2013-10-26 00:34:46",
         "type": "cakephp-plugin",
-        "installation-source": "dist",
+        "installation-source": "source",
         "notification-url": "https://packagist.org/downloads/",
         "license": [
             "MIT"
@@ -145,7 +145,7 @@
         },
         "time": "2013-06-28 02:04:59",
         "type": "cakephp-plugin",
-        "installation-source": "dist",
+        "installation-source": "source",
         "notification-url": "https://packagist.org/downloads/"
     }
 ]
