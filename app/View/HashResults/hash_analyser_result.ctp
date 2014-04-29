@@ -1,4 +1,4 @@
-<div class="hashResults view">
+<div class="hashResults container">
 	
 	<div class="Title" style="font-size:150%">
 			<u>Analysis</u>
@@ -26,8 +26,6 @@
 
 	?>
 
-	<br><br>
-	<button> <a href="/HashTests/hash_analyser"> <- </a> </button>
-	<button> <a href="/pages/hash_function_properties"> home </a> </button>
+	
 	
 </div>

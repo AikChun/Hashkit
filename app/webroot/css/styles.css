@@ -2,4 +2,15 @@ body {
 	margin-bottom: 80px;
 }
 
-.error {color: #FF0000;}
+
+.error {
+	color: #FF0000;
+}
+
+.digests {
+	font-family: Consolas;
+	font-size: 140%;
+}
+div.nowrap{
+	white-space:nowrap;
+}
