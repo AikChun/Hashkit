@@ -130,7 +130,6 @@ class HashTestsController extends AppController {
 			//$this->log($data);
 
 			if (!empty($data['HashTests']['plaintext'])) {
-
 				$output = HashingLib::computeDigests($selectedAlgorithms, $data['HashTests']['plaintext']);
 	            $this->Session->write('output', $output);
 				$this->redirect(array('controller' => 'HashResults', 'action' => 'basic_hashing_result'));
@@ -362,9 +361,10 @@ class HashTestsController extends AppController {
 
 		if($this->request->is('post')) {
 			$data = $this->request->data['HashTests'];
-			$result = HashingLib::checkDictionary($data);
+			$result = HashingLib::matchPlaintextWithMessageDigest($data);
+			$this->log($result);
 			$this->Session->write('reverseData', $result );
-			$this->redirect('/HashResults/reverse');
+			$this->redirect('/HashResults/reverse_look_up_result');
 		}
 	}
 
