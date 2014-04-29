@@ -1,54 +1,3 @@
-<!-- <div class="hashTests view"> -->
-
-<script type="text/javascript">
-
-	function checkform() {
-			
-		var x = document.getElementById('required_base').value;
-		var y = document.getElementById('required_exponent').value;
-
-		if (x == "" || isNaN(x)){
-			 //alert("invalid input");
-			$('.bs-example-modal-lg').modal('show')
-			var required_base = $('#required_base');
-			required_base.val('');
-			var required_exponent = $('#required_exponent');
-			required_exponent.val('');
- 		}else{
- 			if (x > 0 && y > 0){
-				document.getElementById('hash_value').disabled = true;
-			}else{
-				document.getElementById('hash_value').disabled = false;
-			}	
- 		}	
- 	}
-
- 	function checkform1() {
- 		var selected = document.getElementById('HashAlgorithm').value;
-		if(selected == 'CUSTOMISED') {
-			document.getElementById('customizedoptions').style.display = 'block';
-		}else {
-			document.getElementById('customizedoptions').style.display = 'none';
-		}
- 	}
-
- 	function checkform2() {
- 		var a = document.getElementById('customized_algorithm_base').value;
-		var b = document.getElementById('customized_algorithm_exponent').value;
-		if (isNaN(a) || isNaN(b)){
- 				//alert("invalid input");
- 				$('.bs-example-modal-sm').modal('show')
- 		}else{
-			if (a > 0 || b > 0){
-				document.getElementById('hash_value1').disabled = true;
-			}else{
-				document.getElementById('hash_value1').disabled = false;
-			}	
- 		}
- 	}
-
-</script>
-
 <div class="container">
 	<?php echo $this->Form->create('HashTests',array('action' => 'calculate_probability_of_collision'));?> 
 
@@ -101,7 +50,8 @@
 					'div' => false,
 					'label' => 'Number of hashes :',
 					'size' => 30,
-					'id' => 'hash_value'
+					'id' => 'hash_value',
+					'onchange' => 'checkformforHashValue()'
 				));
 			?>
 	</fieldset>
@@ -161,13 +111,18 @@
 	?>
 	</div>
 	</fieldset>
-
-
-	<div id="submitbutton">
-		<?php echo $this->Form->submit('submitbutton1.jpg'); ?>
-	</div>	
-
-	 <button style="display: none;" class="btn btn-primary" data-toggle="modal" data-target=".bs-example-modal-sm">Small modal</button> 
+ 
+ 	<?php echo $this->Form->button('Submit', 
+ 		array(
+ 			'type' => 'submit',
+ 			'class'=> 'btn btn-primary pull-left',
+ 			'onclick'=> 'submitbutton()'
+ 			)); 
+ 	?>
+	
+	<button style="display: none;" class="btn btn-primary" data-toggle="modal" data-target=".bs-example-modal-lg">Small modal</button> 
+	
+	<button style="display: none;" class="btn btn-primary" data-toggle="modal" data-target=".bs-1-modal-lg">Small modal</button> 
 	
 	<div class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
 				<div class="modal-dialog modal-lg">
@@ -177,4 +132,109 @@
 				  </div>
 	</div>
 
+	<div class="modal fade bs-1-modal-lg" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
+				<div class="modal-dialog modal-lg">
+					<div class="modal-content alert alert-danger">
+				      <CENTER><h3> Fill in all required empty fields.</h3></CENTER>
+				    </div>
+				  </div>
+	</div>
+
 </div>
+
+
+<script type="text/javascript">
+
+	function checkform() {
+			
+		var x = document.getElementById('required_base').value;
+		var y = document.getElementById('required_exponent').value;
+
+		if (isNaN(y) || isNaN(x) || x > 5 ){
+			 //alert("invalid input");
+			$('.bs-example-modal-lg').modal('show')
+			var required_base = $('#required_base');
+			required_base.val('');
+			var required_exponent = $('#required_exponent');
+			required_exponent.val('');
+ 		}else{
+ 			if (x > 0 && y > 0){
+				document.getElementById('hash_value').disabled = true;
+			}else{
+				document.getElementById('hash_value').disabled = false;
+			}	
+ 		}	
+ 	}
+
+ 	function checkformforHashValue() {
+ 		var r = document.getElementById('hash_value').value;
+ 		if (isNaN(r)){
+ 			$('.bs-example-modal-lg').modal('show')
+ 			var hash_value = $('#hash_value');
+			hash_value.val('');
+ 		}
+ 	}
+
+ 	function checkform1() {
+ 		var selected = document.getElementById('HashAlgorithm').value;
+		if(selected == 'CUSTOMISED') {
+			document.getElementById('customizedoptions').style.display = 'block';
+		}else {
+			document.getElementById('customizedoptions').style.display = 'none';
+		}
+ 	}
+
+ 	function checkform2() {
+ 		var a = document.getElementById('customized_algorithm_base').value;
+		var b = document.getElementById('customized_algorithm_exponent').value;
+		if (isNaN(a) || isNaN(b) || a > 5){
+ 				//alert("invalid input");
+ 				$('.bs-example-modal-lg').modal('show')
+				var required_base = $('#customized_algorithm_base');
+				required_base.val('');
+				var required_exponent = $('#customized_algorithm_exponent');
+				required_exponent.val('');
+ 		}else{
+			if (a > 0 || b > 0){
+				document.getElementById('hash_value1').disabled = true;
+			}else{
+				document.getElementById('hash_value1').disabled = false;
+			}	
+ 		}
+ 	}
+
+ 	function checkformforHashValue() {
+ 		var h = document.getElementById('hash_value1').value;
+ 		if (isNaN(h)){
+ 			$('.bs-example-modal-lg').modal('show')
+ 			var hash_value1 = $('#hash_value1');
+			hash_value1.val('');
+ 		}
+ 	}
+
+ 	function submitbutton() {
+ 		var c = document.getElementById('required_base').value;
+ 		var d = document.getElementById('required_exponent').value;
+ 		var e = document.getElementById('hash_value').value;
+ 		var f = document.getElementById('HashAlgorithm').value;
+
+ 		if(c == "" && d = ""){
+ 			if(e == ""){
+ 				$('.bs-1-modal-lg').modal('show')
+ 			}
+ 		}else if(c != "" && d != ""){
+ 			if(e != ""){
+ 				$('.bs-1-modal-lg').modal('show')
+ 			}
+ 		}else if(c != "" || d != ""){
+ 			if(e != ""){
+ 				$('.bs-1-modal-lg').modal('show')
+ 			}
+ 		}else if(e != ""){
+ 			if(c != "" || d != ""){
+ 				$('.bs-1-modal-lg').modal('show')
+ 			}
+ 		}
+ 	}
+
+</script>
