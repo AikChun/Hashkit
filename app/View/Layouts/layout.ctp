@@ -32,6 +32,7 @@ $cakeDescription = __d('cake_dev', 'FYP: Hashkit');
 	  	
 	  		echo $this->Html->script('jquery-2.1.0.js');
 	  		echo $this->Html->script('bootstrap.js');
+	  		echo $this->Html->script('jquery.scrollNav.js');
 
 			echo $this->Html->meta(
     			'viewport',
