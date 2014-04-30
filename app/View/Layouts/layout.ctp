@@ -43,7 +43,18 @@
 						
 						<li class="active"><a href="/">Home</a></li>
 						<li><a href="http://hashkitproject.blogspot.sg/">Blog</a></li>
-						<?php if($authUser):?>
+						<?php  if($authUser['group_id'] == 1) :?>
+						<li class="dropdown">
+								
+							<a href="/" class="dropdown-toggle" data-toggle="dropdown">Admin tools<b class="caret"></b></a>
+
+								<ul class="dropdown-menu">
+									<li><a href="/Users/admin_add">list users</a></li>
+									<li><a href="/Users/edit">edit users</a></li>
+								</ul>
+						</li>
+						<?php endif;?>
+						<?php if($authUser):?>						
 						<li class="dropdown">
 								
 							<a href="/" class="dropdown-toggle" data-toggle="dropdown">Hash Functions<b class="caret"></b></a>
