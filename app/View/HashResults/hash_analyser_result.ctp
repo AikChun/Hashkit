@@ -4,7 +4,7 @@
 
 		<div class="modal-header">
 
-			<h2>Reverse Look-up Results</h2>
+			<h2>Message Digest Analyser Results</h2>
 
 		</div>
 
