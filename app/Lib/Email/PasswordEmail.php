@@ -37,6 +37,11 @@ class PasswordEmail {
 		return $email;
 	}
 
+/**
+ * This is called in controller to send new password
+ * @param String newPassword is expected to be a string 
+ * @return boolean true if sending is okay.
+ */
 	public function sendNewPassword($newPassword) {
 		$email = $this->email;
 		$email->subject('[Password Reset] Do NOT reply to this email');
@@ -47,6 +52,23 @@ class PasswordEmail {
 			$result = $email;
 		}
 		return $result;
+
+		// This is the sample code.
+			// public function sendCheckoutEmail($cartData) {
+			// 	$email = $this->email;
+			// 	$email->subject('Thank you for purchasing from ChildLabel! ' . $cartData['payment_options']);
+			// 	$email->template('successful_done');
+			// 	$email->emailFormat('html');
+			// 	$email->viewVars(array('cartData'=>$cartData,
+			// 					'fullName' => $this->to['full_name'],
+			// 					'email' => $this->to['email']));
+			// 	if (EMAIL_ON) {
+			// 		$result = $email->send();
+			// 	} else {
+			// 		$result = $email;
+			// 	}
+			// 	return $result;
+	// }
 	}
 
 	public function sendToken($token) {
