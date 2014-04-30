@@ -90,6 +90,7 @@
 						'class' => 'form-control',
 						'placeholder' => 'Password',
 						'label' => false,
+						'type' => 'password',
 						'required'
 					));
 
@@ -128,7 +129,7 @@
 
 			<div class="col-lg-12">
 
-				<font color="grey" class="pull-right">By clicking 'Sign up', you argee to our <a href="#terms_and_conditions" data-toggle="modal" data-target=".terms_and_conditions">Terms and Conditions</a>.
+				<font color="grey" class="pull-right">By clicking 'Sign up', you agree to our <a href="#terms_and_conditions" data-toggle="modal" data-target=".terms_and_conditions">Terms and Conditions</a>.
 				</font>
 				<br>
 				<?php

@@ -22,8 +22,8 @@
 	echo 'Output Bits: '. $output[2]. '<br><br>';
 
 	echo '<u>Comparison in a better view</u><br><br>';
-	echo 'Input Bits (Hello): 0100100001100101011011000110110001101111<br>';
-	echo 'Input Bits (Helln): 0100100001100101011011000110110001101110<br><br>';
+	echo 'Input Bits (Hello): 010010000110010101101100011011000110111<span style="background-color: #FFFF00">1</span><br>';
+	echo 'Input Bits (Helln): 010010000110010101101100011011000110111<span style="background-color: #FFFF00">0</span><br><br>';
 	echo 'Output Bits (Hello): '. '<span class="digests">'.$output[1].'</span>'. '<br>';
 	echo 'Output Bits (Helln): '. '<span class="digests">'.$output[2].'</span>'. '<br><br>';
 
@@ -49,8 +49,8 @@
 	echo 'Output Bits: '. $output[5]. '<br><br>';
 
 	echo '<u>Comparison in a better view</u><br><br>';
-	echo 'Input Bits (Computer): 0100001101101111011011010111000001110101011101000110010101110010<br>';
-	echo 'Input Bits (Computes): 0100001101101111011011010111000001110101011101000110010101110011<br><br>';
+	echo 'Input Bits (Computer): 010000110110111101101101011100000111010101110100011001010111001<span style="background-color: #FFFF00">0</span><br>';
+	echo 'Input Bits (Computes): 010000110110111101101101011100000111010101110100011001010111001<span style="background-color: #FFFF00">1</span><br><br>';
 	echo 'Output Bits (Computer): '. '<span class="digests">'.$output[4].'</span>'. '<br>';
 	echo 'Output Bits (Computes): '. '<span class="digests">'.$output[5].'</span>'. '<br><br>';
 
@@ -76,8 +76,8 @@
 	echo 'Output Bits: '. $output[8]. '<br><br>';
 
 	echo '<u>Comparison in a better view</u><br><br>';
-	echo 'Input Bits (Science): 01010011011000110110100101100101011011100110001101100101<br>';
-	echo 'Input Bits (Sciencd): 01010011011000110110100101100101011011100110001101100100<br><br>';
+	echo 'Input Bits (Science): 0101001101100011011010010110010101101110011000110110010<span style="background-color: #FFFF00">1</span><br>';
+	echo 'Input Bits (Sciencd): 0101001101100011011010010110010101101110011000110110010<span style="background-color: #FFFF00">0</span><br><br>';
 	echo 'Output Bits (Science): '. '<span class="digests">'.$output[7].'</span>'. '<br>';
 	echo 'Output Bits (Sciencd): '. '<span class="digests">'.$output[8].'</span>'. '<br><br>';
 

@@ -59,7 +59,14 @@
               <hr class="">
                 <h2 id="sec2" class="">Hash functions' properties</h2>
 
-              <p class="">A cyptographic hash functions must be able to defend against all known type of cryptanalytic attack. </p>
+              <p class="">A cyptographic hash functions must be able to defend against all known type of cryptanalytic attack. It should be able to apply to any input size and output a fixed size. It must have the following properties:
+                  <li><b>Pre-image resistance</b>
+                  <br>
+                  For any given input Y, it should be difficult to find another input X such that hash(Y) = hash(X) and Y not equals to X. Function that does not have this property are prone to preimage attacks.
+                  <br><br>
+                  <li><b>Second pre-image resistance</b>
+              
+              </p>
               <div class="row">
                   <div class="col-md-4">
                       <img src="//placehold.it/300x300" class="img-responsive">
