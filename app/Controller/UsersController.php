@@ -276,8 +276,4 @@ class UsersController extends AppController {
 		}
 	}
 
-	
-	public function terms_and_conditions() {
-		
-	}
 }
