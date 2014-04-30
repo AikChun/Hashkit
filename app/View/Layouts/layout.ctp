@@ -49,8 +49,9 @@
 							<a href="/" class="dropdown-toggle" data-toggle="dropdown">Admin tools<b class="caret"></b></a>
 
 								<ul class="dropdown-menu">
-									<li><a href="/Users/admin_add">list users</a></li>
-									<li><a href="/Users/edit">edit users</a></li>
+
+									<li><a href="/Users/">List Users</a></li>
+									<li><a href="/Users/admin_add">Add Users</a></li>
 								</ul>
 						</li>
 						<?php endif;?>
