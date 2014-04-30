@@ -181,16 +181,9 @@
 
 		<br/>
 
-		<b>Comparing between selected algorithmn:</b>
+		<b>Comparing between selected algorithmn:</b><br/><br/>
 
-		<table border="1">
-
-			<col width="300">
-			<col width="90">
-			<col width="90">
-			<col width="90">
-			<col width="90">
-			<col width="90">
+		<table class="table table-bordered table-condensed">
 			
 			<tr>
 
@@ -431,8 +424,6 @@
 		<?php
 			$last = end($output);
 		?>
-
-		<br/>
 
 		<table>
 
