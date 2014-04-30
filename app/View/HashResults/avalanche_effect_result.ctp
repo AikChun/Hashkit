@@ -1,5 +1,15 @@
-<div class="container nowrap">
+<div class="container">
+			
+	<div class="jumbotron">
 
+		<div class="modal-header">
+
+			<h2>Avalanche Effect</h2>
+
+		</div>
+
+		<br/>
+	
 	<div class="selectedAlgorithm" style="font-size:200%">
 		<?php
 		echo 'Your selected algorithm is <b>'. $output[0]['HashTests']['HashAlgorithm']. '</b><br><br>';
@@ -84,5 +94,17 @@
 
 	echo 'Flipping a single bit on the input word "Science" causes <b>'. $output[9]. '%</b> changes in output bits.';
 	?>
+
+		<div class="modal-footer">
+
+		</div>
+
+		<div class="form-group">
+
+				<a href="/" class="btn btn-primary pull-right" data-dismiss="modal">Back to Home</a>
+
+		</div>
+	
+	</div>
 
 </div>

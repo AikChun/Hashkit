@@ -91,7 +91,6 @@
 
 						<li><a href="/Users/Login">Login</a></li>
 						<li><a href="/Users/Register">Register</a></li> 
-
 						
 						<?php endif;?>
 
