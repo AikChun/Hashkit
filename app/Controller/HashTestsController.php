@@ -280,6 +280,8 @@ class HashTestsController extends AppController {
 			);
 			$result = $hashResultModel->find('first', $conditions);
 
+			$hashResult['HashResult']['collision_index'] = $dup;
+
 			$collision_pt = array();
 			$collision_md = array();
 			$collision = '';

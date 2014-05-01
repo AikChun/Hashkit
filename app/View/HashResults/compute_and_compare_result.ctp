@@ -141,12 +141,49 @@
 			</tr>
 
 			<table class="table table-bordered table-condensed">
+				<col align = "left">
+				<col align = "left">
+				<col align = "left">
 
 			<?php
 
 				if(count($ptline) > 1) {
 				$collision_pt = $output[0]['HashResult']['collision_pt'];
 				$collision_md = $output[0]['HashResult']['collision_md'];
+				$collision_index = $output[0]['HashResult']['collision_index'];
+
+			?>
+
+			<tr>
+
+				<td>
+
+					<b>Plaintext</b>
+
+				</td>
+
+				<td>
+
+					<b>
+						<?php
+							echo $output[0]['HashResult']['hash_algorithm_name'];
+						?>
+					</b>
+
+					<b> Message Digest</b>
+
+				</td>
+
+				<td>
+
+					<b>File Line<b>
+
+				</td>
+
+			</tr>
+
+			<?php 
+
 				foreach($output[0]['HashResult']['collision_pt'] as $key => $data):
 
 			?>
@@ -165,6 +202,16 @@
 					
 					<?php
 						echo $collision_md[$key];
+					?>
+
+				</td>
+
+				<td>
+
+					<?php
+
+						echo $collision_index[$key] + 1;
+
 					?>
 
 				</td>
