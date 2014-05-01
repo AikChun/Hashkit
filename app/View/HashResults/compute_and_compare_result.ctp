@@ -83,7 +83,7 @@
 				
 				<td>
 					
-					<b>Selected Algorithm:</b><br/>
+					<b>Selected Algorithm:</b>
 					<?php
 						echo $data1['HashResult']['hash_algorithm_name'];
 					?>
@@ -96,40 +96,39 @@
 
 				<td>
 
-					<b>Message Digest:</b><br/>
+					<b>Message Digest:</b>
+
+				</td>
+
+			</tr>
 
 					<?php
 
 						foreach($mdline as $key2 => $data2):
+					?>	
+
+						<tr>
+						<td>
+						<?php
 						echo $data2;
+						?>
+
+						<br>
+						</td>
+						</tr>
+
+						<?php
 						endforeach;
 						endforeach;
 					
 					?>
-
-				</td>
-				
-			</tr>
-
 		</table>
 
 		<br/>
-
-		<table>
-
-			<tr>
-
-				<td>
 			
 					<b>Analysis: </b>
-			
-				</td>
-			
-			</tr>
 
-			<tr>
-
-				<td>
+			
 			
 					<?php
 						echo $output[0]['HashResult']['description'];
@@ -141,11 +140,50 @@
 			
 			</tr>
 
+			<table class="table table-bordered table-condensed">
+				<col align = "left">
+				<col align = "left">
+				<col align = "left">
+
 			<?php
 
 				if(count($ptline) > 1) {
 				$collision_pt = $output[0]['HashResult']['collision_pt'];
 				$collision_md = $output[0]['HashResult']['collision_md'];
+				$collision_index = $output[0]['HashResult']['collision_index'];
+
+			?>
+
+			<tr>
+
+				<td>
+
+					<b>Plaintext</b>
+
+				</td>
+
+				<td>
+
+					<b>
+						<?php
+							echo $output[0]['HashResult']['hash_algorithm_name'];
+						?>
+					</b>
+
+					<b> Message Digest</b>
+
+				</td>
+
+				<td>
+
+					<b>File Line<b>
+
+				</td>
+
+			</tr>
+
+			<?php 
+
 				foreach($output[0]['HashResult']['collision_pt'] as $key => $data):
 
 			?>
@@ -164,6 +202,16 @@
 					
 					<?php
 						echo $collision_md[$key];
+					?>
+
+				</td>
+
+				<td>
+
+					<?php
+
+						echo $collision_index[$key] + 1;
+
 					?>
 
 				</td>
@@ -462,5 +510,23 @@
 		</div>
 
 	</div>
+
+	<div class="form-group">
+
+			<div class="col-lg-12">
+
+				<?php
+
+					$options = array(
+						'class' => 'btn btn-primary pull-right',
+						'label' => 'Submit'
+					);
+
+				?>
+
+			</div>
+
+		</div>
+
 
 </div>

@@ -90,6 +90,7 @@
 						'class' => 'form-control',
 						'placeholder' => 'Password',
 						'label' => false,
+						'type' => 'password',
 						'required'
 					));
 

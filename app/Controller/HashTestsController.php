@@ -137,7 +137,7 @@ class HashTestsController extends AppController {
 	            $this->Session->write('output', $output);
 				$this->redirect(array('controller' => 'HashResults', 'action' => 'basic_hashing_result'));
 			}
-
+			
 			elseif (!empty($data['HashTests']['file_upload']) && 
 	             is_uploaded_file($data['HashTests']['file_upload']['tmp_name']) &&
 	             ($data['HashTests']['file_upload']['type'] == 'text/plain')) 
@@ -280,6 +280,8 @@ class HashTestsController extends AppController {
 			);
 			$result = $hashResultModel->find('first', $conditions);
 
+			$hashResult['HashResult']['collision_index'] = $dup;
+
 			$collision_pt = array();
 			$collision_md = array();
 			$collision = '';
@@ -332,7 +334,7 @@ class HashTestsController extends AppController {
 			} elseif ($hashResult['HashResult']['security'] == $security) {
 				//if($hashResult['HashResult']['speed'] > $speed) {
 					$recommendAlgo1 = $hashResult['HashResult']['hash_algorithm_name'];
-					$recommendAlgo .= ' ' . $recommendAlgo1;
+					$recommendAlgo .= ', ' . $recommendAlgo1;
 				//}
 			}
 
@@ -345,7 +347,7 @@ class HashTestsController extends AppController {
 			array_push($analysis, $hashResult);
 		}
 		
-		//$this->log($analysis);
+		$this->log($analysis);
 		return $analysis;
 	}
 
