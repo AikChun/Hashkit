@@ -34,6 +34,31 @@
 
 			</div>
 
+
+
+		</div>
+
+
+		<div class="form-group">
+								
+			<label for="hashInput-plaintext" class="col-lg-3 control-label">Re-enter your new password:</label>
+
+			<div class="col-lg-9">
+
+				<?php
+				
+					echo $this->Form->input('new_password1', array(
+											'class' => 'form-control',
+											'placeholder' => 'Re-enter your password here',
+											'label' => false
+					));
+				
+				?>
+
+			</div>
+
+			
+
 		</div>
 
 		<div class="form-group">
