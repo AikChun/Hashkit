@@ -83,7 +83,7 @@
 				
 				<td>
 					
-					<b>Selected Algorithm:</b><br/>
+					<b>Selected Algorithm:</b>
 					<?php
 						echo $data1['HashResult']['hash_algorithm_name'];
 					?>
@@ -96,40 +96,39 @@
 
 				<td>
 
-					<b>Message Digest:</b><br/>
+					<b>Message Digest:</b>
+
+				</td>
+
+			</tr>
 
 					<?php
 
 						foreach($mdline as $key2 => $data2):
+					?>	
+
+						<tr>
+						<td>
+						<?php
 						echo $data2;
+						?>
+
+						<br>
+						</td>
+						</tr>
+
+						<?php
 						endforeach;
 						endforeach;
 					
 					?>
-
-				</td>
-				
-			</tr>
-
 		</table>
 
 		<br/>
-
-		<table>
-
-			<tr>
-
-				<td>
 			
 					<b>Analysis: </b>
-			
-				</td>
-			
-			</tr>
 
-			<tr>
-
-				<td>
+			
 			
 					<?php
 						echo $output[0]['HashResult']['description'];
@@ -140,6 +139,8 @@
 				</td>
 			
 			</tr>
+
+			<table class="table table-bordered table-condensed">
 
 			<?php
 
@@ -462,5 +463,23 @@
 		</div>
 
 	</div>
+
+	<div class="form-group">
+
+			<div class="col-lg-12">
+
+				<?php
+
+					$options = array(
+						'class' => 'btn btn-primary pull-right',
+						'label' => 'Submit'
+					);
+
+				?>
+
+			</div>
+
+		</div>
+
 
 </div>
