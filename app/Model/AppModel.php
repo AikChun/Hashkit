@@ -20,6 +20,7 @@
  */
 
 App::uses('Model', 'Model');
+App::uses('AuthComponent', 'Controller/Component');
 
 
 /**
