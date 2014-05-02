@@ -10,12 +10,6 @@ class Group extends AppModel {
 
 	);
 	public $actAs = array('Acl' => array('type' => 'requester'));
-/**
- * Use table
- *
- * @var mixed False or table name
- */
-	public $useTable = 'group';
 
 /**
  * Display field

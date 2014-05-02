@@ -33,13 +33,13 @@
 		'format' => __('Page {:page} of {:pages}, showing {:current} records out of {:count} total, starting on record {:start}, ending on {:end}')
 		));
 		?>	</p>
-		<div class="paging">
+		<ul class="paging pager">
 		<?php
-			echo $this->Paginator->prev('< ' . __('previous'), array(), null, array('class' => 'prev disabled'));
+			echo $this->Paginator->prev('< ' . __('previous'), array(), null, array('class' => 'prev enabled'));
 			echo $this->Paginator->numbers(array('separator' => ''));
 			echo $this->Paginator->next(__('next') . ' >', array(), null, array('class' => 'next disabled'));
 		?>
-		</div>
+		</ul>
 		<h2><?php echo __('Actions'); ?></h2>
 		<li><?php echo $this->Html->link(__('Add New User'), array('action' => 'admin_add')); ?></li>
 		

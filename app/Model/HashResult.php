@@ -6,12 +6,6 @@ App::uses('AppModel', 'Model');
  */
 class HashResult extends AppModel {
 
-/**
- * Use table
- *
- * @var mixed False or table name
- */
-	public $useTable = 'hash_result';
 	public $belongsTo = array(
 		'Description' => array(
 			'className' => 'Description',

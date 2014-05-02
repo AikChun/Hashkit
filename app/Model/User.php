@@ -8,12 +8,6 @@ App::uses('PasswordEmail', 'Lib/Email');
  */
 class User extends AppModel {
 
-/**
- * Use table
- *
- * @var mixed False or table name
- */
-	public $useTable = 'user';
 
 /**
  * Display field
