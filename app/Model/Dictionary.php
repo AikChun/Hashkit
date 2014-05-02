@@ -11,7 +11,6 @@ class Dictionary extends AppModel {
  *
  * @var mixed False or table name
  */
-	public $useTable = 'dictionary';
 
 }
 

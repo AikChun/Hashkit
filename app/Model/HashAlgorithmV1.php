@@ -7,13 +7,6 @@ App::uses('AppModel', 'Model');
 class HashAlgorithmV1 extends AppModel {
 
 /**
- * Use table
- *
- * @var mixed False or table name
- */
-	public $useTable = 'hash_algorithm_v1';
-
-/**
  * Display field
  *
  * @var string
