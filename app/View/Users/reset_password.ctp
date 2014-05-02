@@ -33,7 +33,8 @@
 					echo $this->Form->input('User.new_password', array(
 											'class' => 'form-control',
 											'placeholder' => 'Enter your new password here',
-											'label' => false
+											'label' => false,
+											'type' => 'password'
 					));
 				
 				?>
@@ -56,7 +57,8 @@
 					echo $this->Form->input('User.confirm_new_password', array(
 											'class' => 'form-control',
 											'placeholder' => 'Re-enter your password here',
-											'label' => false
+											'label' => false,
+											'type' => 'password'
 					));
 
 					echo $this->Form->input('User.id', array(
