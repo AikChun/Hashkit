@@ -69,6 +69,23 @@ class HashResultTest extends CakeTestCase {
 
 		// Then we expect the following.
 		$this->assertTrue($result);
+		// AND hashresults will have two records.
+		$countHashResult = $this->HashResult->find('count');
+
+		$expectedCountHashResult = 2;
+
+		$this->assertEqual($countHashResult, $expectedCountHashResult);
+
+		// AND descriptions will have two records.
+
+		$countDescriptionRecords = $this->Description->find('count');
+
+		$expectedCountDescriptionRecords = 2;
+
+		$this->assertEqual($countDescriptionRecords, $expectedCountDescriptionRecords);
 	}
 
+	public function testSomething() {
+
+	}
 }
