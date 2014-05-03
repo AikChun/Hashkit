@@ -507,26 +507,25 @@
 
 				<a href="/" class="btn btn-primary pull-right" data-dismiss="modal">Back to Home</a>
 
-		</div>
-
-	</div>
-
-	<div class="form-group">
-
-			<div class="col-lg-12">
+				<?php 
+		
+			echo $this->Form->create('HashResults', array('class' => 'form-horizontal', 'type' => 'file'));
+			
+		?>
 
 				<?php
 
 					$options = array(
-						'class' => 'btn btn-primary pull-right',
-						'label' => 'Submit'
+						'class' => 'btn btn-primary pull-left',
+						'label' => 'Save Results'
 					);
 
 				?>
 
-			</div>
+				<?php echo $this->Form->end($options); ?>
 
-		</div>
+		</div>		
 
+	</div>
 
 </div>

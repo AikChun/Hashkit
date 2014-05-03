@@ -118,6 +118,16 @@ class HashResultsController extends AppController {
 		$this->Session->write('output', '');
 	}
 
+	public function download_result() {
+		$view = new View($this);
+		$result = $view->render('compute_and_compare_result','ajax');
+
+		$fp = fopen('hello.html','w');
+		fwrite($fp, $result);
+		
+		fclose($fp);
+	}
+
 	public function compute_and_compare_result() {
 		$outputResult = $this->Session->read('output');
 		if (!empty($outputResult)) {
@@ -132,6 +142,11 @@ class HashResultsController extends AppController {
 			$this->set('output', $outputResult);
 		}
 		//$this->Session->write('output', '');
+
+		if($this->request->is('post')) {
+			$this->download_result();
+			$this->Session->setFlash('Hash result have been saved','flash_custom');
+		}
 	}
 
 	public function show_my_test_results() {

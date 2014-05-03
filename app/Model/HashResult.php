@@ -37,7 +37,7 @@ class HashResult extends AppModel {
 /**
  * Saving hash result with its description
  * @param array data contains HashResult 
- * @param array analysis is a string value of the actual analysis
+ * @param String analysis is a string value of the actual analysis
  * @return boolean true when save correctly. False otherwise.
  */
 	public function savingWithDescription($data, $analysis) {

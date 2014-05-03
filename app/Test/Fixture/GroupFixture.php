@@ -29,61 +29,19 @@ class GroupFixture extends CakeTestFixture {
 	public $records = array(
 		array(
 			'id' => 1,
-			'name' => 'Lorem ipsum dolor ',
+			'name' => 'Administrators',
 			'created' => '2014-05-02 01:28:35',
 			'modified' => '2014-05-02 01:28:35'
 		),
 		array(
 			'id' => 2,
-			'name' => 'Lorem ipsum dolor ',
+			'name' => 'App_Admins',
 			'created' => '2014-05-02 01:28:35',
 			'modified' => '2014-05-02 01:28:35'
 		),
 		array(
 			'id' => 3,
-			'name' => 'Lorem ipsum dolor ',
-			'created' => '2014-05-02 01:28:35',
-			'modified' => '2014-05-02 01:28:35'
-		),
-		array(
-			'id' => 4,
-			'name' => 'Lorem ipsum dolor ',
-			'created' => '2014-05-02 01:28:35',
-			'modified' => '2014-05-02 01:28:35'
-		),
-		array(
-			'id' => 5,
-			'name' => 'Lorem ipsum dolor ',
-			'created' => '2014-05-02 01:28:35',
-			'modified' => '2014-05-02 01:28:35'
-		),
-		array(
-			'id' => 6,
-			'name' => 'Lorem ipsum dolor ',
-			'created' => '2014-05-02 01:28:35',
-			'modified' => '2014-05-02 01:28:35'
-		),
-		array(
-			'id' => 7,
-			'name' => 'Lorem ipsum dolor ',
-			'created' => '2014-05-02 01:28:35',
-			'modified' => '2014-05-02 01:28:35'
-		),
-		array(
-			'id' => 8,
-			'name' => 'Lorem ipsum dolor ',
-			'created' => '2014-05-02 01:28:35',
-			'modified' => '2014-05-02 01:28:35'
-		),
-		array(
-			'id' => 9,
-			'name' => 'Lorem ipsum dolor ',
-			'created' => '2014-05-02 01:28:35',
-			'modified' => '2014-05-02 01:28:35'
-		),
-		array(
-			'id' => 10,
-			'name' => 'Lorem ipsum dolor ',
+			'name' => 'App_Users',
 			'created' => '2014-05-02 01:28:35',
 			'modified' => '2014-05-02 01:28:35'
 		),

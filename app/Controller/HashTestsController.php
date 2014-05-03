@@ -347,7 +347,7 @@ class HashTestsController extends AppController {
 			array_push($analysis, $hashResult);
 		}
 		
-		$this->log($analysis);
+		//$this->log($analysis);
 		return $analysis;
 	}
 

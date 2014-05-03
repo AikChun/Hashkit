@@ -2,7 +2,7 @@
 
 SET NAMES utf8;
 SET foreign_key_checks = 0;
-SET time_zone = '+08:00';
+SET time_zone = '-07:00';
 SET sql_mode = 'NO_AUTO_VALUE_ON_ZERO';
 
 DROP DATABASE IF EXISTS `Hashkit`;
@@ -150,8 +150,8 @@ INSERT INTO `aros_acos` (`id`, `aro_id`, `aco_id`, `_create`, `_read`, `_update`
 (6,	3,	17,	'1',	'1',	'1',	'1'),
 (7,	3,	8,	'1',	'1',	'1',	'1');
 
-DROP TABLE IF EXISTS `description`;
-CREATE TABLE `description` (
+DROP TABLE IF EXISTS `descriptions`;
+CREATE TABLE `descriptions` (
   `id` int(10) NOT NULL AUTO_INCREMENT,
   `user_id` int(10) NOT NULL,
   `description` text NOT NULL,
@@ -160,15 +160,15 @@ CREATE TABLE `description` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
-INSERT INTO `description` (`id`, `user_id`, `description`, `created`, `modified`) VALUES
+INSERT INTO `descriptions` (`id`, `user_id`, `description`, `created`, `modified`) VALUES
 (1,	12,	'No collision detected',	'2014-04-29 23:23:40',	'2014-04-29 23:23:40'),
 (2,	12,	'There is collision detected at: \nhello b1946ac92492d2347c6235b4d2611184\nhello b1946ac92492d2347c6235b4d2611184\nasd e07910a06a086c83ba41827aa00b26ed\nasd e07910a06a086c83ba41827aa00b26ed\n',	'2014-04-29 23:23:52',	'2014-04-29 23:23:52'),
 (3,	12,	'There is collision detected at: \nhello 8530cf1cb1524cd9fceeb0fa72ce7f23\nhello 8530cf1cb1524cd9fceeb0fa72ce7f23\nasd fc1d00273547dfe714bfa8384a68b460\nasd fc1d00273547dfe714bfa8384a68b460\n',	'2014-04-29 23:34:14',	'2014-04-29 23:34:14'),
 (4,	12,	'There is collision detected at: \nhello b1946ac92492d2347c6235b4d2611184\nhello b1946ac92492d2347c6235b4d2611184\nasd e07910a06a086c83ba41827aa00b26ed\nasd e07910a06a086c83ba41827aa00b26ed\n',	'2014-04-29 23:35:52',	'2014-04-29 23:35:52'),
 (5,	12,	'There is collision detected at: \nhello b1946ac92492d2347c6235b4d2611184\nhello b1946ac92492d2347c6235b4d2611184\nasd e07910a06a086c83ba41827aa00b26ed\nasd e07910a06a086c83ba41827aa00b26ed\n',	'2014-04-29 23:45:14',	'2014-04-29 23:45:14');
 
-DROP TABLE IF EXISTS `dictionary`;
-CREATE TABLE `dictionary` (
+DROP TABLE IF EXISTS `dictionaries`;
+CREATE TABLE `dictionaries` (
   `id` int(10) NOT NULL AUTO_INCREMENT,
   `plaintext` varchar(255) NOT NULL,
   `SHA1` varchar(40) NOT NULL,
@@ -176,7 +176,7 @@ CREATE TABLE `dictionary` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
-INSERT INTO `dictionary` (`id`, `plaintext`, `SHA1`, `MD5`) VALUES
+INSERT INTO `dictionaries` (`id`, `plaintext`, `SHA1`, `MD5`) VALUES
 (1,	'hello\n',	'f572d396fae9206628714fb2ce00f72e94f2258f',	'b1946ac92492d2347c6235b4d2611184'),
 (2,	'asd\n',	'c85320d9ddb90c13f4a215f1f0a87b531ab33310',	'e07910a06a086c83ba41827aa00b26ed'),
 (3,	'bye\n',	'ee9e51458f4642f48efe956962058245ee7127b1',	'91fc14ad02afd60985bb8165bda320a6'),
@@ -197,8 +197,8 @@ INSERT INTO `dictionary` (`id`, `plaintext`, `SHA1`, `MD5`) VALUES
 (18,	'dqwf',	'ad95b984e59ee3a5aa2fca10aa67b1aa8e549434',	'021308b6fd672f4b5c97c4d7c4cbf4f2'),
 (19,	'knewf',	'b0eb9b291034dcf10a0e900153c0b3068662ce06',	'3a101a990eb249b59b6240d6e85aaef3');
 
-DROP TABLE IF EXISTS `group`;
-CREATE TABLE `group` (
+DROP TABLE IF EXISTS `groups`;
+CREATE TABLE `groups` (
   `id` int(10) NOT NULL AUTO_INCREMENT,
   `name` varchar(20) NOT NULL,
   `created` datetime NOT NULL,
@@ -206,13 +206,13 @@ CREATE TABLE `group` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
-INSERT INTO `group` (`id`, `name`, `created`, `modified`) VALUES
+INSERT INTO `groups` (`id`, `name`, `created`, `modified`) VALUES
 (1,	'Administrators',	'0000-00-00 00:00:00',	'0000-00-00 00:00:00'),
 (2,	'App_Admins',	'0000-00-00 00:00:00',	'0000-00-00 00:00:00'),
 (3,	'App_Users',	'0000-00-00 00:00:00',	'0000-00-00 00:00:00');
 
-DROP TABLE IF EXISTS `hash_algorithm`;
-CREATE TABLE `hash_algorithm` (
+DROP TABLE IF EXISTS `hash_algorithms`;
+CREATE TABLE `hash_algorithms` (
   `id` int(10) NOT NULL AUTO_INCREMENT,
   `name` varchar(25) NOT NULL,
   `speed` double NOT NULL,
@@ -227,15 +227,15 @@ CREATE TABLE `hash_algorithm` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
-INSERT INTO `hash_algorithm` (`id`, `name`, `speed`, `security`, `collision_resistance`, `preimage_resistance`, `2nd_preimage_resistance`, `collision_bka`, `preimage_bka`, `2nd_preimage_bka`, `output_length`) VALUES
+INSERT INTO `hash_algorithms` (`id`, `name`, `speed`, `security`, `collision_resistance`, `preimage_resistance`, `2nd_preimage_resistance`, `collision_bka`, `preimage_bka`, `2nd_preimage_bka`, `output_length`) VALUES
 (1,	'SHA1',	333.29,	2,	'Broken',	'Unbroken',	'Unbroken',	'2^60',	'Nil',	'Nil',	160),
 (2,	'MD5',	392.32,	1,	'Broken',	'Broken',	'Unbroken',	'2^20.96',	'2^123.4',	'Nil',	128),
 (3,	'MD2',	5.43,	1,	'Broken',	'Broken',	'Unbroken',	'2^63.3',	'2^73',	'Nil',	128),
 (4,	'MD4',	540.87,	0,	'Broken',	'Broken',	'Broken',	'3',	'2^69.4',	'2^78.4',	128),
 (5,	'SHA256',	169.49,	3,	'Unbroken',	'Unbroken',	'Unbroken',	'Nil',	'Nil',	'Nil',	256);
 
-DROP TABLE IF EXISTS `hash_algorithm_v1`;
-CREATE TABLE `hash_algorithm_v1` (
+DROP TABLE IF EXISTS `hash_algorithm_v1s`;
+CREATE TABLE `hash_algorithm_v1s` (
   `id` int(10) NOT NULL AUTO_INCREMENT,
   `name` varchar(40) NOT NULL,
   `base` int(11) NOT NULL,
@@ -243,7 +243,7 @@ CREATE TABLE `hash_algorithm_v1` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
-INSERT INTO `hash_algorithm_v1` (`id`, `name`, `base`, `exponent`) VALUES
+INSERT INTO `hash_algorithm_v1s` (`id`, `name`, `base`, `exponent`) VALUES
 (1,	'MD2',	2,	128),
 (2,	'MD4',	2,	128),
 (3,	'MD5',	2,	128),
@@ -268,8 +268,8 @@ INSERT INTO `hash_algorithm_v1` (`id`, `name`, `base`, `exponent`) VALUES
 (26,	'HAVAL160,3',	2,	160),
 (27,	'HAVAL192,3',	2,	192);
 
-DROP TABLE IF EXISTS `hash_result`;
-CREATE TABLE `hash_result` (
+DROP TABLE IF EXISTS `hash_results`;
+CREATE TABLE `hash_results` (
   `id` int(10) NOT NULL AUTO_INCREMENT,
   `plaintext` text NOT NULL,
   `message_digest` text NOT NULL,
@@ -281,7 +281,7 @@ CREATE TABLE `hash_result` (
   KEY `description_id` (`description_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
-INSERT INTO `hash_result` (`id`, `plaintext`, `message_digest`, `hash_algorithm_id`, `description_id`, `created`, `modified`) VALUES
+INSERT INTO `hash_results` (`id`, `plaintext`, `message_digest`, `hash_algorithm_id`, `description_id`, `created`, `modified`) VALUES
 (1,	'hello',	'5d41402abc4b2a76b9719d911017c592',	2,	0,	'2014-04-29',	'2014-04-29'),
 (2,	'hello',	'866437cb7a794bce2b727acc0362ee27',	4,	0,	'2014-04-29',	'2014-04-29'),
 (3,	'dqwf',	'021308b6fd672f4b5c97c4d7c4cbf4f2',	2,	0,	'2014-04-29',	'2014-04-29'),
@@ -299,8 +299,8 @@ INSERT INTO `hash_result` (`id`, `plaintext`, `message_digest`, `hash_algorithm_
 (15,	'hello\nasd\nbye\nhello\nhey\nasd\n',	'b1946ac92492d2347c6235b4d2611184\ne07910a06a086c83ba41827aa00b26ed\n91fc14ad02afd60985bb8165bda320a6\nb1946ac92492d2347c6235b4d2611184\n081ecc5e6dd6ba0d150fc4bc0e62ec50\ne07910a06a086c83ba41827aa00b26ed\n',	2,	5,	'2014-04-29',	'2014-04-29'),
 (16,	'hello\nasd\nbye\nhello\nhey\nasd\n',	'63481c78ae04c201fa01ea9d2b1db56d\n5449a412bb27febdba1f76f80f8a1781\n2fd556fb9d48f459987b07735e870d81\n63481c78ae04c201fa01ea9d2b1db56d\ne9a00640d0763f3f2ff3181258dc63f5\n5449a412bb27febdba1f76f80f8a1781\n',	4,	5,	'2014-04-29',	'2014-04-29');
 
-DROP TABLE IF EXISTS `user`;
-CREATE TABLE `user` (
+DROP TABLE IF EXISTS `users`;
+CREATE TABLE `users` (
   `id` int(10) NOT NULL AUTO_INCREMENT,
   `password` varchar(255) NOT NULL,
   `name` varchar(30) NOT NULL,
@@ -315,10 +315,10 @@ CREATE TABLE `user` (
   UNIQUE KEY `email` (`email`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
-INSERT INTO `user` (`id`, `password`, `name`, `email`, `group_id`, `profile`, `status`, `token`, `created`, `modified`) VALUES
+INSERT INTO `users` (`id`, `password`, `name`, `email`, `group_id`, `profile`, `status`, `token`, `created`, `modified`) VALUES
 (5,	'96b9369f55be479d63a8ef366966a03a607657e4',	'yong',	'yong24@gmail.com',	1,	'I am yong',	'',	'',	'2014-03-28 01:05:48',	'2014-03-28 01:05:48'),
 (10,	'96b9369f55be479d63a8ef366966a03a607657e4',	'AikChun',	'aikchun616@gmail.com',	1,	'I am the main user.',	'',	'2f8c70400f525af8a1801c590056c2fdd6b757db',	'2014-03-28 01:36:02',	'2014-04-09 23:11:24'),
 (11,	'96b9369f55be479d63a8ef366966a03a607657e4',	'dude',	'dude@gmail.com',	3,	'',	'',	'',	'2014-04-05 00:20:03',	'2014-04-05 00:20:03'),
 (12,	'1fda6ac901aee9291e9ef40a02e86367bb6da06d',	'ian',	'ian@gmail.com',	1,	'super user',	'',	'',	'2014-04-16 15:29:25',	'2014-04-16 15:29:25');
 
--- 2014-04-29 23:45:36
+-- 2014-05-02 01:29:18
