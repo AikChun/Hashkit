@@ -184,7 +184,7 @@ class HashTestsController extends AppController {
 
 				$output = HashingLib::computeDigests($selectedAlgorithms, $lineArray);
 
-				$outputResult = $this->compareDigests($output);
+				$outputResult = HashingLib::compareDigests($output);
 
 				if(!empty($data['HashTests']['email'])) {
 					$outputResult[0]['email'] = 1;
@@ -339,7 +339,7 @@ class HashTestsController extends AppController {
 					$this->Session->write('samplespace', $samplespace);
 					$this->Session->write('totalhash', $totalhash);
 					$this->Session->write('requiredsamplespace', $total_sample_size_ninety_nine_percentage);	
-					//$this->generate_ninety_nine_percentage_proability($N,$K);	
+					//HashingLib::generate_ninety_nine_percentage_proability($N,$K);	
 					$this->redirect(array('controller' => 'HashResults', 'action' => 'calculate_probability_of_collision_result'));
 				 }//end of if else 
 					
@@ -353,35 +353,6 @@ class HashTestsController extends AppController {
 		
 	}
 
-/**
- * To calcuate the number of hashes needed to get a 99% probability of getting a collision 
- *  
- */
-	public function generate_ninety_nine_percentage_proability($N, $K){
-		$check = true;
-
-		while($check == true) :
-			$firstexpEqu = (- bcpow($N,2)) / (2 * $K);
-			$probability = (1 - exp($firstexpEqu)) * 100;
-			if($probability < 99) {
-				if($K < 100){
-					$N += 1;
-				}else if($K < 1000){
-					$N += 10;
-				}else if($K < 10000){
-					$N += 100;
-				}else if($K < 100000){
-					$N += 1000;
-				}else{
-					$N += 100000000000000000000000000;	
-				}
-			}else {	
-				$requiredsamplespace = $N;
-				$check = false;
-			}
-		endwhile;
-		$this->Session->write('requiredsamplespace', $requiredsamplespace);	
-	} 
  
 	public function avalanche_effect() {
         
@@ -430,7 +401,7 @@ class HashTestsController extends AppController {
 			array_push($output, $ScienceResult);
 			
 			$this->Session->write('output', $output);
-			$this -> log ($output);
+			//$this -> log ($output);
 			$this->redirect(array('controller' => 'HashResults', 'action' => 'avalanche_effect_result'));
 			
 		}		
