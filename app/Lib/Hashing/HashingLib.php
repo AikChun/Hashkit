@@ -62,7 +62,7 @@ class HashingLib {
  * Compare the message digests to come up with an analysis
  *
  */
-	protected function compareDigests($output) {
+	public static function compareDigests($output) {
 		$hashResultModel = ClassRegistry::init('HashResult');
 		$hashAlgorithmModel = ClassRegistry::init("HashAlgorithm");
 		$analysis = array();
@@ -259,7 +259,7 @@ class HashingLib {
  * To calcuate the number of hashes needed to get a 99% probability of getting a collision 
  *  
  */
-	public function generate_ninety_nine_percentage_proability($N, $K){
+	public static function generate_ninety_nine_percentage_proability($N, $K){
 		$check = true;
 
 		while($check == true) :
@@ -284,6 +284,30 @@ class HashingLib {
 		endwhile;
 		$this->Session->write('requiredsamplespace', $requiredsamplespace);	
 	} 
+
+	public static function computeAvalanche($firstMD, $secondMD){
+		$lengthOfMD = strlen ($firstMD);
+		$bitDiff = array();
+		$result = array();
+		$count = 0;
+		for ($i = 0; $i < $lengthOfMD; $i++){
+			if (strcmp($firstMD[$i], $secondMD[$i]) != 0) {
+				$count++;
+			}
+			else{
+				array_push($bitDiff, $i);
+			}
+		}
+
+		$percent = $count / $lengthOfMD * 100;
+		$percent = round ($percent, 2);
+
+		$result['Percent'] = $percent;
+		$result['BitDiff'] = $bitDiff;
+
+		return $result;
+	}
+
 }
 
 

@@ -383,9 +383,9 @@ class HashTestsController extends AppController {
 			$ScienceMD = hash(strtolower($data['HashTests']['HashAlgorithm']), 'Science');
 			$SciencdMD = hash(strtolower($data['HashTests']['HashAlgorithm']), 'Sciencd');
 
-			$HelloResult = $this -> compute_avalanche($HelloMD, $HellnMD);
-			$ComputerResult = $this -> compute_avalanche($ComputerMD, $ComputesMD);
-			$ScienceResult = $this -> compute_avalanche($ScienceMD, $SciencdMD);
+			$HelloResult = HashingLib::computeAvalanche($HelloMD, $HellnMD);
+			$ComputerResult = HashingLib::computeAvalanche($ComputerMD, $ComputesMD);
+			$ScienceResult = HashingLib::computeAvalanche($ScienceMD, $SciencdMD);
 			
 			array_push($output, $data);
 			array_push($output, $HelloMD);
@@ -407,28 +407,6 @@ class HashTestsController extends AppController {
 		}		
 	}
 
-	public function compute_avalanche($firstMD, $secondMD){
-		$lengthOfMD = strlen ($firstMD);
-		$bitDiff = array();
-		$result = array();
-		$count = 0;
-		for ($i = 0; $i < $lengthOfMD; $i++){
-			if (strcmp($firstMD[$i], $secondMD[$i]) != 0) {
-				$count++;
-			}
-			else{
-				array_push($bitDiff, $i);
-			}
-		}
-
-		$percent = $count / $lengthOfMD * 100;
-		$percent = round ($percent, 2);
-
-		$result['Percent'] = $percent;
-		$result['BitDiff'] = $bitDiff;
-
-		return $result;
-	}
 /**
  * To read in user's input and get the hash algorithms can produce the same output. 
  *  
