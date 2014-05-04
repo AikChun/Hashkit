@@ -569,24 +569,25 @@ class HashTestsController extends AppController {
 			$ScienceMD = hash(strtolower($data['HashTests']['HashAlgorithm']), 'Science');
 			$SciencdMD = hash(strtolower($data['HashTests']['HashAlgorithm']), 'Sciencd');
 
-			$HelloPercent = $this -> compute_avalanche($HelloMD, $HellnMD);
-			$ComputerPercent = $this -> compute_avalanche($ComputerMD, $ComputesMD);
-			$SciencePercent = $this -> compute_avalanche($ScienceMD, $SciencdMD);
+			$HelloResult = $this -> compute_avalanche($HelloMD, $HellnMD);
+			$ComputerResult = $this -> compute_avalanche($ComputerMD, $ComputesMD);
+			$ScienceResult = $this -> compute_avalanche($ScienceMD, $SciencdMD);
 			
 			array_push($output, $data);
 			array_push($output, $HelloMD);
 			array_push($output, $HellnMD);
-			array_push($output, $HelloPercent);
+			array_push($output, $HelloResult);
 
 			array_push($output, $ComputerMD);
 			array_push($output, $ComputesMD);
-			array_push($output, $ComputerPercent);
+			array_push($output, $ComputerResult);
 
 			array_push($output, $ScienceMD);
 			array_push($output, $SciencdMD);
-			array_push($output, $SciencePercent);
+			array_push($output, $ScienceResult);
 			
 			$this->Session->write('output', $output);
+			$this -> log ($output);
 			$this->redirect(array('controller' => 'HashResults', 'action' => 'avalanche_effect_result'));
 			
 		}		
@@ -594,15 +595,25 @@ class HashTestsController extends AppController {
 
 	public function compute_avalanche($firstMD, $secondMD){
 		$lengthOfMD = strlen ($firstMD);
+		$bitDiff = array();
+		$result = array();
 		$count = 0;
 		for ($i = 0; $i < $lengthOfMD; $i++){
 			if (strcmp($firstMD[$i], $secondMD[$i]) != 0) {
 				$count++;
 			}
+			else{
+				array_push($bitDiff, $i);
+			}
 		}
-		$this -> log($count);
+
 		$percent = $count / $lengthOfMD * 100;
-		return round($percent, 2);
+		$percent = round ($percent, 2);
+
+		$result['Percent'] = $percent;
+		$result['BitDiff'] = $bitDiff;
+
+		return $result;
 	}
 /**
  * To read in user's input and get the hash algorithms can produce the same output. 
