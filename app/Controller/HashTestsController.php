@@ -89,42 +89,6 @@ class HashTestsController extends AppController {
 		$this->set('data', $data);
 	}
 
-	/**
-	 * Allow user to input plaintext that is to be hashed.
-	 */
-	public function checkDuplicatesInArray($array) {
-		$count = 0;
-		$dup = array();
-		$dupIndex = array();
-    	$duplicates=FALSE;
-    	foreach($array as $k=>$i) {
-        	if(!isset($value_{$i})) {
-          	  $value_{$i}=TRUE;
-        	}
-        	else {
-            	$duplicates|=TRUE; 
-            	array_push($dup, $i);    
-            	//array_push($dup, $count);  
-        	}
-    	}
-
-    	foreach ($dup as $q => $w) {
-    		foreach ($array as $a => $s) {
-    			if($w == $s) {
-    				array_push($dupIndex, $count);
-    			}
-    			$count += 1;
-    		}
-    		$count = 0;
-    	}
-
-    	if ($duplicates == TRUE) {
-    		return $dupIndex;
-   		} else {
-   			return ($duplicates);
-   		}
-	}
-
 	public function basic_hashing_input() {
 		$selectedAlgorithms = $this->Session->read('selectedAlgorithms');
 
