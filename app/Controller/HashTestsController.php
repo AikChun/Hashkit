@@ -497,8 +497,8 @@ class HashTestsController extends AppController {
 					
 			
 			}catch(Exception $e) {
-					$this->Session->setFlash($e->getMessage(),'flash_custom');
-					$this->redirect(array('action' => 'calculate_probability_of_collision'));
+					//$this->Session->setFlash($e->getMessage(),'flash_custom');
+					$this->Session->setFlash($e->getMessage(), 'alert-box', array('class'=>'alert-danger'));
 			}
 		
 		}

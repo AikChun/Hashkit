@@ -10,7 +10,6 @@
 	  		echo $this->Html->script('jquery-2.1.0.js');
 	  		echo $this->Html->script('bootstrap.js');
 	  		echo $this->Html->script('jquery.scrollNav.js');
-
 			echo $this->Html->meta(
     			'viewport',
     			'width=device-width, initial-scale=1.0'
