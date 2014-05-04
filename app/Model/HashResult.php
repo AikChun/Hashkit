@@ -52,4 +52,23 @@ class HashResult extends AppModel {
 		}
 		return true; 
 	}
+
+/**
+ * Sending email for notification in compute and compare
+ * @param array $outputResult expected to be array of computed results that is to be sent to user
+ */
+	public function sendResults($outputResult) {
+
+		$recipient = array(
+			'full_name' => $this->_getUser('name'),
+			'email' => $this->_getUser('email')
+		);
+
+		$email = new DescriptionEmail($recipient);
+		$sendEmailSuccess = $email->sendHashResult($outputResult);
+
+		return $sendEmailSuccess;
+		
+	}
+
 }

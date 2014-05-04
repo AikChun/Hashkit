@@ -40,7 +40,7 @@ class DescriptionEmail {
 /**
  * This is called in controller to send new password
  * @param String newPassword is expected to be a string 
- * @return boolean true if sending is okay.
+ * @return boolean true if sending is okay, false if otherwise.
  */
 	public function sendHashResult($output) {
 
@@ -56,7 +56,7 @@ class DescriptionEmail {
 		if ($emailOn) {
 			$result = $email->send('Your hash results is ready to view');
 		} else {
-			$result = $email;
+			$result = false;
 		}
 		return $result;
 
@@ -78,16 +78,4 @@ class DescriptionEmail {
 	// }
 	}
 
-	public function sendToken($token) {
-		$email = $this->email;
-		$email->subject('[Password Reset] Do NOT reply to this email');
-		$baseURL = Router::url('/users/reset_password?token=' . $token, true);
-		$emailOn = Configure::read('EMAIL_ON');
-		if ($emailOn) {
-			$result = $email->send("Please click this link to reset your password. $baseURL");
-		} else {
-			$result = $email;
-		}
-		return $result;
-	}
 }
