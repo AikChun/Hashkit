@@ -169,7 +169,7 @@ class HashTestsController extends AppController {
 				
 				$output = HashingLib::computeDigests($selectedAlgorithms, $data['HashTests']['plaintext']);
 				
-                $outputResult = $this->compareDigests($output);
+				$outputResult = HashingLib::compareDigests($output);
 
 				$this->Session->write('output', $outputResult);
 				$this->redirect(array('controller' => 'HashResults', 'action' => 'compute_and_compare_result'));
@@ -197,101 +197,6 @@ class HashTestsController extends AppController {
 
 			}
 		}
-	}
-
-/**
- * Compare the message digests to come up with an analysis
- *
- */
-	protected function compareDigests($output) {
-		$hashResultModel = ClassRegistry::init('HashResult');
-		$hashAlgorithmModel = ClassRegistry::init("HashAlgorithm");
-		$analysis = array();
-		$security = -1;
-		$speed = 0;
-		$recommendAlgo1 = '';
-
-		$mdline = explode("\n",$output[0]['HashResult']['message_digest']);
-		$ptline = explode("\n",$output[0]['HashResult']['plaintext']);
-
-		$dup = HashTestsController::checkDuplicatesInArray($mdline);
-
-		foreach($output as $key => $hashResult) {
-			$conditions = array(
-				'conditions' => array('HashResult.message_digest' => $hashResult['HashResult']['message_digest']),
-				'fields' => 'id'
-			);
-			$result = $hashResultModel->find('first', $conditions);
-
-			$hashResult['HashResult']['collision_index'] = $dup;
-
-			$collision_pt = array();
-			$collision_md = array();
-			$collision = '';
-			if($dup != FALSE) {
-				foreach($dup as $key => $num) {
-					array_push($collision_pt,$ptline[$num]);
-				 	array_push($collision_md,$mdline[$num]);
-				 	$collision .= $ptline[$num] . " " . $mdline[$num] . "\n";
-				}
-			}
-
-			if($dup != FALSE) {
-				$hashResult['HashResult']['description'] = 'There is collision detected at: ' . "\n";
-				$hashResult['HashResult']['collision_pt'] = $collision_pt;
-				$hashResult['HashResult']['collision_md'] = $collision_md;
-				$hashResult['HashResult']['collision'] = $collision;
-			} elseif ($dup == FALSE) {
-				$hashResult['HashResult']['collision'] = $collision;
-				$hashResult['HashResult']['description'] = 'No collision detected';
-			}
-
-			$options = array(
-				'conditions' => array(
-					'HashAlgorithm.id' => $hashResult['HashResult']['hash_algorithm_id']
-					),
-				'fields' => array('HashAlgorithm.speed','HashAlgorithm.security',
-					'HashAlgorithm.collision_resistance','HashAlgorithm.preimage_resistance',
-					'HashAlgorithm.2nd_preimage_resistance','HashAlgorithm.output_length',
-					'HashAlgorithm.collision_bka','HashAlgorithm.preimage_bka',
-					'HashAlgorithm.2nd_preimage_bka')
-
-				);
-			$searchResult = array();
-			$searchResult = $hashAlgorithmModel->find('first', $options);
-	
-			$hashResult['HashResult']['speed'] = $searchResult['HashAlgorithm']['speed'];
-			$hashResult['HashResult']['security'] = $searchResult['HashAlgorithm']['security'];
-			$hashResult['HashResult']['collision_resistance'] = $searchResult['HashAlgorithm']['collision_resistance'];
-			$hashResult['HashResult']['preimage_resistance'] = $searchResult['HashAlgorithm']['preimage_resistance'];
-			$hashResult['HashResult']['2nd_preimage_resistance'] = $searchResult['HashAlgorithm']['2nd_preimage_resistance'];
-			$hashResult['HashResult']['output_length'] = $searchResult['HashAlgorithm']['output_length'];
-			$hashResult['HashResult']['collision_bka'] = $searchResult['HashAlgorithm']['collision_bka'];
-			$hashResult['HashResult']['preimage_bka'] = $searchResult['HashAlgorithm']['preimage_bka'];
-			$hashResult['HashResult']['2nd_preimage_bka'] = $searchResult['HashAlgorithm']['2nd_preimage_bka'];
-			
-			if ($hashResult['HashResult']['security'] > $security) {
-				$security = $hashResult['HashResult']['security'];
-				$recommendAlgo = $hashResult['HashResult']['hash_algorithm_name'];
-				$speed = $hashResult['HashResult']['speed'];
-			} elseif ($hashResult['HashResult']['security'] == $security) {
-				//if($hashResult['HashResult']['speed'] > $speed) {
-					$recommendAlgo1 = $hashResult['HashResult']['hash_algorithm_name'];
-					$recommendAlgo .= ', ' . $recommendAlgo1;
-				//}
-			}
-
-			$hashResult['HashResult']['recommendation'] = $recommendAlgo;
-			//if(!empty($result['HashResult']['id'])) {
-			//	$hashResult['HashResult']['analysis'] = 'This input is a very common hash value for the algorithm: '. $hashResult['HashResult']['hash_algorithm_name'];
-			//} else {
-			//	$hashResult['HashResult']['analysis'] = 'This is not a common hash value for algorithm: '. $hashResult['HashResult']['hash_algorithm_name'];
-			//}
-			array_push($analysis, $hashResult);
-		}
-		
-		//$this->log($analysis);
-		return $analysis;
 	}
 
 /**
