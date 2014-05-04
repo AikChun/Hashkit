@@ -4,10 +4,6 @@
 
 		<div class="modal-header">
 
-			<?php 
-				if($output[0]['email'] != 1) {
-			?>
-
 			<h2>Hash Algorithm Recommendation</h2>
 
 		</div>
@@ -502,43 +498,12 @@
 			</tr>
 
 		</table>
-	
-		<div class="modal-footer">
 
-		</div>
+		<br>
 
-		<div class="form-group">
+		<b><p>You can also login to <a href="http://hashkit.localhost"> http://hashkit.localhost </a> to view your hash results from hash results history</p><b>
 
-				<a href="/" class="btn btn-primary pull-right" data-dismiss="modal">Back to Home</a>
-
-				<?php 
-		
-			echo $this->Form->create('HashResults', array('class' => 'form-horizontal', 'type' => 'file'));
-			
-		?>
-
-				<?php
-
-					$options = array(
-						'class' => 'btn btn-primary pull-left',
-						'label' => 'Save Results'
-					);
-
-				?>
-
-				<?php echo $this->Form->end($options); ?>
-
-		</div>		
-
-		<?php 
-			}else{
-		?>
-
-			Hash results will be email to you shortly after computation is done.
-
-		<?php
-			}
-		?>
+			<br>
 
 	</div>
 

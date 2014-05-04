@@ -200,17 +200,15 @@ class HashTestsController extends AppController {
 		$selectedAlgorithms = $this->Session->read('selectedAlgorithms');
 		if($this->request->is('post')) {
 			$data = $this->request->data;
-			//$this->log($data);
 
 			if (!empty($data['HashTests']['plaintext'])) {
 				
 				$output = HashingLib::computeDigests($selectedAlgorithms, $data['HashTests']['plaintext']);
 				
                 $outputResult = $this->compareDigests($output);
+
 				$this->Session->write('output', $outputResult);
 				$this->redirect(array('controller' => 'HashResults', 'action' => 'compute_and_compare_result'));
-	            //$this->Session->write('output', $output);
-				//$this->redirect(array('controller' => 'HashResults', 'action' => 'compute_and_compare_result'));
 			}
 
 			elseif (!empty($data['HashTests']['file_upload']) && 
@@ -223,6 +221,13 @@ class HashTestsController extends AppController {
 				$output = HashingLib::computeDigests($selectedAlgorithms, $lineArray);
 
 				$outputResult = $this->compareDigests($output);
+
+				if(!empty($data['HashTests']['email'])) {
+					$outputResult[0]['email'] = 1;
+                }else{
+                	$outputResult[0]['email'] = 0;
+                }
+
 				$this->Session->write('output', $outputResult);
 				$this->redirect(array('controller' => 'HashResults', 'action' => 'compute_and_compare_result'));
 
