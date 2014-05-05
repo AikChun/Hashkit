@@ -124,7 +124,7 @@
                   </div>
               </div>
               <hr class="">
-                <h2 id="sec3" class="">Attacks on Hash functions</h2>
+                <h2 id="sec4" class="">Attacks on Hash functions</h2>
                 <br>
                 <b>Brute-force attack</b>
                 <p>An attack that is used when it is not possible to take
