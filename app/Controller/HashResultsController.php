@@ -146,7 +146,7 @@ class HashResultsController extends AppController {
 			$view = new View($this);
 			$result = $view->render('compute_and_compare_result','ajax');
 			$this->HashResult->download_result($result);
-			$this->Session->setFlash('Hash result have been saved','flash_custom');
+			$this->Session->setFlash('Hash result have been saved', 'alert-box', array('class'=>'alert-danger'));
 		}
 	}
 

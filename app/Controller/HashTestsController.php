@@ -54,7 +54,7 @@ class HashTestsController extends AppController {
 
 		if($this->request->is('post')) {
 			if(empty($this->request->data['HashTests']['HashAlgorithm'])) {
-				$this->Session->setFlash('You did not select any algorithms!');
+				$this->Session->setFlash('You did not select any algorithms!', 'alert-box', array('class'=>'alert-danger'));
 				return $this->redirect(array('action' => 'basic_hashing'));
 			}
 			$postData = $this->request->data['HashTests']['HashAlgorithm'];
@@ -94,7 +94,14 @@ class HashTestsController extends AppController {
 
 		if($this->request->is('post')) {
 			$data = $this->request->data;
-			//$this->log($data);
+
+			//if (empty($data['HashTests']['plaintext']) && empty($data['HashTests']['file_upload']))  {
+			//	$this->Session->setFlash('Please enter plaintext or choose upload file to proceed', 'alert-box', array('class'=>'alert-danger'));
+			//}
+
+			//if (!empty($data['HashTests']['file_upload']) && ($data['HashTests']['file_upload']['type'] != 'text/plain')) {
+			//	$this->Session->setFlash('Uploaded file must be in text file format', 'alert-box', array('class'=>'alert-danger'));
+			//}	
 
 			if (!empty($data['HashTests']['plaintext'])) {
 				$output = HashingLib::computeDigests($selectedAlgorithms, $data['HashTests']['plaintext']);
@@ -113,11 +120,10 @@ class HashTestsController extends AppController {
 
             $this->Session->write('output', $output);
 			$this->redirect(array('controller' => 'HashResults', 'action' => 'basic_hashing_result'));
-        	
-		}
+
+		} 
 	}
 }
-
 /**
  * To allow the user choose the algorithms that is to analyzed.
  */
@@ -125,10 +131,10 @@ class HashTestsController extends AppController {
 		$HashAlgorithmModel = ClassRegistry::init('HashAlgorithm');
 		if($this->request->is('post')) {
 			if(empty($this->request->data['HashTests']['HashAlgorithm'])) {
-				$this->Session->setFlash('You did not select any algorithms!');
+				$this->Session->setFlash('You did not select any algorithm!', 'alert-box', array('class'=>'alert-danger'));
 				return $this->redirect(array('action' => 'compute_and_compare'));
 			} elseif (count($this->request->data['HashTests']['HashAlgorithm']) == 1) {
-				$this->Session->setFlash('Please select more than one algorithmn');
+				$this->Session->setFlash('Please select more than one algorithm', 'alert-box', array('class'=>'alert-danger'));
 				return $this->redirect(array('action' => 'compute_and_compare'));
 			}
 			
@@ -370,7 +376,7 @@ class HashTestsController extends AppController {
 			$output = array();
 
 			if(empty($data['HashTests']['HashAlgorithm'])) {
-				$this->Session->setFlash('You did not select any algorithms!');
+				$this->Session->setFlash('You did not select any algorithms!', 'alert-box', array('class'=>'alert-danger'));
 				return $this->redirect(array('action' => 'avalanche_effect'));
 			}
 		

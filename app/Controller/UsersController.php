@@ -144,7 +144,7 @@ class UsersController extends AppController {
 	}
 
 	public function logout() {
-		$this->Session->setFlash("Goodbye.");
+		$this->Session->setFlash('You have successfully logout.', 'alert-box', array('class'=>'alert-danger'));
 		$this->redirect($this->Auth->logout());
 
 	}
@@ -155,7 +155,7 @@ class UsersController extends AppController {
 			$data['User']['group_id'] = 3;
 			try{
 				if(!($data['User']['password'] == $data['User']['confirm_password'])) {
-					throw new Exception ('Please the password\'s does not match!');
+					throw new Exception ('Password\'s does not match!');
 				}
 				$conditions = array(
 					'conditions' => array('User.email' => $data['User']['email']),
@@ -167,14 +167,14 @@ class UsersController extends AppController {
 				}
 				$this->User->create();
 				if ($this->User->save($data)) {
-					$this->Session->setFlash(__('You have registered successfully!'));
+					$this->Session->setFlash('You have registered successfully!', 'alert-box', array('class'=>'alert-danger'));
 					return $this->redirect(array('action' => 'index'));
 				} else {
-					$this->Session->setFlash(__('The user could not be saved. Please, try again.'));
+					$this->Session->setFlash('The user could not be saved. Please, try again.', 'alert-box', array('class'=>'alert-danger'));
 				}
 
 			} catch(Exception $e) {
-				$this->Session->setFlash($e->getMessage());
+				$this->Session->setFlash($e->getMessage(), 'alert-box', array('class'=>'alert-danger'));
 				$this->redirect(array('action' => 'index'));
 			}
 		}
@@ -191,10 +191,10 @@ class UsersController extends AppController {
 
 				//send email with token
 				$this->User->sendToken($userData);
-				$this->Session->setFlash('The reset link has been sent to your email. Please check your email and click the link.');
+				$this->Session->setFlash('The reset link has been sent to your email. Please check your email and click the link.', 'alert-box', array('class'=>'alert-danger'));
 				$this->redirect(array('action' => 'login'));
 			} else {
-				$this->Session->setFlash('Did you enter a valid email address?');
+				$this->Session->setFlash('Did you enter a valid email address?', 'alert-box', array('class'=>'alert-danger'));
 			}
 		}
 	}
@@ -214,7 +214,7 @@ class UsersController extends AppController {
 		}
 
 		if (!$validToken) {
-			$this->Session->setFlash('Invalid link. Please Login.');
+			$this->Session->setFlash('Invalid link. Please Login.', 'alert-box', array('class'=>'alert-danger'));
 			$this->redirect(array('action' => 'login'));
 		}
 
@@ -232,10 +232,10 @@ class UsersController extends AppController {
 			}
 
 			if ($result) {
-				$this->Session->setFlash('Password successfully changed');
+				$this->Session->setFlash('Password successfully changed', 'alert-box', array('class'=>'alert-danger'));
 				$this->redirect(array('action' => 'login'));
 			} else {
-				$this->Session->setFlash($errorMessage);
+				$this->Session->setFlash($errorMessage, 'alert-box', array('class'=>'alert-danger'));
 			}
 		}
 	}
@@ -267,10 +267,10 @@ class UsersController extends AppController {
 		}
 		if ($this->request->is(array('post', 'put'))) {
 			if ($this->User->save($this->request->data)) {
-				$this->Session->setFlash(__('The user has been saved.'));
+				$this->Session->setFlash('The user has been saved', 'alert-box', array('class'=>'alert-danger'));
 				return $this->redirect(array('action' => 'view_my_own_profile'));
 			} else {
-				$this->Session->setFlash(__('The user could not be saved. Please, try again.'));
+				$this->Session->setFlash('The user could not be saved. Please try again.', 'alert-box', array('class'=>'alert-danger'));
 			}
 		} else {
 			$options = array('conditions' => array('User.' . $this->User->primaryKey => $this->Auth->user('id')));
