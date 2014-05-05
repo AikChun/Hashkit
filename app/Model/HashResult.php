@@ -7,9 +7,9 @@ App::uses('AppModel', 'Model');
 class HashResult extends AppModel {
 
 	public $belongsTo = array(
-		'Description' => array(
-			'className' => 'Description',
-			'foreignKey' => 'description_id'
+		'HashTest' => array(
+			'className' => 'HashTest',
+			'foreignKey' => 'hash_tests_id'
 		)
 	);
 
