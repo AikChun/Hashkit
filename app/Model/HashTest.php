@@ -62,6 +62,9 @@ class HashTest extends AppModel {
 	}
 /**
  * function to compute message digests
+ * @param array $selectedAlgorithms contains one or many algorithm names.
+ * @param mixed $fileData could be either in string or array format.
+ * @return array $output in a format of $output[n]['HashResult']['attribute']
  */
 	public function computeDigests($selectedAlgorithms, $fileData) {
 
@@ -150,7 +153,6 @@ class HashTest extends AppModel {
 			} else {
 				return false;
 			}
-
 		}
 		return false;
 	}
