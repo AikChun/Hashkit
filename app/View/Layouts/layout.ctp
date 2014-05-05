@@ -9,7 +9,6 @@
 	  	
 	  		echo $this->Html->script('jquery-2.1.0.js');
 	  		echo $this->Html->script('bootstrap.js');
-	  		echo $this->Html->script('jquery.scrollNav.js');
 			echo $this->Html->meta(
     			'viewport',
     			'width=device-width, initial-scale=1.0'
@@ -71,6 +70,7 @@
 
 						</li>
 						<li><a href="/Pages/hash_function">Hash information</a></li>
+						<li><a href="/Questionnaires/questionnaire">Questionnarie</a></li>
 						<?php endif;?>
 						<li><a href="/Pages/about_us">About Us</a></li>
 						<li><a href="/Pages/contact_us">Contact Us</a></li>
