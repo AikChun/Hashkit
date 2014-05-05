@@ -108,7 +108,11 @@
 			<div class="container">
 				
 				<p class="navbar-text pull-left">Site Built by Hashkit Team @2014</p>
-				<button class="navbar-text btn btn-danger pull-right"><a href="http://hashkitproject.blogspot.sg/">Blog</button>
+
+				<a class="navbar-text btn btn-danger pull-right" href="http://hashkitproject.blogspot.sg/">Visit our blog!</a>
+
+				<a class="btn btn-danger pull-right" href="http://hashkitproject.blogspot.sg/">Visit our blog!</a>
+
 			</div>
 
 		</div>
