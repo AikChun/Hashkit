@@ -103,6 +103,7 @@ class QuestionnairesController extends AppController {
 	}
 
 	public function questionnaire() {
-
+		$result = $this->Questionnaire->find('all');
+        $this->set('result', $result);
 	}
 }
