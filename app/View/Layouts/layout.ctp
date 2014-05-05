@@ -40,7 +40,6 @@
 					<ul class="nav navbar-nav navbar-left">
 						
 						<li class="active"><a href="/">Home</a></li>
-						<li><a href="http://hashkitproject.blogspot.sg/">Blog</a></li>
 						<?php  if($authUser['group_id'] == 1) :?>
 						<li class="dropdown">
 								
@@ -108,8 +107,8 @@
 			
 			<div class="container">
 				
-				<p class="navbar-text pull-left">Site Built By FYP GROUP</p>
-
+				<p class="navbar-text pull-left">Site Built by Hashkit Team @2014</p>
+				<button class="navbar-text btn btn-danger pull-right"><a href="http://hashkitproject.blogspot.sg/">Blog</button>
 			</div>
 
 		</div>
