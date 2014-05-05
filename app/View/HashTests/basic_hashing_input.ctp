@@ -48,7 +48,7 @@
 
 		<div class="form-group">
 
-			<label for="hashInput-file" class="col-lg-3 control-label">Upload text file:</label>
+			<label for="hashInput-file" class="col-lg-3 control-label" style="top: -5px;">Upload text file:</label>
 
 				<div class="col-lg-9">
 
