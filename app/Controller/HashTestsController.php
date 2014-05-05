@@ -223,7 +223,7 @@ class HashTestsController extends AppController {
 		if($this->request->is('post')) {
 			$data = $this->request->data['HashTests'];
 			$result = HashingLib::matchPlaintextWithMessageDigest($data);
-			$this->log($result);
+			//$this->log($result);
 			$this->Session->write('reverseData', $result );
 			$this->redirect('/HashResults/reverse_look_up_result');
 		}
@@ -450,7 +450,7 @@ class HashTestsController extends AppController {
 		}	
 	}
 
-	function crypto_rand_secure($min, $max) {
+	public function crypto_rand_secure($min, $max) {
         $range = $max - $min;
         if ($range < 0) return $min; // not so random...
         $log = log($range, 2);
@@ -479,21 +479,16 @@ class HashTestsController extends AppController {
 	public function generate_array($amount,$hash_algorithm_name) {
 		$wordhashlist = array();
 
-		//pow(2,$amount/2)
 		for ($i = 1; $i <= $amount; $i++ ){
 			$alphanumeric = $this->get_a_string(64);
 			$singlehash = hash(strtolower($hash_algorithm_name), $alphanumeric);
 			$wordhashlist[$i]['word'] = $alphanumeric;
 			$wordhashlist[$i]['hash'] = $singlehash;
-			//array_push($wordhashlist["hash"], $singlehash);
 		}
-		//array_multisort($wordhashlist[]["hash"],SORT_STRING);
-		//array_multisort($wordhashlist["hash"],SORT_STRING);
-		//$this->array_sort_by_column($wordhashlist, 'hash');
+
 		usort($wordhashlist, function($a, $b) {
    			 return strcasecmp($a['hash'], $b['hash']);
 		});
-		$this->log($wordhashlist);
 		return $wordhashlist;
 
 	}

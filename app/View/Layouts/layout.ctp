@@ -9,7 +9,6 @@
 	  	
 	  		echo $this->Html->script('jquery-2.1.0.js');
 	  		echo $this->Html->script('bootstrap.js');
-	  		echo $this->Html->script('jquery.scrollNav.js');
 			echo $this->Html->meta(
     			'viewport',
     			'width=device-width, initial-scale=1.0'
@@ -41,7 +40,6 @@
 					<ul class="nav navbar-nav navbar-left">
 						
 						<li class="active"><a href="/">Home</a></li>
-						<li><a href="http://hashkitproject.blogspot.sg/">Blog</a></li>
 						<?php  if($authUser['group_id'] == 1) :?>
 						<li class="dropdown">
 								
@@ -70,10 +68,11 @@
 								</ul>
 
 						</li>
-						<li><a href="/Pages/hash_function">Hash information</a></li>
+						<li><a href="/Pages/hash_information">Hash information</a></li>
+						<li><a href="/Questionnaires/questionnaire">Questionnarie</a></li>
 						<?php endif;?>
-						<li><a href="/Users/AboutUs">About Us</a></li>
-						<li><a href="#contact" data-toggle="modal">Contact Us</a></li>
+						<li><a href="/Pages/about_us">About Us</a></li>
+						<li><a href="/Pages/contact_us">Contact Us</a></li>
 
 					</ul>
 
@@ -108,78 +107,14 @@
 			
 			<div class="container">
 				
-				<p class="navbar-text pull-left">Site Built By FYP GROUP</p>
+				<p class="navbar-text pull-left">Site Built by Hashkit Team @2014</p>
+
+				<a class="navbar-text btn btn-danger pull-right" href="http://hashkitproject.blogspot.sg/"><font style="color:#FFFFFF">Visit our blog!</font></a>
 
 			</div>
 
 		</div>
 
-		<div class="modal fade" id="contact" role="dialog">
-			
-			<div class="modal-dialog">
-
-				<div class="modal-content">
-
-					<form class="form-horizontal">
-
-						<div class="modal-header">
-
-							<h4>Contact Us!</h4>
-
-						</div>
-
-						<div class="modal-body">
-							
-							<div class="form-group">
-								
-								<label for="contact-name" class="col-lg-2 control-label">Name:</label>
-
-								<div class="col-lg-10">
-
-									<input type="text" class="form-control" id="contact-name" placeholder="Full Name">
-
-								</div>
-
-							</div>
-
-							<div class="form-group">
-
-								<label for="contact-email" class="col-lg-2 control-label">Email:</label>
-
-								<div class="col-lg-10">
-
-									<input type="text" class="form-control" id="contact-email" placeholder="you@example.com">
-
-								</div>
-
-							</div>
-
-							<div class="form-group">
-
-								<label for="contact-message" class="col-lg-2 control-label">Message:</label>
-
-								<div class="col-lg-10">
-
-									<textarea class="form-control" rows="8"placeholder="Your message to us"></textarea>
-
-								</div>
-
-							</div>
-
-						</div>
-
-						<div class="modal-footer">
-
-							<button class="btn btn-primary" type="submit">Send</button>
-							<a class="btn btn-default" data-dismiss="modal">Close</a>
-
-						</div>
-
-					</form>
-
-				</div>
-
-			</div>
 	</body>
 
 </html>

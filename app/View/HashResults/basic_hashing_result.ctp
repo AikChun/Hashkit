@@ -11,140 +11,63 @@
 		<br/>
 
 		<?php
-			if(!empty($output)) :
-		?>
 
-			<table>
+			if(!empty($output)) {
 
-				<tr>
-					<td><b>Plaintext entered: </b></td>
-				</tr>
-				
-				<?php 
-					$ptline = explode("\n",$output[0]['HashResult']['plaintext']);
-				?>
-				
-				<?php
-					if(count($ptline > 1)) { 
-				?>
-				
-				<tr>
+				echo '<b>Plaintext entered:</b>';
+				echo '<br/>';
 
-				<?php
-					foreach($ptline as $key1 => $data1):
-				?>
-				
-					<td>
+				$ptline = explode("\n",$output[0]['HashResult']['plaintext']);
 
-					<?php
+				if(count($ptline > 1)) {
+
+					foreach($ptline as $key1 => $data1){
+
 						echo $data1;
-					?>
+						echo '<br/>';
 
-					</td>
+					}
 
-				</tr>
+				}else {
 
-				<?php 
-
-					endforeach;
-					}else{
-
-				?>
-
-				<tr>
-
-					<td>
-
-						<?php
-							echo $output[0]['HashResult']['plaintext'];
-						?>
-				
-					</td>
-				
-				</tr>
-				
-				<?php
-					} 
-				?>
-
-			</table>
-
-			<br/>
-
-			<table>
-				
-				<?php
-
-					foreach($output as $key1 => $data1):
-					$mdline = explode("\n",$data1['HashResult']['message_digest']);
-				
-				?>
-				
-				<tr>
-
-					<td>
-
-						<b>Selected Algorithm: </b><br/>
-
-						<?php 
-							echo $data1['HashResult']['hash_algorithm_name'];
-						?>
-
-					</td>
-				</tr>
-
-				<tr>
-				
-					<td>
-						<br/>
-						<b>Message Digest: </b>
-					</td>
-				
-				</tr>
-				
-				<?php
-					foreach($mdline as $key2 => $data2):
-				?>
-
-				<tr>
-			
-					<td>
+					echo $output[0]['HashResult']['plaintext'];
+					echo '<br/>';
 					
-					<?php
+				}
+
+				foreach($output as $key1 => $data1){
+
+					$mdline = explode("\n",$data1['HashResult']['message_digest']);
+
+					echo '<br/>';
+					echo '<b>Selected Algorithm:</b>';
+					echo '<br/>';
+					echo $data1['HashResult']['hash_algorithm_name'];
+					echo '<br/>';
+					echo '<b>Message Digest:</b>';
+					echo '<br/>';
+
+					foreach($mdline as $key2 => $data2){
 						echo $data2;
-					?>
+					}
 
-					</td>
-				
-				<?php 
-				
-					endforeach;
-					endforeach;
+					echo '<br/>';
 
-				?>
+				}
 
-				
-				</tr>
+			}else if(empty($output)){
+				echo 'Please select and choose your choice of algorithm';
+			}
 
-			</table>
-
-			<?php
-			
-				endif;
-				if(empty($output)) :
-				
-			?>
-
-			Please select and choose your choice of algorithm.
-		
-		<?php
-
-			endif;
 		?>
 
 		<div class="modal-footer">
 
-		<a href="/" class="btn btn-primary pull-right" data-dismiss="modal">Back to Home</a>
+		</div>
+
+		<div class="form-group">
+
+			<a href="/" class="btn btn-primary pull-right">Back to Home</a>
 
 		</div>
 

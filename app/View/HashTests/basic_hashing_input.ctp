@@ -25,9 +25,9 @@
 				<?php
 				
 					echo $this->Form->input('plaintext', array(
-											'class' => 'form-control',
-											'placeholder' => 'Please enter your plaintext here',
-											'label' => false
+						'class' => 'form-control',
+						'placeholder' => 'Please enter your plaintext here',
+						'label' => false
 					));
 				
 				?>
@@ -48,20 +48,24 @@
 
 		<div class="form-group">
 
-			<label for="hashInput-file" class="col-lg-3 control-label">Upload text file:</label>
+			<label for="hashInput-file" class="col-lg-3 control-label" style="top: -5px;">Upload text file:</label>
 
 				<div class="col-lg-9">
 
-						<?php
+					<?php
 
-							echo $this->Form->input('file_upload',array(
-													'type' => 'file',
-													'label' => false
-							));
-						
-						?>
+						echo $this->Form->input('file_upload',array(
+							'type' => 'file',
+							'label' => false
+						));
+					
+					?>
 
 				</div>
+
+		</div>
+
+		<div class="modal-footer">
 
 		</div>
 
