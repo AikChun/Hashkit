@@ -70,6 +70,7 @@
 
 						</li>
 						<li><a href="/Pages/hash_function">Hash information</a></li>
+						<li><a href="/Questionnaires/questionnaire">Questionnarie</a></li>
 						<?php endif;?>
 						<li><a href="/Users/AboutUs">About Us</a></li>
 						<li><a href="#contact" data-toggle="modal">Contact Us</a></li>
