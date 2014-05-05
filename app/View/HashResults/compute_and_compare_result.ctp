@@ -4,6 +4,10 @@
 
 		<div class="modal-header">
 
+			<?php 
+				if($output[0]['email'] != 1) {
+			?>
+
 			<h2>Hash Algorithm Recommendation</h2>
 
 		</div>
@@ -525,6 +529,16 @@
 				<?php echo $this->Form->end($options); ?>
 
 		</div>		
+
+		<?php 
+			}else{
+		?>
+
+			Hash results will be email to you shortly after computation is done.
+
+		<?php
+			}
+		?>
 
 	</div>
 

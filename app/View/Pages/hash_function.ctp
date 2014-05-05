@@ -1,4 +1,4 @@
-<script src="/js/jquery.jeditable.js" type="text/javascript"></script>
+<!-- <script src="/js/jquery.jeditable.js" type="text/javascript"></script>
 <style type="text/css">  
 
     #content {
@@ -25,40 +25,42 @@
       });
     });
 </script>
+ -->
+
 
 <article class="container">
         <div class="row">
             <div class="col-md-3" id="leftCol">
-                <ul class="nav nav-stacked" id="sidebar">
-                  <li><a href="#sec0" class="">Introduction</a></li>
+                <ul class="nav nav-stacked nav-pills" id="sidebar">
+                  <li><a href="#sec0" class="active">Introduction</a></li>
+                  <li class="divider"></li>
                   <li><a href="#sec1" class="">Types of Hash functions</a></li>
-                  <li><a href="#sec2" class="">Hash functions' properties</a></li>
-                  <li><a href="#sec3" class="">Attacks on Hash functions</a></li>
-                  <li><a href="#sec4" class="">Summary</a></li>
+                  <li class="divider"></li>
+                  <li><a href="#sec2" class="">Uses for Hash functions</a></li>
+                  <li class="divider"></li>
+                  <li><a href="#sec3" class="">Hash functions' properties</a></li>
+                  <li class="divider"></li>
+                  <li><a href="#sec4" class="">Attacks on Hash functions</a></li>
+                  <li class="divider"></li>
+                  <li><a href="#sec5" class="">Summary</a></li>
               </ul>
           </div>
+          
           <div class="col-md-9">
               <h2 id="sec0" contenteditable="false">Introduction</h2>
-              <br>
-              <h3 class="">What is a hash function ?</h3>
-              <br>
+              <h3 class="">What is a Hash function ?</h3>
               <p class="edit_area">A hash function takes in any length of data such as characters and maps them to a fixed length of arbitrary hash value.</p> 
-              <br>
-                <h3 class="">What about crytographic hash function ?</h3>
+              <hr class="">
+                <h3 class="">What about Crytographic Hash function ?</h3>
+                <p class="edit_area">Despite of having the same functionality as a hash function, it has additional properties such one-way which provides better security. It is usually associated with generating a message digest (sometimes called a checksum) which is normally shorter than the original data. For a message digest function to be crypotgraphically secure, it must be computationally infeasible to get back the original message by using the message digest and impossible to find two different messages with the same message digest. It is designed to be easily computable and has to achieve certain security properties, e.g: preimage resistance, second preimage resistance and collision resistance.<p>
                 <br>
-                <p class="edit_area">Despite of having the same functionality as a hash function, it has additional properties such one-way which provides better security. It is usually associated with generating a message digest (sometimes called a checksum) which is normally shorter than the original data. For a message digest function to be crypotgraphically secure, it must be computationally infeasible to get back the original message by using the message digest and impossible to find two different messages with the same message digest. It is designed to be easily computable and has to achieve certain security properties, e.g: preimage resistance, second preimage resistance and collision resistance.
-                (</p><a href="#sec2" class="">link</a><p>)</p>
+                Example of a MD5 function to perform on a message :
                 <br>
-                <br>
-                Example for a MD5 function to perform on a message :
-                <br>
-                <br>
-                  <img src="/img/example.jpg">
-                <br>
+                  <center><img src="/img/example.jpg"></center>
                 <br>
                 <h3>Is there any encryption in hash or digest ?</h3>
-                <br>
-                <p class="edit_area">The answer is No. There is always a confusion because all these words are in the category of "cryptography", but it is important to understand the difference. Encryption provide a 1:1 mapping between an arbitrary length and output and can be always reversible with a key which makes it a two-way operation.</p>     
+                  <p class="edit_area">The answer is No. There is always a confusion because all these words are in the category of "cryptography", but it is important to understand the difference. Encryption provide a 1:1 mapping between an arbitrary length and output and can be always reversible with a key which makes it a two-way operation. Unlike encryption, the hash should be only one-way which means that from a hash, it cannot not be used to get the original message. Below are the steps taken for each process that shows the difference between encryption and hash : 
+                  </p>     
                 <br>
                 <div class="row">
                   <div class="col-md-6">
@@ -79,27 +81,29 @@
                   </div>
               </div>
               <br>
-              <h3 id="sec1">Type of Hash functions</h3>
+              <hr class="">
+              <h2 id="sec1">Type of Hash functions</h2>
               <br>
-              <img src="/img/typeofhashfunctions.jpg">
+                <CENTER><img src="/img/typeofhashfunctions.jpg"></CENTER>
               <br>
-              <h3 class="">Usage of crytographic hash functions</h3>
-              <br>
+              <p> The classification of the hash functions depends on 
+    
+              </p>
+              <hr class="">
+              <h2 id="sec2">Uses for Hash functions</h2>
               <h3>Verifying file integrity</h3>
-              <br>
               <p class="edit_area">This is often used to check the intergity of the data by comparing the both checksums of two identical files generated by same hash function to be similar to one another.</p>
               <br>
               <h3>Hashing passwords</h3>
-              <br>
               <p class="edit_area">In a computer system, it is not a good idea to store passwords in cleartext (readable to user) due to the fact that if the system has been compromised, the bad guy can somehow obtain the stored passwords and use to their advantage. Hence, a more secure way is to store the hash of the password, rather than the password itself since the hashes are not reversible. This reduces the consequence of damage done by the bad guy.</p> 
               Example : 
               <br>
               <br>
-
+              
 
               </br>
               <hr class="">
-                <h2 id="sec2" class="">Hash functions' properties</h2>
+                <h2 id="sec3" class="">Hash functions' properties</h2>
 
               <p class="">A cyptographic hash functions must be able to defend against all known type of cryptanalytic attack. It should be able to apply to any input size and output a fixed size. It must have the following properties:
                   <li><b>Pre-image resistance</b>
@@ -107,7 +111,6 @@
                   For any given input Y, it should be difficult to find another input X such that hash(Y) = hash(X) and Y not equals to X. Function that does not have this property are prone to preimage attacks.
                   <br><br>
                   <li><b>Second pre-image resistance</b>
-              
               </p>
               <div class="row">
                   <div class="col-md-4">
@@ -121,24 +124,32 @@
                   </div>
               </div>
               <hr class="">
-                <h2 id="sec3" class="">Section 3</h2>
-  Images are responsive sed @mdo but sum are more fun peratis unde omnis
-              iste natus error sit voluptatem accusantium doloremque laudantium, totam
-              rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto
-              beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas
-              sit aspernatur aut odit aut fugit, sed quia cor magni dolores eos qui ratione
-              voluptatem sequi nesciunt. Neque porro quisquam est, qui dolorem ipsum
-              quia dolor sit amet, consectetur, adipisci velit, sed quia non numquam
-              eius modi tempora incidunt ut labore et dolore magnam aliquam quaerat voluptatem.
-              Ut enim ad minima veniam, quis nostrum exercitationem ullam corporis suscipit
-              laboriosam, nisi ut..
-              <br class="">Fos qui ratione voluptatem sequi nesciunt. Neque porro quisquam est, qui
-              dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, sed quia
-              non numquam eius modi tempora incidunt ut labore et dolore magnam aliquam
-              quaerat voluptatem. Ut enim ad minima veniam, quis nostrum exercitationem
-              ullam corporis suscipit laboriosam, nisi ut..
+                <h2 id="sec3" class="">Attacks on Hash functions</h2>
+                <br>
+                <b>Brute-force attack</b>
+                <p>An attack that is used when it is not possible to take
+                  advantage of weakness in hash function structure and alogrithm.
+                  It involves hashing all possible combinations from a random word generator or dictionary until the correct pair of collision is found. In theory, given enough time, a brute-force attack will eventually be successful but it is not practical as some hash function has larger output bits which requires too much time and resouces to perform. An easy measure against brute force attack will be limiting the number of attempts on important functions such as login.</p>
+                <br>
+                <b>Birthday attack</b>
+                <p>A type of cryptographic attack that is based on the birthday 
+                  problem in probability theory that is used to estimate the likelihood of collision in hash functions. It states that in order for there to be a 50% chance that someone in a given room shares your birthday, you need 253 people in the room. However, if you are looking for a greater than 50% chance that any two people in the room have the same birthday, you only need 23 people.This applies to finding collisions in hashing algorithms because it is harder to find collision with a given hash than it is to find any two random plaintext that hash to the same value. It illustrates the tremendous difference between the effort required for a pre-image attack and a collision attack.</p>
+                <br>
+                <b>Collision attack</b>
+                <p>An attack that finds two different messages m1 and m2, such that hash(m1) = hash(m2). In a classical collision attack, the attacker  has no control over the content of either message, but are arbitrarily chosen by the algorithm. A collision found from two random message does not really affect the security of hash function. For the attack to be useful, the attack must be in control of the input to the hash function</p>
+                <br>
+                <b>Chosen-prefix collision attack</b>
+                <p>An extension of collision attack where the attacker can choose two arbitrarily different message, and then append different calculated values that result in the whole message having an equal hash value. This attack is much more powerful than a classical collision attack</p>
+                <br>
+                <b>Pre-image attack</b>
+                <p>An attack where the adversary only has access to message digest and is trying to generate a plaintext that hash to the same value. This attack usually occur when the database of hashed password is leaked or hacked.
+                </p>
+                <br>
+                <b>2nd pre-image attack</b>
+                <p>An attack where the adversary only has access to the input plaintext and is trying to find another plaintext that hash to the same value. It is important for hash function to be resistant to 2nd pre-image attacks because of digital signature schemes where its H(message) and message is made public. An attacker can come up with another H(message) using different plaintext and publish the message as though he is the orignal signer.</p>
+  
                 <h2 id="sec4" class="">Section 4</h2>
-  Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium
+              Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium
               doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore
               veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim
               ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia
@@ -182,6 +193,3 @@
           }
         }
     });
-
-
-</script>

@@ -89,42 +89,6 @@ class HashTestsController extends AppController {
 		$this->set('data', $data);
 	}
 
-	/**
-	 * Allow user to input plaintext that is to be hashed.
-	 */
-	public function checkDuplicatesInArray($array) {
-		$count = 0;
-		$dup = array();
-		$dupIndex = array();
-    	$duplicates=FALSE;
-    	foreach($array as $k=>$i) {
-        	if(!isset($value_{$i})) {
-          	  $value_{$i}=TRUE;
-        	}
-        	else {
-            	$duplicates|=TRUE; 
-            	array_push($dup, $i);    
-            	//array_push($dup, $count);  
-        	}
-    	}
-
-    	foreach ($dup as $q => $w) {
-    		foreach ($array as $a => $s) {
-    			if($w == $s) {
-    				array_push($dupIndex, $count);
-    			}
-    			$count += 1;
-    		}
-    		$count = 0;
-    	}
-
-    	if ($duplicates == TRUE) {
-    		return $dupIndex;
-   		} else {
-   			return ($duplicates);
-   		}
-	}
-
 	public function basic_hashing_input() {
 		$selectedAlgorithms = $this->Session->read('selectedAlgorithms');
 
@@ -200,17 +164,15 @@ class HashTestsController extends AppController {
 		$selectedAlgorithms = $this->Session->read('selectedAlgorithms');
 		if($this->request->is('post')) {
 			$data = $this->request->data;
-			//$this->log($data);
 
 			if (!empty($data['HashTests']['plaintext'])) {
 				
 				$output = HashingLib::computeDigests($selectedAlgorithms, $data['HashTests']['plaintext']);
 				
-                $outputResult = $this->compareDigests($output);
+				$outputResult = HashingLib::compareDigests($output);
+
 				$this->Session->write('output', $outputResult);
 				$this->redirect(array('controller' => 'HashResults', 'action' => 'compute_and_compare_result'));
-	            //$this->Session->write('output', $output);
-				//$this->redirect(array('controller' => 'HashResults', 'action' => 'compute_and_compare_result'));
 			}
 
 			elseif (!empty($data['HashTests']['file_upload']) && 
@@ -222,133 +184,19 @@ class HashTestsController extends AppController {
 
 				$output = HashingLib::computeDigests($selectedAlgorithms, $lineArray);
 
-				$outputResult = $this->compareDigests($output);
+				$outputResult = HashingLib::compareDigests($output);
+
+				if(!empty($data['HashTests']['email'])) {
+					$outputResult[0]['email'] = 1;
+                }else{
+                	$outputResult[0]['email'] = 0;
+                }
+
 				$this->Session->write('output', $outputResult);
 				$this->redirect(array('controller' => 'HashResults', 'action' => 'compute_and_compare_result'));
 
 			}
 		}
-	}
-
-/**
- * Compute the hashed value of the input plaintext.
- * @param Array $selectedAlgorithms array-type $key => algorithm name
- * @param String $hashTestForm plaintext from the user
- * @return Array $output $key => array('HashAlgorithm' column names => value)
- */
-	protected function computeDigests($selectedAlgorithms, $hashTestForm) {
-		$computed = array();
-		$output = array();
-		foreach($selectedAlgorithms as $key => $algorithm ) {
-			$messageDigest = hash(strtolower($algorithm['HashAlgorithm']['name']), $hashTestForm['plaintext']);
-
-			$computed['HashResult']['plaintext'] = $hashTestForm['plaintext'];
-			$computed['HashResult']['message_digest'] = $messageDigest;
-			$computed['HashResult']['hash_algorithm_id'] = $algorithm['HashAlgorithm']['id'];
-			$computed['HashResult']['hash_algorithm_name'] = $algorithm['HashAlgorithm']['name'];
-			$computed['HashResult']['user_id'] = $hashTestForm['id'];
-			array_push($output, $computed);
-		}
-		// $output['HashAlgorithm'] = $selectedAlgorithms['HashAlgorithm'];
-		// $output['HashResult']['plaintext'] = $plaintext;
-		// $output['HashResult']['message_digest'] = $listOfMessageDigests;
-		
-		return $output;
-	}
-
-/**
- * Compare the message digests to come up with an analysis
- *
- */
-	protected function compareDigests($output) {
-		$hashResultModel = ClassRegistry::init('HashResult');
-		$hashAlgorithmModel = ClassRegistry::init("HashAlgorithm");
-		$analysis = array();
-		$security = -1;
-		$speed = 0;
-		$recommendAlgo1 = '';
-
-		$mdline = explode("\n",$output[0]['HashResult']['message_digest']);
-		$ptline = explode("\n",$output[0]['HashResult']['plaintext']);
-
-		$dup = HashTestsController::checkDuplicatesInArray($mdline);
-
-		foreach($output as $key => $hashResult) {
-			$conditions = array(
-				'conditions' => array('HashResult.message_digest' => $hashResult['HashResult']['message_digest']),
-				'fields' => 'id'
-			);
-			$result = $hashResultModel->find('first', $conditions);
-
-			$hashResult['HashResult']['collision_index'] = $dup;
-
-			$collision_pt = array();
-			$collision_md = array();
-			$collision = '';
-			if($dup != FALSE) {
-				foreach($dup as $key => $num) {
-					array_push($collision_pt,$ptline[$num]);
-				 	array_push($collision_md,$mdline[$num]);
-				 	$collision .= $ptline[$num] . " " . $mdline[$num] . "\n";
-				}
-			}
-
-			if($dup != FALSE) {
-				$hashResult['HashResult']['description'] = 'There is collision detected at: ' . "\n";
-				$hashResult['HashResult']['collision_pt'] = $collision_pt;
-				$hashResult['HashResult']['collision_md'] = $collision_md;
-				$hashResult['HashResult']['collision'] = $collision;
-			} elseif ($dup == FALSE) {
-				$hashResult['HashResult']['collision'] = $collision;
-				$hashResult['HashResult']['description'] = 'No collision detected';
-			}
-
-			$options = array(
-				'conditions' => array(
-					'HashAlgorithm.id' => $hashResult['HashResult']['hash_algorithm_id']
-					),
-				'fields' => array('HashAlgorithm.speed','HashAlgorithm.security',
-					'HashAlgorithm.collision_resistance','HashAlgorithm.preimage_resistance',
-					'HashAlgorithm.2nd_preimage_resistance','HashAlgorithm.output_length',
-					'HashAlgorithm.collision_bka','HashAlgorithm.preimage_bka',
-					'HashAlgorithm.2nd_preimage_bka')
-
-				);
-			$searchResult = array();
-			$searchResult = $hashAlgorithmModel->find('first', $options);
-	
-			$hashResult['HashResult']['speed'] = $searchResult['HashAlgorithm']['speed'];
-			$hashResult['HashResult']['security'] = $searchResult['HashAlgorithm']['security'];
-			$hashResult['HashResult']['collision_resistance'] = $searchResult['HashAlgorithm']['collision_resistance'];
-			$hashResult['HashResult']['preimage_resistance'] = $searchResult['HashAlgorithm']['preimage_resistance'];
-			$hashResult['HashResult']['2nd_preimage_resistance'] = $searchResult['HashAlgorithm']['2nd_preimage_resistance'];
-			$hashResult['HashResult']['output_length'] = $searchResult['HashAlgorithm']['output_length'];
-			$hashResult['HashResult']['collision_bka'] = $searchResult['HashAlgorithm']['collision_bka'];
-			$hashResult['HashResult']['preimage_bka'] = $searchResult['HashAlgorithm']['preimage_bka'];
-			$hashResult['HashResult']['2nd_preimage_bka'] = $searchResult['HashAlgorithm']['2nd_preimage_bka'];
-			
-			if ($hashResult['HashResult']['security'] > $security) {
-				$security = $hashResult['HashResult']['security'];
-				$recommendAlgo = $hashResult['HashResult']['hash_algorithm_name'];
-				$speed = $hashResult['HashResult']['speed'];
-			} elseif ($hashResult['HashResult']['security'] == $security) {
-				//if($hashResult['HashResult']['speed'] > $speed) {
-					$recommendAlgo1 = $hashResult['HashResult']['hash_algorithm_name'];
-					$recommendAlgo .= ', ' . $recommendAlgo1;
-				//}
-			}
-
-			$hashResult['HashResult']['recommendation'] = $recommendAlgo;
-			//if(!empty($result['HashResult']['id'])) {
-			//	$hashResult['HashResult']['analysis'] = 'This input is a very common hash value for the algorithm: '. $hashResult['HashResult']['hash_algorithm_name'];
-			//} else {
-			//	$hashResult['HashResult']['analysis'] = 'This is not a common hash value for algorithm: '. $hashResult['HashResult']['hash_algorithm_name'];
-			//}
-			array_push($analysis, $hashResult);
-		}
-		
-		//$this->log($analysis);
-		return $analysis;
 	}
 
 /**
@@ -491,49 +339,20 @@ class HashTestsController extends AppController {
 					$this->Session->write('samplespace', $samplespace);
 					$this->Session->write('totalhash', $totalhash);
 					$this->Session->write('requiredsamplespace', $total_sample_size_ninety_nine_percentage);	
-					//$this->generate_ninety_nine_percentage_proability($N,$K);	
+					//HashingLib::generate_ninety_nine_percentage_proability($N,$K);	
 					$this->redirect(array('controller' => 'HashResults', 'action' => 'calculate_probability_of_collision_result'));
 				 }//end of if else 
 					
 			
 			}catch(Exception $e) {
-					$this->Session->setFlash($e->getMessage(),'flash_custom');
-					$this->redirect(array('action' => 'calculate_probability_of_collision'));
+					//$this->Session->setFlash($e->getMessage(),'flash_custom');
+					$this->Session->setFlash($e->getMessage(), 'alert-box', array('class'=>'alert-danger'));
 			}
 		
 		}
 		
 	}
 
-/**
- * To calcuate the number of hashes needed to get a 99% probability of getting a collision 
- *  
- */
-	public function generate_ninety_nine_percentage_proability($N, $K){
-		$check = true;
-
-		while($check == true) :
-			$firstexpEqu = (- bcpow($N,2)) / (2 * $K);
-			$probability = (1 - exp($firstexpEqu)) * 100;
-			if($probability < 99) {
-				if($K < 100){
-					$N += 1;
-				}else if($K < 1000){
-					$N += 10;
-				}else if($K < 10000){
-					$N += 100;
-				}else if($K < 100000){
-					$N += 1000;
-				}else{
-					$N += 100000000000000000000000000;	
-				}
-			}else {	
-				$requiredsamplespace = $N;
-				$check = false;
-			}
-		endwhile;
-		$this->Session->write('requiredsamplespace', $requiredsamplespace);	
-	} 
  
 	public function avalanche_effect() {
         
@@ -564,41 +383,30 @@ class HashTestsController extends AppController {
 			$ScienceMD = hash(strtolower($data['HashTests']['HashAlgorithm']), 'Science');
 			$SciencdMD = hash(strtolower($data['HashTests']['HashAlgorithm']), 'Sciencd');
 
-			$HelloPercent = $this -> compute_avalanche($HelloMD, $HellnMD);
-			$ComputerPercent = $this -> compute_avalanche($ComputerMD, $ComputesMD);
-			$SciencePercent = $this -> compute_avalanche($ScienceMD, $SciencdMD);
+			$HelloResult = HashingLib::computeAvalanche($HelloMD, $HellnMD);
+			$ComputerResult = HashingLib::computeAvalanche($ComputerMD, $ComputesMD);
+			$ScienceResult = HashingLib::computeAvalanche($ScienceMD, $SciencdMD);
 			
 			array_push($output, $data);
 			array_push($output, $HelloMD);
 			array_push($output, $HellnMD);
-			array_push($output, $HelloPercent);
+			array_push($output, $HelloResult);
 
 			array_push($output, $ComputerMD);
 			array_push($output, $ComputesMD);
-			array_push($output, $ComputerPercent);
+			array_push($output, $ComputerResult);
 
 			array_push($output, $ScienceMD);
 			array_push($output, $SciencdMD);
-			array_push($output, $SciencePercent);
+			array_push($output, $ScienceResult);
 			
 			$this->Session->write('output', $output);
+			//$this -> log ($output);
 			$this->redirect(array('controller' => 'HashResults', 'action' => 'avalanche_effect_result'));
 			
 		}		
 	}
 
-	public function compute_avalanche($firstMD, $secondMD){
-		$lengthOfMD = strlen ($firstMD);
-		$count = 0;
-		for ($i = 0; $i < $lengthOfMD; $i++){
-			if (strcmp($firstMD[$i], $secondMD[$i]) != 0) {
-				$count++;
-			}
-		}
-		$this -> log($count);
-		$percent = $count / $lengthOfMD * 100;
-		return round($percent, 2);
-	}
 /**
  * To read in user's input and get the hash algorithms can produce the same output. 
  *  

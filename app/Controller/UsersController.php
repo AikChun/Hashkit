@@ -37,6 +37,8 @@ class UsersController extends AppController {
  	 'forget_password',
  	 'reset_password',
 	 'register',
+	 'view_my_own_profile',
+	 'edit_my_own_profile'
  	);
  	$this->Auth->allow($allowedActions);
  }
@@ -241,10 +243,10 @@ class UsersController extends AppController {
 /**
  * View for users profile
  */
-	public function view_my_own_profile() {
+	public function view_my_own_profile($id = null) {
 		$conditions = array(
 			'conditions' => array(
-				'User.id' => $this->Auth->user('id')
+				'User.id' => $id
 			)
 		);
 

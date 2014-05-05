@@ -10,7 +10,6 @@
 	  		echo $this->Html->script('jquery-2.1.0.js');
 	  		echo $this->Html->script('bootstrap.js');
 	  		echo $this->Html->script('jquery.scrollNav.js');
-
 			echo $this->Html->meta(
     			'viewport',
     			'width=device-width, initial-scale=1.0'
@@ -83,7 +82,7 @@
 						<?php if($authUser):?>
 
 						<li style="float:right;"><a href="/Users/Logout">Logout</a></li>
-						<li><a href="/Users/view_my_own_profile"><?php echo $authUser['name'];?></a></li>
+						<li><a href="/Users/view_my_own_profile/<?php echo $authUser['id']?>"><?php echo $authUser['name'];?></a></li>
 						
 						<?php endif;?>
 						
