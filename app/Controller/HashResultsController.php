@@ -129,26 +129,16 @@ class HashResultsController extends AppController {
 		fclose($fp);
 	}
 
-	public function send_results($outputResult) {
-
-		$recipient = array(
-			'full_name' => 'Ian',
-			'email' => 'luffy.7@hotmail.com',
-		);
-
-		$email = new DescriptionEmail($recipient);
-		$email->sendHashResult($outputResult);
-		
-	}
 
 	public function compute_and_compare_result() {
 		$outputResult = $this->Session->read('output');
 
 		if ($outputResult[0]['email'] == 1) {
-			$this->send_results($outputResult);
+			//$this->send_results($outputResult);
+			$emailSentSuccess = $this->HashResult->sendResults($outputResult);
 		}
 
-		$this->log($outputResult);
+		//$this->log($outputResult);
 		if (!empty($outputResult)) {
 			$this->set("output", $outputResult);
 			$outputResult[0]['HashResult']['description'] .= $outputResult[0]['HashResult']['collision'];
