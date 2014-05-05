@@ -22,20 +22,24 @@
 				if(count($ptline > 1)) {
 
 					foreach($ptline as $key1 => $data1){
+
 						echo $data1;
+						echo '<br/>';
+
 					}
 
 				}else {
-					echo $output[0]['HashResult']['plaintext'];
-				}
 
-				echo '<br/>';
-				echo '<br/>';
+					echo $output[0]['HashResult']['plaintext'];
+					echo '<br/>';
+					
+				}
 
 				foreach($output as $key1 => $data1){
 
 					$mdline = explode("\n",$data1['HashResult']['message_digest']);
-					
+
+					echo '<br/>';
 					echo '<b>Selected Algorithm:</b>';
 					echo '<br/>';
 					echo $data1['HashResult']['hash_algorithm_name'];
@@ -47,7 +51,6 @@
 						echo $data2;
 					}
 
-					echo '<br/>';
 					echo '<br/>';
 
 				}
