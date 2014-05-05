@@ -67,7 +67,7 @@
 
 				echo $this->Form->input('message', array(
 					'class' => 'form-control',
-					'rows' => '8',
+					'rows' => '10',
 					'placeholder' => 'Your message to us!',
 					'label' => false,
 					'required'));
@@ -80,7 +80,11 @@
 
 		<div class="modal-footer">
 
-			<div class="form-group">
+		</div>
+
+		<div class="form-group">
+
+			<div class="col-lg-12">
 
 				<?php
 
@@ -91,11 +95,11 @@
 
 				?>
 
-				<?php echo $this->Form->end($options); ?>
-
 			</div>
 
 		</div>
+
+		<?php echo $this->Form->end($options); ?>
 
 	</div>
 
