@@ -48,7 +48,8 @@ class PagesController extends AppController {
  **/
  protected function _configureAllowedActions() {
  	$allowedActions = array(
-		'index'
+		'index',
+		'contact_us'
  	);
  	$this->Auth->allow($allowedActions);
  }
@@ -110,6 +111,10 @@ class PagesController extends AppController {
 	}
 
 	public function hash_function() {
+
+	}
+
+	public function contact_us() {
 
 	}
 }
