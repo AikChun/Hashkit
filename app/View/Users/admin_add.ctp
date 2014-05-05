@@ -56,14 +56,14 @@
 		<div class="form-group">
 			<label class="col-lg-2 control-label">Choose Group:</label>
 			<div class="col-lg-2">
-			 <select class="form-control" name="data[User][group_id]">
-		        <option value="">(choose one)</option>
-		        <option value="1">1</option>
-		        <option value="2">2</option>
-		        <option value="3">3</option>
-		    </select>
-		    </div>
-	    </div>
+				<select class="form-control" name="data[User][group_id]">
+					<option value="">(choose one)</option>
+					<option value="1">1</option>
+					<option value="2">2</option>
+					<option value="3">3</option>
+				</select>
+			</div>
+		</div>
 		<br/>
 		<div class="form-group">
 

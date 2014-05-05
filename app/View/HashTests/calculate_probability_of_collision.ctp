@@ -204,7 +204,14 @@
 
 			<label class="col-lg-2 control-label">Hash Algorithm:</label>
 
-			<div class="col-lg-10">
+			<div class="col-lg-2">
+
+				<select class="form-control" name="data[HashAlgorithmV1][name]">
+					<option value="">(choose one)</option>
+					<option value="1">1</option>
+					<option value="2">2</option>
+					<option value="3">3</option>
+				</select>
 
 				<?php 
 				

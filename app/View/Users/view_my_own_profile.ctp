@@ -1,32 +1,79 @@
-<div class="users view">
-<h2><?php echo __('User'); ?></h2>
-	<dl>
-		<dt><?php echo __('Id'); ?></dt>
-		<dd>
-			<?php echo h($data['User']['id']); ?>
-			&nbsp;
-		</dd>
-		<dt><?php echo __('Name'); ?></dt>
-		<dd>
-			<?php echo h($data['User']['name']); ?>
-			&nbsp;
-		</dd>
-		<dt><?php echo __('Email'); ?></dt>
-		<dd>
-			<?php echo h($data['User']['email']); ?>
-			&nbsp;
-		</dd>
-		<dt><?php echo __('Group Id'); ?></dt>
-		<dd>
-			<?php echo h($data['User']['group_id']); ?>
-			&nbsp;
-		</dd>
-		<dt><?php echo __('Profile'); ?></dt>
-		<dd>
-			<?php echo h($data['User']['profile']); ?>
-			&nbsp;
-		</dd>
-	</dl>
-	<a href="/users/edit_my_own_profile/<?php echo $authUser['id']?>"><button class="edit profile">Edit Profile</button></a>
-</div>
+<div class="container">
+			
+	<div class="jumbotron">
 
+		<div class="modal-header">
+
+			<h2>My Profile</h2>
+
+		</div>
+
+		<br/>
+
+		<div class="form-horizontal">
+
+			<div class="form-group">
+
+				<label for="profile-email" class="col-lg-2 control-label">Email:</label>
+
+				<div class="col-lg-10">
+
+					<?php
+
+						echo $authUser['email'];
+
+					?>
+
+				</div>
+
+			</div>
+
+			<div class="form-group">
+
+				<label for="profile-group_id" class="col-lg-2 control-label">Group ID:</label>
+
+				<div class="col-lg-10">
+
+					<?php
+
+						echo $authUser['group_id'];
+
+					?>
+
+				</div>
+
+			</div>
+
+			<div class="form-group">
+
+				<label for="profile-profile" class="col-lg-2 control-label">Profile:</label>
+
+				<div class="col-lg-10">
+
+					<?php
+
+						echo $authUser['profile'];
+
+					?>
+
+				</div>
+
+			</div>
+
+		</div>
+
+		<div class="modal-footer">
+
+		</div>
+
+		<div class="form-group pull-right">
+
+			<a href="/HashResults/show_my_test_results/<?php echo $authUser['id']?>" class="btn btn-primary" data-dismiss="modal">View History</a>
+			<a href="/Users/edit_my_own_profile/<?php echo $authUser['id']?>" class="btn btn-primary" data-dismiss="modal">Edit My Profile</a>
+			<a href="/" class="btn btn-default" data-dismiss="modal">Back to Home</a>
+
+		</div>
+
+	</div>
+
+</div>
