@@ -110,11 +110,15 @@ class PagesController extends AppController {
 
 	}
 
-	public function hash_function() {
+	public function hash_information() {
 
 	}
 
 	public function contact_us() {
+
+	}
+
+	public function hash_function() {
 
 	}
 }

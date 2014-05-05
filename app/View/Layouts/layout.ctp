@@ -68,7 +68,7 @@
 								</ul>
 
 						</li>
-						<li><a href="/Pages/hash_function">Hash information</a></li>
+						<li><a href="/Pages/hash_information">Hash information</a></li>
 						<li><a href="/Questionnaires/questionnaire">Questionnarie</a></li>
 						<?php endif;?>
 						<li><a href="/Pages/about_us">About Us</a></li>
