@@ -119,16 +119,6 @@ class HashResultsController extends AppController {
 		$this->Session->write('output', '');
 	}
 
-	public function download_result() {
-		$view = new View($this);
-		$result = $view->render('compute_and_compare_result','ajax');
-
-		$fp = fopen('hello.html','w');
-		fwrite($fp, $result);
-		
-		fclose($fp);
-	}
-
 
 	public function compute_and_compare_result() {
 		$outputResult = $this->Session->read('output');
@@ -153,7 +143,9 @@ class HashResultsController extends AppController {
 		//$this->Session->write('output', '');
 
 		if($this->request->is('post')) {
-			$this->download_result();
+			$view = new View($this);
+			$result = $view->render('compute_and_compare_result','ajax');
+			$this->HashResult->download_result($result);
 			$this->Session->setFlash('Hash result have been saved','flash_custom');
 		}
 	}
