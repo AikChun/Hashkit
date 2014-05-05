@@ -25,9 +25,9 @@
 				<?php
 				
 					echo $this->Form->input('plaintext', array(
-											'class' => 'form-control',
-											'placeholder' => 'Please enter your plaintext here',
-											'label' => false
+						'class' => 'form-control',
+						'placeholder' => 'Please enter your plaintext here',
+						'label' => false
 					));
 				
 				?>
@@ -52,16 +52,20 @@
 
 				<div class="col-lg-9">
 
-						<?php
+					<?php
 
-							echo $this->Form->input('file_upload',array(
-													'type' => 'file',
-													'label' => false
-							));
-						
-						?>
+						echo $this->Form->input('file_upload',array(
+							'type' => 'file',
+							'label' => false
+						));
+					
+					?>
 
 				</div>
+
+		</div>
+
+		<div class="modal-footer">
 
 		</div>
 
