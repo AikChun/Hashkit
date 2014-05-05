@@ -67,6 +67,15 @@
 
 		<div class="form-group">
 
+			<div class="email" style="">
+<input type="checkbox" name="data[HashTests][email]" value="1" id="email_checkbox"/> 
+Send email notification when results are done.
+</div>
+
+</div>
+
+		<div class="form-group">
+
 			<div class="col-lg-12">
 
 				<?php

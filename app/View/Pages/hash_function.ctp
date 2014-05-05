@@ -99,7 +99,7 @@
               Example : 
               <br>
               <br>
-
+              
 
               </br>
               <hr class="">
@@ -112,8 +112,58 @@
                   <br><br>
                   <li><b>Second pre-image resistance</b>
               </p>
-          </div> <!--col-md-9 -->
-      </div> <!--row-->
+              <div class="row">
+                  <div class="col-md-4">
+                      <img src="//placehold.it/300x300" class="img-responsive">
+                  </div>
+                  <div class="col-md-4">
+                      <img src="//placehold.it/300x300" class="img-responsive">
+                  </div>
+                  <div class="col-md-4">
+                      <img src="//placehold.it/300x300" class="img-responsive">
+                  </div>
+              </div>
+              <hr class="">
+                <h2 id="sec3" class="">Attacks on Hash functions</h2>
+                <br>
+                <b>Brute-force attack</b>
+                <p>An attack that is used when it is not possible to take
+                  advantage of weakness in hash function structure and alogrithm.
+                  It involves hashing all possible combinations from a random word generator or dictionary until the correct pair of collision is found. In theory, given enough time, a brute-force attack will eventually be successful but it is not practical as some hash function has larger output bits which requires too much time and resouces to perform. An easy measure against brute force attack will be limiting the number of attempts on important functions such as login.</p>
+                <br>
+                <b>Birthday attack</b>
+                <p>A type of cryptographic attack that is based on the birthday 
+                  problem in probability theory that is used to estimate the likelihood of collision in hash functions. It states that in order for there to be a 50% chance that someone in a given room shares your birthday, you need 253 people in the room. However, if you are looking for a greater than 50% chance that any two people in the room have the same birthday, you only need 23 people.This applies to finding collisions in hashing algorithms because it is harder to find collision with a given hash than it is to find any two random plaintext that hash to the same value. It illustrates the tremendous difference between the effort required for a pre-image attack and a collision attack.</p>
+                <br>
+                <b>Collision attack</b>
+                <p>An attack that finds two different messages m1 and m2, such that hash(m1) = hash(m2). In a classical collision attack, the attacker  has no control over the content of either message, but are arbitrarily chosen by the algorithm. A collision found from two random message does not really affect the security of hash function. For the attack to be useful, the attack must be in control of the input to the hash function</p>
+                <br>
+                <b>Chosen-prefix collision attack</b>
+                <p>An extension of collision attack where the attacker can choose two arbitrarily different message, and then append different calculated values that result in the whole message having an equal hash value. This attack is much more powerful than a classical collision attack</p>
+                <br>
+                <b>Pre-image attack</b>
+                <p>An attack where the adversary only has access to message digest and is trying to generate a plaintext that hash to the same value. This attack usually occur when the database of hashed password is leaked or hacked.
+                </p>
+                <br>
+                <b>2nd pre-image attack</b>
+                <p>An attack where the adversary only has access to the input plaintext and is trying to find another plaintext that hash to the same value. It is important for hash function to be resistant to 2nd pre-image attacks because of digital signature schemes where its H(message) and message is made public. An attacker can come up with another H(message) using different plaintext and publish the message as though he is the orignal signer.</p>
+  
+                <h2 id="sec4" class="">Section 4</h2>
+              Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium
+              doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore
+              veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim
+              ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia
+              cor magni dolores eos qui ratione voluptatem sequi nesciunt. Neque porro
+              quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci
+              velit, sed quia non numquam eius modi tempora incidunt ut labore et dolore
+              magnam aliquam quaerat voluptatem. Ut enim ad minima veniam, quis nostrum
+              exercitationem ullam corporis suscipit laboriosam, nisi ut
+              <hr class="">
+               <h4 class=""></h4>
+
+              <hr class="">
+          </div>
+      </div>
   </article>
 
 <script type="text/javascript">
@@ -143,4 +193,3 @@
           }
         }
     });
-</script>
