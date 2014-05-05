@@ -46,15 +46,15 @@ class DescriptionEmail {
 
 		$email = $this->email;
 		$email->subject('Your hash result is ready to view');
-		$email->template('email_results');
-		$email->emailFormat('html');
-		$email->viewVars(array('output'=>$output));
-
+		//$email->template('email_results');
+		//$email->emailFormat('html');
+		//$email->viewVars(array('output'=>$output));
+		$msg = 'Your hash results is ready to view. PLease log in to http://hashkit.localhost and view your results at result history.';
 		$emailOn = Configure::read('EMAIL_ON');
 		
 
 		if ($emailOn) {
-			$result = $email->send('Your hash results is ready to view');
+			$result = $email->send($msg);
 		} else {
 			$result = false;
 		}

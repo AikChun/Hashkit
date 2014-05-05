@@ -4,7 +4,7 @@
 
 		<?php 
 		
-			echo $this->Form->create('User', array('action' => '', 'class' => 'form-horizontal'));
+			echo $this->Form->create('User', array('action' => 'edit_my_own_profile', 'class' => 'form-horizontal'));
 			
 		?>
 
@@ -13,6 +13,8 @@
 			<h2>Edit Profile</h2>
 
 		</div>
+
+		<br/>
 
 		<div class="form-group">
 								

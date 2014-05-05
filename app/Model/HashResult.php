@@ -71,4 +71,11 @@ class HashResult extends AppModel {
 		
 	}
 
+	public function download_result($result) {
+		$fp = fopen('hello.html','w');
+		fwrite($fp, $result);
+		
+		fclose($fp);
+	}
+
 }
