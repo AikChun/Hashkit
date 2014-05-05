@@ -82,7 +82,7 @@
 						<?php if($authUser):?>
 
 						<li style="float:right;"><a href="/Users/Logout">Logout</a></li>
-						<li><a href="/Users/view_my_own_profile/<?php echo $authUser['id']?>"><?php echo $authUser['name'];?></a></li>
+						<li><a href="/Users/view_my_own_profile"><?php echo $authUser['name'];?></a></li>
 						
 						<?php endif;?>
 						
