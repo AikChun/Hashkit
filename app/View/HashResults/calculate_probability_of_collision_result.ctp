@@ -10,7 +10,8 @@
 
 		<br/>
 
-		<?php 
+		<?php
+
 				//base - result from database (total hashes)
 				//exponent - result from database (total hashes)
 				//requiredbase - sample size base 
@@ -45,12 +46,19 @@
 				}
 		
 		?>
+
 		<br>
 
-		<?php echo "the probability of getting a collision in numbers of tries: " . round($probability,2) . " %"; ?>
+		<?php
+			echo "the probability of getting a collision in numbers of tries: " . round($probability,2) . " %";
+		?>
+
 		<br>
 
-		<?php echo "the required sample space to get 99% probability of getting a collision: " . $requiredsamplespace . " hashes" ?>
+		<?php 
+			echo "the required sample space to get 99% probability of getting a collision: " . $requiredsamplespace . " hashes";
+		?>
+
 		<br>
 
 		<div class="modal-footer">
@@ -59,7 +67,7 @@
 
 		<div class="form-group">
 
-				<a href="/" class="btn btn-primary pull-right" data-dismiss="modal">Back to Home</a>
+			<a href="/" class="btn btn-primary pull-right" data-dismiss="modal">Back to Home</a>
 
 		</div>
 	

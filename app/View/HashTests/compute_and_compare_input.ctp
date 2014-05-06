@@ -52,14 +52,14 @@
 
 				<div class="col-lg-9">
 
-						<?php
+					<?php
 
-							echo $this->Form->input('file_upload',array(
-													'type' => 'file',
-													'label' => false
-							));
-						
-						?>
+						echo $this->Form->input('file_upload',array(
+							'type' => 'file',
+							'label' => false
+						));
+					
+					?>
 
 				</div>
 
@@ -68,26 +68,24 @@
 		<div class="form-group">
 
 			<div class="email" style="">
-<input type="checkbox" name="data[HashTests][email]" value="1" id="email_checkbox"/> 
-Send email notification when results are done.
-</div>
 
-</div>
-
-		<div class="form-group">
-
-			<div class="col-lg-12">
-
-				<?php
-
-					$options = array(
-						'class' => 'btn btn-primary pull-right',
-						'label' => 'Submit'
-					);
-
-				?>
-
+				<input type="checkbox" name="data[HashTests][email]" value="1" id="email_checkbox"/> 
+				Send email notification when results are done.
+			
 			</div>
+
+		</div>
+
+		<div class="modal-footer">
+
+			<?php
+
+				$options = array(
+					'class' => 'btn btn-primary pull-right',
+					'label' => 'Submit'
+				);
+
+			?>
 
 		</div>
 

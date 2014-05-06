@@ -2,12 +2,6 @@
 			
 	<div class="jumbotron">
 
-		<?php
-			
-			echo $this->Form->create('HashTests',array('action' => 'calculate_probability_of_collision', 'class' => 'form-horizontal'));
-
-		?> 
-
 		<div class="modal-header">
 
 			<h2>Hash Collision Probability</h2>
@@ -15,6 +9,12 @@
 		</div>
 
 		<br/>
+
+		<?php
+			
+			echo $this->Form->create('HashTests',array('action' => 'calculate_probability_of_collision', 'class' => 'form-horizontal'));
+
+		?> 
 
 		<div class="form-group">
 								
@@ -91,13 +91,6 @@
 
 			<div class="col-lg-2">
 
-				<select class="form-control" name="data[HashAlgorithmV1][name]">
-					<option value="">(choose one)</option>
-					<option value="1">1</option>
-					<option value="2">2</option>
-					<option value="3">3</option>
-				</select>
-
 				<?php 
 				
 					$algorithms = array();
@@ -111,6 +104,7 @@
 
 					echo $this->Form->input('HashAlgorithm', array(
 						'empty' => '(choose one)',
+						'class' => 'form-control',
 						'options'=> $algorithms,
 						'id' => 'HashAlgorithm',
 						'onchange' => 'checkform1()',
@@ -118,7 +112,7 @@
 						)
 					);
 
-			?>
+				?>
 
 			</div>
 

@@ -35,11 +35,12 @@
 					
 				}
 
-				foreach($output as $key1 => $data1){
+				echo '<br/>';
+
+				foreach($output as $key1 => $data1) {
 
 					$mdline = explode("\n",$data1['HashResult']['message_digest']);
 
-					echo '<br/>';
 					echo '<b>Selected Algorithm:</b>';
 					echo '<br/>';
 					echo $data1['HashResult']['hash_algorithm_name'];
@@ -47,15 +48,34 @@
 					echo '<b>Message Digest:</b>';
 					echo '<br/>';
 
-					foreach($mdline as $key2 => $data2){
-						echo $data2;
-					}
+					if (count($mdline) == 1) {
+					
+					foreach($mdline as $key2 => $data2) {
 
-					echo '<br/>';
+						echo $data2;
+						echo '<br/>';
+						echo '<br/>';
+
+					}
+				
+				}else {
+
+					foreach($mdline as $key2 => $data2) {
+
+						if ($data2 == $mdline[(count($mdline)-1)]) {
+							echo '<br/>';
+						}else {
+							echo $data2;
+							echo '<br/>';
+						}
+
+					}
 
 				}
 
-			}else if(empty($output)){
+				}
+
+			}else if(empty($output)) {
 				echo 'Please select and choose your choice of algorithm';
 			}
 

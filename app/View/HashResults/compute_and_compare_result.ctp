@@ -4,145 +4,87 @@
 
 		<div class="modal-header">
 
-			<?php 
-				if($output[0]['email'] != 1) {
-			?>
-
 			<h2>Hash Algorithm Recommendation</h2>
 
 		</div>
 			
 		<br/>
 
-		<table>
+		<?php
 
-			<tr>
+			if($output[0]['email'] != 1) {
 
-				<td>
+			echo '<b>Plaintext entered:</b>';
+			echo '<br/>';
+
+			$ptline = explode("\n",$output[0]['HashResult']['plaintext']);
 			
-					<b>Plaintext entered: </b>
-			
-				</td>
-			
-			</tr>
+			if(count($ptline > 1)) {
 
-			<?php 
-			
-				$ptline = explode("\n",$output[0]['HashResult']['plaintext']);
-				if(count($ptline > 1)) { 
-			
-			?>
+				$asd = end($ptline);
 
-			<tr>
+				foreach($ptline as $key1 => $data1){
 
-				<?php foreach($ptline as $key1 => $data1):?>
+					echo $data1;
 
-				<td>
+					if($asd != $data1) {
+						echo '<br/>';
+					}
 
-					<?php 
-						echo $data1;
-					?>
-				
-				</td>
-
-			</tr>
-
-			<?php
-			
-				endforeach;
-				}else { 
-
-			?>
-
-			<tr>
-
-				<td>
-
-					<?php
-						echo $output[0]['HashResult']['plaintext'];
-					?>
-
-				</td>
-			
-			</tr>
-
-			<?php
 				}
-			?>
 
-		</table>
+			}else {
+				echo $output[0]['HashResult']['plaintext'];
+			}
 
-		<br/>
+			echo '<br/>';
+			echo '<br/>';
 
-		<table>
-			
-			<?php
-
-				foreach($output as $key1 => $data1):
+			foreach($output as $key1 => $data1) {
+				
 				$mdline = explode("\n",$data1['HashResult']['message_digest']);
 
-			?>
+				echo '<b>Selected Algorithm:</b>';
+				echo '<br/>';
+				echo $data1['HashResult']['hash_algorithm_name'];
+				echo '<br/>';
+				echo '<b>Message Digest:</b>';
+				echo '<br/>';
 
-			<tr>
-				
-				<td>
+				if (count($mdline) == 1) {
 					
-					<b>Selected Algorithm:</b>
-					<?php
-						echo $data1['HashResult']['hash_algorithm_name'];
-					?>
+					foreach($mdline as $key2 => $data2) {
 
-				</td>
-
-			</tr>
-
-			<tr>
-
-				<td>
-
-					<b>Message Digest:</b>
-
-				</td>
-
-			</tr>
-
-					<?php
-
-						foreach($mdline as $key2 => $data2):
-					?>	
-
-						<tr>
-						<td>
-						<?php
 						echo $data2;
-						?>
+						echo '<br/>';
+						echo '<br/>';
 
-						<br>
-						</td>
-						</tr>
+					}
+				
+				}else {
 
-						<?php
-						endforeach;
-						endforeach;
-					
-					?>
-		</table>
+					foreach($mdline as $key2 => $data2) {
 
-		<br/>
-			
-					<b>Analysis: </b>
+						if ($data2 == $mdline[(count($mdline)-1)]) {
+							echo '<br/>';
+						}else {
+							echo $data2;
+							echo '<br/>';
+						}
 
-			
-			
-					<?php
-						echo $output[0]['HashResult']['description'];
-					?>
-			
-					<br/>
-			
-				</td>
-			
-			</tr>
+					}
+
+				}
+		
+			}
+
+			echo '<b>Analysis:</b>';
+			echo '<br/>';
+			echo $output[0]['HashResult']['description'];
+			echo '<br/>';
+			echo '<br/>';
+		?>
+
 
 			<table class="table table-bordered table-condensed">
 				<col align = "left">
@@ -233,8 +175,13 @@
 
 		<br/>
 
-		<b>Comparing between selected algorithmn:</b><br/><br/>
+		<?php
+			echo '<b>Comparing between selected algorithmn:</b>';
+			echo '<br/>';
+			echo '<br/>';
 
+		?>
+		
 		<table class="table table-bordered table-condensed">
 			
 			<tr>
@@ -253,7 +200,7 @@
 
 					<b>
 						<?php 
-						echo $data['HashResult']['hash_algorithm_name'];
+							echo $data['HashResult']['hash_algorithm_name'];
 						?>
 					</b>
 
@@ -472,36 +419,16 @@
 			</tr>
 
 		</table>
-		
+
 		<?php
+
 			$last = end($output);
+
+			echo '<b>Recommended Hash Function:</b>';
+			echo '<br/>';
+			echo $last['HashResult']['recommendation'];
+
 		?>
-
-		<table>
-
-			<tr>
-				
-				<td>
-
-					<b>Recommended Hash Function:<b>
-				
-				</td>
-			
-			</tr>
-
-			<tr>
-
-				<td>
-
-					<?php
-						echo $last['HashResult']['recommendation'];
-					?>
-			
-				</td>
-			
-			</tr>
-
-		</table>
 	
 		<div class="modal-footer">
 
@@ -509,35 +436,28 @@
 
 		<div class="form-group">
 
-				<a href="/" class="btn btn-primary pull-right" data-dismiss="modal">Back to Home</a>
+			<?php
 
-				<?php 
-		
-			echo $this->Form->create('HashResults', array('class' => 'form-horizontal', 'type' => 'file'));
-			
-		?>
+				echo $this->Form->create('HashResults', array('class' => 'form-horizontal', 'type' => 'file'));
 
-				<?php
+				$options = array(
+					'class' => 'btn btn-primary pull-left',
+					'label' => 'Save Results'
+				);
 
-					$options = array(
-						'class' => 'btn btn-primary pull-left',
-						'label' => 'Save Results'
-					);
+				echo $this->Form->end($options);
+				echo '<a href="/" class="btn btn-default pull-right" data-dismiss="modal">Back to Home</a>';
 
-				?>
-
-				<?php echo $this->Form->end($options); ?>
+			?>
 
 		</div>		
 
-		<?php 
-			}else{
-		?>
-
-			Hash results will be email to you shortly after computation is done.
-
 		<?php
+
+			}else {
+				echo 'Hash results will be email to you shortly after computation is done.';
 			}
+
 		?>
 
 	</div>
