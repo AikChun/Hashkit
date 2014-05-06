@@ -11,9 +11,7 @@
 		<br/>
 
 		<?php
-
 			echo $this->Form->create('User', array('action' => 'register', 'class' => 'form-horizontal'));
-
 		?>
 
 		<div class="form-group">

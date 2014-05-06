@@ -1,5 +1,5 @@
 <div class="container">
-			
+
 	<div class="jumbotron">
 
 		<div class="modal-header">
@@ -7,18 +7,16 @@
 			<h2>Login</h2>
 
 		</div>
-			
+
 		<br/>
 
-		<?php 
-		
+		<?php
 			echo $this->Form->create('User', array('action' => 'login', 'class' => 'form-horizontal'));
-			
 		?>
 
 		<div class="form-group">
-								
-			<label for="login-email" class="col-lg-2 control-label">Email:</label>
+
+			<label class="col-lg-2 control-label">Email:</label>
 
 			<div class="col-lg-10">
 
@@ -39,7 +37,7 @@
 
 		<div class="form-group">
 
-			<label for="login-password" class="col-lg-2 control-label">Password:</label>
+			<label class="col-lg-2 control-label">Password:</label>
 
 			<div class="col-lg-10">
 

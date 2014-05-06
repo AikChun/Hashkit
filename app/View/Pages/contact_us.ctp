@@ -2,10 +2,8 @@
 			
 	<div class="jumbotron">
 
-		<?php 
-		
+		<?php		
 			echo $this->Form->create('Pages', array('action' => 'contact_us', 'class' => 'form-horizontal'));
-			
 		?>
 
 		<div class="modal-header">
@@ -18,7 +16,7 @@
 
 		<div class="form-group">
 								
-			<label for="contact_us-name" class="col-lg-2 control-label">Name:</label>
+			<label class="col-lg-2 control-label">Name:</label>
 
 			<div class="col-lg-10">
 
@@ -39,7 +37,7 @@
 
 		<div class="form-group">
 
-			<label for="contact_us-email" class="col-lg-2 control-label">Email:</label>
+			<label class="col-lg-2 control-label">Email:</label>
 
 			<div class="col-lg-10">
 
@@ -59,7 +57,7 @@
 
 		<div class="form-group">
 
-			<label for="contact_us-message" class="col-lg-2 control-label">Message:</label>
+			<label class="col-lg-2 control-label">Message:</label>
 
 			<div class="col-lg-10">
 

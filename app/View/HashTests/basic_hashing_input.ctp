@@ -10,10 +10,8 @@
 
 		<br/>
 
-		<?php 
-		
+		<?php
 			echo $this->Form->create('HashTests', array('action' => 'basic_hashing_input', 'class' => 'form-horizontal', 'type' => 'file'));
-			
 		?>
 
 		<div class="form-group">

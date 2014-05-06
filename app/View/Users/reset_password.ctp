@@ -55,10 +55,10 @@
 				<?php
 				
 					echo $this->Form->input('User.confirm_new_password', array(
-											'class' => 'form-control',
-											'placeholder' => 'Re-enter your password here',
-											'label' => false,
-											'type' => 'password'
+						'class' => 'form-control',
+						'placeholder' => 'Re-enter your password here',
+						'label' => false,
+						'type' => 'password'
 					));
 
 					echo $this->Form->input('User.id', array(
@@ -80,7 +80,7 @@
 
 				<?php
 
-					$options = array(
+					$reset_password_submit = array(
 						'class' => 'btn btn-primary pull-right',
 						'label' => 'Submit'
 					);
@@ -91,7 +91,7 @@
 
 		</div>
 
-		<?php echo $this->Form->end($options); ?>
+		<?php echo $this->Form->end($reset_password_submit); ?>
 
 	</div>
 

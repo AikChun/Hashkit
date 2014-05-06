@@ -10,10 +10,8 @@
 
 		<br/>
 
-		<?php 
-		
+		<?php
 			echo $this->Form->create('HashTests', array('action' => 'hash_analyser', 'class' => 'form-horizontal'));
-			
 		?>
 
 		<div class="form-group">
