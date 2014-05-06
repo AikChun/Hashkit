@@ -50,28 +50,30 @@
 
 					if (count($mdline) == 1) {
 					
-					foreach($mdline as $key2 => $data2) {
+						foreach($mdline as $key2 => $data2) {
 
-						echo $data2;
-						echo '<br/>';
-						echo '<br/>';
-
-					}
-				
-				}else {
-
-					foreach($mdline as $key2 => $data2) {
-
-						if ($data2 == $mdline[(count($mdline)-1)]) {
-							echo '<br/>';
-						}else {
 							echo $data2;
 							echo '<br/>';
+							echo '<br/>';
+
+						}
+				
+					}else {
+
+						foreach($mdline as $key2 => $data2) {
+
+							if ($data2 == $mdline[(count($mdline)-1)]) {
+								echo '<br/>';
+							}else {
+
+								echo $data2;
+								echo '<br/>';
+							
+							}
+
 						}
 
 					}
-
-				}
 
 				}
 
@@ -85,11 +87,7 @@
 
 		</div>
 
-		<div class="form-group">
-
-			<a href="/" class="btn btn-primary pull-right">Back to Home</a>
-
-		</div>
+		<a href="/" class="btn btn-primary pull-right">Back to Home</a>
 
 	</div>
 

@@ -440,12 +440,12 @@
 
 				echo $this->Form->create('HashResults', array('class' => 'form-horizontal', 'type' => 'file'));
 
-				$options = array(
+				$compute_and_compare_save = array(
 					'class' => 'btn btn-primary pull-left',
 					'label' => 'Save Results'
 				);
 
-				echo $this->Form->end($options);
+				echo $this->Form->end($compute_and_compare_save);
 				echo '<a href="/" class="btn btn-default pull-right" data-dismiss="modal">Back to Home</a>';
 
 			?>

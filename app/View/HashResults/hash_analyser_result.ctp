@@ -12,7 +12,7 @@
 
 		<?php
 
-			if ($messagedigestlength != 0){
+			if ($messagedigestlength != 0) {
 
 				$bitSize = (int)$messagedigestlength * 4;
 
@@ -43,11 +43,7 @@
 
 		</div>
 
-		<div class="form-group">
-
-				<a href="/" class="btn btn-primary pull-right" data-dismiss="modal">Back to Home</a>
-
-		</div>
+		<a href="/" class="btn btn-primary pull-right" data-dismiss="modal">Back to Home</a>
 
 	</div>
 

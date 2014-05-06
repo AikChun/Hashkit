@@ -2,12 +2,6 @@
 			
 	<div class="jumbotron">
 
-		<?php 
-		
-			echo $this->Form->create('HashTests', array('action' => 'compute_and_compare_input', 'class' => 'form-horizontal', 'type' => 'file'));
-			
-		?>
-
 		<div class="modal-header">
 
 			<h2>Hash Input</h2>
@@ -16,18 +10,24 @@
 
 		<br/>
 
+		<?php 
+		
+			echo $this->Form->create('HashTests', array('action' => 'compute_and_compare_input', 'class' => 'form-horizontal', 'type' => 'file'));
+			
+		?>
+
 		<div class="form-group">
 								
-			<label for="hashInput-plaintext" class="col-lg-3 control-label">Please enter your plaintext:</label>
+			<label class="col-lg-3 control-label">Please enter your plaintext:</label>
 
 			<div class="col-lg-9">
 
 				<?php
 				
 					echo $this->Form->input('plaintext', array(
-											'class' => 'form-control',
-											'placeholder' => 'Please enter your plaintext here',
-											'label' => false
+						'class' => 'form-control',
+						'placeholder' => 'Please enter your plaintext here',
+						'label' => false
 					));
 				
 				?>
@@ -48,7 +48,7 @@
 
 		<div class="form-group">
 
-			<label for="hashInput-file" class="col-lg-3 control-label">Upload text file:</label>
+			<label class="col-lg-3 control-label">Upload text file:</label>
 
 				<div class="col-lg-9">
 
@@ -67,10 +67,9 @@
 
 		<div class="form-group">
 
-			<div class="email" style="">
+			<div class="col-lg-12">
 
-				<input type="checkbox" name="data[HashTests][email]" value="1" id="email_checkbox"/> 
-				Send email notification when results are done.
+				<input type="checkbox" name="data[HashTests][email]" value="1" id="email_checkbox"/>Send email notification when results are done.
 			
 			</div>
 
@@ -78,18 +77,18 @@
 
 		<div class="modal-footer">
 
-			<?php
-
-				$options = array(
-					'class' => 'btn btn-primary pull-right',
-					'label' => 'Submit'
-				);
-
-			?>
-
 		</div>
 
-		<?php echo $this->Form->end($options); ?>
+		<?php
+
+			$compute_and_compare_next = array(
+				'class' => 'btn btn-primary pull-right',
+				'label' => 'Next'
+			);
+
+			echo $this->Form->end($compute_and_compare_next);
+
+		?>
 
 	</div>
 

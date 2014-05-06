@@ -2,12 +2,6 @@
 			
 	<div class="jumbotron">
 
-		<?php 
-		
-			echo $this->Form->create('HashTests', array('action' => 'basic_hashing_input', 'class' => 'form-horizontal', 'type' => 'file'));
-			
-		?>
-
 		<div class="modal-header">
 
 			<h2>Hash Input</h2>
@@ -16,9 +10,15 @@
 
 		<br/>
 
+		<?php 
+		
+			echo $this->Form->create('HashTests', array('action' => 'basic_hashing_input', 'class' => 'form-horizontal', 'type' => 'file'));
+			
+		?>
+
 		<div class="form-group">
 								
-			<label for="hashInput-plaintext" class="col-lg-3 control-label">Please enter your plaintext:</label>
+			<label class="col-lg-3 control-label">Please enter your plaintext:</label>
 
 			<div class="col-lg-9">
 
@@ -48,7 +48,7 @@
 
 		<div class="form-group">
 
-			<label for="hashInput-file" class="col-lg-3 control-label" style="top: -5px;">Upload text file:</label>
+			<label class="col-lg-3 control-label" style="top: -5px;">Upload text file:</label>
 
 				<div class="col-lg-9">
 
@@ -69,24 +69,16 @@
 
 		</div>
 
-		<div class="form-group">
+		<?php
 
-			<div class="col-lg-12">
+			$basic_hasing_next = array(
+				'class' => 'btn btn-primary pull-right',
+				'label' => 'Next'
+			);
 
-				<?php
+			echo $this->Form->end($basic_hasing_next);
 
-					$options = array(
-						'class' => 'btn btn-primary pull-right',
-						'label' => 'Submit'
-					);
-
-				?>
-
-			</div>
-
-		</div>
-
-		<?php echo $this->Form->end($options); ?>
+		?>
 
 	</div>
 

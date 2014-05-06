@@ -10,10 +10,8 @@
 			
 		<br/>
 
-		<?php 
-		
+		<?php
 			echo $this->Form->create('HashTests', array('action' => 'reverse_look_up', 'class' => 'form-horizontal'));
-			
 		?>
 
 		<div class="form-group">
@@ -61,25 +59,15 @@
 
 		</div>
 
-		<div class="form-group">
-		
-			<div class="col-lg-12">
-
-				<?php
-
-					$reverse_lookup_next = array(
-						'class' => 'btn btn-primary pull-right',
-						'label' => 'Next'
-					);
-
-				?>
-
-			</div>
-
-		</div>
-	
 		<?php
-			echo $this->Form->end($reverse_lookup_next);
+
+			$reverse_lookup_next = array(
+				'class' => 'btn btn-primary pull-right',
+				'label' => 'Next'
+			);
+
+			echo $this->Form->end($reverse_lookup_next)
+		
 		?>
 
 	</div>
