@@ -3,16 +3,12 @@
 
 	<head>
 
-		<title>Hashkit Project Home Page</title>
-
+		<title>Hashkit</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	  	<?php 
 	  	
 	  		echo $this->Html->script('jquery-2.1.0.js');
 	  		echo $this->Html->script('bootstrap.js');
-			echo $this->Html->meta(
-    			'viewport',
-    			'width=device-width, initial-scale=1.0'
-			);
 
 			echo $this->Html->css(array('bootstrap','styles'));
 			echo $this->fetch('script');
@@ -24,22 +20,21 @@
 	</head>
 
 	<body>
-	<div class="navbar-wrapper">
-		<div class = "navbar navbar-inverse navbar-static-top">
+		
+		<div class = "navbar navbar-inverse navbar-static-top ">
 			<div class = "container">
-				<a href = "/pages/index" class = "navbar-brand">Hashkit</a>
+				<a href = "/" class = "navbar-brand">Hashkit</a>
 				<button class = "navbar-toggle" data-toggle = "collapse" data-target = ".navHeaderCollapse">
 					<span class = "icon-bar"></span>
 					<span class = "icon-bar"></span>
 					<span class = "icon-bar"></span>
 
 				</button>
-
 				<div class="collapse navbar-collapse navHeaderCollapse">
 					
 					<ul class="nav navbar-nav navbar-left">
 						
-						<li class="active"><a href="/">Home</a></li>
+						<li><a href="/">Home</a></li>
 						<?php  if($authUser['group_id'] == 1) :?>
 						<li class="dropdown">
 								
@@ -55,7 +50,7 @@
 						<?php if($authUser):?>						
 						<li class="dropdown">
 								
-							<a href="/" class="dropdown-toggle" data-toggle="dropdown">Hash Functions<b class="caret"></b></a>
+							<a href="" class="dropdown-toggle" data-toggle="dropdown">Hash Functions<b class="caret"></b></a>
 
 								<ul class="dropdown-menu">
 									<li><a href="/HashTests/basic_hashing">Hash generator</a></li>
@@ -68,8 +63,8 @@
 								</ul>
 
 						</li>
-						<li><a href="/Pages/hash_information">Hash information</a></li>
-						<li><a href="/Questionnaires/questionnaire">Questionnarie</a></li>
+						<li><a href="/Pages/hash_information">Hash Information</a></li>
+						<li><a href="/Questionnaires/questionnaire">Questionnaire</a></li>
 						<?php endif;?>
 						<li><a href="/Pages/about_us">About Us</a></li>
 						<li><a href="/Pages/contact_us">Contact Us</a></li>
@@ -117,4 +112,9 @@
 
 	</body>
 
+	<script type="text/javascript">
+		$(document).ready(function () {
+        $('a[href="' + this.location.pathname + '"]').parent().addClass('active');
+    });
+	</script>
 </html>
