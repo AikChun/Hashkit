@@ -94,7 +94,6 @@ class HashTestsController extends AppController {
 
 		if($this->request->is('post')) {
 			$data = $this->request->data;
-			$text = $data['HashTests']['plaintext'];
 
 			//if (empty($data['HashTests']['plaintext']) && empty($data['HashTests']['file_upload']))  {
 			//	$this->Session->setFlash('Please enter plaintext or choose upload file to proceed', 'alert-box', array('class'=>'alert-danger'));
@@ -104,38 +103,25 @@ class HashTestsController extends AppController {
 			//	$this->Session->setFlash('Uploaded file must be in text file format', 'alert-box', array('class'=>'alert-danger'));
 			//}	
 
-			if (!empty($data['HashTests']['file_upload']) && 
+			if (!empty($data['HashTests']['plaintext'])) {
+				$output = $this->HashTest->computeDigests($selectedAlgorithms, $data['HashTests']['plaintext']);
+	            $this->Session->write('output', $output);
+				$this->redirect(array('controller' => 'HashResults', 'action' => 'basic_hashing_result'));
+			}
+			
+			elseif (!empty($data['HashTests']['file_upload']) && 
 	             is_uploaded_file($data['HashTests']['file_upload']['tmp_name']) &&
-	             ($data['HashTests']['file_upload']['type'] == 'text/plain')) {
+	             ($data['HashTests']['file_upload']['type'] == 'text/plain')) 
+			{
 
-				$text = file($data['HashTests']['file_upload']['tmp_name']);
+			$lineArray = file($data['HashTests']['file_upload']['tmp_name']);
 
-			} 
+			$output = $this->HashTest->computeDigests($selectedAlgorithms, $lineArray);
 
-			// check and insert word into the dictionary
-			if(is_array($text)) {
-				foreach($text as $key => $word) {
-					$this->HashTest->checkAndInsertIntoDictionary($word);
-				}
-			} else {
-				$this->HashTest->checkAndInsertIntoDictionary($text);
-			}
-			
-			// work out the message digest. And pack it into data format
-			$output = $this->HashTest->computeDigests($selectedAlgorithms, $text);
-
-			try {
-				$saveSuccessful = $this->HashTest->saveTestResults($output);
-				if(!$saveSuccessful) {
-					throw new Exception('Unable to save Test.');
-				}
-			} catch (Exception $e) {
-				$this->Session->setFlash($e->getMessage(), 'alert-box', array('class'=>'alert-danger'));
-				$this->redirect(array('action' => 'basic_hashing'));
-			}
-			
-			$this->Session->write('output', $output);
+            $this->Session->write('output', $output);
 			$this->redirect(array('controller' => 'HashResults', 'action' => 'basic_hashing_result'));
+
+		} 
 	}
 }
 /**
@@ -187,12 +173,19 @@ class HashTestsController extends AppController {
 
 			if (!empty($data['HashTests']['plaintext'])) {
 				
-				$output = HashingLib::computeDigests($selectedAlgorithms, $data['HashTests']['plaintext']);
+				$output = $this->HashTest->computeDigests($selectedAlgorithms, $data['HashTests']['plaintext']);
 				
 				$outputResult = HashingLib::compareDigests($output);
 
 				$this->Session->write('output', $outputResult);
 				$this->redirect(array('controller' => 'HashResults', 'action' => 'compute_and_compare_result'));
+
+				if(!empty($data['HashTests']['email'])) {
+					$outputResult[0]['email'] = 1;
+                }elseif(empty($data['HashTests']['email'])) {
+                	
+                	$outputResult[0]['email'] = 0;
+                }
 			}
 
 			elseif (!empty($data['HashTests']['file_upload']) && 
@@ -202,13 +195,14 @@ class HashTestsController extends AppController {
 
 				$lineArray = file($data['HashTests']['file_upload']['tmp_name']);
 
-				$output = HashingLib::computeDigests($selectedAlgorithms, $lineArray);
+				$output = $this->HashTest->computeDigests($selectedAlgorithms, $lineArray);
 
 				$outputResult = HashingLib::compareDigests($output);
 
 				if(!empty($data['HashTests']['email'])) {
 					$outputResult[0]['email'] = 1;
-                }else{
+                }elseif(empty($data['HashTests']['email'])) {
+
                 	$outputResult[0]['email'] = 0;
                 }
 
@@ -237,7 +231,7 @@ class HashTestsController extends AppController {
 		if($this->request->is('post')) {
 			$data = $this->request->data['HashTests'];
 			$result = HashingLib::matchPlaintextWithMessageDigest($data);
-			//$this->log($result);
+			$this->log($result);
 			$this->Session->write('reverseData', $result );
 			$this->redirect('/HashResults/reverse_look_up_result');
 		}
@@ -464,7 +458,7 @@ class HashTestsController extends AppController {
 		}	
 	}
 
-	public function crypto_rand_secure($min, $max) {
+	function crypto_rand_secure($min, $max) {
         $range = $max - $min;
         if ($range < 0) return $min; // not so random...
         $log = log($range, 2);
@@ -493,16 +487,21 @@ class HashTestsController extends AppController {
 	public function generate_array($amount,$hash_algorithm_name) {
 		$wordhashlist = array();
 
+		//pow(2,$amount/2)
 		for ($i = 1; $i <= $amount; $i++ ){
 			$alphanumeric = $this->get_a_string(64);
 			$singlehash = hash(strtolower($hash_algorithm_name), $alphanumeric);
 			$wordhashlist[$i]['word'] = $alphanumeric;
 			$wordhashlist[$i]['hash'] = $singlehash;
+			//array_push($wordhashlist["hash"], $singlehash);
 		}
-
+		//array_multisort($wordhashlist[]["hash"],SORT_STRING);
+		//array_multisort($wordhashlist["hash"],SORT_STRING);
+		//$this->array_sort_by_column($wordhashlist, 'hash');
 		usort($wordhashlist, function($a, $b) {
    			 return strcasecmp($a['hash'], $b['hash']);
 		});
+		$this->log($wordhashlist);
 		return $wordhashlist;
 
 	}
@@ -595,12 +594,6 @@ class HashTestsController extends AppController {
 			$this->redirect(array('controller' => 'HashResults', 'action' => 'birthday_attack_result'));
 			
 		}	
-	}
-
-	public function show_test_results() {
-		$this->HashTest->recursive = 0;
-		$this->set('hashTests', $this->Paginator->paginate('HashTest'));
-		
 	}
 
 }
