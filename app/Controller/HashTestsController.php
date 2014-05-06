@@ -202,14 +202,12 @@ class HashTestsController extends AppController {
 				if(!empty($data['HashTests']['email'])) {
 					$outputResult[0]['email'] = 1;
                 }elseif(empty($data['HashTests']['email'])) {
-
                 	$outputResult[0]['email'] = 0;
                 }
 
 				$this->Session->write('output', $outputResult);
 				$this->redirect(array('controller' => 'HashResults', 'action' => 'compute_and_compare_result'));
-
-			}
+			}		
 		}
 	}
 

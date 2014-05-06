@@ -90,6 +90,8 @@ class HashTest extends AppModel {
 		
 		} elseif (is_array($fileData)) {
 			foreach($selectedAlgorithms as $key => $algorithm ) {
+				$computed = array();
+				$auth = array();
 
 				foreach($fileData as $key => $line) {
 
