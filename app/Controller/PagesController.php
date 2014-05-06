@@ -19,7 +19,6 @@
  */
 
 App::uses('AppController', 'Controller');
-App::uses('ContactUsEmail', 'Lib/Email');
 
 /**
  * Static content controller
@@ -49,8 +48,7 @@ class PagesController extends AppController {
  **/
  protected function _configureAllowedActions() {
  	$allowedActions = array(
-		'index',
-		'contact_us'
+		'index'
  	);
  	$this->Auth->allow($allowedActions);
  }
@@ -115,26 +113,6 @@ class PagesController extends AppController {
 
 	}
 
-	public function contact_us() {
-		if($this->request->is('post')) {
-			$data = $this->request->data;
-
-			$this->log('THISHISHSIHSIS');
-			$this->log($data);
-
-			$recipient = array(
-			'full_name' => $data['Pages']['name'],
-			'email' => $data['Pages']['email'],
-		);
-
-		$email = new ContactUsEmail($recipient);
-		$sendEmailSuccess = $email->sendContactUs($data);
-
-		return $sendEmailSuccess;
-		
-		}
-		$this->log('KLKLKL');
-	}
 
 	public function hash_function() {
 

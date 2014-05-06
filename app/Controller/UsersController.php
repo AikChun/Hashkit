@@ -1,5 +1,6 @@
 <?php
 App::uses('AppController', 'Controller');
+App::uses('ContactUsEmail', 'Lib/Email');
 /**
  * Users Controller
  *
@@ -32,13 +33,12 @@ class UsersController extends AppController {
  	$allowedActions = array(
  	 'login',
  	 'logout',
- 	 'admin_login',
- 	 'admin_logout',
  	 'forget_password',
  	 'reset_password',
 	 'register',
 	 'view_my_own_profile',
-	 'edit_my_own_profile'
+	 'edit_my_own_profile',
+	 'contact_us'
  	);
  	$this->Auth->allow($allowedActions);
  }
@@ -284,4 +284,22 @@ class UsersController extends AppController {
 		}
 	}
 
+/**
+ * Function to send enquiry email to the project
+ */
+	public function contact_us() {
+		if($this->request->is('post')) {
+			$data = $this->request->data;
+
+			$recipient = array(
+			'full_name' => $data['Users']['name'],
+			'email' => $data['Users']['email'],
+		);
+
+		$email = new ContactUsEmail($recipient);
+		$sendEmailSuccess = $email->sendContactUs($data);
+
+		
+		}
+	}
 }

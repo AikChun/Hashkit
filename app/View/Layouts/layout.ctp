@@ -67,7 +67,7 @@
 						<li><a href="/Questionnaires/questionnaire">Questionnaire</a></li>
 						<?php endif;?>
 						<li><a href="/Pages/about_us">About Us</a></li>
-						<li><a href="/Pages/contact_us">Contact Us</a></li>
+						<li><a href="/contact_us">Contact Us</a></li>
 
 					</ul>
 
