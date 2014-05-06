@@ -1,4 +1,4 @@
-<div class="container">
+<div class="container nowrap">
 			
 	<div class="jumbotron">
 
@@ -12,7 +12,7 @@
 	
 	<div class="selectedAlgorithm" style="font-size:200%">
 		<?php
-		echo 'Your selected algorithm is <b>'. $output[0]['HashTests']['HashAlgorithm']. '</b><br><br>';
+		echo 'Your selected algorithm is <b>'. $output[0]['HashTests']['HashAlgorithm']. '</b><br>';
 		?>
 	</div>
 
