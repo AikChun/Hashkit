@@ -290,13 +290,9 @@ class UsersController extends AppController {
 	public function contact_us() {
 		if($this->request->is('post')) {
 			$data = $this->request->data;
+			$this->log($data);
 
-			$recipient = array(
-			'full_name' => $data['Users']['name'],
-			'email' => $data['Users']['email'],
-		);
-
-		$email = new ContactUsEmail($recipient);
+		$email = new ContactUsEmail($data);
 		$sendEmailSuccess = $email->sendContactUs($data);
 
 		

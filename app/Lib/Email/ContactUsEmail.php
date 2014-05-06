@@ -5,6 +5,7 @@ App::uses('CakeEmail', 'Network/Email');
 class ContactUsEmail {
 
 	private $emailConfig = 'gmail';
+	private $recipient = 'hashkitproject@gmail.com';
 	private $sender = 'hashkitproject@hashkit.com';
 
 	private $from;
@@ -12,9 +13,10 @@ class ContactUsEmail {
 
 	private $email;
 
-	public function __construct($to) {
-		$this->from	= array('full_name' => 'Hashkit Password Support System', 'email' => $this->sender);
-		$this->to	= $to;
+	public function __construct($data) {
+
+		$this->from	= array('full_name' => $data['Users']['name'], 'email' => $this->sender);
+		$this->to	= array('full_name' => 'Hashkit Support System', 'email' => $this->recipient);
 
 		$this->_prepareAddressFields();
 	}
@@ -48,10 +50,10 @@ class ContactUsEmail {
  */
 	 public function sendContactUs($content) {
 	 	$email = $this->email;
-	 	$email->subject('contact us email');
+	 	$email->subject($content['Users']['subject']);
 	 	$emailOn = Configure::read('EMAIL_ON');
 	 	if ($emailOn) {
-	 		$result = $email->send($content['Pages']['message']);
+	 		$result = $email->send($content['Users']['message']);
 	 	} else {
 	 		$result = $email;
 	 	}
