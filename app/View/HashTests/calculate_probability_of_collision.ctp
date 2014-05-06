@@ -1,12 +1,122 @@
+
+<script type="text/javascript">
+
+	function checkform() {
+			
+		var x = document.getElementById('required_base').value;
+		var y = document.getElementById('required_exponent').value;
+
+		if (isNaN(y) || isNaN(x) || x > 5 ){
+
+			$('.bs-example-modal-lg').modal('show')
+			var required_base = $('#required_base');
+			required_base.val('');
+			var required_exponent = $('#required_exponent');
+			required_exponent.val('');
+
+		}else{
+
+			if (x > 0 && y > 0){
+				document.getElementById('hash_value').disabled = true;
+			}else{
+				document.getElementById('hash_value').disabled = false;
+			}
+
+		}	
+	}
+
+	function checkformforHashValue() {
+
+		var r = document.getElementById('hash_value').value;
+
+		if (isNaN(r)){
+
+			$('.bs-example-modal-lg').modal('show')
+			var hash_value = $('#hash_value');
+			hash_value.val('');
+
+		}
+	}
+
+	function checkform1() {
+
+		var selected = document.getElementById('HashAlgorithm').value;
+
+		if(selected == 'CUSTOMISED') {
+			document.getElementById('customizedoptions').style.display = 'block';
+		}else {
+			document.getElementById('customizedoptions').style.display = 'none';
+		}
+
+	}
+
+	function checkform2() {
+
+		var a = document.getElementById('customized_algorithm_base').value;
+		var b = document.getElementById('customized_algorithm_exponent').value;
+
+		if (isNaN(a) || isNaN(b) || a > 5){
+				
+				$('.bs-example-modal-lg').modal('show')
+				var required_base = $('#customized_algorithm_base');
+				required_base.val('');
+				var required_exponent = $('#customized_algorithm_exponent');
+				required_exponent.val('');
+
+		}else{
+
+			if (a > 0 || b > 0){
+				document.getElementById('hash_value1').disabled = true;
+			}else{
+				document.getElementById('hash_value1').disabled = false;
+			}	
+		}
+	}
+
+	function checkformforHashValue() {
+
+		var h = document.getElementById('hash_value1').value;
+
+		if (isNaN(h)){
+			
+			$('.bs-example-modal-lg').modal('show')
+			var hash_value1 = $('#hash_value1');
+			hash_value1.val('');
+
+		}
+	}
+
+	function submitbutton() {
+
+		var c = document.getElementById('required_base').value;
+		var d = document.getElementById('required_exponent').value;
+		var e = document.getElementById('hash_value').value;
+		var f = document.getElementById('HashAlgorithm').value;
+
+		if(c == "" && d = ""){
+			if(e == ""){
+				$('.bs-1-modal-lg').modal('show')
+			}
+		}else if(c != "" && d != ""){
+			if(e != ""){
+				$('.bs-1-modal-lg').modal('show')
+			}
+		}else if(c != "" || d != ""){
+			if(e != ""){
+				$('.bs-1-modal-lg').modal('show')
+			}
+		}else if(e != ""){
+			if(c != "" || d != ""){
+				$('.bs-1-modal-lg').modal('show')
+			}
+		}
+	}
+
+</script>
+
 <div class="container">
 			
 	<div class="jumbotron">
-
-		<?php
-			
-			echo $this->Form->create('HashTests',array('action' => 'calculate_probability_of_collision', 'class' => 'form-horizontal'));
-
-		?> 
 
 		<div class="modal-header">
 
@@ -15,6 +125,12 @@
 		</div>
 
 		<br/>
+
+		<?php
+			
+			echo $this->Form->create('HashTests',array('action' => 'calculate_probability_of_collision', 'class' => 'form-horizontal'));
+
+		?> 
 
 		<div class="form-group">
 								
@@ -91,13 +207,6 @@
 
 			<div class="col-lg-2">
 
-				<select class="form-control" name="data[HashAlgorithmV1][name]">
-					<option value="">(choose one)</option>
-					<option value="1">1</option>
-					<option value="2">2</option>
-					<option value="3">3</option>
-				</select>
-
 				<?php 
 				
 					$algorithms = array();
@@ -111,6 +220,7 @@
 
 					echo $this->Form->input('HashAlgorithm', array(
 						'empty' => '(choose one)',
+						'class' => 'form-control',
 						'options'=> $algorithms,
 						'id' => 'HashAlgorithm',
 						'onchange' => 'checkform1()',
@@ -118,7 +228,7 @@
 						)
 					);
 
-			?>
+				?>
 
 			</div>
 
@@ -243,140 +353,17 @@
 
 		</div>
 
-		<div class="form-group">
+		<?php
 
-			<div class="col-lg-12">
+			$calculate_probability_of_collision_next = array(
+				'class' => 'btn btn-primary pull-right',
+				'label' => 'Next'
+			);
 
-				<?php
+			echo $this->Form->end($calculate_probability_of_collision_next);
 
-					$options = array(
-						'class' => 'btn btn-primary pull-right',
-						'label' => 'Next'
-					);
-
-				?>
-
-			</div>
-
-		</div>
-
-		<?php echo $this->Form->end($options); ?>
+		?>
 
 	</div>
 
 </div>
-
-<script type="text/javascript">
-
-	function checkform() {
-			
-		var x = document.getElementById('required_base').value;
-		var y = document.getElementById('required_exponent').value;
-
-		if (isNaN(y) || isNaN(x) || x > 5 ){
-
-			$('.bs-example-modal-lg').modal('show')
-			var required_base = $('#required_base');
-			required_base.val('');
-			var required_exponent = $('#required_exponent');
-			required_exponent.val('');
-
-		}else{
-
-			if (x > 0 && y > 0){
-				document.getElementById('hash_value').disabled = true;
-			}else{
-				document.getElementById('hash_value').disabled = false;
-			}
-
-		}	
-	}
-
-	function checkformforHashValue() {
-
-		var r = document.getElementById('hash_value').value;
-
-		if (isNaN(r)){
-
-			$('.bs-example-modal-lg').modal('show')
-			var hash_value = $('#hash_value');
-			hash_value.val('');
-
-		}
-	}
-
-	function checkform1() {
-
-		var selected = document.getElementById('HashAlgorithm').value;
-
-		if(selected == 'CUSTOMISED') {
-			document.getElementById('customizedoptions').style.display = 'block';
-		}else {
-			document.getElementById('customizedoptions').style.display = 'none';
-		}
-
-	}
-
-	function checkform2() {
-
-		var a = document.getElementById('customized_algorithm_base').value;
-		var b = document.getElementById('customized_algorithm_exponent').value;
-
-		if (isNaN(a) || isNaN(b) || a > 5){
-				
-				$('.bs-example-modal-lg').modal('show')
-				var required_base = $('#customized_algorithm_base');
-				required_base.val('');
-				var required_exponent = $('#customized_algorithm_exponent');
-				required_exponent.val('');
-
-		}else{
-
-			if (a > 0 || b > 0){
-				document.getElementById('hash_value1').disabled = true;
-			}else{
-				document.getElementById('hash_value1').disabled = false;
-			}	
-		}
-	}
-
-	function checkformforHashValue() {
-
-		var h = document.getElementById('hash_value1').value;
-
-		if (isNaN(h)){
-			
-			$('.bs-example-modal-lg').modal('show')
-			var hash_value1 = $('#hash_value1');
-			hash_value1.val('');
-
-		}
-	}
-
-	function submitbutton() {
-
-		var c = document.getElementById('required_base').value;
-		var d = document.getElementById('required_exponent').value;
-		var e = document.getElementById('hash_value').value;
-		var f = document.getElementById('HashAlgorithm').value;
-
-		if(c == "" && d = ""){
-			if(e == ""){
-				$('.bs-1-modal-lg').modal('show')
-			}
-		}else if(c != "" && d != ""){
-			if(e != ""){
-				$('.bs-1-modal-lg').modal('show')
-			}
-		}else if(c != "" || d != ""){
-			if(e != ""){
-				$('.bs-1-modal-lg').modal('show')
-			}
-		}else if(e != ""){
-			if(c != "" || d != ""){
-				$('.bs-1-modal-lg').modal('show')
-			}
-		}
-	}
-
-</script>

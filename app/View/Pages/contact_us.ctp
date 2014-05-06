@@ -24,7 +24,7 @@
 
 				<?php
 
-					echo $this->Form->input('Name', array(
+					echo $this->Form->input('name', array(
 						'class' => 'form-control',
 						'placeholder' => 'Full Name',
 						'label' => false,
@@ -47,7 +47,7 @@
 
 				echo $this->Form->input('email', array(
 					'class' => 'form-control',
-					'placeholder' => 'Password',
+					'placeholder' => 'Email Address',
 					'label' => false,
 					'required'));
 				

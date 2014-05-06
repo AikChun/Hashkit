@@ -109,9 +109,6 @@ class HashResultsController extends AppController {
 		$output = $this->Session->read('output');
 		if(!empty($output)) {
 			$this->set("output", $output);
-			//$saveSuccessful = $this->HashResult->saveWithDescription($output);
-			 $this->HashResult->create();
-			 $this->HashResult->saveMany($output);
 		} else {
 			$output = '';
 			$this->set('output', $output);
@@ -146,7 +143,7 @@ class HashResultsController extends AppController {
 			$view = new View($this);
 			$result = $view->render('compute_and_compare_result','ajax');
 			$this->HashResult->download_result($result);
-			$this->Session->setFlash('Hash result have been saved','flash_custom');
+			$this->Session->setFlash('Hash result have been saved', 'alert-box', array('class'=>'alert-danger'));
 		}
 	}
 

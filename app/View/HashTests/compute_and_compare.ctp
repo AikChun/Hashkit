@@ -2,14 +2,6 @@
 			
 	<div class="jumbotron">
 
-		<?php 
-
-			$email = array('');
-
-			echo $this->Form->create('HashTests');
-
-		?>
-
 		<div class="modal-header">
 
 			<h2>Hash Algorithms</h2>
@@ -18,7 +10,11 @@
 
 		<br/>
 
-		<?php
+		<?php 
+
+			$email = array('');
+
+			echo $this->Form->create('HashTests');
 			echo $this->Form->input('HashAlgorithm', array(
 				'type'=>'select',
 				'multiple'=>'checkbox',
@@ -29,23 +25,21 @@
 				));
 
 		?>
-
-		<br/>
 		
 		<div class="modal-footer">
 
+		</div>
+		
 		<?php
 
-					$options = array(
-						'class' => 'btn btn-primary pull-right',
-						'label' => 'Next'
-					);
+			$options = array(
+				'class' => 'btn btn-primary pull-right',
+				'label' => 'Next'
+			);
+
+			echo $this->Form->end($options);
 
 		?>
-
-		<?php echo $this->Form->end($options); ?>
-
-		</div>
 
 	</div>
 

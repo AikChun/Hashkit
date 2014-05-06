@@ -54,7 +54,7 @@ class HashTestsController extends AppController {
 
 		if($this->request->is('post')) {
 			if(empty($this->request->data['HashTests']['HashAlgorithm'])) {
-				$this->Session->setFlash('You did not select any algorithms!');
+				$this->Session->setFlash('You did not select any algorithms!', 'alert-box', array('class'=>'alert-danger'));
 				return $this->redirect(array('action' => 'basic_hashing'));
 			}
 			$postData = $this->request->data['HashTests']['HashAlgorithm'];
@@ -94,10 +94,17 @@ class HashTestsController extends AppController {
 
 		if($this->request->is('post')) {
 			$data = $this->request->data;
-			//$this->log($data);
+
+			//if (empty($data['HashTests']['plaintext']) && empty($data['HashTests']['file_upload']))  {
+			//	$this->Session->setFlash('Please enter plaintext or choose upload file to proceed', 'alert-box', array('class'=>'alert-danger'));
+			//}
+
+			//if (!empty($data['HashTests']['file_upload']) && ($data['HashTests']['file_upload']['type'] != 'text/plain')) {
+			//	$this->Session->setFlash('Uploaded file must be in text file format', 'alert-box', array('class'=>'alert-danger'));
+			//}	
 
 			if (!empty($data['HashTests']['plaintext'])) {
-				$output = HashingLib::computeDigests($selectedAlgorithms, $data['HashTests']['plaintext']);
+				$output = $this->HashTest->computeDigests($selectedAlgorithms, $data['HashTests']['plaintext']);
 	            $this->Session->write('output', $output);
 				$this->redirect(array('controller' => 'HashResults', 'action' => 'basic_hashing_result'));
 			}
@@ -109,15 +116,14 @@ class HashTestsController extends AppController {
 
 			$lineArray = file($data['HashTests']['file_upload']['tmp_name']);
 
-			$output = HashingLib::computeDigests($selectedAlgorithms, $lineArray);
+			$output = $this->HashTest->computeDigests($selectedAlgorithms, $lineArray);
 
             $this->Session->write('output', $output);
 			$this->redirect(array('controller' => 'HashResults', 'action' => 'basic_hashing_result'));
-        	
-		}
+
+		} 
 	}
 }
-
 /**
  * To allow the user choose the algorithms that is to analyzed.
  */
@@ -125,10 +131,10 @@ class HashTestsController extends AppController {
 		$HashAlgorithmModel = ClassRegistry::init('HashAlgorithm');
 		if($this->request->is('post')) {
 			if(empty($this->request->data['HashTests']['HashAlgorithm'])) {
-				$this->Session->setFlash('You did not select any algorithms!');
+				$this->Session->setFlash('You did not select any algorithm!', 'alert-box', array('class'=>'alert-danger'));
 				return $this->redirect(array('action' => 'compute_and_compare'));
 			} elseif (count($this->request->data['HashTests']['HashAlgorithm']) == 1) {
-				$this->Session->setFlash('Please select more than one algorithmn');
+				$this->Session->setFlash('Please select more than one algorithm', 'alert-box', array('class'=>'alert-danger'));
 				return $this->redirect(array('action' => 'compute_and_compare'));
 			}
 			
@@ -167,9 +173,16 @@ class HashTestsController extends AppController {
 
 			if (!empty($data['HashTests']['plaintext'])) {
 				
-				$output = HashingLib::computeDigests($selectedAlgorithms, $data['HashTests']['plaintext']);
+				$output = $this->HashTest->computeDigests($selectedAlgorithms, $data['HashTests']['plaintext']);
 				
 				$outputResult = HashingLib::compareDigests($output);
+
+				if(!empty($data['HashTests']['email'])) {
+					$outputResult[0]['email'] = 1;
+                }elseif(empty($data['HashTests']['email'])) {
+                	
+                	$outputResult[0]['email'] = 0;
+                }
 
 				$this->Session->write('output', $outputResult);
 				$this->redirect(array('controller' => 'HashResults', 'action' => 'compute_and_compare_result'));
@@ -182,20 +195,19 @@ class HashTestsController extends AppController {
 
 				$lineArray = file($data['HashTests']['file_upload']['tmp_name']);
 
-				$output = HashingLib::computeDigests($selectedAlgorithms, $lineArray);
+				$output = $this->HashTest->computeDigests($selectedAlgorithms, $lineArray);
 
 				$outputResult = HashingLib::compareDigests($output);
 
 				if(!empty($data['HashTests']['email'])) {
 					$outputResult[0]['email'] = 1;
-                }else{
+                }elseif(empty($data['HashTests']['email'])) {
                 	$outputResult[0]['email'] = 0;
                 }
 
 				$this->Session->write('output', $outputResult);
 				$this->redirect(array('controller' => 'HashResults', 'action' => 'compute_and_compare_result'));
-
-			}
+			}		
 		}
 	}
 
@@ -217,7 +229,7 @@ class HashTestsController extends AppController {
 		if($this->request->is('post')) {
 			$data = $this->request->data['HashTests'];
 			$result = HashingLib::matchPlaintextWithMessageDigest($data);
-			//$this->log($result);
+			$this->log($result);
 			$this->Session->write('reverseData', $result );
 			$this->redirect('/HashResults/reverse_look_up_result');
 		}
@@ -370,7 +382,7 @@ class HashTestsController extends AppController {
 			$output = array();
 
 			if(empty($data['HashTests']['HashAlgorithm'])) {
-				$this->Session->setFlash('You did not select any algorithms!');
+				$this->Session->setFlash('You did not select any algorithms!', 'alert-box', array('class'=>'alert-danger'));
 				return $this->redirect(array('action' => 'avalanche_effect'));
 			}
 		
@@ -444,7 +456,7 @@ class HashTestsController extends AppController {
 		}	
 	}
 
-	public function crypto_rand_secure($min, $max) {
+	function crypto_rand_secure($min, $max) {
         $range = $max - $min;
         if ($range < 0) return $min; // not so random...
         $log = log($range, 2);
@@ -473,16 +485,21 @@ class HashTestsController extends AppController {
 	public function generate_array($amount,$hash_algorithm_name) {
 		$wordhashlist = array();
 
+		//pow(2,$amount/2)
 		for ($i = 1; $i <= $amount; $i++ ){
 			$alphanumeric = $this->get_a_string(64);
 			$singlehash = hash(strtolower($hash_algorithm_name), $alphanumeric);
 			$wordhashlist[$i]['word'] = $alphanumeric;
 			$wordhashlist[$i]['hash'] = $singlehash;
+			//array_push($wordhashlist["hash"], $singlehash);
 		}
-
+		//array_multisort($wordhashlist[]["hash"],SORT_STRING);
+		//array_multisort($wordhashlist["hash"],SORT_STRING);
+		//$this->array_sort_by_column($wordhashlist, 'hash');
 		usort($wordhashlist, function($a, $b) {
    			 return strcasecmp($a['hash'], $b['hash']);
 		});
+		$this->log($wordhashlist);
 		return $wordhashlist;
 
 	}

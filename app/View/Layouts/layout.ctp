@@ -54,7 +54,7 @@
 
 								<ul class="dropdown-menu">
 									<li><a href="/HashTests/basic_hashing">Hash generator</a></li>
-									<li><a href="/HashTests/compute_and_compare">Hash alogrithm recommendation</a></li>
+									<li><a href="/HashTests/compute_and_compare">Hash algorithm recommendation</a></li>
 									<li><a href="/HashTests/hash_analyser">Message digest analyser</a></li>
 									<li><a href="/HashTests/calculate_probability_of_collision">Collision proability calculator</a></li>
 									<li><a href="/HashTests/birthday_attack">Collision generator</a></li>

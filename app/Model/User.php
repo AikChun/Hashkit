@@ -19,9 +19,9 @@ class User extends AppModel {
 	public $belongsTo = array('Group');
 	public $actsAs = array('Acl' => array('type' => 'requester'));
 	public $hasMany = array(
-		'Description' => array(
-			'className' => 'Description',
-			'foreignKey' => 'user_id',
+		'HashTest' => array(
+			'className' => 'HashTest',
+			'foreignKey' => 'hash_test_id',
 			'dependent' => true
 		)
 	);
