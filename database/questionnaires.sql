@@ -5,10 +5,6 @@ SET foreign_key_checks = 0;
 SET time_zone = '-07:00';
 SET sql_mode = 'NO_AUTO_VALUE_ON_ZERO';
 
-DROP DATABASE IF EXISTS `Hashkit`;
-CREATE DATABASE `Hashkit` /*!40100 DEFAULT CHARACTER SET utf8 */;
-USE `Hashkit`;
-
 DROP TABLE IF EXISTS `questionnaires`;
 CREATE TABLE `questionnaires` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
@@ -26,4 +22,4 @@ INSERT INTO `questionnaires` (`id`, `questions`, `answers`) VALUES
 (6,	'Which of the following is/are not a cryptographic hash function?<br><br>\r\ni.  MD5<br>\r\nii. SHA1<br>\r\niii.SHA256<br>\r\niv. DES<br><br>\r\n\r\na) i and iv<br>\r\nb) ii and iii<br>\r\nc) iv',	'c'),
 (7,	'Which of the following is/are attacks towards hash functions?<br><br>\r\ni. Collision attack<br>\r\nii. Birthday attack<br>\r\niii. Monster attack<br>\r\niv. Preimage attack<br><br>\r\n\r\na) i, ii and iii<br>\r\nb) ii, iii and iv<br>\r\nc) i, ii and iv',	'c');
 
--- 2014-05-06 07:18:32
+-- 2014-05-06 07:32:49
