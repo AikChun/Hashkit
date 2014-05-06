@@ -138,8 +138,15 @@
               In the websites which the softwares are allowed to distribute, they are tied to a hash digest. So when users downloaded the program, the user can hash it with the same algorithm and check the match of the hashes. However, this does not protect from forging another hash digest for modified software but,it can be done by using digital signature for the hash value of the software. 
               </br>
               <h4>Digital Signature</h4>
+              A form of electronic signature that usually attached with the document or digital message so to facilitate in proving the authenticity of a digital message or document.
+              <br>
+              Example of how document will be signed with digital signature :
+              <br>
+              <CENTER><img src="/img/signing.jpg"></CENTER>
+              <br>
               </br>
               <hr class="">
+
                 <h2 id="sec4" class="">Hash functions' properties</h2>
                 
               <p class="">A cyptographic hash functions must be able to defend against all known type of cryptanalytic attack. It should be able to apply to any input size and output a fixed size. It must have the following properties:
@@ -174,10 +181,10 @@
                   
               </p>
               <br>
-              <h4><b>optional properties</b></h4>
+              <h4><b>Optional properties</b></h4>
               <br>
               <h4>Avalanche effect<h4>
-              
+
               <hr class="">
                 <h2 id="sec5" class="">Attacks on Hash functions</h2>
                 <br>
@@ -191,6 +198,17 @@
                 <h4>Birthday attack</h4>
                 <p>A type of cryptographic attack that is based on the birthday 
                   problem in probability theory that is used to estimate the likelihood of collision in hash functions. It states that in order for there to be a 50% chance that someone in a given room shares your birthday, you need 253 people in the room. However, if you are looking for a greater than 50% chance that any two people in the room have the same birthday, you only need 23 people.This applies to finding collisions in hashing algorithms because it is harder to find collision with a given hash than it is to find any two random plaintext that hash to the same value. It illustrates the tremendous difference between the effort required for a pre-image attack and a collision attack.</p>
+                  <br>
+                  <p>Based on the birthday paradox which in theory can calculate the probability that, in a set of n randomly chosen people, some pair of them will have the same birthday, this method uses a probabilistic model to reduce the complexity of cracking a hash function.  
+                  </p>
+                  <br>
+                  <img src="/img/part1.jpg" />
+                  <br>
+                  <img src="/img/part2 .jpg" />
+                  <br>
+                  <p> By using the above mathematical expression, we can help you to do the math for the probability of getting a collision and the required amount of hashes before getting a 99% probability.In our tools, there is a probability calculator which allows users to calculate the proability based on their inputs.(link: <b><a href="/HashTests/calculate_probability_of_collision">Collision probability calculator</a></b>)
+                  </p>
+
                 <br>
                 <h4>Collision attack</h4>
                 <p>An attack that finds two different messages m1 and m2, such that hash(m1) = hash(m2). In a classical collision attack, the attacker  has no control over the content of either message, but are arbitrarily chosen by the algorithm. A collision found from two random message does not really affect the security of hash function. For the attack to be useful, the attack must be in control of the input to the hash function</p>

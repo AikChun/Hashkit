@@ -4,7 +4,7 @@ SET NAMES utf8;
 SET foreign_key_checks = 0;
 SET time_zone = '-07:00';
 SET sql_mode = 'NO_AUTO_VALUE_ON_ZERO';
-
+USE `Hashkit`;
 DROP TABLE IF EXISTS `questionnaires`;
 CREATE TABLE `questionnaires` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
