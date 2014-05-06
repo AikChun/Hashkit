@@ -14,14 +14,12 @@
 
 			<div class="form-group">
 
-				<label for="profile-name" class="col-lg-2 control-label">Name :</label>
+				<label class="col-lg-2 control-label" style="top: -7px;">Name:</label>
 
 				<div class="col-lg-10">
 
 					<?php
-
 						echo $authUser['name'];
-
 					?>
 
 				</div>
@@ -30,31 +28,26 @@
 
 			<div class="form-group">
 
-				<label for="profile-email" class="col-lg-2 control-label">Email:</label>
+				<label class="col-lg-2 control-label" style="top: -7px;">Email:</label>
 
 				<div class="col-lg-10">
 
 					<?php
-
 						echo $authUser['email'];
-
 					?>
 
 				</div>
 
 			</div>
 
-
 			<div class="form-group">
 
-				<label for="profile-profile" class="col-lg-2 control-label">Profile:</label>
+				<label class="col-lg-2 control-label" style="top: -7px;">Profile:</label>
 
 				<div class="col-lg-10">
 
 					<?php
-
 						echo $authUser['profile'];
-
 					?>
 
 				</div>
@@ -69,9 +62,9 @@
 
 		<div class="form-group pull-right">
 
-			<a href="/HashTests/show_test_results" class="btn btn-primary" data-dismiss="modal">View History</a>
-			<a href="/Users/edit_my_own_profile" class="btn btn-primary" data-dismiss="modal">Edit My Profile</a>
-			<a href="/" class="btn btn-default" data-dismiss="modal">Back to Home</a>
+			<a href="/HashTests/show_test_results" class="btn btn-primary">View History</a>
+			<a href="/Users/edit_my_own_profile" class="btn btn-primary">Edit My Profile</a>
+			<a href="/" class="btn btn-default">Back to Home</a>
 
 		</div>
 

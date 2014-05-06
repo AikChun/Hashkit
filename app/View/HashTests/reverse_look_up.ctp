@@ -16,7 +16,7 @@
 
 		<div class="form-group">
 
-			<label for="reverse_look_up-message_digest" class="col-lg-2 control-label">Message Digest:</label>
+			<label class="col-lg-2 control-label">Message Digest:</label>
 
 			<div class="col-lg-10">
 
@@ -36,7 +36,7 @@
 
 		<div class="form-group">
 								
-			<label for="reverse_look_up-algorithms" class="col-lg-2 control-label">Hash Algorithms:</label>
+			<label class="col-lg-2 control-label">Hash Algorithms:</label>
 
 			<div class="col-lg-2">
 

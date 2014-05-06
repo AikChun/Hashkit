@@ -18,7 +18,7 @@
 
 		<div class="form-group">
 								
-			<label for="hash_analyser-input" class="col-lg-4 control-label">Please enter the message digest:</label>
+			<label class="col-lg-4 control-label">Please enter the message digest:</label>
 
 			<div class="col-lg-8">
 

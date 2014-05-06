@@ -446,7 +446,7 @@
 				);
 
 				echo $this->Form->end($compute_and_compare_save);
-				echo '<a href="/" class="btn btn-default pull-right" data-dismiss="modal">Back to Home</a>';
+				echo '<a href="/" class="btn btn-default pull-right">Back to Home</a>';
 
 			?>
 

@@ -1,0 +1,256 @@
+<div class="container">
+			
+	<div class="jumbotron">
+
+		<div class="modal-header">
+
+			<h2>Hash Algorithm Recommendation</h2>
+
+		</div>
+			
+		<br/>
+
+		<b>Plaintext entered:</b><br/>hello<br/><br/><b>Selected Algorithm:</b><br/>SHA1<br/><b>Message Digest:</b><br/>aaf4c61ddcc5e8a2dabede0f3b482cd9aea9434d<br/><br/><b>Selected Algorithm:</b><br/>MD4<br/><b>Message Digest:</b><br/>866437cb7a794bce2b727acc0362ee27<br/><br/><b>Analysis:</b><br/>No collision detected<br/><br/>
+
+			<table class="table table-bordered table-condensed">
+				<col align = "left">
+				<col align = "left">
+				<col align = "left">
+
+			
+			</tr>
+
+		</table>
+
+		<br/>
+
+		<b>Comparing between selected algorithmn:</b><br/><br/>		
+		<table class="table table-bordered table-condensed">
+			
+			<tr>
+
+				<td>
+			
+					<b>Algorithm</b>
+			
+				</td>
+
+				
+				<td>
+
+					<b>
+						SHA1					</b>
+
+				</td>
+
+				
+				<td>
+
+					<b>
+						MD4					</b>
+
+				</td>
+
+				
+			</tr>
+
+			<tr>
+
+				<td>
+
+					Output Length(bits)
+				
+				</td>
+			
+				
+				<td>
+	
+					160	
+				</td>
+
+				
+				<td>
+	
+					128	
+				</td>
+
+				
+			</tr>
+
+			<tr>
+
+				<td>
+
+					Speed(MB/s)
+				
+				</td>
+
+				
+				<td>
+
+					333.29				
+				</td>
+
+				
+				<td>
+
+					540.87				
+				</td>
+
+				
+			</tr>
+
+			<tr>
+
+				<td>
+
+					Collision Resistence
+				
+				</td>
+
+				
+				<td>
+
+					Broken				
+				</td>
+
+				
+				<td>
+
+					Broken				
+				</td>
+
+				
+			</tr>
+
+			<tr>
+
+				<td>
+
+					Preimage Resistence
+				
+				</td>
+
+				
+				<td>
+
+					Unbroken
+				</td>
+
+				
+				<td>
+
+					Broken
+				</td>
+
+				
+			</tr>
+
+			<tr>
+
+				<td>
+
+					2nd Preimage Resistence
+				
+				</td>
+
+				
+				<td>
+				
+					Unbroken				
+				</td>
+
+				
+				<td>
+				
+					Broken				
+				</td>
+
+				
+			</tr>
+
+			<tr>
+
+				<td>
+
+					Collision Best Known Attack
+				
+				</td>
+				
+								
+				<td>
+
+					2^60
+				</td>
+				
+								
+				<td>
+
+					3
+				</td>
+				
+							
+			</tr>
+
+			<tr>
+
+				<td>
+
+					Preimage Best Known Attack
+				
+				</td>
+
+				
+				<td>
+
+					Nil
+				</td>
+
+				
+				<td>
+
+					2^69.4
+				</td>
+
+				
+			</tr>
+
+			<tr>
+				
+				<td>
+
+					2nd Preimage Best Known Attack
+				
+				</td>
+
+				
+				<td>
+
+					Nil
+				</td>
+
+				
+				<td>
+
+					2^78.4
+				</td>
+
+				
+			</tr>
+
+		</table>
+
+		<b>Recommended Hash Function:</b><br/>SHA1	
+		<div class="modal-footer">
+
+		</div>
+
+		<div class="form-group">
+
+			<form action="/HashResults/compute_and_compare_result" class="form-horizontal" id="HashResultsComputeAndCompareResultForm" enctype="multipart/form-data" method="post" accept-charset="utf-8"><div style="display:none;"><input type="hidden" name="_method" value="POST"/></div><div class="submit"><input  class="btn btn-primary pull-left" type="submit" value="Save Results"/></div></form><a href="/" class="btn btn-default pull-right">Back to Home</a>
+		</div>		
+
+		
+	</div>
+
+</div>

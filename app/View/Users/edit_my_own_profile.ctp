@@ -2,12 +2,6 @@
 
 	<div class="jumbotron">
 
-		<?php 
-		
-			echo $this->Form->create('User', array('action' => 'edit_my_own_profile', 'class' => 'form-horizontal'));
-			
-		?>
-
 		<div class="modal-header">
 
 			<h2>Edit Profile</h2>
@@ -16,9 +10,15 @@
 
 		<br/>
 
+		<?php 
+		
+			echo $this->Form->create('User', array('action' => 'edit_my_own_profile', 'class' => 'form-horizontal'));
+			
+		?>
+
 		<div class="form-group">
 								
-			<label for="profile-name" class="col-lg-2 control-label">Name:</label>
+			<label class="col-lg-2 control-label">Name:</label>
 
 			<div class="col-lg-10">
 
@@ -38,7 +38,7 @@
 
 		<div class="form-group">
 								
-			<label for="profile-email" class="col-lg-2 control-label">Email:</label>
+			<label class="col-lg-2 control-label">Email:</label>
 
 			<div class="col-lg-10">
 
@@ -58,7 +58,7 @@
 
 		<div class="form-group">
 
-			<label for="profile-profile" class="col-lg-2 control-label">Profile:</label>
+			<label class="col-lg-2 control-label">Profile:</label>
 
 			<div class="col-lg-10">
 
@@ -78,40 +78,20 @@
 
 		<div class="modal-footer">
 
-			<div class="form-group">
-
-					<?php
-
-						$options = array(
-							'class' => 'btn btn-primary',
-							'label' => 'Save Changes'
-						);
-
-					?>
-
-					<?php echo $this->Form->end($options); ?>
-
-			</div>
-
 		</div>
+
+		<?php
+
+			$edit_my_own_profile_save = array(
+				'class' => 'btn btn-primary pull-left',
+				'label' => 'Save Changes'
+			);
+
+			echo $this->Form->end($edit_my_own_profile_save);
+			echo '<a href="/users/view_my_own_profile" class="btn btn-default pull-right">Cancel</a>';
+
+		?>
 
 	</div>
 
 </div>
-
-<!--
-<div class="users form">
-<?php echo $this->Form->create('User'); ?>
-	<fieldset>
-		<legend><?php echo __('Edit User'); ?></legend>
-	<?php
-		echo $this->Form->input('id');
-		echo $this->Form->input('name');
-		echo $this->Form->input('email');
-		echo $this->Form->input('profile');
-
-	?>
-	</fieldset>
-<?php echo $this->Form->end(__('Submit')); ?>
-</div>
--->

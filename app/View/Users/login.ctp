@@ -2,12 +2,6 @@
 			
 	<div class="jumbotron">
 
-		<?php 
-		
-			echo $this->Form->create('User', array('action' => 'login', 'class' => 'form-horizontal'));
-			
-		?>
-
 		<div class="modal-header">
 
 			<h2>Login</h2>
@@ -15,6 +9,12 @@
 		</div>
 			
 		<br/>
+
+		<?php 
+		
+			echo $this->Form->create('User', array('action' => 'login', 'class' => 'form-horizontal'));
+			
+		?>
 
 		<div class="form-group">
 								
@@ -43,15 +43,15 @@
 
 			<div class="col-lg-10">
 
-			<?php
+				<?php
 
-				echo $this->Form->input('password', array(
-					'class' => 'form-control',
-					'placeholder' => 'Password',
-					'label' => false,
-					'required'));
-				
-			?>
+					echo $this->Form->input('password', array(
+						'class' => 'form-control',
+						'placeholder' => 'Password',
+						'label' => false,
+						'required'));
+					
+				?>
 
 			</div>
 
@@ -61,27 +61,19 @@
 
 		</div>
 
-		<div class="form-group">
+		<a href="/Users/forget_password" class="pull-right">Forgot your password?</a>
+		<br>
 
-			<div class="col-lg-12">
+		<?php
 
-				<a href="/Users/forget_password" class="pull-right">Forgot your password?</a>
-				<br/>
+			$options = array(
+				'class' => 'btn btn-primary pull-right',
+				'label' => 'Login'
+			);
 
-				<?php
+			echo $this->Form->end($options);
 
-					$options = array(
-						'class' => 'btn btn-primary pull-right',
-						'label' => 'Login'
-					);
-
-				?>
-
-			</div>
-
-		</div>
-
-		<?php echo $this->Form->end($options); ?>
+		?>
 
 	</div>
 

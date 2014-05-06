@@ -2,12 +2,6 @@
 			
 	<div class="jumbotron">
 
-		<?php
-
-			echo $this->Form->create('User', array('action' => 'register', 'class' => 'form-horizontal'));
-
-		?>
-
 		<div class="modal-header">
 
 			<h2>Registration</h2>
@@ -16,9 +10,15 @@
 
 		<br/>
 
+		<?php
+
+			echo $this->Form->create('User', array('action' => 'register', 'class' => 'form-horizontal'));
+
+		?>
+
 		<div class="form-group">
 								
-			<label for="register-name" class="col-lg-2 control-label">Name:</label>
+			<label class="col-lg-2 control-label">Name:</label>
 
 			<div class="col-lg-10">
 
@@ -39,7 +39,7 @@
 
 		<div class="form-group">
 								
-			<label for="register-email" class="col-lg-2 control-label">Email:</label>
+			<label class="col-lg-2 control-label">Email:</label>
 
 			<div class="col-lg-10">
 
@@ -59,7 +59,7 @@
 
 		<div class="form-group">
 
-			<label for="register-password" class="col-lg-2 control-label">Password:</label>
+			<label class="col-lg-2 control-label">Password:</label>
 
 			<div class="col-lg-10">
 
@@ -80,7 +80,7 @@
 
 		<div class="form-group">
 
-			<label for="register-cPassword" class="col-lg-2 control-label">Confirm Password:</label>
+			<label class="col-lg-2 control-label">Confirm Password:</label>
 
 			<div class="col-lg-10">
 
@@ -102,7 +102,7 @@
 
 		<div class="form-group">
 
-			<label for="register-profile" class="col-lg-2 control-label">Profile:</label>
+			<label class="col-lg-2 control-label">Profile:</label>
 
 			<div class="col-lg-10">
 
@@ -125,28 +125,21 @@
 
 		</div>
 
-		<div class="form-group">
+		<font color="grey" class="pull-right">By clicking 'Sign up', you agree to our <a href="#terms_and_conditions" data-toggle="modal" data-target=".terms_and_conditions">Terms and Conditions</a>.
+		</font>
 
-			<div class="col-lg-12">
+		<br>
 
-				<font color="grey" class="pull-right">By clicking 'Sign up', you agree to our <a href="#terms_and_conditions" data-toggle="modal" data-target=".terms_and_conditions">Terms and Conditions</a>.
-				</font>
-				<br>
-				<?php
+		<?php
 
-					$options = array(
-						'class' => 'btn btn-primary pull-right',
-						'label' => 'Sign Up'
-					);
+			$options = array(
+				'class' => 'btn btn-primary pull-right',
+				'label' => 'Sign Up'
+			);
 
-				?>
-
-			</div>
-
-		</div>
-
-		<?php echo $this->Form->end($options); ?>
-
+			echo $this->Form->end($options);
+			
+		?>
 
 	</div>
 
