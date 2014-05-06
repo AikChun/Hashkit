@@ -10,10 +10,8 @@
 
 		<br/>
 
-		<?php 
-		
+		<?php
 			echo $this->Form->create('User', array('action' => 'edit_my_own_profile', 'class' => 'form-horizontal'));
-			
 		?>
 
 		<div class="form-group">

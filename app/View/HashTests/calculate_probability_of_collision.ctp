@@ -1,4 +1,3 @@
-
 <script type="text/javascript">
 
 	function checkform() {
@@ -127,9 +126,7 @@
 		<br/>
 
 		<?php
-			
 			echo $this->Form->create('HashTests',array('action' => 'calculate_probability_of_collision', 'class' => 'form-horizontal'));
-
 		?> 
 
 		<div class="form-group">
