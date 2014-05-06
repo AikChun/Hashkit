@@ -177,15 +177,15 @@ class HashTestsController extends AppController {
 				
 				$outputResult = HashingLib::compareDigests($output);
 
-				$this->Session->write('output', $outputResult);
-				$this->redirect(array('controller' => 'HashResults', 'action' => 'compute_and_compare_result'));
-
 				if(!empty($data['HashTests']['email'])) {
 					$outputResult[0]['email'] = 1;
                 }elseif(empty($data['HashTests']['email'])) {
                 	
                 	$outputResult[0]['email'] = 0;
                 }
+
+				$this->Session->write('output', $outputResult);
+				$this->redirect(array('controller' => 'HashResults', 'action' => 'compute_and_compare_result'));
 			}
 
 			elseif (!empty($data['HashTests']['file_upload']) && 
