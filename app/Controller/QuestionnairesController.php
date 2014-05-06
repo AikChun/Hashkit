@@ -103,6 +103,15 @@ class QuestionnairesController extends AppController {
 	}
 
 	public function questionnaire() {
+		if($this->request->is('post')){
+			$answers = $this ->Session->read('answers');
+        	$data = $this->request->data;
+        	$this -> log($data);
+        	$this -> log($answers);
+
+        	$this->redirect(array('controller' => 'Questionnaires', 'action' => 'questionnaire_result'));
+        }
+
 		$result = $this->Questionnaire->find('all');
 		$rand_keys = array_rand($result, 3);
 		$questions = array();
@@ -116,14 +125,7 @@ class QuestionnairesController extends AppController {
 			}
 		}
         $this->set('questions', $questions);
-
-        if($this->request->is('post')){
-        	$data = $this->request->data;
-        	$this -> log($data);
-        	$this -> log($answers);
-
-        	$this->redirect(array('controller' => 'Questionnaires', 'action' => 'questionnaire_result'));
-        }
+        $this ->Session->write('answers', $answers);
 	}
 
 	public function questionnaire_result(){
