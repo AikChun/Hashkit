@@ -14,6 +14,22 @@
 
 			<div class="form-group">
 
+				<label for="profile-name" class="col-lg-2 control-label">Name :</label>
+
+				<div class="col-lg-10">
+
+					<?php
+
+						echo $authUser['name'];
+
+					?>
+
+				</div>
+
+			</div>
+
+			<div class="form-group">
+
 				<label for="profile-email" class="col-lg-2 control-label">Email:</label>
 
 				<div class="col-lg-10">
@@ -28,21 +44,6 @@
 
 			</div>
 
-			<div class="form-group">
-
-				<label for="profile-group_id" class="col-lg-2 control-label">Group ID:</label>
-
-				<div class="col-lg-10">
-
-					<?php
-
-						echo $authUser['group_id'];
-
-					?>
-
-				</div>
-
-			</div>
 
 			<div class="form-group">
 
