@@ -104,6 +104,29 @@ class QuestionnairesController extends AppController {
 
 	public function questionnaire() {
 		$result = $this->Questionnaire->find('all');
-        $this->set('result', $result);
+		$rand_keys = array_rand($result, 3);
+		$questions = array();
+		$answers = array();
+
+		for($i = 0; $i < sizeof($result); $i++){
+
+			if (in_array("$i", $rand_keys)){			
+				array_push($questions, $result[$i]['Questionnaire']['questions']);
+				array_push($answers, $result[$i]['Questionnaire']['answers']);	
+			}
+		}
+        $this->set('questions', $questions);
+
+        if($this->request->is('post')){
+        	$data = $this->request->data;
+        	$this -> log($data);
+        	$this -> log($answers);
+
+        	$this->redirect(array('controller' => 'Questionnaires', 'action' => 'questionnaire_result'));
+        }
+	}
+
+	public function questionnaire_result(){
+		
 	}
 }
