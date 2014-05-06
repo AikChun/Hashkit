@@ -597,4 +597,10 @@ class HashTestsController extends AppController {
 		}	
 	}
 
+	public function show_test_results() {
+		$this->HashTest->recursive = 0;
+		$this->set('hashTests', $this->Paginator->paginate('HashTest'));
+		
+	}
+
 }

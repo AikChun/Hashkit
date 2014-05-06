@@ -69,7 +69,7 @@
 
 		<div class="form-group pull-right">
 
-			<a href="/descriptions/show_test_results" class="btn btn-primary" data-dismiss="modal">View History</a>
+			<a href="/HashTests/show_test_results" class="btn btn-primary" data-dismiss="modal">View History</a>
 			<a href="/Users/edit_my_own_profile" class="btn btn-primary" data-dismiss="modal">Edit My Profile</a>
 			<a href="/" class="btn btn-default" data-dismiss="modal">Back to Home</a>
 
