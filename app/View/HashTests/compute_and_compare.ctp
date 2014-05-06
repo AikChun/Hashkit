@@ -43,10 +43,10 @@
 
 		?>
 
-		<?php echo $this->Form->end($options); ?>
-
 		</div>
 
+		<?php echo $this->Form->end($options); ?>
+		
 	</div>
 
 </div>
