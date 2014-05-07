@@ -4,13 +4,15 @@
 	<head>
 
 		<title>Hashkit</title>
-		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<!-- <meta name="viewport" content="width=device-width, initial-scale=1.0"> -->
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
 	  	<?php 
 	  	
 	  		echo $this->Html->script('jquery-2.1.0.js');
 	  		echo $this->Html->script('bootstrap.js');
+	  		echo $this->Html->script('slidebars.js');
 
-			echo $this->Html->css(array('bootstrap','styles'));
+			echo $this->Html->css(array('bootstrap','styles','slidebars'));
 			echo $this->fetch('script');
 			echo $this->fetch('meta');
 			echo $this->fetch('css');
@@ -20,7 +22,7 @@
 	</head>
 
 	<body>
-		
+	<div id="sb-site">	
 		<div class = "navbar navbar-inverse navbar-fixed-top ">
 			<div class = "container">
 				<a href = "/" class = "navbar-brand">Hashkit</a>
@@ -109,7 +111,7 @@
 			</div>
 
 		</div>
-
+	</div>	
 	</body>
 
 	<script type="text/javascript">
