@@ -4,6 +4,8 @@
     },
     "require": {
    	 "markstory/acl_extras": "dev-master",
-   	 "simkimsia/permissions-extras": "dev-master"
+   	 "simkimsia/permissions-extras": "dev-master",
+		"simkimsia/utility_lib": "dev-master",
+		"simkimsia/utility_behaviors": "dev-master"
     }
 }

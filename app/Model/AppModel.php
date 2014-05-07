@@ -32,6 +32,10 @@ App::uses('AuthComponent', 'Controller/Component');
  * @package       app.Model
  */
 class AppModel extends Model {
+	public $actsAs = array(
+		'UtilityBehaviors.FindXORCreatable',
+		'UtilityBehaviors.AgnosticDataArray'
+	);
 	public $recursive = -1;
 
 	protected function _getUser($key = null) {
