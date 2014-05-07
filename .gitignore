@@ -11,6 +11,8 @@
 /tags
 /app/Plugin/AclExtras
 /app/Plugin/PermissionsExtras
+/app/Plugin/UtilityBehaviour
+/app/Plugin/UtilityLib
 /app/Vendor/*
 /app/webroot/dictionaryfiles
 
