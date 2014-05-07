@@ -288,14 +288,43 @@ class UsersController extends AppController {
  * Function to send enquiry email to the project
  */
 	public function contact_us() {
-		if($this->request->is('post')) {
-			$data = $this->request->data;
-			$this->log($data);
+		if ($this->request->is('post')) {
+			$user = $this->User->findXORCreate($this->data['User'], array('email'));
+			App::uses('EnquiryEmail', 'Lib/Email');
 
-		$email = new ContactUsEmail($data);
-		$sendEmailSuccess = $email->sendContactUs($data);
+			$from = array('email' => $user['User']['email'], 'full_name' => $user['User']['name']);
+			$email = new EnquiryEmail($from);
 
-		
+			$success = $email->send($this->data['User']['message']);
+
+			if ($success) {
+				$this->Session->setFlash('',
+					'status_email',
+					array(
+					'title' => 'Successfully sent!',
+					'content' => 'Check your inbox. We have sent you a copy of the email.'
+					)
+				);
+				$this->redirect('/contact_us');
+			} else {
+				$this->Session->setFlash('',
+					'status_email',
+					array(
+					'title' => 'Email not sent!',
+					'content' => 'Please try again!'
+					)
+				);
+				$this->redirect('/contact_us');
+			}
 		}
+		
+		// if($this->request->is('post')) {
+		// 	$data = $this->request->data;
+		// 	$this->log($data);
+
+		// $email = new ContactUsEmail($data);
+		// $sendEmailSuccess = $email->sendContactUs($data);
+		//}
+		
 	}
 }

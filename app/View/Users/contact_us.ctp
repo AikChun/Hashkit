@@ -3,7 +3,7 @@
 	<div class="jumbotron">
 
 		<?php
-			echo $this->Form->create('Users', array('action' => 'contact_us', 'class' => 'form-horizontal'));
+			echo $this->Form->create('User', array('action' => 'contact_us', 'class' => 'form-horizontal'));
 		?>
 
 		<div class="modal-header">

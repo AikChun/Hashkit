@@ -3,7 +3,7 @@
         "This file locks the dependencies of your project to a known state",
         "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file"
     ],
-    "hash": "93d73bd28a8b7f0e70f7d4b143d033e4",
+    "hash": "73e680958d070a93c6a5369322d28902",
     "packages": [
         {
             "name": "composer/installers",
@@ -147,6 +147,65 @@
             "type": "cakephp-plugin",
             "notification-url": "https://packagist.org/downloads/",
             "time": "2013-06-28 02:04:59"
+        },
+        {
+            "name": "simkimsia/utility_behaviors",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/simkimsia/UtilityBehaviors.git",
+                "reference": "d44a0fe0bb56ef266b7c500d7dc041a2c16d62c0"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/simkimsia/UtilityBehaviors/zipball/d44a0fe0bb56ef266b7c500d7dc041a2c16d62c0",
+                "reference": "d44a0fe0bb56ef266b7c500d7dc041a2c16d62c0",
+                "shasum": ""
+            },
+            "require": {
+                "composer/installers": "*"
+            },
+            "type": "cakephp-plugin",
+            "extra": {
+                "installer-name": "UtilityBehaviors"
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Kim Stacks",
+                    "role": "Maintainer"
+                }
+            ],
+            "description": "Useful behaviors for CakePHP 2.x",
+            "homepage": "http://github.com/simkimsia/UtilityBehaviors",
+            "keywords": [
+                "cakephp"
+            ],
+            "time": "2014-02-23 06:56:15"
+        },
+        {
+            "name": "simkimsia/utility_lib",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/simkimsia/UtilityLib.git",
+                "reference": "ddf3a3651ce40f501afdaad57eb23fe79039bdc4"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/simkimsia/UtilityLib/zipball/ddf3a3651ce40f501afdaad57eb23fe79039bdc4",
+                "reference": "ddf3a3651ce40f501afdaad57eb23fe79039bdc4",
+                "shasum": ""
+            },
+            "require": {
+                "composer/installers": "~1.0"
+            },
+            "type": "cakephp-plugin",
+            "notification-url": "https://packagist.org/downloads/",
+            "time": "2014-03-26 07:36:22"
         }
     ],
     "packages-dev": [
@@ -158,7 +217,9 @@
     "minimum-stability": "stable",
     "stability-flags": {
         "markstory/acl_extras": 20,
-        "simkimsia/permissions-extras": 20
+        "simkimsia/permissions-extras": 20,
+        "simkimsia/utility_lib": 20,
+        "simkimsia/utility_behaviors": 20
     },
     "platform": [
 

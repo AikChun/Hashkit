@@ -2,7 +2,7 @@
 			
 	<div class="jumbotron">
 
-		<?php echo $this->Form->create('Questionnaires',array('action' => 'questionnaire'));?>
+		<?php echo $this->Form->create('Questionnaires',array('action' => 'questionnaire', 'onsubmit'=> 'return validateForm()'));?>
 
 		<div class="modal-header">
 
@@ -18,9 +18,9 @@
 				$num = 1;
 				for($i = 0; $i < sizeof($questions); $i++){
 					echo '<b>'.$num++.'. '.$questions[$i].'</b><br><br>';
-					echo '<input type="radio" name= "'.$i.'" value="a" class="'.$i.'question" /> a<br>'; 
-					echo '<input type="radio" name= "'.$i.'" value="b" class="'.$i.'question"/> b<br>';
-					echo '<input type="radio" name= "'.$i.'" value="c" class="'.$i.'question"/> c<br><br>';
+					echo '<input type="radio" name= "'.$i.'" value="a" /> a<br>'; 
+					echo '<input type="radio" name= "'.$i.'" value="b" /> b<br>';
+					echo '<input type="radio" name= "'.$i.'" value="c" /> c<br><br>';
 				}
 			?>
 
@@ -34,8 +34,7 @@
 
 						$options = array(
 							'class' => 'btn btn-primary pull-right',
-							'label' => 'Submit',
-							'onclick' => 'validateForm()'
+							'label' => 'Submit'
 						);
 
 					?>
@@ -44,7 +43,7 @@
 
 		</div>
 
-		<?php echo $this->Form->end($options); ?>
+		<?php echo $this->Form->End($options); ?>
 
 	</div>
 
@@ -52,35 +51,40 @@
 
 <script type="text/javascript">
 	function validateForm() {
-	    // var radio0 = document.getElementsByName("0");
-	    // var radio1 = document.getElementsByName("1");
-	    // var radio2 = document.getElementsByName("2");
-	    // alert("IN");
 
 		var radio0 = document.getElementsByName("0");
 	    var radio1 = document.getElementsByName("1");
 	    var radio2 = document.getElementsByName("2");
-
 	    var radios = [radio0, radio1, radio2];
 
-	    var formValid = false;
+	    var notAnswered = new Array();
+	    var rowValid = false;
+	    var formValid = true;
 
-
-	    var i = 0;
 
 	    for(var i = 0; i < 3; i++){
-	    	for (var j = 0; j < radios[i][j].length; j++){
-	    		if (radios[i][j].checked) formValid = true;
+	    	for (var j = 0; j < radios[i].length; j++){
+	    		if (radios[i][j].checked) rowValid = true;
 	    	}
+	    	if(!rowValid){
+	    		formValid = rowValid;
+	    		notAnswered.push(i);
+	    	}
+	    	rowValid = false;
 	    }
 
-	    // while (!formValid && i < 3) {
-	    //     if (radio0[i].checked) formValid = true;
-	    //     i++;        
-	    // }
+	    if (!formValid){
+	    	var notAnsweredString = "question ";
 
-	    if (!formValid) alert("Must check some option!");
-	    return formValid;
-	}​
+			for(var i = 0; i < notAnswered.length; i++){
+		    	notAnsweredString = notAnsweredString.concat(++notAnswered[i]);
+		    	notAnsweredString = notAnsweredString.concat(" ");
+		    }
+		    
+		    alert("Please answer " + notAnsweredString);
+		}
+	    return formValid;	
+	}
+
 
 </script>
