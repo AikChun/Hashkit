@@ -113,9 +113,18 @@ class HashTestsController extends AppController {
 	             is_uploaded_file($data['HashTests']['file_upload']['tmp_name']) &&
 	             ($data['HashTests']['file_upload']['type'] == 'text/plain')) {
 
-			$text = file($data['HashTests']['file_upload']['tmp_name']);
+				$text = file($data['HashTests']['file_upload']['tmp_name']);
 
 			} 
+
+			if(!is_string($text)) {
+				foreach($text as $key => $word) {
+					$trimmedWord = trim($word);
+					$this->HashTest->checkAndInsertIntoDictionary($trimmedWord);
+				}
+			} else {
+				$this->HashTest->checkAndInsertIntoDictionary($text);
+			}
 
 			$output = $this->HashTest->computeDigests($selectedAlgorithms, $text);
 
