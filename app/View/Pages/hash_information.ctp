@@ -25,8 +25,8 @@
       });
     });
 </script>
- -->
 
+ -->
 
 <article class="container hashinformation">
         <div class="row">
