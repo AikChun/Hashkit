@@ -2,6 +2,10 @@ body {
 	margin-bottom: 80px;
 }
 
+.navbar .nav .active > a, .navbar .nav .active > a:hover {
+	background-color:  #242121;
+}
+
 .jumbotron {
 	background-color: #eeeeee;
 	padding-top: 0px;
