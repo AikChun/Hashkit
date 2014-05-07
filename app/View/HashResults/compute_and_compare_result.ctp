@@ -68,8 +68,10 @@
 						if ($data2 == $mdline[(count($mdline)-1)]) {
 							echo '<br/>';
 						}else {
+
 							echo $data2;
 							echo '<br/>';
+						
 						}
 
 					}
@@ -83,344 +85,215 @@
 			echo $output[0]['HashResult']['description'];
 			echo '<br/>';
 			echo '<br/>';
+
+			if(count($ptline) > 1) {
+
+				echo '<table class="table table-bordered table-condensed">';
+
+						$collision_pt = $output[0]['HashResult']['collision_pt'];
+						$collision_md = $output[0]['HashResult']['collision_md'];
+						$collision_index = $output[0]['HashResult']['collision_index'];
+
+						echo '<tr>';
+
+							echo '<td>';
+								echo '<b>Plaintext</b>';
+							echo '</td>';
+
+							echo '<td>';
+								echo '<b>';
+								echo $output[0]['HashResult']['hash_algorithm_name'];
+								echo '</b>';
+								echo '<b> Message Digest</b>';
+							echo '</td>';
+
+							echo '<td>';
+								echo '<b>File Line</b>';
+							echo '</td>';
+
+						echo '</tr>';
+
+						foreach($output[0]['HashResult']['collision_pt'] as $key => $data) {
+
+							echo '<tr>';
+
+								echo '<td>';
+									echo $collision_pt[$key];
+								echo '</td>';
+
+								echo '<td>';
+									echo $collision_md[$key];
+								echo '</td>';
+								
+								echo '<td>';
+									echo $collision_index[$key] + 1;
+								echo '</td>';
+
+							echo '</tr>';
+
+						}
+
+				echo '</table>';
+
+			}
+
 		?>
 
-
-			<table class="table table-bordered table-condensed">
-				<col align = "left">
-				<col align = "left">
-				<col align = "left">
-
-			<?php
-
-				if(count($ptline) > 1) {
-				$collision_pt = $output[0]['HashResult']['collision_pt'];
-				$collision_md = $output[0]['HashResult']['collision_md'];
-				$collision_index = $output[0]['HashResult']['collision_index'];
-
-			?>
-
-			<tr>
-
-				<td>
-
-					<b>Plaintext</b>
-
-				</td>
-
-				<td>
-
-					<b>
-						<?php
-							echo $output[0]['HashResult']['hash_algorithm_name'];
-						?>
-					</b>
-
-					<b> Message Digest</b>
-
-				</td>
-
-				<td>
-
-					<b>File Line<b>
-
-				</td>
-
-			</tr>
-
-			<?php 
-
-				foreach($output[0]['HashResult']['collision_pt'] as $key => $data):
-
-			?>
-			
-			<tr>
-
-				<td>
-
-					<?php
-						echo $collision_pt[$key];
-					?>
-
-				</td>
-
-				<td>
-					
-					<?php
-						echo $collision_md[$key];
-					?>
-
-				</td>
-
-				<td>
-
-					<?php
-
-						echo $collision_index[$key] + 1;
-
-					?>
-
-				</td>
-				
-				<?php
-					
-					endforeach;
-					}
-
-				?>
-
-			</tr>
-
-		</table>
-
-		<br/>
-
 		<?php
+
 			echo '<b>Comparing between selected algorithmn:</b>';
 			echo '<br/>';
 			echo '<br/>';
 
-		?>
-		
-		<table class="table table-bordered table-condensed">
-			
-			<tr>
+			echo '<table class="table table-bordered table-condensed">';
 
-				<td>
-			
-					<b>Algorithm</b>
-			
-				</td>
+				echo '<tr>';
 
-				<?php 
-					foreach($output as $key => $data):
-				?>
+					echo '<td>';
+						echo '<b>Algorithm</b>';
+					echo '</td>';
 
-				<td>
-
-					<b>
-						<?php 
+					foreach($output as $key => $data) {
+						
+						echo '<td>';
+							echo '<b>';
 							echo $data['HashResult']['hash_algorithm_name'];
-						?>
-					</b>
+							echo '</b>';
+						echo '</td>';
 
-				</td>
+					}
 
-				<?php
-					endforeach;
-				?>
+				echo '</tr>';
 
-			</tr>
+				echo '<tr>';
 
-			<tr>
+					echo '<td>';
+						echo 'Output Length(bits)';
+					echo '</td>';
+					
+					foreach($output as $key => $data) {
 
-				<td>
+						echo '<td>';
+							echo $data['HashResult']['output_length'];
+						echo '</td>';
 
-					Output Length(bits)
+					}
 				
-				</td>
-			
-				<?php
-					foreach($output as $key => $data):
-				?>
+				echo '</tr>';
 
-				<td>
-	
-					<?php 
-						echo $data['HashResult']['output_length'];
-					?>
-	
-				</td>
+				echo '<tr>';
 
-				<?php
-					endforeach;
-				?>
+					echo '<td>';
+						echo 'Speed(MB/s)';
+					echo '</td>';
+					
+					foreach($output as $key => $data) {
 
-			</tr>
+						echo '<td>';
+							echo $data['HashResult']['speed'];
+						echo '</td>';
 
-			<tr>
-
-				<td>
-
-					Speed(MB/s)
+					}
 				
-				</td>
+				echo '</tr>';
 
-				<?php
-					foreach($output as $key => $data):
-				?>
+				echo '<tr>';
 
-				<td>
+					echo '<td>';
+						echo 'Collision Resistence';
+					echo '</td>';
+					
+					foreach($output as $key => $data) {
 
-					<?php echo $data['HashResult']['speed'];?>
+						echo '<td>';
+							echo $data['HashResult']['collision_resistance'];
+						echo '</td>';
+
+					}
 				
-				</td>
+				echo '</tr>';
 
-				<?php
-					endforeach;
-				?>
+				echo '<tr>';
 
-			</tr>
+					echo '<td>';
+						echo 'Preimage Resistence';
+					echo '</td>';
+					
+					foreach($output as $key => $data) {
 
-			<tr>
+						echo '<td>';
+							echo $data['HashResult']['preimage_resistance'];
+						echo '</td>';
 
-				<td>
-
-					Collision Resistence
+					}
 				
-				</td>
+				echo '</tr>';
 
-				<?php
-					foreach($output as $key => $data):
-				?>
+				echo '<tr>';
 
-				<td>
+					echo '<td>';
+						echo '2nd Preimage Resistence';
+					echo '</td>';
+					
+					foreach($output as $key => $data) {
 
-					<?php
-						echo $data['HashResult']['collision_resistance'];
-					?>
+						echo '<td>';
+							echo $data['HashResult']['2nd_preimage_resistance'];
+						echo '</td>';
+
+					}
 				
-				</td>
+				echo '</tr>';
 
-				<?php
-					endforeach;
-				?>
+				echo '<tr>';
 
-			</tr>
+					echo '<td>';
+						echo 'Collision Best Known Attack';
+					echo '</td>';
+					
+					foreach($output as $key => $data) {
 
-			<tr>
+						echo '<td>';
+							echo $data['HashResult']['collision_bka'];
+						echo '</td>';
 
-				<td>
-
-					Preimage Resistence
+					}
 				
-				</td>
+				echo '</tr>';
 
-				<?php
-					foreach($output as $key => $data):
-				?>
+				echo '<tr>';
 
-				<td>
+					echo '<td>';
+						echo 'Preimage Best Known Attack';
+					echo '</td>';
+					
+					foreach($output as $key => $data) {
 
-					<?php
-						echo $data['HashResult']['preimage_resistance'];
-					?>
+						echo '<td>';
+							echo $data['HashResult']['preimage_bka'];
+						echo '</td>';
 
-				</td>
-
-				<?php
-					endforeach;
-				?>
-
-			</tr>
-
-			<tr>
-
-				<td>
-
-					2nd Preimage Resistence
+					}
 				
-				</td>
+				echo '</tr>';
 
-				<?php
-					foreach($output as $key => $data):
-				?>
+				echo '<tr>';
 
-				<td>
+					echo '<td>';
+						echo '2nd Preimage Best Known Attack';
+					echo '</td>';
+					
+					foreach($output as $key => $data) {
+
+						echo '<td>';
+							echo $data['HashResult']['2nd_preimage_bka'];
+						echo '</td>';
+
+					}
 				
-					<?php
-						echo $data['HashResult']['2nd_preimage_resistance'];
-					?>
-				
-				</td>
+				echo '</tr>';
 
-				<?php
-					endforeach;
-				?>
-
-			</tr>
-
-			<tr>
-
-				<td>
-
-					Collision Best Known Attack
-				
-				</td>
-				
-				<?php
-					foreach($output as $key => $data):
-				?>
-				
-				<td>
-
-					<?php
-						echo $data['HashResult']['collision_bka'];
-					?>
-
-				</td>
-				
-				<?php
-					endforeach;
-				?>
-			
-			</tr>
-
-			<tr>
-
-				<td>
-
-					Preimage Best Known Attack
-				
-				</td>
-
-				<?php
-					foreach($output as $key => $data):
-				?>
-
-				<td>
-
-					<?php
-						echo $data['HashResult']['preimage_bka'];
-					?>
-
-				</td>
-
-				<?php
-					endforeach;
-				?>
-
-			</tr>
-
-			<tr>
-				
-				<td>
-
-					2nd Preimage Best Known Attack
-				
-				</td>
-
-				<?php
-					foreach($output as $key => $data):
-				?>
-
-				<td>
-
-					<?php
-						echo $data['HashResult']['2nd_preimage_bka'];
-					?>
-
-				</td>
-
-				<?php
-					endforeach;
-				?>
-
-			</tr>
-
-		</table>
-
-		<?php
+			echo '</table>';
 
 			$last = end($output);
 
