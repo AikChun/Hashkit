@@ -5,6 +5,7 @@ body {
 .jumbotron {
 	background-color: #eeeeee;
 	padding-top: 0px;
+	margin-top: 80px;
 }
 
 .error {
@@ -38,4 +39,8 @@ textarea {
 .inline-edit .hover {
 	background-color: #FFFFA5;
 	cursor: pointer;
+}
+
+.hashinformation {
+	margin-top: 80px;
 }
