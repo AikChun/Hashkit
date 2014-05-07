@@ -2,10 +2,8 @@
 			
 	<div class="jumbotron">
 
-		<?php 
-		
+		<?php
 			echo $this->Form->create('Users', array('action' => 'contact_us', 'class' => 'form-horizontal'));
-			
 		?>
 
 		<div class="modal-header">
@@ -18,7 +16,7 @@
 
 		<div class="form-group">
 								
-			<label for="contact_us-name" class="col-lg-2 control-label">Name:</label>
+			<label class="col-lg-2 control-label">Name:</label>
 
 			<div class="col-lg-10">
 
@@ -39,7 +37,7 @@
 
 		<div class="form-group">
 
-			<label for="contact_us-email" class="col-lg-2 control-label">Email:</label>
+			<label class="col-lg-2 control-label">Email:</label>
 
 			<div class="col-lg-10">
 
@@ -59,7 +57,7 @@
 
 		<div class="form-group">
 								
-			<label for="contact_us-subject" class="col-lg-2 control-label">Subject:</label>
+			<label class="col-lg-2 control-label">Subject:</label>
 
 			<div class="col-lg-10">
 
@@ -80,7 +78,7 @@
 
 		<div class="form-group">
 
-			<label for="contact_us-message" class="col-lg-2 control-label">Message:</label>
+			<label class="col-lg-2 control-label">Message:</label>
 
 			<div class="col-lg-10">
 
@@ -103,24 +101,16 @@
 
 		</div>
 
-		<div class="form-group">
+		<?php
 
-			<div class="col-lg-12">
+			$contact_us_send = array(
+				'class' => 'btn btn-primary pull-right',
+				'label' => 'Send'
+			);
 
-				<?php
+			echo $this->Form->end($contact_us_send);
 
-					$options = array(
-						'class' => 'btn btn-primary pull-right',
-						'label' => 'Send'
-					);
-
-				?>
-
-			</div>
-
-		</div>
-
-		<?php echo $this->Form->end($options); ?>
+		?>
 
 	</div>
 
