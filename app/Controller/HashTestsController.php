@@ -94,6 +94,8 @@ class HashTestsController extends AppController {
 
 		if($this->request->is('post')) {
 			$data = $this->request->data;
+			$text = $this->request->data['HashTests']['plaintext'];
+
 
 			//if (empty($data['HashTests']['plaintext']) && empty($data['HashTests']['file_upload']))  {
 			//	$this->Session->setFlash('Please enter plaintext or choose upload file to proceed', 'alert-box', array('class'=>'alert-danger'));
@@ -103,25 +105,31 @@ class HashTestsController extends AppController {
 			//	$this->Session->setFlash('Uploaded file must be in text file format', 'alert-box', array('class'=>'alert-danger'));
 			//}	
 
-			if (!empty($data['HashTests']['plaintext'])) {
-				$output = $this->HashTest->computeDigests($selectedAlgorithms, $data['HashTests']['plaintext']);
-	            $this->Session->write('output', $output);
-				$this->redirect(array('controller' => 'HashResults', 'action' => 'basic_hashing_result'));
-			}
+			// if (!empty($data['HashTests']['plaintext'])) {
+			// 	$this->redirect(array('controller' => 'HashResults', 'action' => 'basic_hashing_result'));
+			// }
 			
-			elseif (!empty($data['HashTests']['file_upload']) && 
+			if (!empty($data['HashTests']['file_upload']) && 
 	             is_uploaded_file($data['HashTests']['file_upload']['tmp_name']) &&
-	             ($data['HashTests']['file_upload']['type'] == 'text/plain')) 
-			{
+	             ($data['HashTests']['file_upload']['type'] == 'text/plain')) {
 
-			$lineArray = file($data['HashTests']['file_upload']['tmp_name']);
+			$text = file($data['HashTests']['file_upload']['tmp_name']);
 
-			$output = $this->HashTest->computeDigests($selectedAlgorithms, $lineArray);
+			} 
 
+			$output = $this->HashTest->computeDigests($selectedAlgorithms, $text);
+
+			try {
+				$saveSuccessful = $this->HashTest->saveTestResults($output);
+				if(!$saveSuccessful) {
+					throw new Exception('Unable to save Hash Test.');
+				}
+			} catch (Exception $e) {
+				$this->Session->setFlash($e->getMessage(), 'alert-box', array('class'=>'alert-danger'));
+				$this->redirect(array('action' => 'basic_hashing'));
+			}
             $this->Session->write('output', $output);
 			$this->redirect(array('controller' => 'HashResults', 'action' => 'basic_hashing_result'));
-
-		} 
 	}
 }
 /**
