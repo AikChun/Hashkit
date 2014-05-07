@@ -18,8 +18,8 @@
           <?php if(!$authUser):?>
           <h4>To start using by</h4>
           <div class="btn-group">
-          	<button type="button" id ="btnreg" class="btn btn-lg btn-primary " href="/Users/register">Register</button>
-          	<button type="button" id="btlogin" class="btn btn-lg btn-warning" href="/Users/login">Login</button>
+          <a class="btn btn-lg btn-primary" href="/Users/register">Register</a>
+          <a class="btn btn-lg btn-warning" href="/Users/login">Login</a>
           </div>
           <?php endif;?>
         </div>
