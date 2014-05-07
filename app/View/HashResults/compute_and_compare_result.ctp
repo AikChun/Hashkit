@@ -86,7 +86,7 @@
 			echo '<br/>';
 			echo '<br/>';
 
-			if(count($ptline) > 1) {
+			if(count($output[0]['HashResult']['collision_index']) > 1) {
 
 				echo '<table class="table table-bordered table-condensed">';
 
