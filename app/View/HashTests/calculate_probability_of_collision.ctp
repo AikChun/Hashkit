@@ -119,18 +119,23 @@
 
 		<div class="modal-header">
 
-			<h2>Hash Collision Probability</h2>
+			<h2>Hash Collision Probability Calculator</h2>
 
 		</div>
 
 		<br/>
 
+		<p>
+		For any information on birthday attacks, refer to this link
+		<br>
+		To accomplish this, follow the steps below :
+		</p>
+
 		<?php
 			echo $this->Form->create('HashTests',array('action' => 'calculate_probability_of_collision', 'class' => 'form-horizontal'));
 		?> 
-
+		<h4>1. Sample size of the hash function </h4>
 		<div class="form-group">
-								
 			<label class="col-lg-2 control-label">Base:</label>
 
 			<div class="col-lg-10">
@@ -143,7 +148,8 @@
 						'label' => false,
 						'size' => 10,
 						'id' => 'required_base',
-						'onchange' => "checkform()"
+						'onchange' => "checkform()",
+						'placeholder' => 'base'
 					));
 
 				?>
@@ -166,7 +172,8 @@
 						'label' => false,
 						'size' => 10,
 						'id' => 'required_exponent',
-						'onchange' => "checkform()"
+						'onchange' => "checkform()",
+						'placeholder' =>'exponent'
 					));
 
 				?>
@@ -174,7 +181,7 @@
 			</div>
 
 		</div>
-
+		
 		<div class="form-group">
 								
 			<label class="col-lg-2 control-label">Number of Hashes:</label>
@@ -189,7 +196,8 @@
 						'label' => false,
 						'size' => 30,
 						'id' => 'hash_value',
-						'onchange' => 'checkformforHashValue()'
+						'onchange' => 'checkformforHashValue()',
+						'placeholder' =>'hash value (optional)'
 					));
 				
 				?>
@@ -197,7 +205,8 @@
 			</div>
 
 		</div>
-
+		<br>
+		<h4>2.Select Hash algorithm </h4>
 		<div class="form-group">
 
 			<label class="col-lg-2 control-label">Hash Algorithm:</label>
@@ -231,14 +240,14 @@
 
 		</div>
 
+		
+
 		<div class="form-group">
 		
 			<div id="customizedoptions" style="display: none">
-
-				<div style="font-size =100%">Enter the base and expontial or just the total number of hashes for the hash function </div>
-				
+						
 				<div class="form-group">
-										
+						<h4>3. Total size of Hash Functions</h4>				
 					<label class="col-lg-2 control-label">Base:</label>
 
 					<div class="col-lg-10">
@@ -250,7 +259,8 @@
 								'div' => false,
 								'label' => false,
 								'id' => 'customized_algorithm_base',
-								'onchange' => 'checkform2()'
+								'onchange' => 'checkform2()',
+								'placeholder' =>'algorithm base'
 							));
 
 						?>
@@ -272,7 +282,8 @@
 								'div' => false,
 								'label' => false,
 								'id' => 'customized_algorithm_exponent',
-								'onchange' => 'checkform2()'
+								'onchange' => 'checkform2()',
+								'placeholder' =>'algorithm exponent'
 							));
 
 						?>
@@ -293,7 +304,8 @@
 								'type' => 'text',
 								'div' => false,
 								'label' => false,
-								'id' => 'hash_value1'
+								'id' => 'hash_value1',
+								'placeholder' =>'hash value(optional)'
 							));
 								
 						?>
