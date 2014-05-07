@@ -187,46 +187,47 @@ class HashTestsController extends AppController {
 		$selectedAlgorithms = $this->Session->read('selectedAlgorithms');
 		if($this->request->is('post')) {
 			$data = $this->request->data;
+			$text = $this->request->data['HashTests']['plaintext'];
 
-			if (!empty($data['HashTests']['plaintext'])) {
-				
-				$output = $this->HashTest->computeDigests($selectedAlgorithms, $data['HashTests']['plaintext']);
-				
-				$outputResult = HashingLib::compareDigests($output);
+			// check for file upload.
+			if (!empty($data['HashTests']['file_upload']) && 
+	             is_uploaded_file($data['HashTests']['file_upload']['tmp_name']) &&
+	             ($data['HashTests']['file_upload']['type'] == 'text/plain')) {
 
-				if(!empty($data['HashTests']['email'])) {
-					$outputResult[0]['email'] = 1;
-                }elseif(empty($data['HashTests']['email'])) {
-                	
-                	$outputResult[0]['email'] = 0;
-                }
+				//$this->log(file($data['HashTests']['file_upload']['tmp_name']));
 
-				$this->Session->write('output', $outputResult);
-				$this->redirect(array('controller' => 'HashResults', 'action' => 'compute_and_compare_result'));
+				$text = file($data['HashTests']['file_upload']['tmp_name']);
+
+			}		
+
+			if(!is_string($text)) {
+				foreach($text as $key => $word) {
+					$trimmedWord = trim($word);
+					$this->HashTest->checkAndInsertIntoDictionary($trimmedWord);
+				}
+			} else {
+				$this->HashTest->checkAndInsertIntoDictionary($text);
 			}
 
-			elseif (!empty($data['HashTests']['file_upload']) && 
-	             is_uploaded_file($data['HashTests']['file_upload']['tmp_name']) &&
-	             ($data['HashTests']['file_upload']['type'] == 'text/plain')) 
-			{
+			// compute 
+			$output = $this->HashTest->computeDigests($selectedAlgorithms, $text);
+			// AND compare
+			$outputResult = HashingLib::compareDigests($output);
 
-				$this->log(file($data['HashTests']['file_upload']['tmp_name']));
+			// check for email selection
+			if(!empty($data['HashTests']['email'])) {
 
-				$lineArray = file($data['HashTests']['file_upload']['tmp_name']);
+				$outputResult[0]['email'] = 1;
 
-				$output = $this->HashTest->computeDigests($selectedAlgorithms, $lineArray);
+			}elseif(empty($data['HashTests']['email'])) {
+				
+				$outputResult[0]['email'] = 0;
+			}
 
-				$outputResult = HashingLib::compareDigests($output);
-
-				if(!empty($data['HashTests']['email'])) {
-					$outputResult[0]['email'] = 1;
-                }elseif(empty($data['HashTests']['email'])) {
-                	$outputResult[0]['email'] = 0;
-                }
-
-				$this->Session->write('output', $outputResult);
-				$this->redirect(array('controller' => 'HashResults', 'action' => 'compute_and_compare_result'));
-			}		
+			// THEN this execute following...
+			$this->HashTest->saveTestResults($output, $outputResult[0]['HashResult']['description'].$outputResult[0]['HashResult']['collision']);
+			$this->Session->write('output', $outputResult);
+			$this->redirect(array('controller' => 'HashResults', 'action' => 'compute_and_compare_result'));
 		}
 	}
 

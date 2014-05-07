@@ -130,7 +130,7 @@ class HashResultsController extends AppController {
 			$this->set("output", $outputResult);
 			$outputResult[0]['HashResult']['description'] .= $outputResult[0]['HashResult']['collision'];
 			//}
-			$saveSuccessful = $this->HashResult->saveWithDescription($outputResult);
+			//$saveSuccessful = $this->HashResult->saveWithDescription($outputResult);
 			//$this->HashResult->create();
 			//$this->HashResult->saveMany($outputResult);
 		} else {
