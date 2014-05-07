@@ -142,7 +142,12 @@ class HashResultsController extends AppController {
 		if($this->request->is('post')) {
 			$view = new View($this);
 			$result = $view->render('compute_and_compare_result','ajax');
+			
 			$this->HashResult->download_result($result);
+    		$this->response->body($result);
+   		 	$this->response->type('html');
+   			$this->response->download('hashresult.html');
+			
 			$this->Session->setFlash('Hash result have been saved', 'alert-box', array('class'=>'alert-danger'));
 		}
 	}

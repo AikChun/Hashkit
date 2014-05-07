@@ -25,10 +25,10 @@
       });
     });
 </script>
+
  -->
 
-
-<article class="container">
+<article class="container hashinformation">
         <div class="row">
             <div class="col-md-3" id="leftCol">
                 <ul class="nav nav-stacked " id="sidebar">
