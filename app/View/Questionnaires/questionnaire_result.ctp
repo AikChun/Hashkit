@@ -19,10 +19,20 @@
 		</br></br>
 
 		<?php
+			$num = 1;
 			for($i = 0; $i < sizeof($questions); $i++){
-					echo $questions[$i].'<br><br>';
-					echo 'You have selected: '.$data[$i].'<br>';
-					echo 'The answer is: '.$answers[$i].'<br><br>';
+					echo '<b>'.$num++.'. '.$questions[$i].'</b><br><br>';
+					echo 'You have selected: <b>'.$data[$i].'</b><br>';
+					echo 'The answer is: <b>'.$answers[$i].'</b> ';
+					if ($data[$i] == $answers[$i]){
+						echo "<img src='/img/green_tick.png'/>".'<br><br>';
+
+
+					}
+					else{
+						echo "<img src='/img/red_cross.png' />".'<br><br>';
+
+					}
 				}
 
 		?>

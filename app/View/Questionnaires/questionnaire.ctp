@@ -15,33 +15,13 @@
 		<div class="form-group">
 
 			<?php
-
 				$num = 1;
 				for($i = 0; $i < sizeof($questions); $i++){
-					echo $num++.'. '.$questions[$i].'<br><br>';
-					echo '<input type="radio" name= "'.$i.'" value="a" /> a<br>'; 
-					echo '<input type="radio" name= "'.$i.'" value="b" /> b<br>';
-					echo '<input type="radio" name= "'.$i.'" value="c" /> c<br><br>';
+					echo '<b>'.$num++.'. '.$questions[$i].'</b><br><br>';
+					echo '<input type="radio" name= "'.$i.'" value="a" class="'.$i.'question" /> a<br>'; 
+					echo '<input type="radio" name= "'.$i.'" value="b" class="'.$i.'question"/> b<br>';
+					echo '<input type="radio" name= "'.$i.'" value="c" class="'.$i.'question"/> c<br><br>';
 				}
-
-				// for($i = 0; $i < sizeof($result); $i++){
-
-				// 	if (in_array("$i", $rand_keys)){
-				// 		echo $num.'. '.$result[$i]['Questionnaire']['questions'].'<br><br>';
-				// 		array_push($answers, $result[$i]['Questionnaire']['answers']);
-
-				// 		echo '<input type="radio" name= "'.$num.'" value="a" /> a<br>'; 
-				// 		echo '<input type="radio" name= "'.$num.'" value="b" /> b<br>';
-				// 		echo '<input type="radio" name= "'.$num.'" value="c" /> c<br><br>';
-
-				// 		$num++;
-				
-				// 	}
-					
-				// }	
-
-				
-
 			?>
 
 		</div>
@@ -54,7 +34,8 @@
 
 						$options = array(
 							'class' => 'btn btn-primary pull-right',
-							'label' => 'Submit'
+							'label' => 'Submit',
+							'onclick' => 'validateForm()'
 						);
 
 					?>
@@ -68,3 +49,38 @@
 	</div>
 
 </div>
+
+<script type="text/javascript">
+	function validateForm() {
+	    // var radio0 = document.getElementsByName("0");
+	    // var radio1 = document.getElementsByName("1");
+	    // var radio2 = document.getElementsByName("2");
+	    // alert("IN");
+
+		var radio0 = document.getElementsByName("0");
+	    var radio1 = document.getElementsByName("1");
+	    var radio2 = document.getElementsByName("2");
+
+	    var radios = [radio0, radio1, radio2];
+
+	    var formValid = false;
+
+
+	    var i = 0;
+
+	    for(var i = 0; i < 3; i++){
+	    	for (var j = 0; j < radios[i][j].length; j++){
+	    		if (radios[i][j].checked) formValid = true;
+	    	}
+	    }
+
+	    // while (!formValid && i < 3) {
+	    //     if (radio0[i].checked) formValid = true;
+	    //     i++;        
+	    // }
+
+	    if (!formValid) alert("Must check some option!");
+	    return formValid;
+	}​
+
+</script>
