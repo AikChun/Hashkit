@@ -193,6 +193,8 @@ class HashTestsController extends AppController {
 	             ($data['HashTests']['file_upload']['type'] == 'text/plain')) 
 			{
 
+				$this->log(file($data['HashTests']['file_upload']['tmp_name']));
+
 				$lineArray = file($data['HashTests']['file_upload']['tmp_name']);
 
 				$output = $this->HashTest->computeDigests($selectedAlgorithms, $lineArray);

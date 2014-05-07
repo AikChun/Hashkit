@@ -95,7 +95,9 @@ class HashTest extends AppModel {
 
 				foreach($fileData as $key => $line) {
 
-					$messageDigest = hash(strtolower($algorithm['HashAlgorithm']['name']), $line);
+					$line1 = trim($line);
+
+					$messageDigest = hash(strtolower($algorithm['HashAlgorithm']['name']), $line1);
 
 					if(empty($computed['HashResult']['plaintext'])){
 						$computed['HashResult']['plaintext'] = $line; //. "\n";	
