@@ -3,7 +3,7 @@
         "This file locks the dependencies of your project to a known state",
         "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file"
     ],
-    "hash": "73e680958d070a93c6a5369322d28902",
+    "hash": "a3c49bfe5c1146a314757b702f4a5090",
     "packages": [
         {
             "name": "composer/installers",

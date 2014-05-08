@@ -10,7 +10,7 @@
 	  		echo $this->Html->script('jquery-2.1.0.js');
 	  		echo $this->Html->script('bootstrap.js');
 
-			echo $this->Html->css(array('bootstrap','styles'));
+			echo $this->Html->css(array('bootstrap','styles','sidebar'));
 			echo $this->fetch('script');
 			echo $this->fetch('meta');
 			echo $this->fetch('css');
@@ -20,8 +20,9 @@
 	</head>
 
 	<body>
-		<div class = "navbar navbar-inverse navbar-fixed-top ">
+		<div class = "navbar navbar-inverse navbar-fixed-top " role="navigation">			
 			<div class = "container">
+				
 				<a href = "/" class = "navbar-brand">Hashkit</a>
 				<button class = "navbar-toggle" data-toggle = "collapse" data-target = ".navHeaderCollapse">
 					<span class = "icon-bar"></span>
@@ -107,12 +108,21 @@
 
 			</div>
 
-		</div>
+		</div>	
 	</body>
 
 	<script type="text/javascript">
 		$(document).ready(function () {
         $('a[href="' + this.location.pathname + '"]').parent().addClass('active');
-    });
+    	});
+
+		// $(document).ready(function() {
+		//   $('[data-toggle=offcanvas]').click(function() {
+  //   			$('.row-offcanvas').toggleClass('active');
+  // 				});
+		// 	});
 	</script>
+
+
+
 </html>

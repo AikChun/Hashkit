@@ -110,7 +110,7 @@ class PagesController extends AppController {
 	}
 
 	public function hash_information() {
-
+		$this->layout = 'hashinfolayout';
 	}
 
 

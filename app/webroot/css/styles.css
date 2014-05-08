@@ -24,27 +24,6 @@ div.nowrap{
 	white-space:nowrap;
 }
 
-textarea {
-	width: 300px;
-	height: 150px;
-}
-
-.inline-edit {
-	font-size: 9pt;
-	width: 500px;
-	margin-top: 10px;
-	border: 1px solid black;
-}
-
-.inline-edit .form {
-	display: none;
-}
-
-.inline-edit .hover {
-	background-color: #FFFFA5;
-	cursor: pointer;
-}
-
 .hashinformation {
 	margin-top: 80px;
 }
