@@ -307,23 +307,34 @@
 
 		</div>
 
-		<div class="form-group">
+		<?php
 
-			<?php
+			echo $this->Form->create('HashResults', array('class' => 'form-horizontal', 'type' => 'file'));
 
-				echo $this->Form->create('HashResults', array('class' => 'form-horizontal', 'type' => 'file'));
+			$compute_and_compare_save = array(
+				'class' => 'btn btn-primary pull-left',
+				'label' => 'Save Results'
+			);
 
-				$compute_and_compare_save = array(
-					'class' => 'btn btn-primary pull-left',
-					'label' => 'Save Results'
-				);
+		?>
 
-				echo $this->Form->end($compute_and_compare_save);
-				echo '<a href="/" class="btn btn-default pull-right">Back to Home</a>';
+		<div class="pull-right">
+			
+			<div class="col-lg-6 pull-right">
 
-			?>
+				<a href="/" class="btn btn-default pull-right">Back to Home</a>
+			
+			</div>
 
-		</div>		
+			<div class="col-lg-5 pull-right">
+
+				<?php
+					echo $this->Form->end($compute_and_compare_save);
+				?>			
+
+			</div>
+
+		</div>	
 
 		<?php
 
