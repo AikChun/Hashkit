@@ -4,7 +4,7 @@
 
 		<div class="modal-header">
 
-			<h2>Hash Algorithm Recommendation</h2>
+			<h2>Your Hash Result</h2>
 
 		</div>
 			
@@ -12,12 +12,10 @@
 
 		<?php
 
-			if($output[0]['email'] != 1) {
-
 			echo '<b>Plaintext entered:</b>';
 			echo '<br/>';
 
-			$ptline = explode("\n",$output[0]['HashResult']['plaintext']);
+			$ptline = explode("\n",$hashresult[0]['HashResult']['plaintext']);
 			
 			if(count($ptline > 1)) {
 
@@ -34,19 +32,19 @@
 				}
 
 			}else {
-				echo $output[0]['HashResult']['plaintext'];
+				echo $hashresult[0]['HashResult']['plaintext'];
 			}
 
 			echo '<br/>';
 			echo '<br/>';
 
-			foreach($output as $key1 => $data1) {
+			foreach($hashresult as $key1 => $data1) {
 				
 				$mdline = explode("\n",$data1['HashResult']['message_digest']);
 
 				echo '<b>Selected Algorithm:</b>';
 				echo '<br/>';
-				echo $data1['HashResult']['hash_algorithm_name'];
+				echo $hashalgorithm[$key1]['HashAlgorithm']['name'];
 				echo '<br/>';
 				echo '<b>Message Digest:</b>';
 				echo '<br/>';
@@ -80,19 +78,21 @@
 		
 			}
 
+			if($hashtest['HashTest']['analysis'] != 'Basic Hashing') {
+
 			echo '<b>Analysis:</b>';
 			echo '<br/>';
-			echo $output[0]['HashResult']['description'];
+			echo $hashtest['HashTest']['analysis'];
 			echo '<br/>';
 			echo '<br/>';
 
-			if(($output[0]['HashResult']['collision_count']) > 1) {
+			if($hashtest['HashTest']['collision_count'] > 1) {
 
-					echo '<table class="table table-bordered table-condensed">';
+				echo '<table class="table table-bordered table-condensed">';
 
-						$collision_pt = explode("\n", $output[0]['HashResult']['collision_pt']);
-						$collision_md = explode("\n", $output[0]['HashResult']['collision_md']);
-						$collision_index = explode(" ", $output[0]['HashResult']['collision_index']);
+						$collision_pt = explode("\n", $hashtest['HashTest']['collision_pt']);
+						$collision_md = explode("\n", $hashtest['HashTest']['collision_md']);
+						$collision_index = explode(" ", $hashtest['HashTest']['collision_index']);
 
 						echo '<tr>';
 
@@ -102,7 +102,7 @@
 
 							echo '<td>';
 								echo '<b>';
-								echo $output[0]['HashResult']['hash_algorithm_name'];
+								echo $hashalgorithm[0]['HashAlgorithm']['name'];
 								echo '</b>';
 								echo '<b> Message Digest</b>';
 							echo '</td>';
@@ -153,11 +153,11 @@
 						echo '<b>Algorithm</b>';
 					echo '</td>';
 
-					foreach($output as $key => $data) {
+					foreach($hashalgorithm as $key => $data) {
 						
 						echo '<td>';
 							echo '<b>';
-							echo $data['HashResult']['hash_algorithm_name'];
+							echo $data['HashAlgorithm']['name'];
 							echo '</b>';
 						echo '</td>';
 
@@ -171,10 +171,10 @@
 						echo 'Output Length(bits)';
 					echo '</td>';
 					
-					foreach($output as $key => $data) {
+					foreach($hashalgorithm as $key => $data) {
 
 						echo '<td>';
-							echo $data['HashResult']['output_length'];
+							echo $data['HashAlgorithm']['output_length'];
 						echo '</td>';
 
 					}
@@ -187,10 +187,10 @@
 						echo 'Speed(MB/s)';
 					echo '</td>';
 					
-					foreach($output as $key => $data) {
+					foreach($hashalgorithm as $key => $data) {
 
 						echo '<td>';
-							echo $data['HashResult']['speed'];
+							echo $data['HashAlgorithm']['speed'];
 						echo '</td>';
 
 					}
@@ -203,10 +203,10 @@
 						echo 'Collision Resistence';
 					echo '</td>';
 					
-					foreach($output as $key => $data) {
+					foreach($hashalgorithm as $key => $data) {
 
 						echo '<td>';
-							echo $data['HashResult']['collision_resistance'];
+							echo $data['HashAlgorithm']['collision_resistance'];
 						echo '</td>';
 
 					}
@@ -219,10 +219,10 @@
 						echo 'Preimage Resistence';
 					echo '</td>';
 					
-					foreach($output as $key => $data) {
+					foreach($hashalgorithm as $key => $data) {
 
 						echo '<td>';
-							echo $data['HashResult']['preimage_resistance'];
+							echo $data['HashAlgorithm']['preimage_resistance'];
 						echo '</td>';
 
 					}
@@ -235,10 +235,10 @@
 						echo '2nd Preimage Resistence';
 					echo '</td>';
 					
-					foreach($output as $key => $data) {
+					foreach($hashalgorithm as $key => $data) {
 
 						echo '<td>';
-							echo $data['HashResult']['2nd_preimage_resistance'];
+							echo $data['HashAlgorithm']['2nd_preimage_resistance'];
 						echo '</td>';
 
 					}
@@ -251,10 +251,10 @@
 						echo 'Collision Best Known Attack';
 					echo '</td>';
 					
-					foreach($output as $key => $data) {
+					foreach($hashalgorithm as $key => $data) {
 
 						echo '<td>';
-							echo $data['HashResult']['collision_bka'];
+							echo $data['HashAlgorithm']['collision_bka'];
 						echo '</td>';
 
 					}
@@ -267,10 +267,10 @@
 						echo 'Preimage Best Known Attack';
 					echo '</td>';
 					
-					foreach($output as $key => $data) {
+					foreach($hashalgorithm as $key => $data) {
 
 						echo '<td>';
-							echo $data['HashResult']['preimage_bka'];
+							echo $data['HashAlgorithm']['preimage_bka'];
 						echo '</td>';
 
 					}
@@ -283,10 +283,10 @@
 						echo '2nd Preimage Best Known Attack';
 					echo '</td>';
 					
-					foreach($output as $key => $data) {
+					foreach($hashalgorithm as $key => $data) {
 
 						echo '<td>';
-							echo $data['HashResult']['2nd_preimage_bka'];
+							echo $data['HashAlgorithm']['2nd_preimage_bka'];
 						echo '</td>';
 
 					}
@@ -295,12 +295,11 @@
 
 			echo '</table>';
 
-			$last = end($output);
-
 			echo '<b>Recommended Hash Function:</b>';
 			echo '<br/>';
-			echo $last['HashResult']['recommendation'];
+			echo $hashtest['HashTest']['recommendation'];
 
+		}
 		?>
 	
 		<div class="modal-footer">
@@ -335,14 +334,6 @@
 			</div>
 
 		</div>	
-
-		<?php
-
-			}else {
-				echo 'Hash results will be email to you shortly after computation is done.';
-			}
-
-		?>
 
 	</div>
 

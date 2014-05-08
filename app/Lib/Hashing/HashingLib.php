@@ -17,6 +17,7 @@ class HashingLib {
 		$ptline = explode("\n",$output[0]['HashResult']['plaintext']);
 
 		$dup = HashingLib::checkDuplicatesInArray($mdline);
+		$collisionCount = count($dup);
 
 		foreach($output as $key => $hashResult) {
 			$conditions = array(
@@ -25,26 +26,31 @@ class HashingLib {
 			);
 			$result = $hashResultModel->find('first', $conditions);
 
-			$hashResult['HashResult']['collision_index'] = $dup;
+			$hashResult['HashResult']['collision_pt'] = '';
+			$hashResult['HashResult']['collision_md'] = '';
+			$hashResult['HashResult']['collision_index'] = '';
 
-			$collision_pt = array();
-			$collision_md = array();
-			$collision = '';
 			if($dup != FALSE) {
+				$hashResult['HashResult']['collision_count'] = $collisionCount;
 				foreach($dup as $key => $num) {
-					array_push($collision_pt,$ptline[$num]);
-				 	array_push($collision_md,$mdline[$num]);
-				 	$collision .= $ptline[$num] . " " . $mdline[$num] . "\n";
-				}
-			}
 
-			if($dup != FALSE) {
-				$hashResult['HashResult']['description'] = 'There is collision detected at: ' . "\n";
-				$hashResult['HashResult']['collision_pt'] = $collision_pt;
-				$hashResult['HashResult']['collision_md'] = $collision_md;
-				$hashResult['HashResult']['collision'] = $collision;
+					$hashResult['HashResult']['description'] = 'There is collision detected at: ' . "\n";
+					if(empty($hashResult['HashResult']['collision_pt'])) {
+						$hashResult['HashResult']['collision_pt'] = $ptline[$num];	
+					} else {
+						$hashResult['HashResult']['collision_pt'] .= "\n" . $ptline[$num];
+					}
+
+					if(empty($hashResult['HashResult']['collision_md'])) {
+						$hashResult['HashResult']['collision_md'] = $mdline[$num];	
+					} else {
+						$hashResult['HashResult']['collision_md'] .= "\n" . $mdline[$num];
+					}
+						$hashResult['HashResult']['collision_index'] .= $num . " ";
+
+				}
 			} elseif ($dup == FALSE) {
-				$hashResult['HashResult']['collision'] = $collision;
+				$hashResult['HashResult']['collision_count'] = 0;
 				$hashResult['HashResult']['description'] = 'No collision detected';
 			}
 
@@ -84,15 +90,9 @@ class HashingLib {
 			}
 
 			$hashResult['HashResult']['recommendation'] = $recommendAlgo;
-			//if(!empty($result['HashResult']['id'])) {
-			//	$hashResult['HashResult']['analysis'] = 'This input is a very common hash value for the algorithm: '. $hashResult['HashResult']['hash_algorithm_name'];
-			//} else {
-			//	$hashResult['HashResult']['analysis'] = 'This is not a common hash value for algorithm: '. $hashResult['HashResult']['hash_algorithm_name'];
-			//}
 			array_push($analysis, $hashResult);
 		}
 		
-		//$this->log($analysis);
 		return $analysis;
 	}
 

@@ -25,15 +25,33 @@ class HashTest extends AppModel {
  * This is to save test results 
  * @param array $data in the format $data[n]['HashResult']['field']
  */
-	public function saveTestResults($data, $description = 'Basic Hashing') {
+	public function saveTestResults($data, $outputResult = 'Basic Hashing') {
 		$hashResultModel = ClassRegistry::init('HashResult');
+
+		if($outputResult != 'Basic Hashing') {
+		$last = end($outputResult);
+		
 
 		$analysis = array(
 			'HashTest' => array(
-				'analysis' => $description,
+				'analysis' => $last['HashResult']['description'],
+				'user_id' => $this->_getuser('id'),
+				'recommendation' => $last['HashResult']['recommendation'],
+				'collision_pt' => $last['HashResult']['collision_pt'],
+				'collision_md' => $last['HashResult']['collision_md'],
+				'collision_index' => $last['HashResult']['collision_index'],
+				'collision_count' => $last['HashResult']['collision_count']
+			),
+		);
+
+		} else {
+			$analysis = array(
+			'HashTest' => array(
+				'analysis' => $outputResult,
 				'user_id' => $this->_getuser('id')
 			),
 		);
+		}
 
 		try{
 			$this->create();

@@ -225,7 +225,8 @@ class HashTestsController extends AppController {
 			}
 
 			// THEN this execute following...
-			$this->HashTest->saveTestResults($output, $outputResult[0]['HashResult']['description'].$outputResult[0]['HashResult']['collision']);
+			$this->log($outputResult);
+			$this->HashTest->saveTestResults($output, $outputResult);
 			$this->Session->write('output', $outputResult);
 			$this->redirect(array('controller' => 'HashResults', 'action' => 'compute_and_compare_result'));
 		}
@@ -614,4 +615,61 @@ class HashTestsController extends AppController {
 		}	
 	}
 
+	public function show_test_results() {
+		$this->HashTest->recursive = 0;
+		$this->Paginator->settings = array(
+			'conditions' => array('HashTest.user_id' => $this->Auth->user('id')
+			)
+		);
+		$this->set('hashtests', $this->Paginator->paginate());
+
+	}
+
+	public function view($id = null) {
+		if (!$this->HashTest->exists($id)) {
+			throw new NotFoundException(__('Invalid hash result'));
+		}
+		$options = array(
+			'conditions' => array(
+				'HashTest.' . $this->HashTest->primaryKey => $id)
+			);
+		$this->set('hashtest', $this->HashTest->find('first', $options));
+
+		$hashResultModel = ClassRegistry::init('HashResult');
+
+		$options1 = array(
+				'conditions' => array(
+					'HashResult.hash_test_id' => $id
+					),
+				);
+
+		$searchHashResult = $hashResultModel->find('all', $options1);
+		$this->Set('hashresult', $searchHashResult);
+		//$this->log($searchHashResult);
+
+		$hashAlgorithmModel = ClassRegistry::init("HashAlgorithm");
+
+		$searchResultAlgo = array();
+
+		foreach($searchHashResult as $key => $hashResult) {
+
+		$options2 = array(
+				'conditions' => array(
+					'HashAlgorithm.id' => $hashResult['HashResult']['hash_algorithm_id']
+					),
+				);
+
+		$searchAlgo = array();
+		$searchAlgo = $hashAlgorithmModel->find('first', $options2);
+		$this->log($searchAlgo);
+
+		array_push($searchResultAlgo, $searchAlgo);
+		}
+
+		$this->Set('hashalgorithm', $searchResultAlgo);
+
+		//$this->log($searchResultAlgo);
+	}
+
 }
+
