@@ -111,7 +111,7 @@ class QuestionnairesController extends AppController {
         }
 
 		$result = $this->Questionnaire->find('all');
-		$rand_keys = array_rand($result, 3);
+		$rand_keys = array_rand($result, 5);
 		$questions = array();
 		$answers = array();
 

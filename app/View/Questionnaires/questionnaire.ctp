@@ -55,14 +55,16 @@
 		var radio0 = document.getElementsByName("0");
 	    var radio1 = document.getElementsByName("1");
 	    var radio2 = document.getElementsByName("2");
-	    var radios = [radio0, radio1, radio2];
+	    var radio3 = document.getElementsByName("3");
+	    var radio4 = document.getElementsByName("4");
+	    var radios = [radio0, radio1, radio2, radio3, radio4];
 
 	    var notAnswered = new Array();
 	    var rowValid = false;
 	    var formValid = true;
 
 
-	    for(var i = 0; i < 3; i++){
+	    for(var i = 0; i < radios.length; i++){
 	    	for (var j = 0; j < radios[i].length; j++){
 	    		if (radios[i][j].checked) rowValid = true;
 	    	}
