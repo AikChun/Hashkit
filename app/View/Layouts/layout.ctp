@@ -12,7 +12,8 @@
 	  		echo $this->Html->script('bootstrap.js');
 	  		echo $this->Html->script('slidebars.js');
 
-			echo $this->Html->css(array('bootstrap','styles','slidebars'));
+			// echo $this->Html->css(array('bootstrap','styles','slidebars'));
+			echo $this->Html->css(array('bootstrap','styles'));
 			echo $this->fetch('script');
 			echo $this->fetch('meta');
 			echo $this->fetch('css');

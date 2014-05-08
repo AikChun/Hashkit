@@ -119,13 +119,13 @@
 
 		<div class="pull-right">
 			
-			<div class="col-lg-5 pull-right">		
+			<div class="col-lg-5.5 pull-right">		
 
 				<a href="/" class="btn btn-default">Cancel</a>
 			
 			</div>
 
-			<div class="col-lg-6 pull-right">
+			<div class="col-lg-7 pull-right">
 
 				<?php
 
