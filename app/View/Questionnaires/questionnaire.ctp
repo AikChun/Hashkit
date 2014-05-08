@@ -78,7 +78,9 @@
 
 			for(var i = 0; i < notAnswered.length; i++){
 		    	notAnsweredString = notAnsweredString.concat(++notAnswered[i]);
-		    	notAnsweredString = notAnsweredString.concat(" ");
+		    	if (i != (notAnswered.length -1)){
+		    		notAnsweredString = notAnsweredString.concat(", ");
+		    	}
 		    }
 		    
 		    alert("Please answer " + notAnsweredString);
