@@ -240,7 +240,7 @@ class HashTestsController extends AppController {
 		$output = $this->HashTest->computeDigests($selectedAlgorithms, $text);
 		$outputResult = HashingLib::compareDigests($output);
 		//$this->HashTest->sendResults();
-		$this->HashTest->saveTestResults($output, $outputResult)
+		$this->HashTest->saveTestResults($output, $outputResult);
 		//$this->start_queue_compute($selectedAlgorithms,$text);
 
 	}
