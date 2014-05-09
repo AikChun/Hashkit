@@ -35,7 +35,7 @@ class HashTest extends AppModel {
 			$analysis = array(
 				'HashTest' => array(
 					'analysis' => $last['HashResult']['description'],
-					'user_id' => $data['user_id'],
+					'user_id' => $this->_getUser('id'),
 					'recommendation' => $last['HashResult']['recommendation'],
 					'collision_pt' => $last['HashResult']['collision_pt'],
 					'collision_md' => $last['HashResult']['collision_md'],
@@ -48,7 +48,7 @@ class HashTest extends AppModel {
 			$analysis = array(
 			'HashTest' => array(
 				'analysis' => $outputResult,
-				'user_id' => $data['user_id']
+				'user_id' => $this->_getUser('id')
 			),
 		);
 		}
@@ -136,7 +136,6 @@ class HashTest extends AppModel {
 			}
 			
 		}
-		$output['user_id'] = $this->_getUser('id');
 		return $output;
 	}
 
