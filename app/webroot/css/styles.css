@@ -2,14 +2,19 @@ body {
 	margin-bottom: 80px;
 }
 
+#flash_alert {
+	margin-top: 50px;
+	margin-bottom: 0px;
+}
+
 .navbar .nav .active > a, .navbar .nav .active > a:hover {
 	background-color:  #242222;
 }
 
 .jumbotron {
-	background-color: #eeeeee;
-	padding-top: 0px;
 	margin-top: 80px;
+	padding-top: 0px;
+	padding-bottom: 0px;
 }
 
 .error {
@@ -82,11 +87,6 @@ div.nowrap{
 	height: auto !important;
 	height: 100%;
 	padding-top:100px;
-}
-
-html,body {
-	height:100%;
-    background:center no-repeat;
 }
 
 .scroll-top {

@@ -28,8 +28,6 @@
 		
 		<div class="modal-footer">
 
-		</div>
-
 		<?php
 
 				$basic_hasing_next = array(
@@ -40,6 +38,8 @@
 				echo $this->Form->end($basic_hasing_next);
 
 		?>
+
+		</div>
 
 	</div>
 		

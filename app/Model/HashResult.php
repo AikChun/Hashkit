@@ -9,7 +9,7 @@ class HashResult extends AppModel {
 	public $belongsTo = array(
 		'HashTest' => array(
 			'className' => 'HashTest',
-			'foreignKey' => 'hash_tests_id'
+			'foreignKey' => 'hash_test_id'
 		)
 	);
 

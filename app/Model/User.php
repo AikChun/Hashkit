@@ -66,8 +66,6 @@ class User extends AppModel {
 
 	public function beforeDelete($cascade = true) {
 		$conditions = array('HashTest.user_id' => $this->id);
-		$this->log('Logging id');
-		$this->log($this->id);
 		$this->HashTest->deleteAll($conditions);
 		return true;
 	}

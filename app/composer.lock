@@ -3,7 +3,9 @@
         "This file locks the dependencies of your project to a known state",
         "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file"
     ],
+
     "hash": "dbef02a481f78fc447f56fb4d02f6e20",
+
     "packages": [
         {
             "name": "ceeram/clear_cache",
@@ -76,7 +78,7 @@
                 {
                     "name": "Kyle Robinson Young",
                     "email": "kyle@dontkry.com",
-                    "homepage": "https://github.com/shama",
+                    "homepage": "http://dontkry.com",
                     "role": "Developer"
                 }
             ],

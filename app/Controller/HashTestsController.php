@@ -240,9 +240,23 @@ class HashTestsController extends AppController {
 		$output = $this->HashTest->computeDigests($selectedAlgorithms, $text);
 		$outputResult = HashingLib::compareDigests($output);
 		//$this->HashTest->sendResults();
-		$this->HashTest->saveTestResults($output, $outputResult)
+		$this->HashTest->saveTestResults($output, $outputResult);
 		//$this->start_queue_compute($selectedAlgorithms,$text);
 
+	}
+
+	public function delete($id = null) {
+		$this->HashTest->id = $id;
+		if (!$this->HashTest->exists()) {
+			throw new NotFoundException(__('Invalid hash result'));
+		}
+		$this->request->onlyAllow('post', 'delete');
+		if ($this->HashTest->delete()) {
+			$this->Session->setFlash(__('The hash result has been deleted.'));
+		} else {
+			$this->Session->setFlash(__('The hash result could not be deleted. Please, try again.'));
+		}
+		return $this->redirect(array('action' => 'show_test_results'));
 	}
 
 	/*
@@ -262,6 +276,13 @@ class HashTestsController extends AppController {
  *
  */
 	public function reverse_look_up() {
+		if($this->request->is('post')) {
+			$data = $this->request->data['HashTests'];
+			$result = $this->HashTest->matchPlaintextWithMessageDigest($data);
+			$this->Session->write('reverseData', $result );
+			return $this->redirect('/HashResults/reverse_look_up_result');
+		}
+
 		$hashAlgorithmModel = ClassRegistry::init('HashAlgorithm');
 		$searchResult = $hashAlgorithmModel->find('all', array('fields' => array('HashAlgorithm.name')));
 		$preparedData = Hash::extract($searchResult, '{n}.HashAlgorithm.name');
@@ -272,12 +293,6 @@ class HashTestsController extends AppController {
 
 		$this->set('data', $data);
 
-		if($this->request->is('post')) {
-			$data = $this->request->data['HashTests'];
-			$result = HashingLib::matchPlaintextWithMessageDigest($data);
-			$this->Session->write('reverseData', $result );
-			$this->redirect('/HashResults/reverse_look_up_result');
-		}
 	}
 
 /**
@@ -628,7 +643,7 @@ class HashTestsController extends AppController {
         				$birthdayattackresult = $this->generate_array_and_compare(384, $information['HashAlgorithmV1']['name']);	
         				break;
         		default;
-        				$this->Session->setFlash("please choose a hash algorithm");
+        				$this->Session->setFlash('please choose a hash algorithm', 'alert-box', array('class'=>'alert-danger'));
 						$this->redirect(array('action' => 'birthday_attack'));
     					break;
 			}

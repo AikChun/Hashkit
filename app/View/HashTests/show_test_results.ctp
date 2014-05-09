@@ -43,8 +43,6 @@
 							echo '<td>';
 								echo $this->Html->link(__('View'), array('action' => 'view', $hashtest['HashTest']['id']));
 								echo ' | ';
-								echo $this->Html->link(__('Edit'), array('action' => 'edit', $hashtest['HashTest']['id']));
-								echo ' | ';
 								echo $this->Form->postLink(__('Delete'), array('action' => 'delete', $hashtest['HashTest']['id']), null, __('Are you sure you want to delete # %s?', $hashtest['HashTest']['id']));
 							echo '</td>';
 
