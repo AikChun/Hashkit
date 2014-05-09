@@ -240,7 +240,7 @@ class HashTestsController extends AppController {
 		$output = $this->HashTest->computeDigests($selectedAlgorithms, $text);
 		$outputResult = HashingLib::compareDigests($output);
 		//$this->HashTest->sendResults();
-		$this->HashTest->saveTestResults($output, $outputResult)
+		$this->HashTest->saveTestResults($output, $outputResult);
 		//$this->start_queue_compute($selectedAlgorithms,$text);
 
 	}
@@ -628,7 +628,7 @@ class HashTestsController extends AppController {
         				$birthdayattackresult = $this->generate_array_and_compare(384, $information['HashAlgorithmV1']['name']);	
         				break;
         		default;
-        				$this->Session->setFlash("please choose a hash algorithm");
+        				$this->Session->setFlash('please choose a hash algorithm', 'alert-box', array('class'=>'alert-danger'));
 						$this->redirect(array('action' => 'birthday_attack'));
     					break;
 			}
