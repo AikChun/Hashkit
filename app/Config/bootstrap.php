@@ -108,3 +108,11 @@ CakeLog::config('error', array(
 if (file_exists(APP . DS . 'Config' . DS . 'constants.php')) {
     require_once(APP . DS . 'Config' . DS . 'constants.php');
  }
+
+/**
+*
+* autoload.php file for composer installed vendors
+**/
+if (file_exists(APP . DS . 'Vendor' . DS . 'autoload.php')) {
+	require_once (APP . DS . 'Vendor' . DS . 'autoload.php');
+}

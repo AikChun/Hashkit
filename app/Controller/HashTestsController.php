@@ -275,7 +275,6 @@ class HashTestsController extends AppController {
 		if($this->request->is('post')) {
 			$data = $this->request->data['HashTests'];
 			$result = HashingLib::matchPlaintextWithMessageDigest($data);
-			$this->log($result);
 			$this->Session->write('reverseData', $result );
 			$this->redirect('/HashResults/reverse_look_up_result');
 		}

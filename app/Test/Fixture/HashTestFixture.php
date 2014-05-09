@@ -1,9 +1,9 @@
 <?php
 /**
- * GroupFixture
+ * HashTestFixture
  *
  */
-class GroupFixture extends CakeTestFixture {
+class HashTestFixture extends CakeTestFixture {
 
 /**
  * Fields
@@ -12,7 +12,8 @@ class GroupFixture extends CakeTestFixture {
  */
 	public $fields = array(
 		'id' => array('type' => 'integer', 'null' => false, 'default' => null, 'length' => 10, 'key' => 'primary'),
-		'name' => array('type' => 'string', 'null' => false, 'default' => null, 'length' => 20, 'collate' => 'utf8_general_ci', 'charset' => 'utf8'),
+		'analysis' => array('type' => 'text', 'null' => false, 'default' => null, 'collate' => 'utf8_general_ci', 'charset' => 'utf8'),
+		'user_id' => array('type' => 'integer', 'null' => false, 'default' => null),
 		'created' => array('type' => 'datetime', 'null' => false, 'default' => null),
 		'modified' => array('type' => 'datetime', 'null' => false, 'default' => null),
 		'indexes' => array(
@@ -29,21 +30,19 @@ class GroupFixture extends CakeTestFixture {
 	public $records = array(
 		array(
 			'id' => '1',
-			'name' => 'Administrators',
-			'created' => '0000-00-00 00:00:00',
-			'modified' => '0000-00-00 00:00:00'
+			'analysis' => 'There is collision detected at: 
+',
+			'user_id' => '10',
+			'created' => '2014-05-08 18:16:21',
+			'modified' => '2014-05-08 18:16:21'
 		),
 		array(
 			'id' => '2',
-			'name' => 'App_Admins',
-			'created' => '0000-00-00 00:00:00',
-			'modified' => '0000-00-00 00:00:00'
-		),
-		array(
-			'id' => '3',
-			'name' => 'App_Users',
-			'created' => '0000-00-00 00:00:00',
-			'modified' => '0000-00-00 00:00:00'
+			'analysis' => 'There is collision detected at: 
+',
+			'user_id' => '10',
+			'created' => '2014-05-08 18:22:20',
+			'modified' => '2014-05-08 18:22:20'
 		),
 	);
 

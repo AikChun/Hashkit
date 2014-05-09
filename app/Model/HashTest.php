@@ -29,26 +29,26 @@ class HashTest extends AppModel {
 		$hashResultModel = ClassRegistry::init('HashResult');
 
 		if($outputResult != 'Basic Hashing') {
-		$last = end($outputResult);
+			$last = end($outputResult);
 		
 
-		$analysis = array(
-			'HashTest' => array(
-				'analysis' => $last['HashResult']['description'],
-				'user_id' => $this->_getuser('id'),
-				'recommendation' => $last['HashResult']['recommendation'],
-				'collision_pt' => $last['HashResult']['collision_pt'],
-				'collision_md' => $last['HashResult']['collision_md'],
-				'collision_index' => $last['HashResult']['collision_index'],
-				'collision_count' => $last['HashResult']['collision_count']
-			),
-		);
+			$analysis = array(
+				'HashTest' => array(
+					'analysis' => $last['HashResult']['description'],
+					'user_id' => $this->_getUser('id'),
+					'recommendation' => $last['HashResult']['recommendation'],
+					'collision_pt' => $last['HashResult']['collision_pt'],
+					'collision_md' => $last['HashResult']['collision_md'],
+					'collision_index' => $last['HashResult']['collision_index'],
+					'collision_count' => $last['HashResult']['collision_count']
+				),
+			);
 
 		} else {
 			$analysis = array(
 			'HashTest' => array(
 				'analysis' => $outputResult,
-				'user_id' => $this->_getuser('id')
+				'user_id' => $this->_getUser('id')
 			),
 		);
 		}
