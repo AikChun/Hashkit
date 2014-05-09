@@ -225,7 +225,6 @@ class HashTestsController extends AppController {
 			}
 
 			// THEN this execute following...
-			$this->log($outputResult);
 			$this->HashTest->saveTestResults($output, $outputResult);
 			$this->Session->write('output', $outputResult);
 			$this->redirect(array('controller' => 'HashResults', 'action' => 'compute_and_compare_result'));
@@ -250,7 +249,6 @@ class HashTestsController extends AppController {
 		if($this->request->is('post')) {
 			$data = $this->request->data['HashTests'];
 			$result = HashingLib::matchPlaintextWithMessageDigest($data);
-			$this->log($result);
 			$this->Session->write('reverseData', $result );
 			$this->redirect('/HashResults/reverse_look_up_result');
 		}

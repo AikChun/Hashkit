@@ -28,64 +28,22 @@ class DictionaryFixture extends CakeTestFixture {
  */
 	public $records = array(
 		array(
-			'id' => 1,
-			'plaintext' => 'Lorem ipsum dolor sit amet',
-			'SHA1' => 'Lorem ipsum dolor sit amet',
-			'MD5' => 'Lorem ipsum dolor sit amet'
+			'id' => '1',
+			'plaintext' => 'Hello There',
+			'SHA1' => '546e25453a78ef2cee079187fd65bfa2495c2ec7',
+			'MD5' => '32b170d923b654360f351267bf440045'
 		),
 		array(
-			'id' => 2,
-			'plaintext' => 'Lorem ipsum dolor sit amet',
-			'SHA1' => 'Lorem ipsum dolor sit amet',
-			'MD5' => 'Lorem ipsum dolor sit amet'
+			'id' => '2',
+			'plaintext' => 'Good bye',
+			'SHA1' => '6a7641a6610b62fd8111babe5963cbb949871747',
+			'MD5' => 'fc9516d5dfcd680ef15f087041155fe8'
 		),
 		array(
-			'id' => 3,
-			'plaintext' => 'Lorem ipsum dolor sit amet',
-			'SHA1' => 'Lorem ipsum dolor sit amet',
-			'MD5' => 'Lorem ipsum dolor sit amet'
-		),
-		array(
-			'id' => 4,
-			'plaintext' => 'Lorem ipsum dolor sit amet',
-			'SHA1' => 'Lorem ipsum dolor sit amet',
-			'MD5' => 'Lorem ipsum dolor sit amet'
-		),
-		array(
-			'id' => 5,
-			'plaintext' => 'Lorem ipsum dolor sit amet',
-			'SHA1' => 'Lorem ipsum dolor sit amet',
-			'MD5' => 'Lorem ipsum dolor sit amet'
-		),
-		array(
-			'id' => 6,
-			'plaintext' => 'Lorem ipsum dolor sit amet',
-			'SHA1' => 'Lorem ipsum dolor sit amet',
-			'MD5' => 'Lorem ipsum dolor sit amet'
-		),
-		array(
-			'id' => 7,
-			'plaintext' => 'Lorem ipsum dolor sit amet',
-			'SHA1' => 'Lorem ipsum dolor sit amet',
-			'MD5' => 'Lorem ipsum dolor sit amet'
-		),
-		array(
-			'id' => 8,
-			'plaintext' => 'Lorem ipsum dolor sit amet',
-			'SHA1' => 'Lorem ipsum dolor sit amet',
-			'MD5' => 'Lorem ipsum dolor sit amet'
-		),
-		array(
-			'id' => 9,
-			'plaintext' => 'Lorem ipsum dolor sit amet',
-			'SHA1' => 'Lorem ipsum dolor sit amet',
-			'MD5' => 'Lorem ipsum dolor sit amet'
-		),
-		array(
-			'id' => 10,
-			'plaintext' => 'Lorem ipsum dolor sit amet',
-			'SHA1' => 'Lorem ipsum dolor sit amet',
-			'MD5' => 'Lorem ipsum dolor sit amet'
+			'id' => '3',
+			'plaintext' => 'Scarified',
+			'SHA1' => '8a0979fdf5afda41cda40a5e9559a1cf19866178',
+			'MD5' => '7fafbfc50032f66abf91935fd50c95cb'
 		),
 	);
 
