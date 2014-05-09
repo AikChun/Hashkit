@@ -13,7 +13,7 @@
       <div class="container">
         <div class="carousel-caption">
           <!-- <h1>HashKit</h1> -->
-          <img src="/img/logo.jpg">
+          <img src="/img/hash_logo.png">
           <?php if($authUser):?>
           <h3>You are a click away to learn about hash functions and to start, press the any button below:</h3>
 
