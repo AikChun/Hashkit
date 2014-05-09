@@ -1,21 +1,22 @@
 <div class="wrapper">
-    <div class="box">
+
         <div class="row row-offcanvas row-offcanvas-left">
             <!-- sidebar -->
-            <div class="column col-sm-2 col-xs-1 sidebar-offcanvas" id="sidebar">
+            <div class="column col-sm-2 col-xs-1 sidebar-offcanvas" id="sidebar" style="background-color: #242222; margin-top: 50px;">
                 <ul class="nav navbar-inverse">
                     <li><a href="#" data-toggle="offcanvas" class="visible-xs text-center"><i class="glyphicon glyphicon-chevron-right"></i></a>
                     </li>
                 </ul>
-                <ul class="nav navbar-inverse hidden-xs" id="lg-menu">
+                <ul class="nav navbar-inverse hidden-xs" id="lg-menu" style="margin-left: 5px">
                     <li class="active"><a href="#sec0" class=""><i class="glyphicon glyphicon-list-alt"></i> Introduction</a>
                     </li>
                     <li><a href="#sec1" class=""><i class="glyphicon glyphicon-list"></i> Types of Hash functions</a>
                     </li>
                     <li><a href="#sec2" class=""><i class="glyphicon glyphicon-paperclip"></i> List of Hash functions</a>
                     </li>
+
                     <li class="dropdown"> <a href="" class="dropdown-toggle" data-toggle="dropdown"><i class="glyphicon glyphicon-refresh"></i>Uses for Hash functions<b class="caret"></b></a>
-                          <ul class="dropdown-menu">
+                          <ul class="dropdown-menu" style="background-color: #242222;">
                             <li><a href="#verifyfileintegrity">Verify file integrity</a></li>
                             <li><a href="#hashingpasswords">Hashing passwords</a></li>
                             <li><a href="#encryptionalgorithm">Encryption algorithm</a></li>
@@ -23,28 +24,11 @@
                             <li><a href="#digitalsignature">Digital signature</a></li>
                           </ul>
                     </li> <!--end of dropdown -->
+
                     <li><a href="#sec4" class=""><i class="glyphicon glyphicon-wrench"></i> Hash functions' properties</a>
                     </li>
                      <li><a href="#sec5" class=""><i class="glyphicon glyphicon-globe"></i> Attacks on Hash functions</a>
                     </li>
-                    <li><a href="" class=""></a></li>
-                    <li><a href="" class=""></a></li>
-                    <li><a href="" class=""></a></li>
-                    <li><a href="" class=""></a></li>
-                    <li><a href="" class=""></a></li>
-                    <li><a href="" class=""></a></li>
-                    <li><a href="" class=""></a></li>
-                    <li><a href="" class=""></a></li>
-                    <li><a href="" class=""></a></li>
-                    <li><a href="" class=""></a></li>
-                    <li><a href="" class=""></a></li>
-                    <li><a href="" class=""></a></li>
-                    <li><a href="" class=""></a></li>
-                    <li><a href="" class=""></a></li>
-                    <li><a href="" class=""></a></li>
-                    <li><a href="" class=""></a></li>
-                    <li><a href="" class=""></a></li>
-
                 </ul>
                 <!-- tiny only nav-->
                 <ul class="nav navbar-inverse visible-xs" id="xs-menu">
@@ -271,7 +255,7 @@
                 </div>
             </div>
             <!-- /main -->
-        </div>
+
     </div>
 </div>
 <script type="text/javascript">
