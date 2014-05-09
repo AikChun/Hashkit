@@ -1,26 +1,3 @@
-
-<!-- <div class="">
-    <nav>  
-      <ul class="">
-        <li><a href="#sec0">Introduction</a></li>
-        <li><a href="#sec1">Types of Hash functions</a></li>
-        <li><a href="#sec2">List of Hash functions</a></li>
-        <li class="dropdown"><i class="glyphicon glyphicon-refresh"></i>
-            <a href="" class="dropdown-toggle" data-toggle="dropdown">Uses for Hash functions<b class="caret"></b></a>
-              <ul class="dropdown-menu">
-                <li><a href="#verifyfileintegrity">Verify file integrity</a></li>
-                <li><a href="#hashingpasswords">Hashing passwords</a></li>
-                <li><a href="#encryptionalgorithm">Encryption algorithm</a></li>
-                <li><a href="#softwareprotection">Software protection</a></li>
-                <li><a href="#digitalsignature">Digital signature</a></li>
-              </ul>
-        </li>
-        <li><a href="#sec4">Hash functions' properties</a></li>
-        <li><a href="#sec5">Attacks on Hash functions</a></li>
-    </ul>
-    </nav>
-</div> -->
-
 <div class="wrapper">
     <div class="box">
         <div class="row row-offcanvas row-offcanvas-left">
@@ -50,6 +27,23 @@
                     </li>
                      <li><a href="#sec5" class=""><i class="glyphicon glyphicon-globe"></i> Attacks on Hash functions</a>
                     </li>
+                    <li><a href="" class=""></a></li>
+                    <li><a href="" class=""></a></li>
+                    <li><a href="" class=""></a></li>
+                    <li><a href="" class=""></a></li>
+                    <li><a href="" class=""></a></li>
+                    <li><a href="" class=""></a></li>
+                    <li><a href="" class=""></a></li>
+                    <li><a href="" class=""></a></li>
+                    <li><a href="" class=""></a></li>
+                    <li><a href="" class=""></a></li>
+                    <li><a href="" class=""></a></li>
+                    <li><a href="" class=""></a></li>
+                    <li><a href="" class=""></a></li>
+                    <li><a href="" class=""></a></li>
+                    <li><a href="" class=""></a></li>
+                    <li><a href="" class=""></a></li>
+                    <li><a href="" class=""></a></li>
 
                 </ul>
                 <!-- tiny only nav-->
@@ -62,18 +56,22 @@
                     </li>
                     <li><a href="#sec3" class="text-center"><i class="glyphicon glyphicon-refresh"></i></a>
                     </li>
+                    <li><a href="#sec4" class="text-center"><i class="glyphicon glyphicon-wrench"></i></a>
+                    </li>
+                    <li><a href="#sec5" class="text-center"><i class="glyphicon glyphicon-globe"></i></a>
+                    </li>
                 </ul>
             </div>
             <!-- /sidebar -->
             <!-- main right col -->
             <div class="column col-sm-10 col-xs-11 " id="main">
-                    <div class=" col-sm-10 col-xs-11">
+                    <div class=" col-sm-10 col-xs-11 g hashinformation">
                       <h2 id="sec0" contenteditable="false">Introduction</h2>
                       <h3 class="">What is a Hash function ?</h3>
                       <p class="edit_area">A hash function takes in any length of data such as characters and maps them to a fixed length of arbitrary hash value.</p> 
                       <hr class="">
                         <h3 class="">What about Crytographic Hash function ?</h3>
-                        <p class="edit_area">Despite of having the same functionality as a hash function, it has additional properties such one-way which provides better security. It is usually associated with generating a message digest (sometimes called a checksum) which is normally shorter than the original data. For a message digest function to be crypotgraphically secure, it must be computationally infeasible to get back the original message by using the message digest and impossible to find two different messages with the same message digest. It is designed to be easily computable and has to achieve certain security properties, e.g: preimage resistance, second preimage resistance and collision resistance.<p>
+                        <p class="edit_area">Despite of having the same functionality as a hash function, it has additional properties such one-way which provides better security. It is usually associated with generating a message digest (sometimes called a checksum) which is normally shorter than the original data. For a message digest function to be cryptographically secure, it must be computationally infeasible to get back the original message by using the message digest and impossible to find two different messages with the same message digest. It is designed to be easily computable and has to achieve certain security properties, e.g: preimage resistance, second preimage resistance and collision resistance.<p>
                         <br>
                         Example of a MD5 function to perform on a message :
                         <br>
@@ -138,6 +136,14 @@
                       </p>
                       <hr class="">
                       <h2 id="sec2">List of Hash functions</h2>
+                      <p>In this section, it talks about the commonly used families of hash functions and their attributes.</p>
+                      <b>
+                      <h4>MD2/MD4/MD5 family</h4>
+                      <br>
+                      <h4>SHA1/SHA2 family</h4>
+                      <br>
+                      <h4>HAVAL family</h4>
+                      <br>
                       <hr class="">
                       <h2 id="sec3">Uses for Hash functions</h2>
                       <p>Today with the accessibility of lots of resources, nearly every application are integrating hash functions in their products due to their security reasons like to protect against alteration and unwanted attacks.</p> 
@@ -277,4 +283,6 @@
       $('#xs-menu').toggleClass('visible-xs').toggleClass('hidden-xs');
       $('#btnShow').toggle();
   });
+
+    
 </script>
