@@ -80,10 +80,10 @@ class UsersController extends AppController {
 		if ($this->request->is('post')) {
 			$this->User->create();
 			if ($this->User->save($this->request->data)) {
-				$this->Session->setFlash(__('The user has been saved.'));
+				$this->Session->setFlash(__('The user has been saved.', 'alert-box'));
 				return $this->redirect(array('action' => 'index'));
 			} else {
-				$this->Session->setFlash(__('The user could not be saved. Please, try again.'));
+				$this->Session->setFlash(__('The user could not be saved. Please, try again.', 'alert-box'));
 			}
 		}
 	}
@@ -101,10 +101,10 @@ class UsersController extends AppController {
 		}
 		if ($this->request->is(array('post', 'put'))) {
 			if ($this->User->save($this->request->data)) {
-				$this->Session->setFlash(__('The user has been saved.'));
+				$this->Session->setFlash(__('The user has been saved.', 'alert-box'));
 				return $this->redirect(array('action' => 'index'));
 			} else {
-				$this->Session->setFlash(__('The user could not be saved. Please, try again.'));
+				$this->Session->setFlash(__('The user could not be saved. Please, try again.', 'alert-box'));
 			}
 		} else {
 			$options = array('conditions' => array('User.' . $this->User->primaryKey => $id));
@@ -126,9 +126,9 @@ class UsersController extends AppController {
 		}
 		$this->request->onlyAllow('post', 'delete');
 		if ($this->User->delete()) {
-			$this->Session->setFlash(__('The user has been deleted.'));
+			$this->Session->setFlash(__('The user has been deleted.', 'alert-box'));
 		} else {
-			$this->Session->setFlash(__('The user could not be deleted. Please, try again.'));
+			$this->Session->setFlash(__('The user could not be deleted. Please, try again.', 'alert-box'));
 		}
 		return $this->redirect(array('action' => 'index'));
 	}
@@ -138,7 +138,7 @@ class UsersController extends AppController {
 			if($this->Auth->login()) {
 				$this->redirect($this->Auth->redirect('/'));
 			} else {
-				$this->Session->setFlash(__('Your username or password was incorrect.'));
+				$this->Session->setFlash('Your username or password was incorrect.', 'alert-box', array('class'=>'alert-danger'));
 			}
 		}
 	}
@@ -299,7 +299,7 @@ class UsersController extends AppController {
 
 			if ($success) {
 				$this->Session->setFlash('',
-					'status_email',
+					'status_email', 'alert-box',
 					array(
 					'title' => 'Successfully sent!',
 					'content' => 'Check your inbox. We have sent you a copy of the email.'
@@ -308,7 +308,7 @@ class UsersController extends AppController {
 				$this->redirect('/contact_us');
 			} else {
 				$this->Session->setFlash('',
-					'status_email',
+					'status_email', 'alert-box',
 					array(
 					'title' => 'Email not sent!',
 					'content' => 'Please try again!'

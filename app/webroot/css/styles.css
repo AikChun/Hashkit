@@ -2,6 +2,11 @@ body {
 	margin-bottom: 80px;
 }
 
+#flash_alert {
+	margin-top: 50px;
+	margin-bottom: 0px;
+}
+
 .navbar .nav .active > a, .navbar .nav .active > a:hover {
 	background-color:  #242222;
 }

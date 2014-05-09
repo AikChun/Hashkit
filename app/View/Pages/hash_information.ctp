@@ -1,8 +1,8 @@
 <div class="wrapper">
-    <div class="box">
+
         <div class="row row-offcanvas row-offcanvas-left">
             <!-- sidebar -->
-            <div class="column col-sm-2 col-xs-1 sidebar-offcanvas" id="sidebar">
+            <div class="column col-sm-2 col-xs-1 sidebar-offcanvas" id="sidebar" style="background-color: #242222; margin-top: 50px;">
                 <ul class="nav navbar-inverse">
                     <li><a href="#" data-toggle="offcanvas" class="visible-xs text-center"><i class="glyphicon glyphicon-chevron-right"></i></a>
                     </li>
@@ -27,23 +27,6 @@
                     </li>
                      <li><a href="#sec5" class=""><i class="glyphicon glyphicon-globe"></i> Attacks on Hash functions</a>
                     </li>
-                    <li><a href="" class=""></a></li>
-                    <li><a href="" class=""></a></li>
-                    <li><a href="" class=""></a></li>
-                    <li><a href="" class=""></a></li>
-                    <li><a href="" class=""></a></li>
-                    <li><a href="" class=""></a></li>
-                    <li><a href="" class=""></a></li>
-                    <li><a href="" class=""></a></li>
-                    <li><a href="" class=""></a></li>
-                    <li><a href="" class=""></a></li>
-                    <li><a href="" class=""></a></li>
-                    <li><a href="" class=""></a></li>
-                    <li><a href="" class=""></a></li>
-                    <li><a href="" class=""></a></li>
-                    <li><a href="" class=""></a></li>
-                    <li><a href="" class=""></a></li>
-                    <li><a href="" class=""></a></li>
 
                 </ul>
                 <!-- tiny only nav-->
@@ -271,7 +254,7 @@
                 </div>
             </div>
             <!-- /main -->
-        </div>
+
     </div>
 </div>
 <script type="text/javascript">
