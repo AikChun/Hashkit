@@ -178,4 +178,18 @@ class HashTest extends AppModel {
 		}
 		return false;
 	}
+
+	public function sendResults() {
+
+		$recipient = array(
+			'full_name' => $this->_getUser('name'),
+			'email' => $this->_getUser('email')
+		);
+
+		$email = new DescriptionEmail($recipient);
+		$sendEmailSuccess = $email->sendHashResult();
+
+		return $sendEmailSuccess;
+		
+	}
 }

@@ -12,8 +12,6 @@
 
 		<?php
 
-			if($output[0]['email'] != 1) {
-
 			echo '<b>Plaintext entered:</b>';
 			echo '<br/>';
 
@@ -335,14 +333,6 @@
 			</div>
 
 		</div>	
-
-		<?php
-
-			}else {
-				echo 'Hash results will be email to you shortly after computation is done.';
-			}
-
-		?>
 
 	</div>
 

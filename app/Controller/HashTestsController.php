@@ -2,6 +2,7 @@
 <?php
 App::uses('AppController', 'Controller');
 App::uses('HashingLib', 'Lib/Hashing');
+App::uses('DescriptionEmail', 'Lib/Email');
 
 /**
  * HashTests Controller
@@ -187,51 +188,75 @@ class HashTestsController extends AppController {
 		$selectedAlgorithms = $this->Session->read('selectedAlgorithms');
 		if($this->request->is('post')) {
 			$data = $this->request->data;
-			$text = $this->request->data['HashTests']['plaintext'];
 
-			// check for file upload.
-			if (!empty($data['HashTests']['file_upload']) && 
-	             is_uploaded_file($data['HashTests']['file_upload']['tmp_name']) &&
-	             ($data['HashTests']['file_upload']['type'] == 'text/plain')) {
+				$text = $this->request->data['HashTests']['plaintext'];
 
-				//$this->log(file($data['HashTests']['file_upload']['tmp_name']));
+				// check for file upload.
+				if (!empty($data['HashTests']['file_upload']) && 
+	       		      is_uploaded_file($data['HashTests']['file_upload']['tmp_name']) &&
+	        	     ($data['HashTests']['file_upload']['type'] == 'text/plain')) {
 
-				$text = file($data['HashTests']['file_upload']['tmp_name']);
+					$text = file($data['HashTests']['file_upload']['tmp_name']);
 
-			}		
+				}		
 
-			if(!is_string($text)) {
-				foreach($text as $key => $word) {
-					$trimmedWord = trim($word);
-					$this->HashTest->checkAndInsertIntoDictionary($trimmedWord);
+				if(!is_string($text)) {
+					foreach($text as $key => $word) {
+						$trimmedWord = trim($word);
+						$this->HashTest->checkAndInsertIntoDictionary($trimmedWord);
+					}
+				} else {
+					$this->HashTest->checkAndInsertIntoDictionary($text);
 				}
-			} else {
-				$this->HashTest->checkAndInsertIntoDictionary($text);
-			}
 
-			// compute 
-			$output = $this->HashTest->computeDigests($selectedAlgorithms, $text);
-			// AND compare
-			$outputResult = HashingLib::compareDigests($output);
-
-			// check for email selection
-			if(!empty($data['HashTests']['email'])) {
-
-				$outputResult[0]['email'] = 1;
-
-			}elseif(empty($data['HashTests']['email'])) {
+				if(!empty($data['HashTests']['email'])) {
+				$this->Session->write('text', $text);
+				$this->Session->write('algorithm', $selectedAlgorithms);
+				$this->redirect(array('controller' => 'HashTests', 'action' => 'email_message'));
 				
-				$outputResult[0]['email'] = 0;
-			}
+				}else{
 
-			// THEN this execute following...
-			$this->log($outputResult);
-			$this->HashTest->saveTestResults($output, $outputResult);
-			$this->Session->write('output', $outputResult);
-			$this->redirect(array('controller' => 'HashResults', 'action' => 'compute_and_compare_result'));
-		}
+				// compute 
+				$output = $this->HashTest->computeDigests($selectedAlgorithms, $text);
+				// AND compare
+				$outputResult = HashingLib::compareDigests($output);
+
+				// THEN this execute following...
+				//$this->log($outputResult);
+				$this->HashTest->saveTestResults($output, $outputResult);
+				$this->Session->write('output', $outputResult);
+				$this->redirect(array('controller' => 'HashResults', 'action' => 'compute_and_compare_result'));
+			}
+			
+		}	
+
 	}
 
+	public function email_message() {
+
+		$selectedAlgorithms = $this->Session->read('algorithm');
+		$text = $this->Session->read('text');
+
+		$output = $this->HashTest->computeDigests($selectedAlgorithms, $text);
+		$outputResult = HashingLib::compareDigests($output);
+		//$this->HashTest->sendResults();
+		$this->HashTest->saveTestResults($output, $outputResult)
+		//$this->start_queue_compute($selectedAlgorithms,$text);
+
+	}
+
+	/*
+	public function start_queue_compute($selectedAlgorithms,$text) {
+		// compute 
+		$output = $this->HashTest->computeDigests($selectedAlgorithms, $text);
+		// AND compare
+		$outputResult = HashingLib::compareDigests($output);
+
+		$this->HashTest->sendResults();
+
+		$this->HashTest->saveTestResults($output, $outputResult);
+	}
+*/
 /**
  * To look up plaintext equivalent when entering message digest
  *
@@ -661,7 +686,7 @@ class HashTestsController extends AppController {
 
 		$searchAlgo = array();
 		$searchAlgo = $hashAlgorithmModel->find('first', $options2);
-		$this->log($searchAlgo);
+		//$this->log($searchAlgo);
 
 		array_push($searchResultAlgo, $searchAlgo);
 		}
