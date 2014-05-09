@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html style="height: 100%;">
 
 	<head>
 
@@ -19,7 +19,7 @@
 
 	</head>
 
-	<body>
+	<body style="height: 100%;">
 		<div class = "navbar navbar-inverse navbar-fixed-top " id="nav">
 			<div class = "container">
 				<!-- <a href = "/" class = "navbar-brand">Hashkit</a> -->
