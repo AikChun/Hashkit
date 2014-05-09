@@ -25,8 +25,9 @@
 			
 			<div class = "container">
 
-				<a class="navbar-brand" href="/"><img src="/img/smalllogo.jpg"></a>
-				
+				<!-- <a href = "/" class = "navbar-brand">Hashkit</a> -->
+				<a class="navbar-brand" href="index.html"><img src="/img/hash_icon.png"></a>
+
 				<button class = "navbar-toggle" data-toggle = "collapse" data-target = ".navHeaderCollapse">
 
 					<span class = "icon-bar"></span>

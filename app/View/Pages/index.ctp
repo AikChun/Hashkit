@@ -13,7 +13,7 @@
       <div class="container">
         <div class="carousel-caption">
           <!-- <h1>HashKit</h1> -->
-          <img src="/img/logo.jpg">
+          <img src="/img/hash_logo.png">
           <?php if($authUser):?>
           <h3>You are a click away to learn about hash functions and to start, press the any button below:</h3>
 
@@ -77,29 +77,17 @@
 
 <section class="container-fluid" id="section1">
   <h1 class="text-center v-center">About Us</h1>
-  <h3 class="text-center v-center">A project by a group of University of Wollongong Students
+  <h3 class="text-center v-center">We are a group of university students from UOW (University of Wollongong), who are dedicated to impart information to users on the topic of hash functions by giving users a new holistic web environment for better understanding. 
   <br>  
   </h3>
-  <div class="row">
-      <div class="col-sm-4">
-          <div class="row">
-            <div class="col-sm-10 col-sm-offset-2 text-center"><h3>Robust</h3><p>There is other content and snippets of details or features that can be placed here..</p>
-              <img src="https://farm3.staticflickr.com/2171/2067062407_a69bfffe11_b.jpg" class="img-responsive center-block ">
-              <i class="fa fa-cog fa-5x"></i></div>
-          </div>
-      </div>
-        <div class="col-sm-4 text-center">
-          
-          <div class="row">
-            <div class="col-sm-10 col-sm-offset-1 text-center"><h3>Simple</h3><p>You may also want to create content that compells users to scroll down more..</p><i class="fa fa-user fa-5x"></i></div>
-          </div>
-      </div>
-        <div class="col-sm-4 text-center">
-          <div class="row">
-            <div class="col-sm-10 text-center"><h3>Clean</h3><p>In the first 30 seconds of a user's visit to your site they decide if they're going to stay..</p><i class="fa fa-mobile fa-5x"></i></div>
-          </div>
-      </div>
-  </div>
+  <br>
+    <div class="row"> 
+      <div class="col-sm-4"><img src="/img/schoolbuilding.jpg" class="img-responsive"></div>
+      <div class="col-sm-4"><img src="/img/group.jpg" class="img-responsive"></div>
+      <div class="col-sm-4"><img src="/img/uow.jpg" class="img-responsive"></div>
+    </div>
+  <br>
+  <br>
 </section>
 
 <section class="container-fluid" id="section2">

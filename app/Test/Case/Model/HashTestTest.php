@@ -56,6 +56,7 @@ class HashTestTest extends CakeTestCase {
 		  $this->HashTest->expects($this->once())
 		   ->method('_getUser')
 		    ->will($this->returnValue(10));
+
 		// WHEN $data = data[n]['HashResult']['fields'] && $outputResult = 'Basic Hashing'
 		$plaintext = 'Enemies';
 		$hashAlgorithmId = 2;
@@ -81,7 +82,7 @@ class HashTestTest extends CakeTestCase {
 		);
 		// THEN execute saveTestResults
 		$saveSuccessful = $this->HashTest->saveTestResults($data);
-		// EXPECT 
+		// EXPECT return to be true;
 		$this->assertTrue($saveSuccessful);
 	}
 

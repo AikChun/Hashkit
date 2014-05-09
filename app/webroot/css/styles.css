@@ -121,3 +121,15 @@ div.nowrap{
 	max-width:100%;
 	height:10%;*/
 }
+
+IMG.displayed {
+    display: block;
+    margin-left: auto;
+    margin-right: auto; 
+}
+
+#imageContainer {
+    /*background: url('image.jpg') no-repeat top center;*/
+    height: 400px;
+    width: 100%;
+}

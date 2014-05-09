@@ -26,12 +26,13 @@
 					'class' => 'form-control',
 					'placeholder' => 'Message Digest',
 					'label' => false,
+					'onchange' => 'updateWordCount()',
 					'required'));
 				
 			?>
 
 			</div>
-
+			<div id="word_count" style="text-align:right;padding-right:20px"></div>
 		</div>
 
 		<div class="form-group">
@@ -45,7 +46,7 @@
 					echo $this->Form->input('hash_algorithm_name', array(
 						'class' => 'form-control',
 						'options'=> $data,
-						'label' => false
+						'label' => false,
 						)
 					);
 
@@ -73,3 +74,60 @@
 	</div>
 
 </div>
+<script>
+
+		$(document).ready(function() {
+			updateWordCount();
+		});
+
+		$('#word_count').keypress(function() {
+			var algorithmName = $('#HashTestsHashAlgorithmName').val();
+			var textInput = $('#HashTestsMessageDigest').text();
+			var characterLength = textInput.length;
+			alert(characterLength);
+			var maxCharacters = 0;
+			if (algorithmName == 'sha1') {
+				maxCharacters = 40;
+			} else if(algorithmName == 'md5') {
+				maxCharacters = 32;
+
+			} else if(algorithmName == 'md2') {
+				maxCharacters = 32;
+
+			} else if(algorithmName == 'md4') {
+				maxCharacters = 32;
+
+			} else if(algorithmName == 'sha256') {
+				maxCharacters = 64;
+
+			}
+
+			var remainingCharacters = maxCharacters - characterLength;
+			$('#word_count').html(remainingCharacters);
+		});
+		function updateWordCount() {
+			var algorithmName = $('#HashTestsHashAlgorithmName').val();
+			var textInput = $('#HashTestsMessageDigest').text();
+			var characterLength = textInput.length;
+			var maxCharacters = 0;
+			if (algorithmName == 'sha1') {
+				maxCharacters = 40;
+			} else if(algorithmName == 'md5') {
+				maxCharacters = 32;
+
+			} else if(algorithmName == 'md2') {
+				maxCharacters = 32;
+
+			} else if(algorithmName == 'md4') {
+				maxCharacters = 32;
+
+			} else if(algorithmName == 'sha256') {
+				maxCharacters = 64;
+
+			}
+
+			var remainingCharacters = maxCharacters - characterLength;
+			$('#word_count').html(remainingCharacters);
+
+		}
+</script>
