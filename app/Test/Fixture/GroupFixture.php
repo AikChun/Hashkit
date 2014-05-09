@@ -28,22 +28,22 @@ class GroupFixture extends CakeTestFixture {
  */
 	public $records = array(
 		array(
-			'id' => 1,
+			'id' => '1',
 			'name' => 'Administrators',
-			'created' => '2014-05-02 01:28:35',
-			'modified' => '2014-05-02 01:28:35'
+			'created' => '0000-00-00 00:00:00',
+			'modified' => '0000-00-00 00:00:00'
 		),
 		array(
-			'id' => 2,
+			'id' => '2',
 			'name' => 'App_Admins',
-			'created' => '2014-05-02 01:28:35',
-			'modified' => '2014-05-02 01:28:35'
+			'created' => '0000-00-00 00:00:00',
+			'modified' => '0000-00-00 00:00:00'
 		),
 		array(
-			'id' => 3,
+			'id' => '3',
 			'name' => 'App_Users',
-			'created' => '2014-05-02 01:28:35',
-			'modified' => '2014-05-02 01:28:35'
+			'created' => '0000-00-00 00:00:00',
+			'modified' => '0000-00-00 00:00:00'
 		),
 	);
 
