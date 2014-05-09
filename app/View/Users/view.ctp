@@ -58,12 +58,20 @@
 
 		<div class="form-group">
 								
-			<label class="col-lg-2 control-label" style="top: -7px;">Group ID:</label>
+			<label class="col-lg-2 control-label" style="top: -7px;">User Group:</label>
 
 			<div class="col-lg-10">
 
 				<?php
-					echo h($user['User']['group_id']);
+
+					if (h($user['User']['group_id']) == 1) {
+						echo 'Super Administrator';
+					} elseif (h($user['User']['group_id']) == 2) {
+						echo 'Administrator';
+					} elseif (h($user['User']['group_id']) == 3) {
+						echo 'Normal User';
+					}
+
 				?>
 
 			</div>
@@ -136,13 +144,13 @@
 
 		<div class="modal-footer">
 
-		</div>
-
-		<div class="btn-toolbar pull-right">
+			<div class="btn-toolbar pull-right">
 		
-			<a href="/Users/edit/<?php echo $user['User']['id']; ?>" class="btn btn-primary">Edit User</a>
-			<a href="/Users/delete/<?php echo $user['User']['id']; ?>" class="btn btn-danger">Delete User</a>
-			<a href="/Users/index" class="btn btn-default">Back</a>
+				<a href="/Users/edit/<?php echo $user['User']['id']; ?>" class="btn btn-primary">Edit User</a>
+				<a href="/Users/delete/<?php echo $user['User']['id']; ?>" class="btn btn-danger">Delete User</a>
+				<a href="/Users/index" class="btn btn-default">Back</a>
+
+			</div>
 
 		</div>
 

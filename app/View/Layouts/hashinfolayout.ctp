@@ -35,7 +35,7 @@
 					
 					<ul class="nav navbar-nav navbar-left">
 						
-						<li><a href="/">Home</a></li>
+						<li><a href="/#myCarousel">Home</a></li>
 						<?php  if($authUser['group_id'] == 1) :?>
 						<li class="dropdown">
 								

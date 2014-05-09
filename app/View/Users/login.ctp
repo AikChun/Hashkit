@@ -57,21 +57,22 @@
 
 		<div class="modal-footer">
 
+			<a href="/Users/forget_password" class="pull-right">Forgot your password?</a>
+			
+			<br>
+
+			<?php
+
+				$options = array(
+					'class' => 'btn btn-primary pull-right',
+					'label' => 'Login'
+				);
+
+				echo $this->Form->end($options);
+
+			?>
+
 		</div>
-
-		<a href="/Users/forget_password" class="pull-right">Forgot your password?</a>
-		<br>
-
-		<?php
-
-			$options = array(
-				'class' => 'btn btn-primary pull-right',
-				'label' => 'Login'
-			);
-
-			echo $this->Form->end($options);
-
-		?>
 
 	</div>
 

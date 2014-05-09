@@ -2,10 +2,6 @@
 			
 	<div class="jumbotron">
 
-		<?php
-			echo $this->Form->create('User', array('action' => 'contact_us', 'class' => 'form-horizontal'));
-		?>
-
 		<div class="modal-header">
 
 			<h2>Contact Us</h2>
@@ -13,6 +9,10 @@
 		</div>
 			
 		<br/>
+
+		<?php
+			echo $this->Form->create('User', array('action' => 'contact_us', 'class' => 'form-horizontal'));
+		?>
 
 		<div class="form-group">
 								
@@ -45,7 +45,7 @@
 
 				echo $this->Form->input('email', array(
 					'class' => 'form-control',
-					'placeholder' => 'Email Address',
+					'placeholder' => 'Your Email Address: you@example.com',
 					'label' => false,
 					'required'));
 				
@@ -99,18 +99,18 @@
 
 		<div class="modal-footer">
 
+			<?php
+
+				$contact_us_send = array(
+					'class' => 'btn btn-primary',
+					'label' => 'Send'
+				);
+
+				echo $this->Form->end($contact_us_send);
+
+			?>
+
 		</div>
-
-		<?php
-
-			$contact_us_send = array(
-				'class' => 'btn btn-primary pull-right',
-				'label' => 'Send'
-			);
-
-			echo $this->Form->end($contact_us_send);
-
-		?>
 
 	</div>
 

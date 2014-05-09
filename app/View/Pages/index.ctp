@@ -148,16 +148,7 @@
 </section>
 
 <script type="text/javascript">
-	$(document).on("click", "#btnreg", function(event){
-    	window.open("/Users/register");		
-	});
 
-    $(document).on("click", "#btlogin", function(event){
-    	window.open("/Users/login");
-    });
-
-    $('#myCarousel').carousel({ interval: 3000 })
-
-    
+    $('#myCarousel').carousel({ interval: 3000 })   
 
 </script>
