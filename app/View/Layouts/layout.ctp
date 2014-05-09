@@ -20,9 +20,11 @@
 	</head>
 
 	<body>
-		<div class = "navbar navbar-inverse navbar-fixed-top ">
+		<div class = "navbar navbar-inverse navbar-fixed-top " id="nav">
 			<div class = "container">
-				<a href = "/" class = "navbar-brand">Hashkit</a>
+				<!-- <a href = "/" class = "navbar-brand">Hashkit</a> -->
+				<a class="navbar-brand" href="index.html"><img src="/img/smalllogo.jpg"></a>
+				
 				<button class = "navbar-toggle" data-toggle = "collapse" data-target = ".navHeaderCollapse">
 					<span class = "icon-bar"></span>
 					<span class = "icon-bar"></span>
@@ -65,7 +67,7 @@
 						<li><a href="/Pages/hash_information">Hash Information</a></li>
 						<li><a href="/Questionnaires/questionnaire">Questionnaire</a></li>
 						<?php endif;?>
-						<li><a href="/Pages/about_us">About Us</a></li>
+						<li><a href="#section1">About Us</a></li>
 						<li><a href="/contact_us">Contact Us</a></li>
 
 					</ul>
@@ -113,6 +115,31 @@
 	<script type="text/javascript">
 		$(document).ready(function () {
         $('a[href="' + this.location.pathname + '"]').parent().addClass('active');
-    });
+    	});
+
+		$('#nav').affix({
+      		offset: {
+        		top: $('header').height()-$('#nav').height()
+      		}
+		});	
+
+    	/* highlight the top nav as scrolling occurs */
+		$('body').scrollspy({ target: '#nav' });
+
+		/* smooth scrolling for scroll to top */
+		$('.scroll-top').click(function(){
+		  $('body,html').animate({scrollTop:0},1000);
+		})
+
+
+    	/* smooth scrolling for nav sections */
+	    $('#nav .navbar-nav li>a').click(function(){
+	      var link = $(this).attr('href');
+	      var posi = $(link).offset().top+20;
+	      $('body,html').animate({scrollTop:posi},700);
+	    })
+
 	</script>
+
+
 </html>
