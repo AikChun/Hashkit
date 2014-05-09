@@ -3,8 +3,40 @@
         "This file locks the dependencies of your project to a known state",
         "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file"
     ],
-    "hash": "454fa2eba9d3ab482f08c933844dddfe",
+
+    "hash": "dbef02a481f78fc447f56fb4d02f6e20",
+
     "packages": [
+        {
+            "name": "ceeram/clear_cache",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/ceeram/clear_cache.git",
+                "reference": "f883a74279433418757ea7fb50d38f978d7924f9"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/ceeram/clear_cache/zipball/f883a74279433418757ea7fb50d38f978d7924f9",
+                "reference": "f883a74279433418757ea7fb50d38f978d7924f9",
+                "shasum": ""
+            },
+            "require": {
+                "composer/installers": "*",
+                "php": ">=5.3.0"
+            },
+            "type": "cakephp-plugin",
+            "extra": {
+                "installer-name": "ClearCache"
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "description": "Clear CakePHP caches from shell, app or debug_kit panel",
+            "homepage": "http://github.com/ceeram/clear_cache",
+            "time": "2013-09-21 08:08:27"
+        },
         {
             "name": "composer/installers",
             "version": "v1.0.13",
@@ -634,7 +666,8 @@
         "markstory/acl_extras": 20,
         "simkimsia/permissions-extras": 20,
         "simkimsia/utility_lib": 20,
-        "simkimsia/utility_behaviors": 20
+        "simkimsia/utility_behaviors": 20,
+        "ceeram/clear_cache": 20
     },
     "platform": [
 

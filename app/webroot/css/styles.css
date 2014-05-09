@@ -12,8 +12,9 @@ body {
 }
 
 .jumbotron {
-	background-color: #eeeeee;
 	margin-top: 80px;
+	padding-top: 0px;
+	padding-bottom: 0px;
 }
 
 .error {
@@ -86,11 +87,6 @@ div.nowrap{
 	height: auto !important;
 	height: 100%;
 	padding-top:100px;
-}
-
-html,body {
-	height:100%;
-    background:center no-repeat;
 }
 
 .scroll-top {

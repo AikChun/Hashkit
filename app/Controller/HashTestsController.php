@@ -245,6 +245,20 @@ class HashTestsController extends AppController {
 
 	}
 
+	public function delete($id = null) {
+		$this->HashTest->id = $id;
+		if (!$this->HashTest->exists()) {
+			throw new NotFoundException(__('Invalid hash result'));
+		}
+		$this->request->onlyAllow('post', 'delete');
+		if ($this->HashTest->delete()) {
+			$this->Session->setFlash(__('The hash result has been deleted.'));
+		} else {
+			$this->Session->setFlash(__('The hash result could not be deleted. Please, try again.'));
+		}
+		return $this->redirect(array('action' => 'show_test_results'));
+	}
+
 	/*
 	public function start_queue_compute($selectedAlgorithms,$text) {
 		// compute 
