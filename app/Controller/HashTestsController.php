@@ -262,6 +262,13 @@ class HashTestsController extends AppController {
  *
  */
 	public function reverse_look_up() {
+		if($this->request->is('post')) {
+			$data = $this->request->data['HashTests'];
+			$result = $this->HashTest->matchPlaintextWithMessageDigest($data);
+			$this->Session->write('reverseData', $result );
+			return $this->redirect('/HashResults/reverse_look_up_result');
+		}
+
 		$hashAlgorithmModel = ClassRegistry::init('HashAlgorithm');
 		$searchResult = $hashAlgorithmModel->find('all', array('fields' => array('HashAlgorithm.name')));
 		$preparedData = Hash::extract($searchResult, '{n}.HashAlgorithm.name');
@@ -272,12 +279,6 @@ class HashTestsController extends AppController {
 
 		$this->set('data', $data);
 
-		if($this->request->is('post')) {
-			$data = $this->request->data['HashTests'];
-			$result = HashingLib::matchPlaintextWithMessageDigest($data);
-			$this->Session->write('reverseData', $result );
-			$this->redirect('/HashResults/reverse_look_up_result');
-		}
 	}
 
 /**

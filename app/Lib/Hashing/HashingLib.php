@@ -136,29 +136,6 @@ class HashingLib {
 	}
 
 
-/**
- * find plaintext with MessageDigest
- * @param $data array containing ['message_digest'] and ['hash_algorithm']
- * @return mixed false if there are no such record found in database or array containing plaintext is return
- */ 
-	public static function matchPlaintextWithMessageDigest($data) {
-		$dictionaryModel = ClassRegistry::init('Dictionary');
-		$conditions = array(
-			'conditions' => array(
-				'Dictionary.'.$data['hash_algorithm_name'] => $data['message_digest'],
-			),
-			'fields' => array('Dictionary.plaintext')
-		);
-		$checkDictionaryResult = $dictionaryModel->find('all', $conditions);
-		// Insert into dictionary
-		if(empty($checkDictionaryResult)) {
-
-			return false;
-		} else {
-			return $checkDictionaryResult;
-		}
-			
-	}
 
 /**
  * To calcuate the number of hashes needed to get a 99% probability of getting a collision 
