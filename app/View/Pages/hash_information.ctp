@@ -52,10 +52,10 @@
                     <div class=" col-sm-10 col-xs-11 g hashinformation">
                       <h2 id="sec0" contenteditable="false">Introduction</h2>
                       <h3 class="">What is a Hash function ?</h3>
-                      <p class="edit_area">A hash function takes in any length of data such as characters and maps them to a fixed length of arbitrary hash value.</p> 
+                      <p>A hash function takes in any length of data such as characters and maps them to a fixed length of arbitrary hash value.</p> 
                       <hr class="">
                         <h3 class="">What about Crytographic Hash function ?</h3>
-                        <p class="edit_area">Despite of having the same functionality as a hash function, it has additional properties such one-way which provides better security. It is usually associated with generating a message digest (sometimes called a checksum) which is normally shorter than the original data. For a message digest function to be cryptographically secure, it must be computationally infeasible to get back the original message by using the message digest and impossible to find two different messages with the same message digest. It is designed to be easily computable and has to achieve certain security properties, e.g: preimage resistance, second preimage resistance and collision resistance.<p>
+                        <p>Despite of having the same functionality as a hash function, it has additional properties such one-way which provides better security. It is usually associated with generating a message digest (sometimes called a checksum) which is normally shorter than the original data. For a message digest function to be cryptographically secure, it must be computationally infeasible to get back the original message by using the message digest and impossible to find two different messages with the same message digest. It is designed to be easily computable and has to achieve certain security properties, e.g: preimage resistance, second preimage resistance and collision resistance.<p>
                         <br>
                         Example of a MD5 function to perform on a message :
                         <br>
@@ -121,7 +121,7 @@
                       <hr class="">
                       <h2 id="sec2">List of Hash functions</h2>
                       <p>In this section, it talks about the commonly used families of hash functions and their attributes.</p>
-                      <b>
+                      <br>
                       <h4>MD2/MD4/MD5 family</h4>
                       <br>
                       <h4>SHA1/SHA2 family</h4>
@@ -245,7 +245,7 @@
                         <br>
                         <b>rebound attack</b>
                         <br>
-                        <b>linear attack</h3>
+                        <h3>linear attack</h3>
                         <br>
                         <b>random graph theory attack</b>
                         <br>

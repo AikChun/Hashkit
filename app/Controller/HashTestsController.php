@@ -276,6 +276,13 @@ class HashTestsController extends AppController {
  *
  */
 	public function reverse_look_up() {
+		if($this->request->is('post')) {
+			$data = $this->request->data['HashTests'];
+			$result = $this->HashTest->matchPlaintextWithMessageDigest($data);
+			$this->Session->write('reverseData', $result );
+			return $this->redirect('/HashResults/reverse_look_up_result');
+		}
+
 		$hashAlgorithmModel = ClassRegistry::init('HashAlgorithm');
 		$searchResult = $hashAlgorithmModel->find('all', array('fields' => array('HashAlgorithm.name')));
 		$preparedData = Hash::extract($searchResult, '{n}.HashAlgorithm.name');
@@ -286,12 +293,6 @@ class HashTestsController extends AppController {
 
 		$this->set('data', $data);
 
-		if($this->request->is('post')) {
-			$data = $this->request->data['HashTests'];
-			$result = HashingLib::matchPlaintextWithMessageDigest($data);
-			$this->Session->write('reverseData', $result );
-			$this->redirect('/HashResults/reverse_look_up_result');
-		}
 	}
 
 /**
@@ -642,7 +643,7 @@ class HashTestsController extends AppController {
         				$birthdayattackresult = $this->generate_array_and_compare(384, $information['HashAlgorithmV1']['name']);	
         				break;
         		default;
-        				$this->Session->setFlash("please choose a hash algorithm");
+        				$this->Session->setFlash('please choose a hash algorithm', 'alert-box', array('class'=>'alert-danger'));
 						$this->redirect(array('action' => 'birthday_attack'));
     					break;
 			}
