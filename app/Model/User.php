@@ -21,7 +21,7 @@ class User extends AppModel {
 	public $hasMany = array(
 		'HashTest' => array(
 			'className' => 'HashTest',
-			'foreignKey' => 'hash_test_id',
+			'foreignKey' => 'user_id',
 			'dependent' => true
 		)
 	);
@@ -65,9 +65,10 @@ class User extends AppModel {
 	}
 
 	public function beforeDelete($cascade = true) {
-		$user_id = $this->_getUser('id');
-		$conditions = array('Description.user_id' => $user_id);
-		$this->Description->deleteAll($conditions);
+		$conditions = array('HashTest.user_id' => $this->id);
+		$this->log('Logging id');
+		$this->log($this->id);
+		$this->HashTest->deleteAll($conditions);
 		return true;
 	}
 
