@@ -45,6 +45,18 @@ class DictionaryFixture extends CakeTestFixture {
 			'SHA1' => '8a0979fdf5afda41cda40a5e9559a1cf19866178',
 			'MD5' => '7fafbfc50032f66abf91935fd50c95cb'
 		),
+		array(
+			'id' => '4',
+			'plaintext' => 'Hello again',
+			'SHA1' => '43ce0c8e7e28680735241ad3e5550aa361b96f53',
+			'MD5' => '3d67b96cde18c245b65a83ecaff2c906'
+		),
+		array(
+			'id' => '5',
+			'plaintext' => 'Hello Everyone',
+			'SHA1' => '0318d138e57dfdca894d3074c112a1caa1c36bd9',
+			'MD5' => 'ba25d791469f06b7e03cffe1adec69c6'
+		),
 	);
 
 }
