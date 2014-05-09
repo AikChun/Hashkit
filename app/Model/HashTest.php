@@ -25,6 +25,15 @@ class HashTest extends AppModel {
  * This is to save test results 
  * @param array $data in the format $data[n]['HashResult']['field']
  */
+
+	public function beforeDelete($cascade = true) {
+		$conditions = array('HashResult.hash_test_id' => $this->id);
+		$this->log('Logging id');
+		$this->log($this->id);
+		$this->HashResult->deleteAll($conditions);
+		return true;
+	}
+
 	public function saveTestResults($data, $outputResult = 'Basic Hashing') {
 		$hashResultModel = ClassRegistry::init('HashResult');
 
