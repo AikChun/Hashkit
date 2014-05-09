@@ -20,10 +20,11 @@
 	</head>
 
 	<body>
-		<div class = "navbar navbar-inverse navbar-fixed-top " role="navigation">			
+		<div class = "navbar navbar-inverse navbar-fixed-top " id="nav">
 			<div class = "container">
+				<!-- <a href = "/" class = "navbar-brand">Hashkit</a> -->
+				<a class="navbar-brand" href="/"><img src="/img/smalllogo.jpg"></a>
 				
-				<a href = "/" class = "navbar-brand">Hashkit</a>
 				<button class = "navbar-toggle" data-toggle = "collapse" data-target = ".navHeaderCollapse">
 					<span class = "icon-bar"></span>
 					<span class = "icon-bar"></span>
@@ -66,7 +67,7 @@
 						<li><a href="/Pages/hash_information">Hash Information</a></li>
 						<li><a href="/Questionnaires/questionnaire">Questionnaire</a></li>
 						<?php endif;?>
-						<li><a href="//#section1">About Us</a></li>
+						<li><a href="#section1">About Us</a></li>
 						<li><a href="/contact_us">Contact Us</a></li>
 
 					</ul>
@@ -98,17 +99,23 @@
 		<?php echo $this->Session->flash(); ?>
 		<?php echo $this->fetch('content'); ?>
 
-		<div class="navbar navbar-default navbar-fixed-bottom">
+		<div class="navbar navbar-default navbar-fixed-bottom" style="height: 5px;">
 			
-			<div class="container">
-				
-				<p class="navbar-text pull-left">Site Built by Hashkit Team @2014</p>
+			<div class="container" style="margin-top: -8px;">
 
+			<div class="col-lg-5 navbar-text pull-left" style="top: 10px;">
+				Site built by Hashkit Team @2014
+			</div>
+
+			<div class="col-lg-5 pull-right">
 				<a class="navbar-text btn btn-danger pull-right" href="http://hashkitproject.blogspot.sg/"><font style="color:#FFFFFF">Visit our blog!</font></a>
+			</div>
+
+				
 
 			</div>
 
-		</div>	
+		</div>
 	</body>
 
 	<script type="text/javascript">
