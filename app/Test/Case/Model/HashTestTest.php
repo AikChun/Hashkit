@@ -39,6 +39,8 @@ class HashTestTest extends CakeTestCase {
  */
 	public function tearDown() {
 		unset($this->HashTest);
+		unset($this->HashAlgorithm);
+		unset($this->HashResult);
 
 		parent::tearDown();
 	}
@@ -105,6 +107,15 @@ class HashTestTest extends CakeTestCase {
 
 		// EXPECT
 		$this->assertFalse($saveSuccessful);
+		
+		// WHEN $data = 'aalksjda;lkdjwjqdalsdavsn,emwn'
+		$data = 'aalksjda;lkdjwjqdalsdavsn,emwn';
+
+		// THEN EXECUTE checkAndInsertIntoDictionary
+		$saveSuccessful = $this->HashTest->checkAndInsertIntoDictionary($data);
+
+		// EXPECT
+		$this->assertTrue($saveSuccessful);
 
 	}
 
