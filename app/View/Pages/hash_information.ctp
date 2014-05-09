@@ -29,7 +29,6 @@
                     </li>
                      <li><a href="#sec5" class=""><i class="glyphicon glyphicon-globe"></i> Attacks on Hash functions</a>
                     </li>
-
                 </ul>
                 <!-- tiny only nav-->
                 <ul class="nav navbar-inverse visible-xs" id="xs-menu">

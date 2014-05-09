@@ -23,7 +23,7 @@
 		<div class = "navbar navbar-inverse navbar-fixed-top " id="nav">
 			<div class = "container">
 				<!-- <a href = "/" class = "navbar-brand">Hashkit</a> -->
-				<a class="navbar-brand" href="index.html"><img src="/img/smalllogo.jpg"></a>
+				<a class="navbar-brand" href="/"><img src="/img/smalllogo.jpg"></a>
 				
 				<button class = "navbar-toggle" data-toggle = "collapse" data-target = ".navHeaderCollapse">
 					<span class = "icon-bar"></span>
