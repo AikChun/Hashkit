@@ -1,6 +1,5 @@
 <?php
 App::uses('AppController', 'Controller');
-App::uses('DescriptionEmail', 'Lib/Email');
 /**
  * HashResults Controller
  *
@@ -120,19 +119,9 @@ class HashResultsController extends AppController {
 	public function compute_and_compare_result() {
 		$outputResult = $this->Session->read('output');
 
-		if ($outputResult[0]['email'] == 1) {
-			//$this->send_results($outputResult);
-			$emailSentSuccess = $this->HashResult->sendResults($outputResult);
-		}
-
-		//$this->log($outputResult);
 		if (!empty($outputResult)) {
 			$this->set("output", $outputResult);
-			$outputResult[0]['HashResult']['description'] .= $outputResult[0]['HashResult']['collision'];
-			//}
-			//$saveSuccessful = $this->HashResult->saveWithDescription($outputResult);
-			//$this->HashResult->create();
-			//$this->HashResult->saveMany($outputResult);
+
 		} else {
 			$outputResult = '';
 			$this->set('output', $outputResult);

@@ -1,8 +1,8 @@
 <div class="wrapper">
-    <div class="box">
+
         <div class="row row-offcanvas row-offcanvas-left">
             <!-- sidebar -->
-            <div class="column col-sm-2 col-xs-1 sidebar-offcanvas" id="sidebar">
+            <div class="column col-sm-2 col-xs-1 sidebar-offcanvas" id="sidebar" style="background-color: #242222; margin-top: 50px;">
                 <ul class="nav navbar-inverse">
                     <li><a href="#" data-toggle="offcanvas" class="visible-xs text-center"><i class="glyphicon glyphicon-chevron-right"></i></a>
                     </li>
@@ -253,7 +253,7 @@
                 </div>
             </div>
             <!-- /main -->
-        </div>
+
     </div>
 </div>
 <script type="text/javascript">

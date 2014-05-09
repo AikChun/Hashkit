@@ -42,7 +42,7 @@ class DescriptionEmail {
  * @param String newPassword is expected to be a string 
  * @return boolean true if sending is okay, false if otherwise.
  */
-	public function sendHashResult($output) {
+	public function sendHashResult() {
 
 		$email = $this->email;
 		$email->subject('Your hash result is ready to view');
