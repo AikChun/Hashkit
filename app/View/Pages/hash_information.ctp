@@ -14,9 +14,9 @@
                     </li>
                     <li><a href="#sec2" class=""><i class="glyphicon glyphicon-paperclip"></i> List of Hash functions</a>
                     </li>
-                    <li class="dropdown"> <a href="" class="dropdown-toggle" data-toggle="dropdown"><i class="glyphicon glyphicon-refresh"></i>Uses for Hash functions<b class="caret"></b></a>
+                    <li style="color:black;" class="dropdown"> <a href="" class="dropdown-toggle" data-toggle="dropdown"><i class="glyphicon glyphicon-refresh"></i>Uses for Hash functions<b class="caret"></b></a>
                           <ul class="dropdown-menu">
-                            <li><a href="#verifyfileintegrity">Verify file integrity</a></li>
+                            <li ><a href="#verifyfileintegrity">Verify file integrity</a></li>
                             <li><a href="#hashingpasswords">Hashing passwords</a></li>
                             <li><a href="#encryptionalgorithm">Encryption algorithm</a></li>
                             <li><a href="#softwareprotection">Software protection</a></li>
@@ -27,24 +27,6 @@
                     </li>
                      <li><a href="#sec5" class=""><i class="glyphicon glyphicon-globe"></i> Attacks on Hash functions</a>
                     </li>
-                    <li><a href="" class=""></a></li>
-                    <li><a href="" class=""></a></li>
-                    <li><a href="" class=""></a></li>
-                    <li><a href="" class=""></a></li>
-                    <li><a href="" class=""></a></li>
-                    <li><a href="" class=""></a></li>
-                    <li><a href="" class=""></a></li>
-                    <li><a href="" class=""></a></li>
-                    <li><a href="" class=""></a></li>
-                    <li><a href="" class=""></a></li>
-                    <li><a href="" class=""></a></li>
-                    <li><a href="" class=""></a></li>
-                    <li><a href="" class=""></a></li>
-                    <li><a href="" class=""></a></li>
-                    <li><a href="" class=""></a></li>
-                    <li><a href="" class=""></a></li>
-                    <li><a href="" class=""></a></li>
-
                 </ul>
                 <!-- tiny only nav-->
                 <ul class="nav navbar-inverse visible-xs" id="xs-menu">
