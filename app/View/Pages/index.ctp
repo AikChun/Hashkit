@@ -76,16 +76,53 @@
 <!-- /.carousel -->
 
 <section class="container-fluid" id="section1">
-  <h1 class="text-center v-center">About Us</h1>
-  <h3 class="text-center v-center">We are a group of university students from UOW (University of Wollongong), who are dedicated to impart information to users on the topic of hash functions by giving users a new holistic web environment for better understanding. 
-  <br>  
+  <br>
+  <br>
+  <br>
+  <br>
+  <br>
+  <br>
+  <br>
+  <br>
+  
+  <h1 class="text-center v-center" id="headingforaboutus">SAY HELLO TO THE TEAM</h1>
+  <h3 class="text-center v-center" id="textforcontentpage">We are a group of university students from UOW (University of Wollongong), who are dedicated to impart information to users on the topic of hash functions by giving users a new holistic web environment for better understanding.
   </h3>
   <br>
-    <div class="row"> 
-      <div class="col-sm-4"><img src="/img/schoolbuilding.jpg" class="img-responsive"></div>
-      <div class="col-sm-4"><img src="/img/group.jpg" class="img-responsive"></div>
-      <div class="col-sm-4"><img src="/img/uow.jpg" class="img-responsive"></div>
+    <div class="row" id="textforcontentpage"> 
+      <div class="col-sm-4"><h3 class="text-center v-center">Our School (Singapore)</h3></div>
+      <div class="col-sm-4"><h3 class="text-center v-center">Our Team</h3></div>
+      <div class="col-sm-4"><h3 class="text-center v-center">Our School (Australia)</h3></div>
     </div>
+    <div class="row"> 
+      <div class="col-sm-4"><img id="menuImg" src="/img/schoolbuildingdark.jpg" class="img-responsive" onmouseover="onHover();" onmouseout="offHover();" ></div>
+      <div class="col-sm-4"><img id="menuImg1" src="/img/groupdark.jpg" class="img-responsive" onmouseover="onHover1();" onmouseout="offHover1();" ></div>
+      <div class="col-sm-4"><img id="menuImg2" src="/img/uowdark.jpg" class="img-responsive" onmouseover="onHover2();" onmouseout="offHover2();"></div>
+    </div>
+    <div class="row"> 
+      <div class="col-sm-4"><h3 class="text-center v-center"></h3></div>
+      <div class="col-sm-4"><h3 class="text-center v-center" id="textforcontentpage">
+      <p>
+      Sim Aik Chun (leader)
+      <br>
+      Ng Yuetyong
+      <br> 
+      Ian Chua Zhi Ying
+      <br>
+      Weng Xian
+      <br>
+      Ong Wei Liang Eugene  
+      </p>
+      </h3></div>
+      <div class="col-sm-4"><h3 class="text-center v-center"></h3></div>
+    </div>
+    
+  <br>
+  <br>
+  <br>
+  <br>
+  <br>
+  <br>
   <br>
   <br>
 </section>
@@ -93,12 +130,40 @@
 <section class="container-fluid" id="section2">
   <div class="row">
     <div class="col-sm-8 col-sm-offset-2 text-center">
-        <h1>What is Bootstrap1?</h1>
+        <br><br><br><br>
+        <h1 id="headingforaboutus">Frequently Asked Questions</h1>
         <br>
-    <p class="lead" id="section2paragraph">Bootstrap is a free collection of tools for creating websites and web applications. It contains HTML and CSS-based design templates for typography, forms, buttons, navigation and other interface components, as well as optional JavaScript extensions. It is the No.1 project on GitHub with 65,000+ stars and 23,800 forks (as of March 2014) [1] and has been used by NASA and MSNBC, among many others..</p>
-        <br> 
-        <i style="font-size:120px" class="fa fa-camera fa-5x"></i>
-        <p>Big 'ol Camera Icon</p>
+        <p class="lead" id="textforcontentpage">This is a short list of our most freqently asked question.For more information about HashKit, or if you need support, please click on this site or even contact us by this link.</p>
+        <br>
+        <h3 id="textforcontentpage"><b>What is HashKit ?</b></h3>
+        <br>
+        <p class="lead" id="textforcontentpage">HashKit is a simple and illustrative tool to learn/understand about hash functions and more. At the same time, users are able to use the useful tools to increase productivity and other means.</p>
+        <br>
+        <h3 id="textforcontentpage"><b>Any cost for using this online website?</b></h3>
+        <br>
+        <p class="lead" id="textforcontentpage">It is absolutely free.</p>
+        <br>
+        <h3 id="textforcontentpage"><b>I have a technical problem or support issue I need resolved, who do I email?</b></h3>
+        <br>
+        <p class="lead" id="textforcontentpage">The best way to get in touch with us is to using our link or read up in our support center.</p>
+        <br>
+        <h3 id="textforcontentpage"><b>Where does the name come from?<b></h3>
+        <br>
+        <p class="lead" id="textforcontentpage">We are assigned to do this final year project on hash functions in this january and with the objectives from the project, we called it "HashKit" since no one has used or called it yet.</p>
+        <br>
+        <h3 id="textforcontentpage"><b>How to use this website? </b></h3>
+        <br>
+        <p class="lead" id="textforcontentpage">You can register and login as a user to use any tool or read up on any information.</p>
+        <br>
+        <h3 id="textforcontentpage"><b>Is it available or suitable on another platform such as mobile ?</b></h3>
+        <br>
+        <p class="lead" id="textforcontentpage">Yes with the help of the jquery, bootstrap and cakephp.</p>
+        <br>
+        <h3 id="textforcontentpage"><b>Any futher updates?</b></h3>
+        <br>
+        <p class="lead" id="textforcontentpage">Yes. There will be updates. Please wait for new updates..</p>
+        <br><br><br><br><br><br>
+
     </div>
   </div>
 </section>
@@ -113,7 +178,6 @@
           <div class="col-xs-6 text-right">Anyhoo, this is just some random blurb of text, and Bootply.com is a playground and code editor for Bootstrap.</div>
         </div>
         <p class="text-center">
-          <!-- <img src="/assets/example/img_mtnpeople.png" class="img-responsive center-block "> -->
         </p>
       </div>
    </div>
@@ -123,7 +187,6 @@
   <h2 class="text-center">Change this Content. Change the world.</h2>
     <div class="row">
       <div class="col-sm-8 col-sm-offset-2">
-      <!-- <img src="/assets/example/bg_smartphones.jpg" class="img-responsive center-block "> -->
       <p class="text-center">Images will scale down proportionately as browser width narrows.</p>
       </div>
     </div>
@@ -132,7 +195,6 @@
 <section class="container-fluid" id="section5">
   <h2 class="text-center">Do you see what I mean?</h2>
     <p class="text-center lead">Add some compelling information here</p>
-    <!-- <img src="/assets/example/bg_iphone.png" class="img-responsive center-block "> -->
 </section>
 
 <script type="text/javascript">
@@ -140,12 +202,39 @@
     	window.open("/Users/register");		
 	});
 
-    $(document).on("click", "#btlogin", function(event){
-    	window.open("/Users/login");
-    });
+  $(document).on("click", "#btlogin", function(event){
+  	window.open("/Users/login");
+  });
 
-    $('#myCarousel').carousel({ interval: 3000 })
+  $('#myCarousel').carousel({ interval: 3000 })
 
-    
+  function onHover()
+  {
+      $("#menuImg").attr('src', '/img/schoolbuilding.jpg');
+  }
 
+  function offHover()
+  {
+      $("#menuImg").attr('src', '/img/schoolbuildingdark.jpg');
+  }  
+
+  function onHover1()
+  {
+      $("#menuImg1").attr('src', '/img/group.jpg');
+  }
+
+  function offHover1()
+  {
+      $("#menuImg1").attr('src', '/img/groupdark.jpg');
+  }
+
+  function onHover2()
+  {
+      $("#menuImg2").attr('src', '/img/uow.jpg');
+  }
+
+  function offHover2()
+  {
+      $("#menuImg2").attr('src', '/img/uowdark.jpg');
+  }
 </script>

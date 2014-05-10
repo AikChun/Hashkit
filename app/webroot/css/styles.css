@@ -133,3 +133,24 @@ IMG.displayed {
     height: 400px;
     width: 100%;
 }
+
+#headingforaboutus{
+	color: white;
+	margin: 0px auto;
+	padding-bottom: 30px;
+	font-family: "pressura", "Helvetica Neue", Helvetica, Roboto, Arial, sans-serif;
+	font-size: 100px;
+	font-weight: bold;
+	line-height: 0.83em;
+	text-align: center;
+	text-transform: uppercase;
+}
+
+#textforcontentpage{
+	  color: white;
+  	  font-family: "elementa", Georgia, Cambria, "Times New Roman", Times, serif;
+	  font-size: 22px;
+	  font-style: italic;
+	  font-weight: bold;
+	  line-height: 1.45em; }
+}
