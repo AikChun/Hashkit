@@ -26,7 +26,7 @@
 			<div class = "container">
 
 				<!-- <a href = "/" class = "navbar-brand">Hashkit</a> -->
-				<a class="navbar-brand" href="index.html"><img src="/img/hash_icon.png"></a>
+				<a class="navbar-brand" href="" id="iconforbrand"><img src="/img/hash_icon.png"></a>
 
 				<button class = "navbar-toggle" data-toggle = "collapse" data-target = ".navHeaderCollapse">
 
@@ -86,6 +86,7 @@
 						<?php } ?>
 
 						<li><a href="/#section1">About Us</a></li>
+						<li><a href="/#section2">FAQ</a></li>
 						<li><a href="/contact_us">Contact Us</a></li>
 
 					</ul>
