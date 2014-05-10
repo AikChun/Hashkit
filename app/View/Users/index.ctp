@@ -10,7 +10,7 @@
 
 		<br>
 
-		<div class="">
+		<div>
 
 			<?php
 
@@ -32,10 +32,6 @@
 
 						echo '<td>';
 							echo $this->Paginator->sort('group_id');
-						echo '</td>';
-
-						echo '<td>';
-							echo $this->Paginator->sort('profile');
 						echo '</td>';
 
 						echo '<td>';
@@ -65,11 +61,15 @@
 							echo '</td>';
 
 							echo '<td>';
-								echo h($user['User']['group_id']);
-							echo '</td>';
 
-							echo '<td>';
-								echo h($user['User']['profile']);
+								if (h($user['User']['group_id']) == 1) {
+									echo 'Super Administrator';
+								} elseif (h($user['User']['group_id']) == 2) {
+									echo 'Administrator';
+								} elseif (h($user['User']['group_id']) == 3) {
+									echo 'Normal User';
+								}
+
 							echo '</td>';
 
 							echo '<td>';
@@ -93,10 +93,8 @@
 			?>
 
 			<?php
-
 				echo $this->Paginator->counter(array(
 					'format' => __('Page {:page} of {:pages}, showing {:current} records out of {:count} total, starting on record {:start}, ending on {:end}')));
-			
 			?>
 
 			<ul class="paging pager">
@@ -115,9 +113,7 @@
 
 		<div class="modal-footer">
 
-		</div>
-
-		<div class="pull-right">
+			<div class="pull-right">
 
 				<a href="/Users/admin_add" class="btn btn-primary ">Add User</a>
 				<a href="/" class="btn btn-default">Back to Home</a>

@@ -121,23 +121,23 @@
 
 		<div class="modal-footer">
 
+			<font color="grey" class="pull-right">By clicking 'Sign up', you agree to our <a href="#terms_and_conditions" data-toggle="modal" data-target=".terms_and_conditions">Terms and Conditions</a>.
+			</font>
+
+			<br>
+
+			<?php
+
+				$options = array(
+					'class' => 'btn btn-primary pull-right',
+					'label' => 'Sign Up'
+				);
+
+				echo $this->Form->end($options);
+				
+			?>
+		
 		</div>
-
-		<font color="grey" class="pull-right">By clicking 'Sign up', you agree to our <a href="#terms_and_conditions" data-toggle="modal" data-target=".terms_and_conditions">Terms and Conditions</a>.
-		</font>
-
-		<br>
-
-		<?php
-
-			$options = array(
-				'class' => 'btn btn-primary pull-right',
-				'label' => 'Sign Up'
-			);
-
-			echo $this->Form->end($options);
-			
-		?>
 
 	</div>
 

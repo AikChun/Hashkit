@@ -40,7 +40,7 @@
 					
 					<ul class="nav navbar-nav navbar-left">
 						
-						<li><a href="/">Home</a></li>
+						<li><a href="/#myCarousel">Home</a></li>
 
 						<?php  if($authUser['group_id'] == 1) { ?>
 
@@ -121,7 +121,7 @@
 			
 			<div class="container" style="margin-top: -8px;">
 
-				<div class="col-lg-5 navbar-text pull-left" style="top: 10px;">
+				<div class="col-lg-5 navbar-text pull-left" style="top: 8px;">
 					Site built by Hashkit Team @2014
 				</div>
 

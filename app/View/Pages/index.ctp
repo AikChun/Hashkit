@@ -198,9 +198,6 @@
 </section>
 
 <script type="text/javascript">
-	$(document).on("click", "#btnreg", function(event){
-    	window.open("/Users/register");		
-	});
 
   $(document).on("click", "#btlogin", function(event){
   	window.open("/Users/login");

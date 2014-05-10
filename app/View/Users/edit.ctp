@@ -24,9 +24,8 @@
 
 					echo $this->Form->input('name', array(
 						'class' => 'form-control',
-						'placeholder' => 'Full Name',
 						'label' => false,
-						'required'
+						'disabled' => true
 					));
 
 				?>
@@ -42,14 +41,33 @@
 			<div class="col-lg-10">
 
 				<?php
+
 					echo $this->Form->input('email', array(
 						'class' => 'form-control',
-						'placeholder' => 'you@example.com',
 						'label' => false,
-						'required'
+						'disabled' => true
 					));
 
 				?>
+
+			</div>
+
+		</div>
+
+		<div class="form-group">
+
+			<label class="col-lg-2 control-label">User Group:</label>
+	
+			<div class="col-lg-2">
+
+				<select class="form-control" name="data[User][group_id]" required>
+
+					<option value="">(choose one)</option>
+					<option value="1">1</option>
+					<option value="2">2</option>
+					<option value="3">3</option>
+				
+				</select>
 
 			</div>
 
@@ -65,9 +83,8 @@
 
 					echo $this->Form->input('profile', array(
 						'class' => 'form-control',
-						'placeholder' => 'User description',
 						'label' => false,
-						'required'
+						'disabled' => true
 					));
 
 				?>
@@ -97,17 +114,13 @@
 
 		<div class="modal-footer">
 
-		</div>
-		
-		<div class="pull-right">
-			
-			<div class="col-lg-5 pull-right">		
+			<div class="col-lg-5.5 pull-right">		
 
 				<a href="/Users/index" class="btn btn-default">Back</a>
 			
 			</div>
 
-			<div class="col-lg-5 pull-right">
+			<div class="col-lg-7 pull-right">
 
 				<?php
 

@@ -37,18 +37,18 @@
 
 		<div class="modal-footer">
 			
+			<?php
+
+				$forget_password_send = array(
+					'class' => 'btn btn-primary pull-right',
+					'label' => 'Send'
+				);
+
+				echo $this->Form->end($forget_password_send);
+
+			?>
+
 		</div>
-		
-		<?php
-
-			$forget_password_send = array(
-				'class' => 'btn btn-primary pull-right',
-				'label' => 'Send'
-			);
-
-			echo $this->Form->end($forget_password_send);
-
-		?>
 
 	</div>
 

@@ -16,9 +16,9 @@
 
 		<div class="form-group">
 
-			<label class="col-lg-2 control-label">Name :</label>
+			<label class="col-lg-2 control-label">Name:</label>
 
-			<div class="col-lg-5">
+			<div class="col-lg-10">
 
 				<?php
 
@@ -36,9 +36,9 @@
 
 		<div class="form-group">
 
-			<label class="col-lg-2 control-label">Email address :</label>
+			<label class="col-lg-2 control-label">Email:</label>
 
-			<div class="col-lg-5">
+			<div class="col-lg-10">
 
 				<?php
 
@@ -56,9 +56,9 @@
 
 		<div class="form-group">
 
-			<label class="col-lg-2 control-label">Password :</label>
+			<label class="col-lg-2 control-label">Password:</label>
 
-			<div class="col-lg-5">
+			<div class="col-lg-10">
 
 				<?php
 
@@ -76,16 +76,16 @@
 
 		<div class="form-group">
 
-			<label class="col-lg-2 control-label">Choose Group:</label>
+			<label class="col-lg-2 control-label">User Group:</label>
 	
-			<div class="col-lg-2">
+			<div class="col-lg-3">
 
 				<select class="form-control" name="data[User][group_id]">
 
 					<option value="">(choose one)</option>
-					<option value="1">1</option>
-					<option value="2">2</option>
-					<option value="3">3</option>
+					<option value="1">Super Administrator</option>
+					<option value="2">Administrator</option>
+					<option value="3">Normal User</option>
 				
 				</select>
 
@@ -95,9 +95,9 @@
 
 		<div class="form-group">
 
-			<label class="col-lg-2 control-label">Profile :</label>
+			<label class="col-lg-2 control-label">Profile:</label>
 
-			<div class="col-lg-5">
+			<div class="col-lg-10">
 
 				<?php
 
@@ -115,10 +115,6 @@
 
 		<div class="modal-footer">
 
-		</div>
-
-		<div class="pull-right">
-			
 			<div class="col-lg-5.5 pull-right">		
 
 				<a href="/" class="btn btn-default">Cancel</a>
