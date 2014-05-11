@@ -77,26 +77,65 @@
 
 		$(document).ready(function() {
 
+			// perform this when web page is loaded.
+
 			var algorithmName = $('#HashTestsHashAlgorithmName').val();
 			var maxCharacters = determineMaxCharacters(algorithmName);
 			$('#word_count').text(maxCharacters + ' characters left');
 
+			// This updates #word_count upon keypresses in the text box
 			$('#HashTestsMessageDigest').keyup(function () {
-				var algorithmName = $('#HashTestsHashAlgorithmName').val();
+				var whatsleft = determineLeftOverCharacterCount();
 				var maxCharacters = determineMaxCharacters(algorithmName);
-				var len = $(this).val().length;
-				if (len >= maxCharacters) {
-				$('#word_count').text(' you have reached the limit');
-				$('#word_count').css('color', 'red');
+
+				if (whatsleft === false) {
+					$('#word_count').text('You need to enter ' + maxCharacters + ' for the algorithm you\'ve chosen.');
+					$('#word_count').css('color', 'red');
 				} else {
-				var char = maxCharacters - len;
-				$('#word_count').text(char + ' characters left');
-				$('#word_count').css('color', 'black');
+					$('#word_count').text(whatsleft + ' characters left');
+					$('#word_count').css('color', 'black');
 				
 				}
 			});
 
+			// Updates #word_count when select box changes
+			$('#HashTestsHashAlgorithmName').change(function() {
+				var whatsleft = determineLeftOverCharacterCount();
+				var algorithmName = $('#HashTestsHashAlgorithmName').val();
+				var maxCharacters = determineMaxCharacters(algorithmName);
+				if (whatsleft === false) {
+					$('#word_count').text('You need to enter ' + maxCharacters + ' for the algorithm you\'ve chosen.');
+					$('#word_count').css('color', 'red');
+				} else {
+					$('#word_count').text(whatsleft + ' characters left');
+					$('#word_count').css('color', 'black');
+				}
+			}); 
 
+			// counts and prevents user from submitting form if the character count is over for the stipulated algorithm.
+			$('#HashTestsReverseLookUpForm').submit(function() {
+				var whatsleft = determineLeftOverCharacterCount();
+				var algorithmName = $('#HashTestsHashAlgorithmName').val();
+				var maxCharacters = determineMaxCharacters(algorithmName);
+				if(whatsleft != maxCharacters) {
+					alert('Please enter a message digest of ' + maxCharacters + ' characters for your chosen algorithm.');
+					event.preventDefault();
+				}
+				
+			});
+
+			// Find out what is the character amount you need for each algorithm
+			function determineLeftOverCharacterCount() {
+				var algorithmName = $('#HashTestsHashAlgorithmName').val();
+				var maxCharacters = determineMaxCharacters(algorithmName);
+				var len = $('#HashTestsMessageDigest').val().length;
+				if(len > maxCharacters) {
+					return false;
+				}
+				return maxCharacters - len;
+			}
+
+			// returns the max characters that is for each algorithm
 			function determineMaxCharacters(algorithmName) {
 				if(algorithmName == 'sha1') {
 					return 40;
@@ -110,31 +149,6 @@
 					return 64;
 				}
 			}
-
-			$('#HashTestsHashAlgorithmName').change(function() {
-				var algorithmName = $(this).val();
-				var maxCharacters = determineMaxCharacters(algorithmName);
-				var len = $('#HashTestsMessageDigest').val().length;
-				if (len >= maxCharacters) {
-					$('#word_count').text('You have reached the limit!');
-					$('#word_count').css('color', 'red');
-				} else {
-					var char = maxCharacters - len;
-					$('#word_count').text(char + ' characters left');
-					$('#word_count').css('color', 'black');
-				}
-			}); 
-
-			$('#HashTestsReverseLookUpForm').submit(function() {
-				var algorithmName = $('#HashTestsHashAlgorithmName').val();
-				var maxCharacters = determineMaxCharacters(algorithmName);
-				var len = $('#HashTestsMessageDigest').val().length;
-				if(len > maxCharacters) {
-					alert('Please enter a message digest below ' + maxCharacters + ' characters.');
-					event.preventDefault();
-				}
-				
-			});
 
 		});
 
