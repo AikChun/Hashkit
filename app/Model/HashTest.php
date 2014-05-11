@@ -94,6 +94,8 @@ class HashTest extends AppModel {
  * @return array $output in a format of $output[n]['HashResult']['attribute']
  */
 	public function computeDigests($selectedAlgorithms, $fileData) {
+		//$this->log($fileData);
+		//$this->log($selectedAlgorithms);
 
 		$computed = array();
 		$output = array();
@@ -145,6 +147,7 @@ class HashTest extends AppModel {
 			}
 			
 		}
+		$this->log($output);
 		return $output;
 	}
 

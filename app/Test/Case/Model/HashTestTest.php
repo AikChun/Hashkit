@@ -92,6 +92,31 @@ class HashTestTest extends CakeTestCase {
  * @return void
  */
 	public function testComputeDigests() {
+		//plaintext
+		$fileData = 'Hello';
+
+		$conditions = array(
+				'conditions' => array(
+						'HashAlgorithm.name' => 'MD2'
+				),
+				'fields' => array(
+					'HashAlgorithm.id',
+					'HashAlgorithm.name'
+				)
+			);	
+		
+		//get hash algorithm name based on conditions
+		$selectedAlgorithms = $HashAlgorithmModel->find('all', $conditions);
+
+		//call computeDigest to get hash result
+		$result = $this->HashTest->computeDigests($selectedAlgorithms,$fileData);
+		$computedMD = $result[0]['HashResult']['message_digest'];
+
+		//expected message digest
+		$expectedMD = 'a9046c73e00331af68917d3804f70655';
+
+		//check if expected and computed is the same
+		$this->assertEquals($computedMD,$expectedMD);
 	}
 
 /**
