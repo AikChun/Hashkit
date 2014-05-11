@@ -116,7 +116,7 @@
 				var maxCharacters = determineMaxCharacters(algorithmName);
 				var len = $('#HashTestsMessageDigest').val().length;
 				if (len >= maxCharacters) {
-					$('#word_count').text(' you have reached the limit');
+					$('#word_count').text('You have reached the limit!');
 					$('#word_count').css('color', 'red');
 				} else {
 					var char = maxCharacters - len;
@@ -124,6 +124,17 @@
 					$('#word_count').css('color', 'black');
 				}
 			}); 
+
+			$('#HashTestsReverseLookUpForm').submit(function() {
+				var algorithmName = $('#HashTestsHashAlgorithmName').val();
+				var maxCharacters = determineMaxCharacters(algorithmName);
+				var len = $('#HashTestsMessageDigest').val().length;
+				if(len > maxCharacters) {
+					alert('Please enter a message digest below ' + maxCharacters + ' characters.');
+					event.preventDefault();
+				}
+				
+			});
 
 		});
 
