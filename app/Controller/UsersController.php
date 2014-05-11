@@ -100,7 +100,6 @@ class UsersController extends AppController {
 			throw new NotFoundException(__('Invalid user'));
 		}
 		if ($this->request->is(array('post', 'put'))) {
-			$this->log($this->request->data);
 			$this->User->id = $id;
 				$this->User->set(array(
 					'name' => $this->request->data['User']['name'],
