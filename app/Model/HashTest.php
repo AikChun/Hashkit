@@ -147,7 +147,7 @@ class HashTest extends AppModel {
 			}
 			
 		}
-		$this->log($output);
+		//$this->log($output);
 		return $output;
 	}
 
@@ -279,6 +279,7 @@ class HashTest extends AppModel {
     	}
 
     	if ($duplicates == TRUE) {
+    		//$this->log($dupIndex);
     		return $dupIndex;
    		} else {
    			return ($duplicates);

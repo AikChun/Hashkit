@@ -106,7 +106,7 @@ class HashTestTest extends CakeTestCase {
 			);	
 		
 		//get hash algorithm name based on conditions
-		$selectedAlgorithms = $HashAlgorithmModel->find('all', $conditions);
+		$selectedAlgorithms = $this->HashAlgorithm->find('all', $conditions);
 
 		//call computeDigest to get hash result
 		$result = $this->HashTest->computeDigests($selectedAlgorithms,$fileData);
@@ -117,6 +117,28 @@ class HashTestTest extends CakeTestCase {
 
 		//check if expected and computed is the same
 		$this->assertEquals($computedMD,$expectedMD);
+	}
+
+	public function testCheckDuplicatesInArray() {
+		$mdData = array(
+			'aaf4c61ddcc5e8a2dabede0f3b482cd9aea9434d',
+			'f10e2821bbbea527ea02200352313bc059445190',
+			'78c9a53e2f28b543ea62c8266acfdf36d5c63e61',
+			'aaf4c61ddcc5e8a2dabede0f3b482cd9aea9434d',
+			'7f550a9f4c44173a37664d938f1355f0f92a47a7',
+			'f10e2821bbbea527ea02200352313bc059445190'
+			);
+
+		$result = $this->HashTest->checkDuplicatesInArray($mdData);
+
+		$expected = array(
+			'0',
+			'3',
+			'1',
+			'5'
+			);
+
+		$this->assertEquals($result,$expected);
 	}
 
 /**
