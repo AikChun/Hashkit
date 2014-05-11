@@ -26,7 +26,6 @@
 					'class' => 'form-control',
 					'placeholder' => 'Message Digest',
 					'label' => false,
-					'onchange' => 'updateWordCount()',
 					'required'));
 				
 			?>
@@ -77,57 +76,57 @@
 <script>
 
 		$(document).ready(function() {
-			updateWordCount();
-		});
 
-		$('#word_count').keypress(function() {
 			var algorithmName = $('#HashTestsHashAlgorithmName').val();
-			var textInput = $('#HashTestsMessageDigest').text();
-			var characterLength = textInput.length;
-			alert(characterLength);
-			var maxCharacters = 0;
-			if (algorithmName == 'sha1') {
-				maxCharacters = 40;
-			} else if(algorithmName == 'md5') {
-				maxCharacters = 32;
+			var maxCharacters = determineMaxCharacters(algorithmName);
+			$('#word_count').text(maxCharacters + ' characters left');
 
-			} else if(algorithmName == 'md2') {
-				maxCharacters = 32;
+			$('#HashTestsMessageDigest').keyup(function () {
+				var algorithmName = $('#HashTestsHashAlgorithmName').val();
+				var maxCharacters = determineMaxCharacters(algorithmName);
+				var len = $(this).val().length;
+				if (len >= maxCharacters) {
+				$('#word_count').text(' you have reached the limit');
+				$('#word_count').css('color', 'red');
+				} else {
+				var char = maxCharacters - len;
+				$('#word_count').text(char + ' characters left');
+				$('#word_count').css('color', 'black');
+				
+				}
+			});
 
-			} else if(algorithmName == 'md4') {
-				maxCharacters = 32;
 
-			} else if(algorithmName == 'sha256') {
-				maxCharacters = 64;
-
+			function determineMaxCharacters(algorithmName) {
+				if(algorithmName == 'sha1') {
+					return 40;
+				} else if(algorithmName == 'md5') {
+					return 32;
+				} else if(algorithmName == 'md4') {
+					return 32;
+				} else if(algorithmName == 'md2') {
+					return 32;
+				} else if(algorithmName == 'sha256') {
+					return 64;
+				}
 			}
 
-			var remainingCharacters = maxCharacters - characterLength;
-			$('#word_count').html(remainingCharacters);
+			$('#HashTestsHashAlgorithmName').change(function() {
+				var algorithmName = $(this).val();
+				var maxCharacters = determineMaxCharacters(algorithmName);
+				var len = $('#HashTestsMessageDigest').val().length;
+				if (len >= maxCharacters) {
+					$('#word_count').text(' you have reached the limit');
+					$('#word_count').css('color', 'red');
+				} else {
+					var char = maxCharacters - len;
+					$('#word_count').text(char + ' characters left');
+					$('#word_count').css('color', 'black');
+				}
+			}); 
+
 		});
-		function updateWordCount() {
-			var algorithmName = $('#HashTestsHashAlgorithmName').val();
-			var textInput = $('#HashTestsMessageDigest').text();
-			var characterLength = textInput.length;
-			var maxCharacters = 0;
-			if (algorithmName == 'sha1') {
-				maxCharacters = 40;
-			} else if(algorithmName == 'md5') {
-				maxCharacters = 32;
 
-			} else if(algorithmName == 'md2') {
-				maxCharacters = 32;
 
-			} else if(algorithmName == 'md4') {
-				maxCharacters = 32;
 
-			} else if(algorithmName == 'sha256') {
-				maxCharacters = 64;
-
-			}
-
-			var remainingCharacters = maxCharacters - characterLength;
-			$('#word_count').html(remainingCharacters);
-
-		}
 </script>
