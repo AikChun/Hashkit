@@ -219,7 +219,7 @@ class HashTestsController extends AppController {
 				// compute 
 				$output = $this->HashTest->computeDigests($selectedAlgorithms, $text);
 				// AND compare
-				$outputResult = HashingLib::compareDigests($output);
+				$outputResult = $this->HashTest->compareDigests($output);
 
 				// THEN this execute following...
 				//$this->log($outputResult);
@@ -238,7 +238,7 @@ class HashTestsController extends AppController {
 		$text = $this->Session->read('text');
 
 		$output = $this->HashTest->computeDigests($selectedAlgorithms, $text);
-		$outputResult = HashingLib::compareDigests($output);
+		$outputResult = $this->HashTest->compareDigests($output);
 		//$this->HashTest->sendResults();
 		$this->HashTest->saveTestResults($output, $outputResult);
 		//$this->start_queue_compute($selectedAlgorithms,$text);
@@ -264,7 +264,7 @@ class HashTestsController extends AppController {
 		// compute 
 		$output = $this->HashTest->computeDigests($selectedAlgorithms, $text);
 		// AND compare
-		$outputResult = HashingLib::compareDigests($output);
+		$outputResult = $this->HashTest->compareDigests($output);
 
 		$this->HashTest->sendResults();
 
@@ -455,9 +455,9 @@ class HashTestsController extends AppController {
 			$ScienceMD = hash(strtolower($data['HashTests']['HashAlgorithm']), 'Science');
 			$SciencdMD = hash(strtolower($data['HashTests']['HashAlgorithm']), 'Sciencd');
 
-			$HelloResult = HashingLib::computeAvalanche($HelloMD, $HellnMD);
-			$ComputerResult = HashingLib::computeAvalanche($ComputerMD, $ComputesMD);
-			$ScienceResult = HashingLib::computeAvalanche($ScienceMD, $SciencdMD);
+			$HelloResult = $this->HashTest->computeAvalanche($HelloMD, $HellnMD);
+			$ComputerResult = $this->HashTest->computeAvalanche($ComputerMD, $ComputesMD);
+			$ScienceResult = $this->HashTest->computeAvalanche($ScienceMD, $SciencdMD);
 			
 			array_push($output, $data);
 			array_push($output, $HelloMD);
