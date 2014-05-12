@@ -50,10 +50,10 @@ class HashResultsController extends AppController {
 		if ($this->request->is('post')) {
 			$this->HashResult->create();
 			if ($this->HashResult->save($this->request->data)) {
-				$this->Session->setFlash(__('The hash result has been saved.'));
+				$this->Session->setFlash(__('The hash result has been saved.', 'alert-box', array('class'=>'alert-danger')));
 				return $this->redirect(array('action' => 'index'));
 			} else {
-				$this->Session->setFlash(__('The hash result could not be saved. Please, try again.'));
+				$this->Session->setFlash(__('The hash result could not be saved. Please, try again.', 'alert-box', array('class'=>'alert-danger')));
 			}
 		}
 	}
@@ -71,10 +71,10 @@ class HashResultsController extends AppController {
 		}
 		if ($this->request->is(array('post', 'put'))) {
 			if ($this->HashResult->save($this->request->data)) {
-				$this->Session->setFlash(__('The hash result has been saved.'));
+				$this->Session->setFlash(__('The hash result has been saved.', 'alert-box', array('class'=>'alert-danger')));
 				return $this->redirect(array('action' => 'index'));
 			} else {
-				$this->Session->setFlash(__('The hash result could not be saved. Please, try again.'));
+				$this->Session->setFlash(__('The hash result could not be saved. Please, try again.', 'alert-box', array('class'=>'alert-danger')));
 			}
 		} else {
 			$options = array('conditions' => array('HashResult.' . $this->HashResult->primaryKey => $id));
@@ -96,9 +96,9 @@ class HashResultsController extends AppController {
 		}
 		$this->request->onlyAllow('post', 'delete');
 		if ($this->HashResult->delete()) {
-			$this->Session->setFlash(__('The hash result has been deleted.'));
+			$this->Session->setFlash(__('The hash result has been deleted.', 'alert-box', array('class'=>'alert-danger')));
 		} else {
-			$this->Session->setFlash(__('The hash result could not be deleted. Please, try again.'));
+			$this->Session->setFlash(__('The hash result could not be deleted. Please, try again.', 'alert-box', array('class'=>'alert-danger')));
 		}
 		return $this->redirect(array('action' => 'index'));
 	}

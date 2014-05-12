@@ -252,9 +252,9 @@ class HashTestsController extends AppController {
 		}
 		$this->request->onlyAllow('post', 'delete');
 		if ($this->HashTest->delete()) {
-			$this->Session->setFlash(__('The hash result has been deleted.'));
+			$this->Session->setFlash(__('The hash result has been deleted.', 'alert-box', array('class'=>'alert-danger')));
 		} else {
-			$this->Session->setFlash(__('The hash result could not be deleted. Please, try again.'));
+			$this->Session->setFlash(__('The hash result could not be deleted. Please, try again.', 'alert-box', array('class'=>'alert-danger')));
 		}
 		return $this->redirect(array('action' => 'show_test_results'));
 	}

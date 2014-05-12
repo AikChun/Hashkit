@@ -49,10 +49,10 @@ class QuestionnairesController extends AppController {
 		if ($this->request->is('post')) {
 			$this->Questionnaire->create();
 			if ($this->Questionnaire->save($this->request->data)) {
-				$this->Session->setFlash(__('The questionnaire has been saved.'));
+				$this->Session->setFlash(__('The questionnaire has been saved.', 'alert-box', array('class'=>'alert-danger')));
 				return $this->redirect(array('action' => 'index'));
 			} else {
-				$this->Session->setFlash(__('The questionnaire could not be saved. Please, try again.'));
+				$this->Session->setFlash(__('The questionnaire could not be saved. Please, try again.', 'alert-box', array('class'=>'alert-danger')));
 			}
 		}
 	}
@@ -70,10 +70,10 @@ class QuestionnairesController extends AppController {
 		}
 		if ($this->request->is(array('post', 'put'))) {
 			if ($this->Questionnaire->save($this->request->data)) {
-				$this->Session->setFlash(__('The questionnaire has been saved.'));
+				$this->Session->setFlash(__('The questionnaire has been saved.', 'alert-box', array('class'=>'alert-danger')));
 				return $this->redirect(array('action' => 'index'));
 			} else {
-				$this->Session->setFlash(__('The questionnaire could not be saved. Please, try again.'));
+				$this->Session->setFlash(__('The questionnaire could not be saved. Please, try again.', 'alert-box', array('class'=>'alert-danger')));
 			}
 		} else {
 			$options = array('conditions' => array('Questionnaire.' . $this->Questionnaire->primaryKey => $id));
@@ -95,9 +95,9 @@ class QuestionnairesController extends AppController {
 		}
 		$this->request->onlyAllow('post', 'delete');
 		if ($this->Questionnaire->delete()) {
-			$this->Session->setFlash(__('The questionnaire has been deleted.'));
+			$this->Session->setFlash(__('The questionnaire has been deleted.', 'alert-box', array('class'=>'alert-danger')));
 		} else {
-			$this->Session->setFlash(__('The questionnaire could not be deleted. Please, try again.'));
+			$this->Session->setFlash(__('The questionnaire could not be deleted. Please, try again.', 'alert-box', array('class'=>'alert-danger')));
 		}
 		return $this->redirect(array('action' => 'index'));
 	}

@@ -80,60 +80,60 @@
 
 			if($hashtest['HashTest']['analysis'] != 'Basic Hashing') {
 
-			echo '<b>Analysis:</b>';
-			echo '<br/>';
-			echo $hashtest['HashTest']['analysis'];
-			echo '<br/>';
-			echo '<br/>';
+				echo '<b>Analysis:</b>';
+				echo '<br/>';
+				echo $hashtest['HashTest']['analysis'];
+				echo '<br/>';
+				echo '<br/>';
 
-			if($hashtest['HashTest']['collision_count'] > 1) {
+				if($hashtest['HashTest']['collision_count'] > 1) {
 
-				echo '<table class="table table-bordered table-condensed">';
+					echo '<table class="table table-bordered table-condensed">';
 
-						$collision_pt = explode("\n", $hashtest['HashTest']['collision_pt']);
-						$collision_md = explode("\n", $hashtest['HashTest']['collision_md']);
-						$collision_index = explode(" ", $hashtest['HashTest']['collision_index']);
-
-						echo '<tr>';
-
-							echo '<td>';
-								echo '<b>Plaintext</b>';
-							echo '</td>';
-
-							echo '<td>';
-								echo '<b>';
-								echo $hashalgorithm[0]['HashAlgorithm']['name'];
-								echo '</b>';
-								echo '<b> Message Digest</b>';
-							echo '</td>';
-
-							echo '<td>';
-								echo '<b>File Line</b>';
-							echo '</td>';
-
-						echo '</tr>';
-
-						foreach($collision_pt as $key => $data) {
+							$collision_pt = explode("\n", $hashtest['HashTest']['collision_pt']);
+							$collision_md = explode("\n", $hashtest['HashTest']['collision_md']);
+							$collision_index = explode(" ", $hashtest['HashTest']['collision_index']);
 
 							echo '<tr>';
 
 								echo '<td>';
-									echo $collision_pt[$key];
+									echo '<b>Plaintext</b>';
 								echo '</td>';
 
 								echo '<td>';
-									echo $collision_md[$key];
+									echo '<b>';
+									echo $hashalgorithm[0]['HashAlgorithm']['name'];
+									echo '</b>';
+									echo '<b> Message Digest</b>';
 								echo '</td>';
-								
+
 								echo '<td>';
-									echo $collision_index[$key] + 1;
+									echo '<b>File Line</b>';
 								echo '</td>';
 
 							echo '</tr>';
 
-						}
+							foreach($collision_pt as $key => $data) {
 
-				echo '</table>';
+								echo '<tr>';
+
+									echo '<td>';
+										echo $collision_pt[$key];
+									echo '</td>';
+
+									echo '<td>';
+										echo $collision_md[$key];
+									echo '</td>';
+									
+									echo '<td>';
+										echo $collision_index[$key] + 1;
+									echo '</td>';
+
+								echo '</tr>';
+
+							}
+
+					echo '</table>';
 
 			}
 
@@ -304,36 +304,36 @@
 	
 		<div class="modal-footer">
 
+			<?php
+
+				echo $this->Form->create('HashResults', array('class' => 'form-horizontal', 'type' => 'file'));
+
+				$compute_and_compare_save = array(
+					'class' => 'btn btn-primary pull-left',
+					'label' => 'Save Results'
+				);
+
+			?>
+
+			<div class="pull-right">
+				
+				<div class="col-lg-6 pull-right">
+
+					<a href="/HashTests/show_test_results" class="btn btn-default pull-right">Back to History</a>
+				
+				</div>
+
+				<div class="col-lg-5 pull-right">
+
+					<?php
+						echo $this->Form->end($compute_and_compare_save);
+					?>			
+
+				</div>
+
+			</div>
+
 		</div>
-
-		<?php
-
-			echo $this->Form->create('HashResults', array('class' => 'form-horizontal', 'type' => 'file'));
-
-			$compute_and_compare_save = array(
-				'class' => 'btn btn-primary pull-left',
-				'label' => 'Save Results'
-			);
-
-		?>
-
-		<div class="pull-right">
-			
-			<div class="col-lg-6 pull-right">
-
-				<a href="/" class="btn btn-default pull-right">Back to Home</a>
-			
-			</div>
-
-			<div class="col-lg-5 pull-right">
-
-				<?php
-					echo $this->Form->end($compute_and_compare_save);
-				?>			
-
-			</div>
-
-		</div>	
 
 	</div>
 

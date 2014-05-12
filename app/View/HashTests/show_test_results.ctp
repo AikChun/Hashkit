@@ -26,6 +26,10 @@
 							echo $this->Paginator->sort('created');
 						echo '</td>';
 
+						echo '<td>';
+							echo 'Actions';
+						echo '</td>';
+
 					echo '</tr>';
 
 					foreach ($hashtests as $hashtest){
@@ -77,13 +81,7 @@
 
 		<div class="modal-footer">
 
-		</div>
-
-		<div class="pull-right">
-
-				<a href="/" class="btn btn-default">Back to Home</a>
-
-			</div>
+			<a href="/" class="btn btn-default">Back to Home</a>
 
 		</div>
 

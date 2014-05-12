@@ -80,10 +80,10 @@ class UsersController extends AppController {
 		if ($this->request->is('post')) {
 			$this->User->create();
 			if ($this->User->save($this->request->data)) {
-				$this->Session->setFlash(__('The user has been saved.', 'alert-box'));
+				$this->Session->setFlash(__('The user has been saved.', 'alert-box', array('class'=>'alert-danger')));
 				return $this->redirect(array('action' => 'index'));
 			} else {
-				$this->Session->setFlash(__('The user could not be saved. Please, try again.', 'alert-box'));
+				$this->Session->setFlash(__('The user could not be saved. Please, try again.', 'alert-box', array('class'=>'alert-danger')));
 			}
 		}
 	}
@@ -109,10 +109,10 @@ class UsersController extends AppController {
 					'status' => $this->request->data['User']['status']
 					));
 			if ($this->User->save()) {
-				$this->Session->setFlash(__('The user has been saved.', 'alert-box'));
+				$this->Session->setFlash(__('The user has been saved.', 'alert-box', array('class'=>'alert-danger')));
 				return $this->redirect(array('action' => 'index'));
 			} else {
-				$this->Session->setFlash(__('The user could not be saved. Please, try again.', 'alert-box'));
+				$this->Session->setFlash(__('The user could not be saved. Please, try again.', 'alert-box', array('class'=>'alert-danger')));
 			}
 		} else {
 			$options = array('conditions' => array('User.' . $this->User->primaryKey => $id));
@@ -134,9 +134,9 @@ class UsersController extends AppController {
 		}
 		$this->request->onlyAllow('post', 'delete');
 		if ($this->User->delete()) {
-			$this->Session->setFlash(__('The user has been deleted.', 'alert-box'));
+			$this->Session->setFlash(__('The user has been deleted.', 'alert-box', array('class'=>'alert-danger')));
 		} else {
-			$this->Session->setFlash(__('The user could not be deleted. Please, try again.', 'alert-box'));
+			$this->Session->setFlash(__('The user could not be deleted. Please, try again.', 'alert-box', array('class'=>'alert-danger')));
 		}
 		return $this->redirect(array('action' => 'index'));
 	}

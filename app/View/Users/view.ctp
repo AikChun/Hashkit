@@ -42,7 +42,7 @@
 
 		</div>
 
-				<div class="form-group">
+		<div class="form-group">
 								
 			<label class="col-lg-2 control-label" style="top: -7px;">Email:</label>
 
