@@ -700,14 +700,22 @@ class HashTestsController extends AppController {
 
 		$searchAlgo = array();
 		$searchAlgo = $hashAlgorithmModel->find('first', $options2);
-		//$this->log($searchAlgo);
 
 		array_push($searchResultAlgo, $searchAlgo);
 		}
 
 		$this->Set('hashalgorithm', $searchResultAlgo);
 
-		//$this->log($searchResultAlgo);
+		if($this->request->is('post')) {
+			$view = new View($this);
+			$result = $view->render('view','ajax');
+		
+    		$this->response->body($result);
+   		 	$this->response->type('html');
+   			$this->response->download('hashresult.html');
+			
+			$this->Session->setFlash('Hash result have been saved', 'alert-box', array('class'=>'alert-danger'));
+		}
 	}
 
 }
