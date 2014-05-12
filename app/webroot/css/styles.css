@@ -34,8 +34,9 @@ div.nowrap{
 }
 
 #section1 {
-	background-color: #168ccc;
-    color:#dedeff;
+	/*background-color: #168ccc;*/
+    /*color:#dedeff;*/
+    background-color: #dc3d24;
     min-height: 400px;
 	height: auto !important;
 	height: 100%;
@@ -43,20 +44,19 @@ div.nowrap{
 }
   
 #section2 {
-	background-color: #89eec1;
-    color:#FFF;
+	/*background-color: #89eec1;*/
+    /*color:#FFF;*/
+    background-color: #3e3e3e;
     min-height: 400px;
 	height: auto !important;
 	height: 100%;
 	padding-top:100px;
 }
-
-#section2paragraph {
-	color:#003e80;
-}  
+ 
 #section3 {
-	background-color: #168ccc;
-    color:#ddd;
+	/*background-color: #168ccc;
+    color:#ddd;*/
+    color:white;
     min-height: 400px;
 	height: auto !important;
 	height: 100%;
@@ -64,7 +64,7 @@ div.nowrap{
 }
 
 #section4 {
-	background-color: #fff;
+	background-color: #dc3d24;
     color:#444;
     min-height: 400px;
 	height: auto !important;
@@ -135,7 +135,7 @@ IMG.displayed {
 }
 
 #headingforaboutus{
-	color: white;
+	color: #3e3e3e;
 	margin: 0px auto;
 	padding-bottom: 30px;
 	font-family: "pressura", "Helvetica Neue", Helvetica, Roboto, Arial, sans-serif;
@@ -147,10 +147,84 @@ IMG.displayed {
 }
 
 #textforcontentpage{
+	  color: #3e3e3e;
+  	  font-family: "elementa", Georgia, Cambria, "Times New Roman", Times, serif;
+	  font-size: 22px;
+	  /*font-style: italic;*/
+	  font-weight: bold;
+	  line-height: 1.45em; 
+}
+
+#headingalt{
+	color: white;
+	margin: 0px auto;
+	padding-bottom: 30px;
+	font-family: "pressura", "Helvetica Neue", Helvetica, Roboto, Arial, sans-serif;
+	font-size: 100px;
+	font-weight: bold;
+	line-height: 0.83em;
+	text-align: center;
+	text-transform: uppercase;
+}
+
+#textforcontentpagealt{
 	  color: white;
   	  font-family: "elementa", Georgia, Cambria, "Times New Roman", Times, serif;
 	  font-size: 22px;
-	  font-style: italic;
+	  /*font-style: italic;*/
 	  font-weight: bold;
-	  line-height: 1.45em; }
+	  line-height: 1.45em; 
 }
+
+#textforcontentpagealtred{
+	  color: #E05151;
+	  /*background-color: #E05151;*/
+  	  font-family: "elementa", Georgia, Cambria, "Times New Roman", Times, serif;
+	  font-size: 22px;
+	  /*font-style: italic;*/
+	  font-weight: bold;
+	  line-height: 1.45em; 
+}
+
+#textforcarsousel{
+	 color: white;
+  	  font-family: "elementa", Georgia, Cambria, "Times New Roman", Times, serif;
+	  font-size: 30px;
+	  font-weight: bold;
+	  line-height: 1.45em; 
+}
+
+#textforcarsouselhead{
+	color: white;
+	margin: 0px auto;
+	padding-bottom: 30px;
+	/*font-family: "pressura", "Helvetica Neue", Helvetica, Roboto, Arial, sans-serif;*/
+	font-family: "elementa", Georgia, Cambria, "Times New Roman", Times, serif;
+	font-size: 50px;
+	font-weight: bold;
+	line-height: 0.83em;
+	text-align: center;
+	text-transform: uppercase;
+}
+
+.carsouselwallpaper {
+	display: block;
+/*	height: 500px;
+	width: 1500px;
+	position: absolute;
+	top: 0px;
+	right: 0px;*/
+
+}
+
+#textheaderhashinform {
+	color: #3e3e3e;
+}
+
+#textfornavbar{
+	  color: white;
+  	  font-family: "elementa", Georgia, Cambria, "Times New Roman", Times, serif;
+	  font-style: italic;
+	  font-weight: bold;	
+}
+
