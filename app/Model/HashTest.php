@@ -242,7 +242,6 @@ class HashTest extends AppModel {
 			$hashResult['HashResult']['recommendation'] = $recommendAlgo;
 			array_push($analysis, $hashResult);
 		}
-		
 		return $analysis;
 	}
 

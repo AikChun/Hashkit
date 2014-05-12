@@ -120,6 +120,63 @@ class HashTestTest extends CakeTestCase {
 		$this->assertEquals($computedMD,$expectedMD);
 	}
 
+	public function testCompareDigests() {
+		$data = array(
+			'0' => array(
+				'HashResult' => array(
+					'plaintext' => 'hello
+asd
+bye
+hello
+hey
+asd',
+					'message_digest' => 'aaf4c61ddcc5e8a2dabede0f3b482cd9aea9434d
+f10e2821bbbea527ea02200352313bc059445190
+78c9a53e2f28b543ea62c8266acfdf36d5c63e61
+aaf4c61ddcc5e8a2dabede0f3b482cd9aea9434d
+7f550a9f4c44173a37664d938f1355f0f92a47a7
+f10e2821bbbea527ea02200352313bc059445190',							
+					'hash_algorithm_id' => '1',
+					'hash_algorithm_name' => 'SHA1'
+					)
+				),
+			'1' => array(
+				'HashResult' => array(
+					'plaintext' => 'hello 
+asd 
+bye 
+hello 
+hey 
+asd',	
+					'message_digest' => 'aaf4c61ddcc5e8a2dabede0f3b482cd9aea9434d
+f10e2821bbbea527ea02200352313bc059445190
+78c9a53e2f28b543ea62c8266acfdf36d5c63e61
+aaf4c61ddcc5e8a2dabede0f3b482cd9aea9434d
+7f550a9f4c44173a37664d938f1355f0f92a47a7
+f10e2821bbbea527ea02200352313bc059445190',
+					'hash_algorithm_id' => '2',
+					'hash_algorithm_name' => 'MD5'
+					)
+				)
+			);
+		
+		$result = $this->HashTest->compareDigests($data);
+
+		$result = end($result);
+
+		$collisionCount = $result['HashResult']['collision_count'];
+			
+		$expectedCollisionCount = 4;
+
+		$this->assertEquals($collisionCount,$expectedCollisionCount);
+
+		$hashRecommendation = $result['HashResult']['recommendation'];
+		
+		$expectedRecommendation = 'SHA1';
+
+		$this->assertEquals($hashRecommendation,$expectedRecommendation);
+	}
+
 	public function testCheckDuplicatesInArray() {
 		$mdData = array(
 			'aaf4c61ddcc5e8a2dabede0f3b482cd9aea9434d',
