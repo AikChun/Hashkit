@@ -17,7 +17,8 @@ class HashTestTest extends CakeTestCase {
 		'app.user',
 		'app.group',
 		'app.hash_result',
-		'app.dictionary'
+		'app.dictionary',
+		'app.hash_algorithm'
 	);
 
 /**
@@ -93,7 +94,7 @@ class HashTestTest extends CakeTestCase {
  */
 	public function testComputeDigests() {
 		//plaintext
-		$fileData = 'Hello';
+		$fileData = 'hello';
 
 		$conditions = array(
 				'conditions' => array(
