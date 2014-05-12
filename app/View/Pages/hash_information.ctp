@@ -1,17 +1,41 @@
-<div style="padding-top:40px;" class="wrapper">
+<script type="text/javascript">
+    
+    /* off-canvas sidebar toggle */
+
+    $('[data-toggle=offcanvas]').click(function() {
+        $(this).toggleClass('visible-xs text-center');
+        $(this).find('i').toggleClass('glyphicon-chevron-right glyphicon-chevron-left');
+        $('.row-offcanvas').toggleClass('active');
+        $('#lg-menu').toggleClass('hidden-xs').toggleClass('visible-xs');
+        $('#xs-menu').toggleClass('visible-xs').toggleClass('hidden-xs');
+        $('#btnShow').toggle();
+    });
+
+</script>
+
+<div class="wrapper">
+    
+    <div class="box">
+
         <div class="row row-offcanvas row-offcanvas-left">
+                      
             <!-- sidebar -->
-            <div class="column col-sm-2 col-xs-1 sidebar-offcanvas" id="sidebar" style="background-color: #242222;">
-                <ul class="nav navbar-inverse">
+            <div class="column col-sm-2 col-xs-1 sidebar-offcanvas" id="sidebar">
+              
+                <ul class="nav">
+                    <li><a href="#" data-toggle="offcanvas" class="visible-xs text-center"><i class="glyphicon glyphicon-chevron-right"></i></a></li>
+                </ul>
+               
+                <ul class="nav hidden-xs" id="lg-menu">
                     <li><a href="#" data-toggle="offcanvas" class="visible-xs text-center"><i class="glyphicon glyphicon-chevron-right"></i></a>
                     </li>
                 </ul>
                 <ul class="nav navbar-inverse hidden-xs" id="lg-menu" style="margin-left: 5px">
-                    <li class="active"><a href="#sec0" class=""><i class="glyphicon glyphicon-list-alt"></i> Introduction</a>
+                    <li class="active"><a href="/Pages/hash_information/#sec0"><i class="glyphicon glyphicon-list-alt"></i> Introduction</a>
                     </li>
-                    <li><a href="#sec1" class=""><i class="glyphicon glyphicon-list"></i> Types of Hash functions</a>
+                    <li><a href="/Pages/hash_information/#sec1"><i class="glyphicon glyphicon-list"></i> Types of Hash functions</a>
                     </li>
-                    <li><a href="#sec2" class=""><i class="glyphicon glyphicon-paperclip"></i> List of Hash functions</a>
+                    <li><a href="/Pages/hash_information/#sec2"><i class="glyphicon glyphicon-paperclip"></i> List of Hash functions</a>
                     </li>
 
                     <li class="dropdown"> <a href="" class="dropdown-toggle" data-toggle="dropdown"><i class="glyphicon glyphicon-refresh"></i>Uses for Hash functions<b class="caret"></b></a>
@@ -24,13 +48,15 @@
                           </ul>
                     </li> <!--end of dropdown -->
 
-                    <li><a href="#sec4" class=""><i class="glyphicon glyphicon-wrench"></i> Hash functions' properties</a>
+                    <li><a href="/Pages/hash_information/#sec4"><i class="glyphicon glyphicon-wrench"></i> Hash functions' properties</a>
                     </li>
-                     <li><a href="#sec5" class=""><i class="glyphicon glyphicon-globe"></i> Attacks on Hash functions</a>
+                     <li><a href="/Pages/hash_information/#sec5"><i class="glyphicon glyphicon-globe"></i> Attacks on Hash functions</a>
                     </li>
+
                 </ul>
+              
                 <!-- tiny only nav-->
-                <ul class="nav navbar-inverse visible-xs" id="xs-menu">
+              <ul class="nav visible-xs" id="xs-menu">
                     <li><a href="#sec0" class="text-center"><i class="glyphicon glyphicon-list-alt"></i></a>
                     </li>
                     <li><a href="#sec1" class="text-center"><i class="glyphicon glyphicon-list"></i></a>
@@ -43,19 +69,23 @@
                     </li>
                     <li><a href="#sec5" class="text-center"><i class="glyphicon glyphicon-globe"></i></a>
                     </li>
+
                 </ul>
+              
             </div>
             <!-- /sidebar -->
+          
             <!-- main right col -->
-            <div class="column col-sm-10 col-xs-11 "  id="main">
-                    <div class=" col-sm-10 col-xs-11 ">
-                      <h2 id="sec0" class="text-center v-center" contenteditable="false">Introduction</h2>
+            <div class="column col-sm-10 col-xs-11" id="main">
+               
+               <div class=" col-sm-10 col-xs-11">
+                      <h2 id="sec0" class="text-center v-center">Introduction</h2>
                       <br>
                       <br>
-                      <h3 class="">What is a Hash function ?</h3>
+                      <h3 >What is a Hash function ?</h3>
                       <p>A hash function takes in any length of data such as a string of characters or numbers and maps them to a fixed length of arbitrary hash value.</p> 
-                      <hr class="">
-                        <h3 class="">What about Crytographic Hash function ?</h3>
+                      <hr >
+                        <h3 >What about Crytographic Hash function ?</h3>
                         <p>Despite of having the same functionality as a hash function, it has additional properties such one-way which provides better security. It is usually associated with generating a <a href="#messagedigest">message digest</a> (sometimes called a checksum) which is normally shorter than the original data. For a message digest function to be cryptographically secure, it must be computationally infeasible to get back the original message by using the message digest and impossible to find two different messages with the same message digest. It is designed to be easily computable and has to achieve certain security properties, e.g: <a href="#preimageresist">pre-image resistance</a>, <a href="#secpreimageresist">second pre-image resistance</a> and <a href="#collisionresistance">collision resistance</a>.</p>
                         <br>
                         <b><i>In our bag of tools, do come and try out our hash generator by this <a href="/HashTests/basic_hashing">link</a>. It can help you to hash with algorithms such as MD5, SHA1 or even Whirlpool.</i></b>
@@ -73,7 +103,7 @@
                           <div class="col-md-6">
                               <div class="panel panel-default">
                                   <div class="panel-heading">
-                                      <h3 class="" contenteditable="false">Encryption</h3>
+                                      <h3  >Encryption</h3>
                                       <img src="/img/EncryptDecrypt.jpg">
                                   </div>
                               </div>
@@ -81,20 +111,20 @@
                           <div class="col-md-6">
                               <div class="panel panel-default">
                                   <div class="panel-heading">
-                                      <h3 class="" contenteditable="false">Hash Function</h3>
+                                      <h3  >Hash Function</h3>
                                       <img src="/img/sha1.jpg">
                                   </div>
                               </div>
                           </div>
                       </div>
                       <br>
-                      <hr class="">
-                      <h3 class="" id="messagedigest">What is a message digest ?</h3>
+                      <hr >
+                      <h3  id="messagedigest">What is a message digest ?</h3>
                       <br>
                       <p>
                       It is a representation of text in a form of a single string of alphanumeric values, which is usually created by a <a href="#onewayhash">one-way hash function</a>.    
                       </p>
-                      <hr class="">
+                      <hr>
                       <h2 id="sec1" class="text-center v-center" >Type of Hash functions</h2>
                       <br>
                       <br>
@@ -129,7 +159,7 @@
                       <p>
                       For a function to be categorised as Collision Resistant hash functions, it has to fulfil the two security properties: <a href="#preimageresist">pre-image resistance</a> and <a href="#collisionresistance">collision resistance</a>
                       </p>
-                      <hr class="">
+                      <hr >
                       <h2 id="sec2" class="text-center v-center">List of Hash functions</h2>
                       <br><br>
                       <p>In this section, it talks about the commonly used families of hash functions and their attributes.</p>
@@ -161,12 +191,12 @@
                       <br>
                       <h4><b>HAVAL family</b></h4>
                       <br>
-                      <hr class="">
+                      <hr >
                       <h2 id="sec3" class="text-center v-center">Uses for Hash functions</h2>
                       <p>Today with the accessibility of lots of resources, nearly every application are integrating hash functions in their products due to their security reasons like to protect against alteration and unwanted attacks.</p> 
                       <br>
-                      <h4><b>Verifying file integrity</b></h4>
-                      <p id="verifyfileintegrity" class="edit_area">This is often used to check the intergity of the data by comparing the both checksums of two identical files generated by same hash function to be similar to one another.</p>
+                      <h4  id="verifyfileintegrity" ><b>Verifying file integrity</b></h4>
+                      <p class="edit_area">This is often used to check the intergity of the data by comparing the both checksums of two identical files generated by same hash function to be similar to one another.</p>
                       Example :
                       <br>
                       <CENTER><img src="/img/fileintegrity.jpg"></CENTER>
@@ -190,11 +220,11 @@
                       <CENTER><img src="/img/signing.jpg"></CENTER>
                       <br>
                       </br>
-                      <hr class="">
+                      <hr >
 
                       <h2 id="sec4" class="text-center v-center">Hash functions' properties</h2>
                       <br><br>  
-                      <p class="">A cyptographic hash functions must be able to defend against all known type of cryptanalytic attack. It should be able to apply to any input size and output a fixed size. It must have the following properties:
+                      <p >A cyptographic hash functions must be able to defend against all known type of cryptanalytic attack. It should be able to apply to any input size and output a fixed size. It must have the following properties:
                           <br><br>
                           <h4 id="collisionresistance"><b>Collision resistance</b></h4>
                           A measure to show the difficulty for anyone to pick two inputs that generate the same hash value.If it is difficult to find different messages M1 and M2
@@ -230,7 +260,7 @@
                       <br>
                       <h4><b>Avalanche effect</b><h4>
 
-                      <hr class="">
+                      <hr >
                         <h2 id="sec5" class="text-center v-center">Attacks on Hash functions</h2>
                         <br><br>
                         <h3><b>Generic analysis</b></h3>
@@ -289,22 +319,19 @@
                         <br>
                         <h4><b>distinguishing attack</b></h4>
                         <br>
+                        <br>
+                        <br>
+                        <br>
+                        <br>
+                        <br>
+                        <br>
+                        <br>
                   </div>
                 </div>
+               
             </div>
             <!-- /main -->
-
+          
+        </div>
     </div>
 </div>
-<script type="text/javascript">
-    $('[data-toggle=offcanvas]').click(function() {
-      $(this).toggleClass('visible-xs text-center');
-      $(this).find('i').toggleClass('glyphicon-chevron-right glyphicon-chevron-left');
-      $('.row-offcanvas').toggleClass('active');
-      $('#lg-menu').toggleClass('hidden-xs').toggleClass('visible-xs');
-      $('#xs-menu').toggleClass('visible-xs').toggleClass('hidden-xs');
-      $('#btnShow').toggle();
-  });
-
-    
-</script>

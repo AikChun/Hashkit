@@ -10,7 +10,7 @@
 
 		<br>
 
-		<div class="">
+		<div >
 
 			<?php
 
