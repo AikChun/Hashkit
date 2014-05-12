@@ -66,8 +66,8 @@
 					'label' => 'Next'
 				);
 
-				echo $this->Form->end($reverse_lookup_next)
-		
+				echo $this->Form->end($reverse_lookup_next);
+				
 			?>
 
 		</div>
@@ -75,6 +75,7 @@
 	</div>
 
 </div>
+
 <script>
 
 		$(document).ready(function() {

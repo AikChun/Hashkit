@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html style="height: 100%;">
+<html>
 
 	<head>
 
@@ -20,7 +20,6 @@
 	</head>
 
 		<body style= "">
-
 		<div class = "navbar navbar-inverse navbar-fixed-top " id="nav">
 			
 			<div class = "container">
