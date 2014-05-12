@@ -286,6 +286,8 @@ class HashTest extends AppModel {
 	}
 
 	public static function computeAvalanche($firstMD, $secondMD){
+		CakeLog::write('debug',$firstMD);
+		CakeLog::write('debug',$secondMD);
 		$lengthOfMD = strlen ($firstMD);
 		$bitDiff = array();
 		$result = array();
@@ -304,7 +306,7 @@ class HashTest extends AppModel {
 
 		$result['Percent'] = $percent;
 		$result['BitDiff'] = $bitDiff;
-
+		CakeLog::write('debug',$result);
 		return $result;
 	}
 

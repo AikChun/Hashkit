@@ -199,6 +199,31 @@ f10e2821bbbea527ea02200352313bc059445190',
 		$this->assertEquals($result,$expected);
 	}
 
+	public function testComputeAvalanche() {
+		$SHA256HelloMD = '185f8db32271fe25f561a6fc938b2e264306ec304eda518007d1764826381969';
+		$SHA256HellnMD = '0256ddc873b8db322a842b7a1dc11f145293254ca0fae6424f30e63d713b6345';
+
+		$result = $this->HashTest->computeAvalanche($SHA256HelloMD,$SHA256HellnMD);
+
+		$expectedPercent = 92.19;
+
+		$computedPercent = $result['Percent'];
+
+		$this->assertEquals($computedPercent,$expectedPercent);
+
+		$expectedBitDiff = array(
+			'2',
+			'5',
+			'43',
+			'53',
+			'58'
+			);
+
+		$computedBitDiff = $result['BitDiff'];
+
+		$this->assertEquals($computedBitDiff,$expectedBitDiff);
+	}
+
 /**
  * testCheckAndInsertIntoDictionary method
  *

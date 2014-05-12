@@ -455,9 +455,15 @@ class HashTestsController extends AppController {
 			$ScienceMD = hash(strtolower($data['HashTests']['HashAlgorithm']), 'Science');
 			$SciencdMD = hash(strtolower($data['HashTests']['HashAlgorithm']), 'Sciencd');
 
+			$this->log($HelloMD);
+			$this->log($HellnMD);
+
 			$HelloResult = $this->HashTest->computeAvalanche($HelloMD, $HellnMD);
 			$ComputerResult = $this->HashTest->computeAvalanche($ComputerMD, $ComputesMD);
 			$ScienceResult = $this->HashTest->computeAvalanche($ScienceMD, $SciencdMD);
+
+			$this->log('AHAHAHAHAH');
+			$this->log($HelloResult);
 			
 			array_push($output, $data);
 			array_push($output, $HelloMD);
