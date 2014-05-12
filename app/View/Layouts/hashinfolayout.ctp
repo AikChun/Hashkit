@@ -19,14 +19,14 @@
 
 	</head>
 
-		<body style="height:100%; overflow-y:hidden; padding-top:50px;">
+		<body style= "">
 
 		<div class = "navbar navbar-inverse navbar-fixed-top " id="nav">
 			
 			<div class = "container">
 
 				<!-- <a href = "/" class = "navbar-brand">Hashkit</a> -->
-				<a class="navbar-brand" href="" id="iconforbrand"><img src="/img/hash_icon.png"></a>
+				<a class="navbar-brand" href="/" id="iconforbrand"><img src="/img/hash_icon.png"></a>
 
 				<button class = "navbar-toggle" data-toggle = "collapse" data-target = ".navHeaderCollapse">
 
@@ -155,8 +155,22 @@
 		    }
 		  });
 		});
+
+		// /* highlight the top nav as scrolling occurs */
+		// $('body').scrollspy({ target: '#nav' });
+
+		/* smooth scrolling for scroll to top */
+		// $('.scroll-top').click(function(){
+		//   $('body,html').animate({scrollTop:0},1000);
+		// })	
+
+		// /* smooth scrolling for nav sections */
+		 // $('#nav .navbar-nav li>a').click(function(){
+		 //   var link = $(this).attr('href');
+		 //   var posi = $(link).offset().top+20;
+		 //   $('body,html').animate({scrollTop:posi},700);
+
+
 	</script>
-
-
 
 </html>

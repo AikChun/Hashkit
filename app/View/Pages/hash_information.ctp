@@ -1,5 +1,4 @@
-<div class="wrapper">
-
+<div style="padding-top:40px;" class="wrapper">
         <div class="row row-offcanvas row-offcanvas-left">
             <!-- sidebar -->
             <div class="column col-sm-2 col-xs-1 sidebar-offcanvas" id="sidebar" style="background-color: #242222;">
@@ -48,7 +47,7 @@
             </div>
             <!-- /sidebar -->
             <!-- main right col -->
-            <div class="column col-sm-10 col-xs-11 " id="main">
+            <div class="column col-sm-10 col-xs-11 "  id="main">
                     <div class=" col-sm-10 col-xs-11 ">
                       <h2 id="sec0" class="text-center v-center" contenteditable="false">Introduction</h2>
                       <br>
