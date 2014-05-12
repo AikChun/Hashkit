@@ -72,9 +72,25 @@
 					'label' => 'Next'
 				);
 
-				echo $this->Form->end($basic_hasing_next);
-
 			?>
+
+			<div class="pull-right">
+				
+				<div class="col-lg-6.5 pull-right">
+
+					<a href="/HashTests/basic_hashing" class="btn btn-default pull-right">Back</a>
+				
+				</div>
+
+				<div class="col-lg-5 pull-right">
+
+					<?php
+						echo $this->Form->end($basic_hasing_next);
+					?>			
+
+				</div>
+
+			</div>
 
 		</div>
 

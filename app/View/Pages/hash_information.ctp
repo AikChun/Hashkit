@@ -1,8 +1,7 @@
-<div class="wrapper">
-
+<div style="padding-top:40px;" class="wrapper">
         <div class="row row-offcanvas row-offcanvas-left">
             <!-- sidebar -->
-            <div class="column col-sm-2 col-xs-1 sidebar-offcanvas" id="sidebar" style="background-color: #242222; margin-top: 50px;">
+            <div class="column col-sm-2 col-xs-1 sidebar-offcanvas" id="sidebar" style="background-color: #242222;">
                 <ul class="nav navbar-inverse">
                     <li><a href="#" data-toggle="offcanvas" class="visible-xs text-center"><i class="glyphicon glyphicon-chevron-right"></i></a>
                     </li>
@@ -48,8 +47,8 @@
             </div>
             <!-- /sidebar -->
             <!-- main right col -->
-            <div class="column col-sm-10 col-xs-11 " id="main">
-                    <div class=" col-sm-10 col-xs-11 g hashinformation">
+            <div class="column col-sm-10 col-xs-11 "  id="main">
+                    <div class=" col-sm-10 col-xs-11 ">
                       <h2 id="sec0" class="text-center v-center" contenteditable="false">Introduction</h2>
                       <br>
                       <br>
