@@ -13,7 +13,7 @@
 		<div class="selectedAlgorithm" style="font-size:160%">
 
 			<?php
-				echo 'You have got <b>'.$result.' out of 3.</b>';
+				echo 'You have got <b>'.$result.' out of 5.</b>';
 			?>
 		
 		</div>
@@ -27,14 +27,16 @@
 			for($i = 0; $i < sizeof($questions); $i++){
 
 					echo '<b>'.$num++.'. '.$questions[$i].'</b><br><br>';
-					echo 'You have selected: <b>'.$data[$i].'</b><br>';
-					echo 'The answer is: <b>'.$answers[$i].'</b> ';
+					echo 'You have selected: <b>'.$data[$i].'</b>';
+					
 
 					if ($data[$i] == $answers[$i]){
-						echo "<img src='/img/green_tick.png'/>".'<br><br>';
+						echo "<img src='/img/green_tick.png'/>".'<br>';
 					}else{
-						echo "<img src='/img/red_cross.png' />".'<br><br>';
+						echo "<img src='/img/red_cross.png' />".'<br>';
 					}
+
+					echo 'The answer is: <b>'.$answers[$i].'</b><br><br> ';
 				
 			}
 
