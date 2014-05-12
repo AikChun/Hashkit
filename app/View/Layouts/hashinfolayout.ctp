@@ -19,7 +19,8 @@
 
 	</head>
 
-		<body style= "">
+		<body>
+
 		<div class = "navbar navbar-inverse navbar-fixed-top " id="nav">
 			
 			<div class = "container">
@@ -136,11 +137,12 @@
 	</body>
 
 	<script type="text/javascript">
-		$(document).ready(function () {
-        $('a[href="' + this.location.pathname + '"]').parent().addClass('active');
-    	});
 
-	    $(function() {
+		$(document).ready(function () {
+		$('a[href="' + this.location.pathname + '"]').parent().addClass('active');
+		});
+
+		$(function() {
 		  $('a[href*=#]:not([href=#])').click(function() {
 		    if (location.pathname.replace(/^\//,'') == this.pathname.replace(/^\//,'') && location.hostname == this.hostname) {
 		      var target = $(this.hash);
