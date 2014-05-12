@@ -127,7 +127,7 @@
 
 					$add_user_save = array(
 						'class' => 'btn btn-primary',
-						'label' => 'Add User'
+						'label' => 'Confirm'
 					);
 
 					echo $this->Form->end($add_user_save);

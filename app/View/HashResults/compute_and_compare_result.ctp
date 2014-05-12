@@ -308,21 +308,22 @@
 				echo $this->Form->create('HashResults', array('class' => 'form-horizontal', 'type' => 'file'));
 
 				$compute_and_compare_save = array(
-					'class' => 'btn btn-primary pull-left',
+					'class' => 'btn btn-warning pull-right',
 					'label' => 'Save Results'
 				);
 
 			?>
 
-			<div class="pull-right">
+			<div>
 				
-				<div class="col-lg-6 pull-right">
+				<div class="col-lg-8.5 pull-right">
 
-					<a href="/" class="btn btn-default pull-right">Back to Home</a>
+					<a href="/" class="btn btn-primary">Start New Test</a>
+					<a href="/" class="btn btn-default">Back to Home</a>
 				
 				</div>
 
-				<div class="col-lg-5 pull-right">
+				<div class="col-lg-4 pull-right" style="left: 5px;">
 
 					<?php
 						echo $this->Form->end($compute_and_compare_save);

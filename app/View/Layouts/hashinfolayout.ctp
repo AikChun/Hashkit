@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html style="height: 100%;">
+<html>
 
 	<head>
 
@@ -19,7 +19,7 @@
 
 	</head>
 
-		<body style="height:100%; overflow-y:hidden; padding-top:50px;">
+		<body style="height:100%;padding-top:50px;">
 
 		<div class = "navbar navbar-inverse navbar-fixed-top " id="nav">
 			
