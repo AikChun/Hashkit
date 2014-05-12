@@ -75,18 +75,18 @@
 
 		<div class="modal-footer">
 
+			<?php
+
+				$compute_and_compare_next = array(
+					'class' => 'btn btn-primary pull-right',
+					'label' => 'Next'
+				);
+
+				echo $this->Form->end($compute_and_compare_next);
+
+			?>
+		
 		</div>
-
-		<?php
-
-			$compute_and_compare_next = array(
-				'class' => 'btn btn-primary pull-right',
-				'label' => 'Next'
-			);
-
-			echo $this->Form->end($compute_and_compare_next);
-
-		?>
 
 	</div>
 

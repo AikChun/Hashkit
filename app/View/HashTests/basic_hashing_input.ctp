@@ -65,18 +65,18 @@
 
 		<div class="modal-footer">
 
+			<?php
+
+				$basic_hasing_next = array(
+					'class' => 'btn btn-primary pull-right',
+					'label' => 'Next'
+				);
+
+				echo $this->Form->end($basic_hasing_next);
+
+			?>
+
 		</div>
-
-		<?php
-
-			$basic_hasing_next = array(
-				'class' => 'btn btn-primary pull-right',
-				'label' => 'Next'
-			);
-
-			echo $this->Form->end($basic_hasing_next);
-
-		?>
 
 	</div>
 

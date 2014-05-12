@@ -63,9 +63,9 @@
 
 		<div class="modal-footer">
 
+			<a href="/" class="btn btn-primary pull-right">Back to Home</a>
+			
 		</div>
-
-		<a href="/" class="btn btn-primary pull-right">Back to Home</a>
 	
 	</div>
 

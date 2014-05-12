@@ -27,19 +27,19 @@
 		?>
 		
 		<div class="modal-footer">
-
-		</div>
 		
-		<?php
+			<?php
 
-			$options = array(
-				'class' => 'btn btn-primary pull-right',
-				'label' => 'Next'
-			);
+				$options = array(
+					'class' => 'btn btn-primary pull-right',
+					'label' => 'Next'
+				);
 
-			echo $this->Form->end($options);
+				echo $this->Form->end($options);
 
-		?>
+			?>
+		
+		</div>
 
 	</div>
 

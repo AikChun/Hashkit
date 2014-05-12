@@ -31,7 +31,9 @@
 			?>
 
 			</div>
+
 			<div id="word_count" style="text-align:right;padding-right:20px"></div>
+		
 		</div>
 
 		<div class="form-group">
@@ -57,18 +59,18 @@
 
 		<div class="modal-footer">
 
-		</div>
+			<?php
 
-		<?php
+				$reverse_lookup_next = array(
+					'class' => 'btn btn-primary pull-right',
+					'label' => 'Next'
+				);
 
-			$reverse_lookup_next = array(
-				'class' => 'btn btn-primary pull-right',
-				'label' => 'Next'
-			);
-
-			echo $this->Form->end($reverse_lookup_next)
+				echo $this->Form->end($reverse_lookup_next)
 		
-		?>
+			?>
+
+		</div>
 
 	</div>
 
@@ -117,7 +119,7 @@
 				var whatsleft = determineLeftOverCharacterCount();
 				var algorithmName = $('#HashTestsHashAlgorithmName').val();
 				var maxCharacters = determineMaxCharacters(algorithmName);
-				if(whatsleft != maxCharacters) {
+				if(whatsleft != 0) {
 					alert('Please enter a message digest of ' + maxCharacters + ' characters for your chosen algorithm.');
 					event.preventDefault();
 				}

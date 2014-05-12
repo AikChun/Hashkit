@@ -133,9 +133,11 @@
 
 		<?php
 			echo $this->Form->create('HashTests',array('action' => 'calculate_probability_of_collision', 'class' => 'form-horizontal'));
-		?> 
+		?>
+
 		<h4>1. Sample size of the hash function </h4>
 		<div class="form-group">
+
 			<label class="col-lg-2 control-label">Base:</label>
 
 			<div class="col-lg-10">
@@ -205,8 +207,11 @@
 			</div>
 
 		</div>
+
 		<br>
+
 		<h4>2.Select Hash algorithm </h4>
+
 		<div class="form-group">
 
 			<label class="col-lg-2 control-label">Hash Algorithm:</label>
@@ -238,9 +243,7 @@
 
 			</div>
 
-		</div>
-
-		
+		</div>		
 
 		<div class="form-group">
 		
@@ -360,18 +363,18 @@
 
 		<div class="modal-footer">
 
+			<?php
+
+				$calculate_probability_of_collision_next = array(
+					'class' => 'btn btn-primary pull-right',
+					'label' => 'Next'
+				);
+
+				echo $this->Form->end($calculate_probability_of_collision_next);
+
+			?>
+
 		</div>
-
-		<?php
-
-			$calculate_probability_of_collision_next = array(
-				'class' => 'btn btn-primary pull-right',
-				'label' => 'Next'
-			);
-
-			echo $this->Form->end($calculate_probability_of_collision_next);
-
-		?>
 
 	</div>
 

@@ -41,9 +41,9 @@
 	
 		<div class="modal-footer">
 
-		</div>
+			<a href="/" class="btn btn-primary pull-right">Back to Home</a>
 
-		<a href="/" class="btn btn-primary pull-right">Back to Home</a>
+		</div>
 
 	</div>
 
