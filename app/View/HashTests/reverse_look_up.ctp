@@ -119,7 +119,7 @@
 				var whatsleft = determineLeftOverCharacterCount();
 				var algorithmName = $('#HashTestsHashAlgorithmName').val();
 				var maxCharacters = determineMaxCharacters(algorithmName);
-				if(whatsleft != 0) {
+				if(whatsleft === false || whatsleft !== 0) {
 					alert('Please enter a message digest of ' + maxCharacters + ' characters for your chosen algorithm.');
 					event.preventDefault();
 				}
