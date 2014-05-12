@@ -185,23 +185,56 @@
   <h1 class="text-center " id="headingforaboutus">Support</h1>
     <div class="row">
       <div class="col-sm-6 col-sm-offset-3">
-        <p class="text-center lead" id="textforcontentpage">Vertical scrolling has become a popular and lasting trend in Web design. The question becomes, is it here to stay?</p>
-        <div class="row">
-          <div class="col-xs-6" id="textforcontentpage">Some brand-tacular designs even have home page content that is taller that 12,000 pixels. That's a lotta content.</div>
-          <div class="col-xs-6 text-right" id="textforcontentpage">Anyhoo, this is just some random blurb of text, and Bootply.com is a playground and code editor for Bootstrap.</div>
-          
-        </div>
+        <p class="text-center lead" id="textforcontentpage">If you do have any issue, you may find your answer here:</p>
+        <h3 id="textforcontentpagealtred"><b>Login help</b></h3>
+        <br>
+        <h3 id="textforcontentpagealtred">What are the requirements for passwords on Hash Kit account?</h3>
+        <br>
+        <p class="lead" id="textforcontentpage">Here are the requirements of password:
+        <br>  
+        - The use of both uppercase and lowercase letters (case sensitivity)
+        <br>
+        - Inclusion of one or more numerical digits
+        <br>
+        - Inclusion of special characters, e.g. @, #, &, $ etc.
+        <br>
+        - At least 8 characters
+        </p>
+
+        <h3 id="textforcontentpagealtred">How do I change my password?</h3>
+
+        <p class="lead" id="textforcontentpage">You can find a “change password button” in your profile and this will change your password with immediate effects and an email will be sent to your email upon confirmation.I can’t remember my password, what should I do?Click on the forget password link at the login page, an email will be sent to you to assist on resetting your password.</p>
+
+        <h3 id="textforcontentpagealtred">Can I access the web application without logging in?</h3>
+
+        <p class="lead" id="textforcontentpage">A Hash Kit account is mandatory for the usage of this application.</p>
+
+        <h3 id="textforcontentpagealtred">I haven't received the reset email in my mailbox, what should I do next? </h3>
+
+        <p class="lead" id="textforcontentpage">Please wait for few minutes for the server to process the email and check your spam mail. If the email still did not arrive, you can contact the administrator (hashkitproject@gmail.com) for further assistance or use our contact us button on top.</p>
+
+       <h3 id="textforcontentpagealtred">Process help</h3> 
+
+        <h3 id="textforcontentpagealtred">What happens if I unexpectedly/accidently close the browser?</h3>
+
+        <p class="lead" id="textforcontentpage">You will have to restart the browser and try to run the application again.</p>
+
+        <h3 id="textforcontentpagealtred">If my browser hangs when the processing is still been carried out, what should I do next?</h3>
+
+        <p class="lead" id="textforcontentpage">You will have to restart the browser and try to run the application again.After the process is done, I cannot see the result screen and what should I do next?Check your internet connection. You can refresh the page by pressing the refresh button on the web browser and wait for it to load. If it still does not work, please contact the administrator (hashkitproject@gmail.com) for further assistance.</p>
+
+
+        <h3 id="textforcontentpagealtred">Other topics help</h3>
+
+        <h3 id="textforcontentpagealtred">I can’t see anything on the website, what should i do?</h3>
+
+        <p class="lead" id="textforcontentpage">Check your internet connection. You can refresh the page by pressing the refresh button on the web browser and wait for it to load. If it still does not work, please contact the administrator(hashkitproject@gmail.com) for further assistance.</p>
+
+        <h3 id="textforcontentpagealtred">If I received any 404 error page in anytime during the visit of the website, what should I do next?</h3>
+
+        <p class="lead" id="textforcontentpage">Check your internet connection. You can refresh the page by pressing the refresh button on the web browser and wait for it to load. If it still does not work, please contact the administrator (hashkitproject@gmail.com) for further assistance.</p>
       </div>
    </div>
-</section>
-
-<section class="container-fluid" id="section4">
-  <h2 class="text-center">Change this Content. Change the world.</h2>
-    <div class="row">
-      <div class="col-sm-8 col-sm-offset-2">
-      <p class="text-center">Images will scale down proportionately as browser width narrows.</p>
-      </div>
-    </div>
 </section>
 
 <script type="text/javascript">

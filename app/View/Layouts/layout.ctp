@@ -81,7 +81,7 @@
 
 						</li>
 						<li id="textfornavbar"><a href="/Pages/hash_information">Hash Information</a></li>
-						<li id="textfornavbar"><a href="/Questionnaires/questionnaire">Questionnaire</a></li>
+						<li id="textfornavbar"><a href="/Questionnaires/questionnaire_start">Questionnaire</a></li>
 						
 						<?php } ?>
 
