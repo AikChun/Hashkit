@@ -17,7 +17,8 @@ class HashTestTest extends CakeTestCase {
 		'app.user',
 		'app.group',
 		'app.hash_result',
-		'app.dictionary'
+		'app.dictionary',
+		'app.hash_algorithm'
 	);
 
 /**
@@ -93,7 +94,7 @@ class HashTestTest extends CakeTestCase {
  */
 	public function testComputeDigests() {
 		//plaintext
-		$fileData = 'Hello';
+		$fileData = 'hello';
 
 		$conditions = array(
 				'conditions' => array(
@@ -119,6 +120,63 @@ class HashTestTest extends CakeTestCase {
 		$this->assertEquals($computedMD,$expectedMD);
 	}
 
+	public function testCompareDigests() {
+		$data = array(
+			'0' => array(
+				'HashResult' => array(
+					'plaintext' => 'hello
+asd
+bye
+hello
+hey
+asd',
+					'message_digest' => 'aaf4c61ddcc5e8a2dabede0f3b482cd9aea9434d
+f10e2821bbbea527ea02200352313bc059445190
+78c9a53e2f28b543ea62c8266acfdf36d5c63e61
+aaf4c61ddcc5e8a2dabede0f3b482cd9aea9434d
+7f550a9f4c44173a37664d938f1355f0f92a47a7
+f10e2821bbbea527ea02200352313bc059445190',							
+					'hash_algorithm_id' => '1',
+					'hash_algorithm_name' => 'SHA1'
+					)
+				),
+			'1' => array(
+				'HashResult' => array(
+					'plaintext' => 'hello 
+asd 
+bye 
+hello 
+hey 
+asd',	
+					'message_digest' => 'aaf4c61ddcc5e8a2dabede0f3b482cd9aea9434d
+f10e2821bbbea527ea02200352313bc059445190
+78c9a53e2f28b543ea62c8266acfdf36d5c63e61
+aaf4c61ddcc5e8a2dabede0f3b482cd9aea9434d
+7f550a9f4c44173a37664d938f1355f0f92a47a7
+f10e2821bbbea527ea02200352313bc059445190',
+					'hash_algorithm_id' => '2',
+					'hash_algorithm_name' => 'MD5'
+					)
+				)
+			);
+		
+		$result = $this->HashTest->compareDigests($data);
+
+		$result = end($result);
+
+		$collisionCount = $result['HashResult']['collision_count'];
+			
+		$expectedCollisionCount = 4;
+
+		$this->assertEquals($collisionCount,$expectedCollisionCount);
+
+		$hashRecommendation = $result['HashResult']['recommendation'];
+		
+		$expectedRecommendation = 'SHA1';
+
+		$this->assertEquals($hashRecommendation,$expectedRecommendation);
+	}
+
 	public function testCheckDuplicatesInArray() {
 		$mdData = array(
 			'aaf4c61ddcc5e8a2dabede0f3b482cd9aea9434d',
@@ -139,6 +197,31 @@ class HashTestTest extends CakeTestCase {
 			);
 
 		$this->assertEquals($result,$expected);
+	}
+
+	public function testComputeAvalanche() {
+		$SHA256HelloMD = '185f8db32271fe25f561a6fc938b2e264306ec304eda518007d1764826381969';
+		$SHA256HellnMD = '0256ddc873b8db322a842b7a1dc11f145293254ca0fae6424f30e63d713b6345';
+
+		$result = $this->HashTest->computeAvalanche($SHA256HelloMD,$SHA256HellnMD);
+
+		$expectedPercent = 92.19;
+
+		$computedPercent = $result['Percent'];
+
+		$this->assertEquals($computedPercent,$expectedPercent);
+
+		$expectedBitDiff = array(
+			'2',
+			'5',
+			'43',
+			'53',
+			'58'
+			);
+
+		$computedBitDiff = $result['BitDiff'];
+
+		$this->assertEquals($computedBitDiff,$expectedBitDiff);
 	}
 
 /**

@@ -13,6 +13,7 @@
 /app/Plugin/PermissionsExtras
 /app/Plugin/UtilityBehaviour
 /app/Plugin/UtilityLib
+Plugin/ClearCache
 /app/Vendor/*
 /app/webroot/dictionaryfiles
 
