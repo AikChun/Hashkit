@@ -158,7 +158,7 @@ class HashTest extends AppModel {
 
 /**
  * Compare the message digests to come up with an analysis
- *
+ * @param data output from computeDigests function
  */
 	public function compareDigests($output) {
 		$hashResultModel = ClassRegistry::init('HashResult');
@@ -257,7 +257,7 @@ class HashTest extends AppModel {
 
 /**
  * Find duplicate message digests within submitted entries.
- * @array containing message in this format ($key => $row)
+ * @param containing array of message digest
  * @return array containing index for duplicate message digest.
  */
 
@@ -288,13 +288,18 @@ class HashTest extends AppModel {
     	}
 
     	if ($duplicates == TRUE) {
-    		//$this->log($dupIndex);
     		return $dupIndex;
    		} else {
    			return ($duplicates);
    		}
 	}
 
+
+/**
+ * Calcuate the percentage of avalanche effect between two message digest
+ * @param containing two different message digest
+ * @return percentage of bits change and array of same bits index
+ */
 	public static function computeAvalanche($firstMD, $secondMD){
 		$lengthOfMD = strlen ($firstMD);
 		$bitDiff = array();
@@ -382,17 +387,5 @@ class HashTest extends AppModel {
 			
 	}
 
-	public function sendResults() {
 
-		$recipient = array(
-			'full_name' => $this->_getUser('name'),
-			'email' => $this->_getUser('email')
-		);
-
-		$email = new DescriptionEmail($recipient);
-		$sendEmailSuccess = $email->sendHashResult();
-
-		return $sendEmailSuccess;
-		
-	}
 }
