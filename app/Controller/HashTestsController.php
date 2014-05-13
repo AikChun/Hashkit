@@ -1,8 +1,6 @@
 	
 <?php
 App::uses('AppController', 'Controller');
-App::uses('HashingLib', 'Lib/Hashing');
-App::uses('DescriptionEmail', 'Lib/Email');
 
 /**
  * HashTests Controller
@@ -90,25 +88,16 @@ class HashTestsController extends AppController {
 		$this->set('data', $data);
 	}
 
+/**
+ * Input page of the basic hashing functionality of the project.
+ */
+
 	public function basic_hashing_input() {
 		$selectedAlgorithms = $this->Session->read('selectedAlgorithms');
 
 		if($this->request->is('post')) {
 			$data = $this->request->data;
 			$text = $this->request->data['HashTests']['plaintext'];
-
-
-			//if (empty($data['HashTests']['plaintext']) && empty($data['HashTests']['file_upload']))  {
-			//	$this->Session->setFlash('Please enter plaintext or choose upload file to proceed', 'alert-box', array('class'=>'alert-danger'));
-			//}
-
-			//if (!empty($data['HashTests']['file_upload']) && ($data['HashTests']['file_upload']['type'] != 'text/plain')) {
-			//	$this->Session->setFlash('Uploaded file must be in text file format', 'alert-box', array('class'=>'alert-danger'));
-			//}	
-
-			// if (!empty($data['HashTests']['plaintext'])) {
-			// 	$this->redirect(array('controller' => 'HashResults', 'action' => 'basic_hashing_result'));
-			// }
 			
 			if (!empty($data['HashTests']['file_upload']) && 
 	             is_uploaded_file($data['HashTests']['file_upload']['tmp_name']) &&
@@ -222,26 +211,12 @@ class HashTestsController extends AppController {
 				$outputResult = $this->HashTest->compareDigests($output);
 
 				// THEN this execute following...
-				//$this->log($outputResult);
 				$this->HashTest->saveTestResults($output, $outputResult);
 				$this->Session->write('output', $outputResult);
 				$this->redirect(array('controller' => 'HashResults', 'action' => 'compute_and_compare_result'));
 			}
 			
 		}	
-
-	}
-
-	public function email_message() {
-
-		$selectedAlgorithms = $this->Session->read('algorithm');
-		$text = $this->Session->read('text');
-
-		$output = $this->HashTest->computeDigests($selectedAlgorithms, $text);
-		$outputResult = $this->HashTest->compareDigests($output);
-		//$this->HashTest->sendResults();
-		$this->HashTest->saveTestResults($output, $outputResult);
-		//$this->start_queue_compute($selectedAlgorithms,$text);
 
 	}
 
@@ -259,18 +234,6 @@ class HashTestsController extends AppController {
 		return $this->redirect(array('action' => 'show_test_results'));
 	}
 
-	/*
-	public function start_queue_compute($selectedAlgorithms,$text) {
-		// compute 
-		$output = $this->HashTest->computeDigests($selectedAlgorithms, $text);
-		// AND compare
-		$outputResult = $this->HashTest->compareDigests($output);
-
-		$this->HashTest->sendResults();
-
-		$this->HashTest->saveTestResults($output, $outputResult);
-	}
-*/
 /**
  * To look up plaintext equivalent when entering message digest
  *
@@ -279,6 +242,7 @@ class HashTestsController extends AppController {
 		if($this->request->is('post')) {
 			$data = $this->request->data['HashTests'];
 			$result = $this->HashTest->matchPlaintextWithMessageDigest($data);
+			$this->log($result);
 			$this->Session->write('reverseData', $result );
 			return $this->redirect('/HashResults/reverse_look_up_result');
 		}
@@ -425,7 +389,9 @@ class HashTestsController extends AppController {
 		
 	}
 
- 
+/**
+ * To calcuate the change of bits of different message digest from the same hash function
+ */
 	public function avalanche_effect() {
         
         $HashAlgorithmV1Model = ClassRegistry::init('HashAlgorithmV1');
@@ -455,15 +421,9 @@ class HashTestsController extends AppController {
 			$ScienceMD = hash(strtolower($data['HashTests']['HashAlgorithm']), 'Science');
 			$SciencdMD = hash(strtolower($data['HashTests']['HashAlgorithm']), 'Sciencd');
 
-			$this->log($HelloMD);
-			$this->log($HellnMD);
-
 			$HelloResult = $this->HashTest->computeAvalanche($HelloMD, $HellnMD);
 			$ComputerResult = $this->HashTest->computeAvalanche($ComputerMD, $ComputesMD);
 			$ScienceResult = $this->HashTest->computeAvalanche($ScienceMD, $SciencdMD);
-
-			$this->log('AHAHAHAHAH');
-			$this->log($HelloResult);
 			
 			array_push($output, $data);
 			array_push($output, $HelloMD);
@@ -660,6 +620,10 @@ class HashTestsController extends AppController {
 		}	
 	}
 
+/**
+ * Display user past hash test result history
+ */
+
 	public function show_test_results() {
 		$this->HashTest->recursive = 0;
 		$this->Paginator->settings = array(
@@ -690,7 +654,6 @@ class HashTestsController extends AppController {
 
 		$searchHashResult = $hashResultModel->find('all', $options1);
 		$this->Set('hashresult', $searchHashResult);
-		//$this->log($searchHashResult);
 
 		$hashAlgorithmModel = ClassRegistry::init("HashAlgorithm");
 

@@ -145,4 +145,9 @@ class QuestionnairesController extends AppController {
         $this->set('data', $data);
         $this->set('result', $result);
 	}
+
+	public function questionnaire_start() {
+
+	}
+
 }

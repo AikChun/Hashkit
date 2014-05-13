@@ -31,6 +31,7 @@ class HashTestTest extends CakeTestCase {
 		$this->HashTest = ClassRegistry::init('HashTest');
 		$this->HashAlgorithm = ClassRegistry::init('HashAlgorithm');
 		$this->HashResult = ClassRegistry::init('HashResult');
+		$this->HashResult = ClassRegistry::init('Dictionary');
 	}
 
 /**
@@ -159,22 +160,23 @@ f10e2821bbbea527ea02200352313bc059445190',
 					)
 				)
 			);
-		
+
 		$result = $this->HashTest->compareDigests($data);
 
 		$result = end($result);
 
 		$collisionCount = $result['HashResult']['collision_count'];
-			
+				
 		$expectedCollisionCount = 4;
 
 		$this->assertEquals($collisionCount,$expectedCollisionCount);
 
 		$hashRecommendation = $result['HashResult']['recommendation'];
-		
+			
 		$expectedRecommendation = 'SHA1';
-
+	
 		$this->assertEquals($hashRecommendation,$expectedRecommendation);
+
 	}
 
 	public function testCheckDuplicatesInArray() {
@@ -222,6 +224,21 @@ f10e2821bbbea527ea02200352313bc059445190',
 		$computedBitDiff = $result['BitDiff'];
 
 		$this->assertEquals($computedBitDiff,$expectedBitDiff);
+	}
+
+	public function testMatchPlaintextWithMessageDigest() {
+		$data = array(
+			'message_digest' => '6a7641a6610b62fd8111babe5963cbb949871747',
+			'hash_algorithm_name' => 'SHA1'
+			);
+
+		$result = $this->HashTest->matchPlaintextWithMessageDigest($data);
+
+		$reversedPlainText = $result[0]['Dictionary']['plaintext'];
+
+		$expectedResult = 'Good bye';
+
+		$this->assertEquals($reversedPlainText,$expectedResult);
 	}
 
 /**
