@@ -94,60 +94,65 @@ class HashTest extends AppModel {
  * @return array $output in a format of $output[n]['HashResult']['attribute']
  */
 	public function computeDigests($selectedAlgorithms, $fileData) {
-		//$this->log($fileData);
-		//$this->log($selectedAlgorithms);
 
-		$computed = array();
-		$output = array();
-
-		if (is_string($fileData)) {
-
-			foreach($selectedAlgorithms as $key => $algorithm ) {
-
-				// compute message digests
-				$messageDigest = hash(strtolower($algorithm['HashAlgorithm']['name']), $fileData);
-
-				// prepare individual data
-				$computed['HashResult']['plaintext'] = $fileData;
-				$computed['HashResult']['message_digest'] = $messageDigest;
-				$computed['HashResult']['hash_algorithm_id'] = $algorithm['HashAlgorithm']['id'];
-				$computed['HashResult']['hash_algorithm_name'] = $algorithm['HashAlgorithm']['name'];
-
-				array_push($output, $computed);
-
+		try{
+			if(empty($selectedAlgorithms)) {
+				throw new Exception('No algorithm Selected');
 			}
-		
-		} elseif (is_array($fileData)) {
-			foreach($selectedAlgorithms as $key => $algorithm ) {
-				$computed = array();
-				$auth = array();
 
-				foreach($fileData as $key => $line) {
+			$computed = array();
+			$output = array();
 
-					$line1 = trim($line);
+			if (is_string($fileData)) {
 
-					$messageDigest = hash(strtolower($algorithm['HashAlgorithm']['name']), $line1);
+				foreach($selectedAlgorithms as $key => $algorithm ) {
 
-					if(empty($computed['HashResult']['plaintext'])){
-						$computed['HashResult']['plaintext'] = $line; //. "\n";	
-					} else {
-						$computed['HashResult']['plaintext'] .= $line; //. "\n";
-					}
+					// compute message digests
+					$messageDigest = hash(strtolower($algorithm['HashAlgorithm']['name']), $fileData);
 
-					if(empty($computed['HashResult']['message_digest'])){
-						$computed['HashResult']['message_digest'] = $messageDigest . "\n";	
-					} else {
-						$computed['HashResult']['message_digest'] .= $messageDigest . "\n";
-					}
+					// prepare individual data
+					$computed['HashResult']['plaintext'] = $fileData;
+					$computed['HashResult']['message_digest'] = $messageDigest;
+					$computed['HashResult']['hash_algorithm_id'] = $algorithm['HashAlgorithm']['id'];
+					$computed['HashResult']['hash_algorithm_name'] = $algorithm['HashAlgorithm']['name'];
+
+					array_push($output, $computed);
 
 				}
-				$computed['HashResult']['hash_algorithm_id'] = $algorithm['HashAlgorithm']['id'];
-				$computed['HashResult']['hash_algorithm_name'] = $algorithm['HashAlgorithm']['name'];
-				array_push($output, $computed);
-			}
+		
+			} elseif (is_array($fileData)) {
+				foreach($selectedAlgorithms as $key => $algorithm ) {
+					$computed = array();
+					$auth = array();
+
+					foreach($fileData as $key => $line) {
+
+						$line1 = trim($line);
+
+						$messageDigest = hash(strtolower($algorithm['HashAlgorithm']['name']), $line1);
+
+						if(empty($computed['HashResult']['plaintext'])){
+							$computed['HashResult']['plaintext'] = $line; //. "\n";	
+						} else {
+							$computed['HashResult']['plaintext'] .= $line; //. "\n";
+						}
+
+						if(empty($computed['HashResult']['message_digest'])){
+							$computed['HashResult']['message_digest'] = $messageDigest . "\n";	
+						} else {
+							$computed['HashResult']['message_digest'] .= $messageDigest . "\n";
+						}
+
+					}
+					$computed['HashResult']['hash_algorithm_id'] = $algorithm['HashAlgorithm']['id'];
+					$computed['HashResult']['hash_algorithm_name'] = $algorithm['HashAlgorithm']['name'];
+					array_push($output, $computed);
+				}
 			
+			} 
+		} catch(Exception $e) {
+			return false;
 		}
-		//$this->log($output);
 		return $output;
 	}
 
@@ -163,86 +168,91 @@ class HashTest extends AppModel {
 		$speed = 0;
 		$recommendAlgo1 = '';
 
-		$mdline = explode("\n",$output[0]['HashResult']['message_digest']);
-		$ptline = explode("\n",$output[0]['HashResult']['plaintext']);
+		try{
+			if(empty($output)) {
+				throw new Exception('No output array');
+			}
 
-		$dup = $this->checkDuplicatesInArray($mdline);
-		$collisionCount = count($dup);
+			$mdline = explode("\n",$output[0]['HashResult']['message_digest']);
+			$ptline = explode("\n",$output[0]['HashResult']['plaintext']);
 
-		foreach($output as $key => $hashResult) {
-			$conditions = array(
-				'conditions' => array('HashResult.message_digest' => $hashResult['HashResult']['message_digest']),
-				'fields' => 'id'
-			);
-			$result = $hashResultModel->find('first', $conditions);
+			$dup = $this->checkDuplicatesInArray($mdline);
+			$collisionCount = count($dup);
 
-			$hashResult['HashResult']['collision_pt'] = '';
-			$hashResult['HashResult']['collision_md'] = '';
-			$hashResult['HashResult']['collision_index'] = '';
+			foreach($output as $key => $hashResult) {
 
-			if($dup != FALSE) {
-				$hashResult['HashResult']['collision_count'] = $collisionCount;
-				foreach($dup as $key => $num) {
+				$hashResult['HashResult']['collision_pt'] = '';
+				$hashResult['HashResult']['collision_md'] = '';
+				$hashResult['HashResult']['collision_index'] = '';
 
-					$hashResult['HashResult']['description'] = 'There is collision detected at: ' . "\n";
-					if(empty($hashResult['HashResult']['collision_pt'])) {
-						$hashResult['HashResult']['collision_pt'] = $ptline[$num];	
-					} else {
-						$hashResult['HashResult']['collision_pt'] .= "\n" . $ptline[$num];
+				if($dup != FALSE) {
+					$hashResult['HashResult']['collision_count'] = $collisionCount;
+					foreach($dup as $key => $num) {
+
+						$hashResult['HashResult']['description'] = 'There is collision detected at: ' . "\n";
+						if(empty($hashResult['HashResult']['collision_pt'])) {
+							$hashResult['HashResult']['collision_pt'] = $ptline[$num];	
+						} else {
+							$hashResult['HashResult']['collision_pt'] .= "\n" . $ptline[$num];
+						}
+
+						if(empty($hashResult['HashResult']['collision_md'])) {
+							$hashResult['HashResult']['collision_md'] = $mdline[$num];	
+						} else {
+							$hashResult['HashResult']['collision_md'] .= "\n" . $mdline[$num];
+						}
+							$hashResult['HashResult']['collision_index'] .= $num . " ";
+
 					}
-
-					if(empty($hashResult['HashResult']['collision_md'])) {
-						$hashResult['HashResult']['collision_md'] = $mdline[$num];	
-					} else {
-						$hashResult['HashResult']['collision_md'] .= "\n" . $mdline[$num];
-					}
-						$hashResult['HashResult']['collision_index'] .= $num . " ";
-
+				} elseif ($dup == FALSE) {
+					$hashResult['HashResult']['collision_count'] = 0;
+					$hashResult['HashResult']['description'] = 'No collision detected';
 				}
-			} elseif ($dup == FALSE) {
-				$hashResult['HashResult']['collision_count'] = 0;
-				$hashResult['HashResult']['description'] = 'No collision detected';
+
+				$options = array(
+					'conditions' => array(
+						'HashAlgorithm.id' => $hashResult['HashResult']['hash_algorithm_id']
+						),
+					'fields' => array('HashAlgorithm.speed','HashAlgorithm.security',
+						'HashAlgorithm.collision_resistance','HashAlgorithm.preimage_resistance',
+						'HashAlgorithm.2nd_preimage_resistance','HashAlgorithm.output_length',
+						'HashAlgorithm.collision_bka','HashAlgorithm.preimage_bka',
+						'HashAlgorithm.2nd_preimage_bka')
+
+					);
+				$searchResult = array();
+				$searchResult = $hashAlgorithmModel->find('first', $options);
+		
+				$hashResult['HashResult']['speed'] = $searchResult['HashAlgorithm']['speed'];
+				$hashResult['HashResult']['security'] = $searchResult['HashAlgorithm']['security'];
+				$hashResult['HashResult']['collision_resistance'] = $searchResult['HashAlgorithm']['collision_resistance'];
+				$hashResult['HashResult']['preimage_resistance'] = $searchResult['HashAlgorithm']['preimage_resistance'];
+				$hashResult['HashResult']['2nd_preimage_resistance'] = $searchResult['HashAlgorithm']['2nd_preimage_resistance'];
+				$hashResult['HashResult']['output_length'] = $searchResult['HashAlgorithm']['output_length'];
+				$hashResult['HashResult']['collision_bka'] = $searchResult['HashAlgorithm']['collision_bka'];
+				$hashResult['HashResult']['preimage_bka'] = $searchResult['HashAlgorithm']['preimage_bka'];
+				$hashResult['HashResult']['2nd_preimage_bka'] = $searchResult['HashAlgorithm']['2nd_preimage_bka'];
+				
+				if ($hashResult['HashResult']['security'] > $security) {
+					$security = $hashResult['HashResult']['security'];
+					$recommendAlgo = $hashResult['HashResult']['hash_algorithm_name'];
+					$speed = $hashResult['HashResult']['speed'];
+				} elseif ($hashResult['HashResult']['security'] == $security) {
+					//if($hashResult['HashResult']['speed'] > $speed) {
+						$recommendAlgo1 = $hashResult['HashResult']['hash_algorithm_name'];
+						$recommendAlgo .= ', ' . $recommendAlgo1;
+					//}
+				}
+
+				$hashResult['HashResult']['recommendation'] = $recommendAlgo;
+				array_push($analysis, $hashResult);
 			}
 
-			$options = array(
-				'conditions' => array(
-					'HashAlgorithm.id' => $hashResult['HashResult']['hash_algorithm_id']
-					),
-				'fields' => array('HashAlgorithm.speed','HashAlgorithm.security',
-					'HashAlgorithm.collision_resistance','HashAlgorithm.preimage_resistance',
-					'HashAlgorithm.2nd_preimage_resistance','HashAlgorithm.output_length',
-					'HashAlgorithm.collision_bka','HashAlgorithm.preimage_bka',
-					'HashAlgorithm.2nd_preimage_bka')
-
-				);
-			$searchResult = array();
-			$searchResult = $hashAlgorithmModel->find('first', $options);
-	
-			$hashResult['HashResult']['speed'] = $searchResult['HashAlgorithm']['speed'];
-			$hashResult['HashResult']['security'] = $searchResult['HashAlgorithm']['security'];
-			$hashResult['HashResult']['collision_resistance'] = $searchResult['HashAlgorithm']['collision_resistance'];
-			$hashResult['HashResult']['preimage_resistance'] = $searchResult['HashAlgorithm']['preimage_resistance'];
-			$hashResult['HashResult']['2nd_preimage_resistance'] = $searchResult['HashAlgorithm']['2nd_preimage_resistance'];
-			$hashResult['HashResult']['output_length'] = $searchResult['HashAlgorithm']['output_length'];
-			$hashResult['HashResult']['collision_bka'] = $searchResult['HashAlgorithm']['collision_bka'];
-			$hashResult['HashResult']['preimage_bka'] = $searchResult['HashAlgorithm']['preimage_bka'];
-			$hashResult['HashResult']['2nd_preimage_bka'] = $searchResult['HashAlgorithm']['2nd_preimage_bka'];
-			
-			if ($hashResult['HashResult']['security'] > $security) {
-				$security = $hashResult['HashResult']['security'];
-				$recommendAlgo = $hashResult['HashResult']['hash_algorithm_name'];
-				$speed = $hashResult['HashResult']['speed'];
-			} elseif ($hashResult['HashResult']['security'] == $security) {
-				//if($hashResult['HashResult']['speed'] > $speed) {
-					$recommendAlgo1 = $hashResult['HashResult']['hash_algorithm_name'];
-					$recommendAlgo .= ', ' . $recommendAlgo1;
-				//}
+		} catch(Exception $e) {
+				return false;
 			}
-
-			$hashResult['HashResult']['recommendation'] = $recommendAlgo;
-			array_push($analysis, $hashResult);
-		}
 		return $analysis;
+
 	}
 
 /**
@@ -286,8 +296,6 @@ class HashTest extends AppModel {
 	}
 
 	public static function computeAvalanche($firstMD, $secondMD){
-		CakeLog::write('debug',$firstMD);
-		CakeLog::write('debug',$secondMD);
 		$lengthOfMD = strlen ($firstMD);
 		$bitDiff = array();
 		$result = array();
@@ -306,7 +314,7 @@ class HashTest extends AppModel {
 
 		$result['Percent'] = $percent;
 		$result['BitDiff'] = $bitDiff;
-		CakeLog::write('debug',$result);
+
 		return $result;
 	}
 
