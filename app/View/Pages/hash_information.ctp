@@ -1,18 +1,3 @@
-<script type="text/javascript">
-    
-    /* off-canvas sidebar toggle */
-
-    $('[data-toggle=offcanvas]').click(function() {
-        $(this).toggleClass('visible-xs text-center');
-        $(this).find('i').toggleClass('glyphicon-chevron-right glyphicon-chevron-left');
-        $('.row-offcanvas').toggleClass('active');
-        $('#lg-menu').toggleClass('hidden-xs').toggleClass('visible-xs');
-        $('#xs-menu').toggleClass('visible-xs').toggleClass('hidden-xs');
-        $('#btnShow').toggle();
-    });
-
-</script>
-
 <div class="wrapper">
     
     <div class="box">
@@ -22,6 +7,14 @@
             <!-- sidebar -->
             <div class="column col-sm-2 col-xs-1 sidebar-offcanvas" id="sidebar">
               
+                <a data-scroll href="/Pages/hash_information/#sec0">Section 0</a>
+                <a data-scroll href="/Pages/hash_information/#sec1">Section 1</a>
+                <a data-scroll href="/Pages/hash_information/#sec2">Section 2</a>
+                <a data-scroll href="/Pages/hash_information/#sec3">Section 3</a>
+                <a data-scroll href="/Pages/hash_information/#sec4">Section 4</a>
+                <a data-scroll data-options="easing: linear" href="#sec5">Section 5</a>
+                <a data-scroll data-options="easing: linear" href="#sec">Linear (no other options)</a><br>
+
                 <ul class="nav">
                     <li><a href="#" data-toggle="offcanvas" class="visible-xs text-center"><i class="glyphicon glyphicon-chevron-right"></i></a></li>
                 </ul>
@@ -31,11 +24,11 @@
                     </li>
                 </ul>
                 <ul class="nav navbar-inverse hidden-xs" id="lg-menu" style="margin-left: 5px">
-                    <li class="active"><a href="/Pages/hash_information/#sec0"><i class="glyphicon glyphicon-list-alt"></i> Introduction</a>
+                    <li class="active"><a data-scroll href="#sec0"><i class="glyphicon glyphicon-list-alt"></i> Introduction</a>
                     </li>
-                    <li><a href="/Pages/hash_information/#sec1"><i class="glyphicon glyphicon-list"></i> Types of Hash functions</a>
+                    <li><a data-scroll href="#sec1"><i class="glyphicon glyphicon-list"></i> Types of Hash functions</a>
                     </li>
-                    <li><a href="/Pages/hash_information/#sec2"><i class="glyphicon glyphicon-paperclip"></i> List of Hash functions</a>
+                    <li><a data-scroll href="#sec2"><i class="glyphicon glyphicon-paperclip"></i> List of Hash functions</a>
                     </li>
 
                     <li class="dropdown"> <a href="" class="dropdown-toggle" data-toggle="dropdown"><i class="glyphicon glyphicon-refresh"></i>Uses for Hash functions<b class="caret"></b></a>
@@ -48,9 +41,9 @@
                           </ul>
                     </li> <!--end of dropdown -->
 
-                    <li><a href="/Pages/hash_information/#sec4"><i class="glyphicon glyphicon-wrench"></i> Hash functions' properties</a>
+                    <li><a data-scroll href="#sec4"><i class="glyphicon glyphicon-wrench"></i> Hash functions' properties</a>
                     </li>
-                     <li><a href="/Pages/hash_information/#sec5"><i class="glyphicon glyphicon-globe"></i> Attacks on Hash functions</a>
+                     <li><a data-scroll href="#sec5"><i class="glyphicon glyphicon-globe"></i> Attacks on Hash functions</a>
                     </li>
 
                 </ul>
@@ -79,7 +72,9 @@
             <div class="column col-sm-10 col-xs-11" id="main">
                
                <div class=" col-sm-10 col-xs-11">
-                      <h2 id="sec0" class="text-center v-center">Introduction</h2>
+
+                      <p id="sec0">Section 0</p>
+                      <h2 class="text-center v-center">Introduction</h2>
                       <br>
                       <br>
                       <h3 >What is a Hash function ?</h3>
@@ -125,7 +120,9 @@
                       It is a representation of text in a form of a single string of alphanumeric values, which is usually created by a <a href="#onewayhash">one-way hash function</a>.    
                       </p>
                       <hr>
-                      <h2 id="sec1" class="text-center v-center" >Type of Hash functions</h2>
+
+                      <p id="sec1">Section 1</p>
+                      <h2 class="text-center v-center" >Type of Hash functions</h2>
                       <br>
                       <br>
                         <CENTER><img src="/img/typeofhashfunctions.jpg"></CENTER>
@@ -160,7 +157,9 @@
                       For a function to be categorised as Collision Resistant hash functions, it has to fulfil the two security properties: <a href="#preimageresist">pre-image resistance</a> and <a href="#collisionresistance">collision resistance</a>
                       </p>
                       <hr >
-                      <h2 id="sec2" class="text-center v-center">List of Hash functions</h2>
+
+                      <p id="sec2">Section 2</p>
+                      <h2 class="text-center v-center">List of Hash functions</h2>
                       <br><br>
                       <p>In this section, it talks about the commonly used families of hash functions and their attributes.</p>
                       <br>
@@ -192,7 +191,9 @@
                       <h4><b>HAVAL family</b></h4>
                       <br>
                       <hr >
-                      <h2 id="sec3" class="text-center v-center">Uses for Hash functions</h2>
+
+                      <p id="sec3">Section 3</p>
+                      <h2 class="text-center v-center">Uses for Hash functions</h2>
                       <p>Today with the accessibility of lots of resources, nearly every application are integrating hash functions in their products due to their security reasons like to protect against alteration and unwanted attacks.</p> 
                       <br>
                       <h4  id="verifyfileintegrity" ><b>Verifying file integrity</b></h4>
@@ -222,7 +223,8 @@
                       </br>
                       <hr >
 
-                      <h2 id="sec4" class="text-center v-center">Hash functions' properties</h2>
+                      <p id="sec4">Section 4</p>
+                      <h2 class="text-center v-center">Hash functions' properties</h2>
                       <br><br>  
                       <p >A cyptographic hash functions must be able to defend against all known type of cryptanalytic attack. It should be able to apply to any input size and output a fixed size. It must have the following properties:
                           <br><br>
@@ -261,7 +263,9 @@
                       <h4><b>Avalanche effect</b><h4>
 
                       <hr >
-                        <h2 id="sec5" class="text-center v-center">Attacks on Hash functions</h2>
+
+                      <p id="sec">Section 5</p>
+                        <h2 class="text-center v-center">Attacks on Hash functions</h2>
                         <br><br>
                         <h3><b>Generic analysis</b></h3>
                         <p>
@@ -335,3 +339,26 @@
         </div>
     </div>
 </div>
+
+<script type="text/javascript">
+    
+    smoothScroll.init({
+        speed: 500, // Integer. How fast to complete the scroll in milliseconds
+        easing: 'easeInOutCubic', // Easing pattern to use
+        updateURL: false, // Boolean. Whether or not to update the URL with the anchor hash on scroll
+        offset: 0, // Integer. How far to offset the scrolling anchor location in pixels
+        callbackBefore: function ( toggle, anchor ) {}, // Function to run before scrolling
+        callbackAfter: function ( toggle, anchor ) {} // Function to run after scrolling
+    });
+
+    /* off-canvas sidebar toggle */
+    $('[data-toggle=offcanvas]').click(function() {
+        $(this).toggleClass('visible-xs text-center');
+        $(this).find('i').toggleClass('glyphicon-chevron-right glyphicon-chevron-left');
+        $('.row-offcanvas').toggleClass('active');
+        $('#lg-menu').toggleClass('hidden-xs').toggleClass('visible-xs');
+        $('#xs-menu').toggleClass('visible-xs').toggleClass('hidden-xs');
+        $('#btnShow').toggle();
+    });
+
+</script>
