@@ -19,7 +19,7 @@
 
 	</head>
 
-		<body>
+	<body>
 
 		<div class = "navbar navbar-inverse navbar-fixed-top " id="nav">
 			
@@ -73,7 +73,7 @@
 									<li><a href="/HashTests/compute_and_compare">Hash Algorithm Recommendation</a></li>
 									<li><a href="/HashTests/hash_analyser">Message Digest Analyser</a></li>
 									<li><a href="/HashTests/calculate_probability_of_collision">Collision Probability Calculator</a></li>
-									<li><a href="/HashTests/birthday_attack">Collision Generator</a></li>
+								<!-- 	<li><a href="/HashTests/birthday_attack">Collision Generator</a></li> -->
 									<li><a href="/HashTests/reverse_look_up">Reverse Look-up</a></li>
 									<li><a href="/HashTests/avalanche_effect">Avalanche Effect</a></li>
 
@@ -81,14 +81,21 @@
 
 						</li>
 						<li id="textfornavbar"><a href="/Pages/hash_information">Hash Information</a></li>
-						<li id="textfornavbar"><a href="/Questionnaires/questionnaire">Questionnaire</a></li>
+						<li id="textfornavbar"><a href="/Questionnaires/questionnaire_start">Questionnaire</a></li>
 						
 						<?php } ?>
+						
+						<li id="textfornavbar" class="dropdown">
+							<a href="#" class="dropdown-toggle" data-toggle="dropdown">Help<b class="caret"></b></a>
 
+								<ul class="dropdown-menu">
+									
+									<li id="textfornavbar"><a href="/#section2">FAQ</a></li>
+									<li id="textfornavbar"><a href="/#section3">Support</a></li>
+									<li id="textfornavbar"><a href="/contact_us">Contact Us</a></li>
+								</ul>
+						</li>
 						<li id="textfornavbar"><a href="/#section1">About Us</a></li>
-						<li id="textfornavbar"><a href="/#section2">FAQ</a></li>
-						<li id="textfornavbar"><a href="/contact_us">Contact Us</a></li>
-
 					</ul>
 
 					<ul id="textfornavbar" class = "nav navbar-nav navbar-right">
