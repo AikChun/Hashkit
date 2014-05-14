@@ -15,17 +15,16 @@
       <!-- <img src="/img/wallpapertest1.jpg" class="img-responsive"> -->
       <img src="/img/test3.png" class="img-responsive">
       <div class="container">
-        <div class="carousel-caption ">
+        <div class="carousel-caption" style="left:-44%; top: 60%;position:absolute;">
           <!-- <h1>HashKit</h1> -->
           <!-- <img src="/img/hash_logo.png"> -->
           <!-- <img src="/img/testlogo.png"> -->
           <?php if($authUser):?>
           <!-- <h3 id ="textforcarsousel">You are a click away to learn about hash functions and to start, press the any button below:</h3> -->
 
-          <div class="btn-group">
           <a class="btn btn-lg btn-primary" href="/Pages/hash_information">Information</a>
           <a class="btn btn-lg btn-warning" href="/Questionnaires/questionnaire">Quiz</a>
-          </div>
+
           <?php endif;?>
           
           <?php if(!$authUser):?>
