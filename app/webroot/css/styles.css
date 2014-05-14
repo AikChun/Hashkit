@@ -226,5 +226,34 @@ IMG.displayed {
   	  font-family: "elementa", Georgia, Cambria, "Times New Roman", Times, serif;
 	  font-style: italic;
 	  font-weight: bold;*/	
+	/*	text-align: center;*/
+		font-family: 'Lato', sans-serif;
+		text-transform: uppercase;
+/*		color: #eee;*/
 }
 
+#textfornavbarbottom{
+	  color: white;
+  	  font-family: "elementa", Georgia, Cambria, "Times New Roman", Times, serif;
+	  font-style: italic;
+	  font-weight: bold;	
+	  /*color: #eee;*/
+}
+
+div.item > img {
+	padding-top: 30px;
+	margin-top: 20px;
+}
+
+/*.carsouselwallpaper {
+    width: 1500px;
+    height: 300px;
+    background-size: cover;
+    /*background-repeat: no-repeat;
+    /*background-position: 50% 50%;
+}​*/
+
+#buttonposition {
+
+	left: 50px;
+}
