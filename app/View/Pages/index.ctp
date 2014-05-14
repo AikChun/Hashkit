@@ -7,17 +7,20 @@
     <li data-target="#myCarousel" data-slide-to="1"></li>
     <li data-target="#myCarousel" data-slide-to="2"></li>
   </ol>
-  <div class="carousel-inner">
-    <div class="item active">
-      <img src="/img/wallpaper6.jpg" class="img-responsive">
+  <div class="carousel-inner" >
+    <div class="item active" >
+     <!--  <img src="/img/wallpaper6.jpg" class="img-responsive"> -->
       <!-- <img src="/img/wallpaper1color.png" class="img-responsive"> -->
       <!-- <img src="/img/wallpaper1gradient.png" class="img-responsive"> -->
+      <!-- <img src="/img/wallpapertest1.jpg" class="img-responsive"> -->
+      <img src="/img/test3.png" class="img-responsive">
       <div class="container">
-        <div class="carousel-caption">
+        <div class="carousel-caption ">
           <!-- <h1>HashKit</h1> -->
-          <img src="/img/hash_logo.png">
+          <!-- <img src="/img/hash_logo.png"> -->
+          <!-- <img src="/img/testlogo.png"> -->
           <?php if($authUser):?>
-          <h3 id ="textforcarsousel">You are a click away to learn about hash functions and to start, press the any button below:</h3>
+          <!-- <h3 id ="textforcarsousel">You are a click away to learn about hash functions and to start, press the any button below:</h3> -->
 
           <div class="btn-group">
           <a class="btn btn-lg btn-primary" href="/Pages/hash_information">Information</a>
@@ -26,8 +29,8 @@
           <?php endif;?>
           
           <?php if(!$authUser):?>
-          <h3 id ="textforcarsousel">Want to learn more about hash functions? Now, You can by just clicking the buttons below:</h3>
-          <div class="btn-group">
+          <!-- <h3 id ="textforcarsousel">Want to learn more about hash functions? Now, You can by just clicking the buttons below:</h3> -->
+          <div class="buttonposition">
           <a class="btn btn-lg btn-primary" href="/Users/register">Register</a>
           <a class="btn btn-lg btn-warning" href="/Users/login">Login</a>
           </div>
@@ -49,7 +52,7 @@
 
           <?php if(!$authUser):?>
           <h3 id ="textforcarsousel">want to learn more ? Login and You can read up on information about Hash functions</h3>
-          <button type="button" class="btn btn-lg btn-warning" href="/Users/login">Login</button>
+          <a class="btn btn-lg btn-warning" href="/Users/login">Login</a>
           <?php endif;?>
 
         </div>
@@ -64,7 +67,7 @@
           
           <?php if(!$authUser):?>
           <p id ="textforcarsousel">Come and try out our tools by logging in..</p>
-          <button type="button" class="btn btn-lg btn-warning" href="/Users/login">Login</button>
+          <a class="btn btn-lg btn-warning" href="/Users/login">Login</a>
           <?php endif;?>
 
           <?php if($authUser):?>
@@ -177,12 +180,12 @@
   </div>
 </section>
 
-<section class="container-fluid" id="section3 ">
+<section class="container-fluid" id="section3">
   <br>
   <br>
   <br>
   <br>
-  <h1 class="text-center " id="headingforaboutus">Support</h1>
+  <h1 class="text-center" id="headingforaboutus">Support</h1>
     <div class="row">
       <div class="col-sm-6 col-sm-offset-3">
         <p class="text-center lead" id="textforcontentpage">If you do have any issue, you may find your answer here:</p>
