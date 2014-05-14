@@ -85,9 +85,36 @@
 
 		<div class="modal-footer">
 
-			<a href="/HashTests/basic_hashing" class="btn btn-primary">Start New Test</a>
-			<a href="/" class="btn btn-default">Back to Home</a>
-			
+			<?php
+
+				echo $this->Form->create('HashResults', array('class' => 'form-horizontal', 'type' => 'file'));
+
+				$basic_hashing_save = array(
+					'class' => 'btn btn-warning pull-right',
+					'label' => 'Save Results'
+				);
+
+			?>
+
+			<div>
+				
+				<div class="col-lg-8.5 pull-right">
+
+					<a href="/" class="btn btn-primary">Start New Test</a>
+					<a href="/" class="btn btn-default">Back to Home</a>
+				
+				</div>
+
+				<div class="col-lg-4 pull-right" style="left: 5px;">
+
+					<?php
+						echo $this->Form->end($basic_hashing_save);
+					?>			
+
+				</div>
+
+			</div>
+
 		</div>		
 
 	</div>
