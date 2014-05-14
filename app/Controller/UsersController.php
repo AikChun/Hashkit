@@ -30,17 +30,17 @@ class UsersController extends AppController {
  * @return void
  **/
  protected function _configureAllowedActions() {
- 	$allowedActions = array(
- 	 'login',
- 	 'logout',
- 	 'forget_password',
- 	 'reset_password',
-	 'register',
-	 'view_my_own_profile',
-	 'edit_my_own_profile',
-	 'contact_us'
- 	);
- 	$this->Auth->allow($allowedActions);
+	$allowedActions = array(
+		'login',
+		'logout',
+		'forget_password',
+		'reset_password',
+		'register',
+		'view_my_own_profile',
+		'edit_my_own_profile',
+		'contact_us'
+	);
+	$this->Auth->allow($allowedActions);
  }
 
 /**
@@ -117,6 +117,8 @@ class UsersController extends AppController {
 		} else {
 			$options = array('conditions' => array('User.' . $this->User->primaryKey => $id));
 			$this->request->data = $this->User->find('first', $options);
+			$this->set('groupId', $this->request->data['User']['group_id']);
+
 		}
 	}
 
@@ -326,8 +328,8 @@ class UsersController extends AppController {
 		}
 		
 		// if($this->request->is('post')) {
-		// 	$data = $this->request->data;
-		// 	$this->log($data);
+		//	$data = $this->request->data;
+		//	$this->log($data);
 
 		// $email = new ContactUsEmail($data);
 		// $sendEmailSuccess = $email->sendContactUs($data);

@@ -1,4 +1,7 @@
 <div class="container">
+<?php echo $data['User']['group_id'];
+		echo 'Hello World';
+?>
 
 	<div class="jumbotron">
 		
@@ -60,10 +63,10 @@
 
 				<select class="form-control" name="data[User][group_id]" required>
 
-					<option value="">(choose one)</option>
-					<option value="1">Super Administrator</option>
-					<option value="2">Administrator</option>
-					<option value="3">Normal User</option>
+				<option value="">(choose one)</option>
+					<option value="1"<?php if($groupId == 1){echo ' selected';}?>>Super Administrator</option>
+					<option value="2"<?php if($groupId == 2){echo ' selected';}?>>Administrator</option>
+					<option value="3"<?php if($groupId == 3){echo ' selected';}?>>Normal User</option>
 				
 				</select>
 
