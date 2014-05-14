@@ -235,6 +235,8 @@
         <h3 id="textforcontentpagealtred">If I received any 404 error page in anytime during the visit of the website, what should I do next?</h3>
 
         <p class="lead" id="textforcontentpage">Check your internet connection. You can refresh the page by pressing the refresh button on the web browser and wait for it to load. If it still does not work, please contact the administrator (hashkitproject@gmail.com) for further assistance.</p>
+        <br><br>
+      <a class="btn btn-lg btn-success" href="/#myCarousel"><i class ="glyphicon glyphicon-chevron-up">Top</i></a>
       </div>
    </div>
 </section>
