@@ -24,9 +24,9 @@
 
 		<div class="form-group">
 								
-			<label for="hashInput-plaintext" class="col-lg-3 control-label">Please enter your new password:</label>
+			<label for="hashInput-plaintext" class="col-lg-4 control-label">Please enter your new password:</label>
 
-			<div class="col-lg-9">
+			<div class="col-lg-8">
 
 				<?php
 				
@@ -48,9 +48,9 @@
 
 		<div class="form-group">
 								
-			<label for="hashInput-plaintext" class="col-lg-3 control-label">Re-enter your new password:</label>
+			<label for="hashInput-plaintext" class="col-lg-4 control-label">Re-enter your new password:</label>
 
-			<div class="col-lg-9">
+			<div class="col-lg-8">
 
 				<?php
 				
@@ -63,8 +63,7 @@
 
 					echo $this->Form->input('User.id', array(
 						'type' => 'hidden'
-						)
-					);
+					));
 				
 				?>
 
@@ -91,7 +90,13 @@
 
 		</div>
 
-		<?php echo $this->Form->end($reset_password_submit); ?>
+		<div class="modal-footer">
+
+			<?php
+				echo $this->Form->end($reset_password_submit);
+			?>
+
+		</div>
 
 	</div>
 
