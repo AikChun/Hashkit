@@ -50,6 +50,7 @@ class AppController extends Controller {
 						'username' => 'email',
 						'password' => 'password'
 					),
+				'scope' => array('User.visible' => 1),
 				'userModel' =>'User',
 				)
 			)
