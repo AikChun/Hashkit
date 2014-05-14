@@ -277,7 +277,6 @@ class UsersController extends AppController {
 			$this->User->id = $this->Auth->user('id');
 			$this->User->set(array(
 				'name' => $this->request->data['User']['name'],
-				'email' => $this->request->data['User']['email'],
 				'profile' => $this->request->data['User']['profile']
 			));
 			if ($this->User->save()) {
