@@ -9,7 +9,7 @@
 		
 			echo $this->Html->script('jquery-2.1.0.js');
 			echo $this->Html->script('bootstrap.js');
-
+			
 			echo $this->Html->css(array('bootstrap','styles'));
 			echo $this->fetch('script');
 			echo $this->fetch('meta');
