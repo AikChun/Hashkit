@@ -4,37 +4,32 @@
 			
 		var x = document.getElementById('required_base').value;
 		var y = document.getElementById('required_exponent').value;
-
-		if (isNaN(y) || isNaN(x) || x > 5 ){
-
-			$('.bs-example-modal-lg').modal('show')
-			var required_base = $('#required_base');
-			required_base.val('');
-			var required_exponent = $('#required_exponent');
-			required_exponent.val('');
-
-		}else{
-
-			if (x > 0 && y > 0){
-				document.getElementById('hash_value').disabled = true;
-			}else{
-				document.getElementById('hash_value').disabled = false;
-			}
-
-		}	
-	}
-
-	function checkformforHashValue() {
-
 		var r = document.getElementById('hash_value').value;
+		if (y != 0 || x != 0){
+			if (isNaN(y) || isNaN(x) || x > 5 ){
+				$('.bs-example-modal-lg').modal('show')
+				var required_base = $('#required_base');
+				required_base.val('');
+				var required_exponent = $('#required_exponent');
+				required_exponent.val('');
+			}else{
 
-		if (isNaN(r)){
+				if (x > 0 && y > 0){
+					document.getElementById('hash_value').disabled = true;
+				}else{
+					document.getElementById('hash_value').disabled = false;
+				}
 
-			$('.bs-example-modal-lg').modal('show')
-			var hash_value = $('#hash_value');
-			hash_value.val('');
-
+			}
+		}else if (r != 0){
+			if(isNaN(r)){
+				$('.bs-example-modal-lg').modal('show')
+				var hash_valueNew = $('#hash_value');
+				hash_valueNew.val('');
+			}
 		}
+
+
 	}
 
 	function checkform1() {
@@ -53,23 +48,34 @@
 
 		var a = document.getElementById('customized_algorithm_base').value;
 		var b = document.getElementById('customized_algorithm_exponent').value;
+		var h = document.getElementById('hash_value1').value;
 
-		if (isNaN(a) || isNaN(b) || a > 5){
-				
-				$('.bs-example-modal-lg').modal('show')
-				var required_base = $('#customized_algorithm_base');
-				required_base.val('');
-				var required_exponent = $('#customized_algorithm_exponent');
-				required_exponent.val('');
+		if(a != 0 && b != 0){
 
-		}else{
+			if (isNaN(a) || isNaN(b) || a > 5){
+					
+					$('.bs-example-modal-lg').modal('show')
+					var required_base = $('#customized_algorithm_base');
+					required_base.val('');
+					var required_exponent = $('#customized_algorithm_exponent');
+					required_exponent.val('');
 
-			if (a > 0 || b > 0){
-				document.getElementById('hash_value1').disabled = true;
 			}else{
-				document.getElementById('hash_value1').disabled = false;
-			}	
+
+				if (a > 0 || b > 0){
+					document.getElementById('hash_value1').disabled = true;
+				}else{
+					document.getElementById('hash_value1').disabled = false;
+				}	
+			}
+		}else if (h != 0 ){
+			if(isNaN(h)){
+				$('.bs-example-modal-lg').modal('show')
+				var hash_valueChange = $('#hash_value1');
+				hash_valueChange.val('');
+			}
 		}
+
 	}
 
 	function checkformforHashValue() {
@@ -78,36 +84,10 @@
 
 		if (isNaN(h)){
 			
-			$('.bs-example-modal-lg').modal('show')
+			$('.bs-1-modal-lg').modal('show')
 			var hash_value1 = $('#hash_value1');
 			hash_value1.val('');
 
-		}
-	}
-
-	function submitbutton() {
-
-		var c = document.getElementById('required_base').value;
-		var d = document.getElementById('required_exponent').value;
-		var e = document.getElementById('hash_value').value;
-		var f = document.getElementById('HashAlgorithm').value;
-
-		if(c == "" && d = ""){
-			if(e == ""){
-				$('.bs-1-modal-lg').modal('show')
-			}
-		}else if(c != "" && d != ""){
-			if(e != ""){
-				$('.bs-1-modal-lg').modal('show')
-			}
-		}else if(c != "" || d != ""){
-			if(e != ""){
-				$('.bs-1-modal-lg').modal('show')
-			}
-		}else if(e != ""){
-			if(c != "" || d != ""){
-				$('.bs-1-modal-lg').modal('show')
-			}
 		}
 	}
 
@@ -136,6 +116,7 @@
 		?>
 
 		<h4>1. Sample size of the hash function </h4>
+		<h5>Either enter the base/exponent or the sample size of hashes</h5>
 		<div class="form-group">
 
 			<label class="col-lg-2 control-label">Base:</label>
@@ -198,7 +179,7 @@
 						'label' => false,
 						'size' => 30,
 						'id' => 'hash_value',
-						'onchange' => 'checkformforHashValue()',
+						'onchange' => 'checkform()',
 						'placeholder' =>'hash value (optional)'
 					));
 				
@@ -243,18 +224,18 @@
 
 			</div>
 
-		</div>		
+		</div> <!--form-group of select hash algorithm -->	
 
 		<div class="form-group">
 		
 			<div id="customizedoptions" style="display: none">
 						
 				<div class="form-group">
-						<h4>3. Total size of Hash Functions</h4>				
+					<h4>3. Total size of Hash Functions</h4>
+					<h5>  Either enter the base/exponent or the total size of hashes for the algorithm</h5>				
 					<label class="col-lg-2 control-label">Base:</label>
 
 					<div class="col-lg-10">
-
 						<?php
 
 							echo $this->Form->input('customized_algorithm_base', array(
@@ -265,9 +246,7 @@
 								'onchange' => 'checkform2()',
 								'placeholder' =>'algorithm base'
 							));
-
 						?>
-
 					</div>
 
 				</div>
@@ -308,6 +287,7 @@
 								'div' => false,
 								'label' => false,
 								'id' => 'hash_value1',
+								'onchange' => 'checkform2()',
 								'placeholder' =>'hash value(optional)'
 							));
 								
@@ -317,49 +297,30 @@
 
 				</div>
 
-			</div>
+			</div> <!--end of customizedoptions -->
+		</div> <!-- formgroup -->
 
-			<button style="display: none;" class="btn btn-primary" data-toggle="modal" data-target=".bs-example-modal-lg">Small modal</button> 
+		<button style="display: none;" class="btn btn-primary" data-toggle="modal" data-target=".bs-example-modal-lg">Small modal</button> 
 		
-			<button style="display: none;" class="btn btn-primary" data-toggle="modal" data-target=".bs-1-modal-lg">Small modal</button> 
+		<div class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
+
+			<div class="modal-dialog modal-lg">
 			
-			<div class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
-
-				<div class="modal-dialog modal-lg">
-				
-					<div class="modal-content alert alert-danger">
+				<div class="modal-content alert alert-danger">
+					
+					<CENTER>
 						
-						<CENTER>
-							
-							<h3>Invalid input. Enter numeric digits only.</h3>
-						
-						</CENTER>
-
-					</div>
+						<h3>Invalid input. Enter numeric digits only.</h3>
+					
+					</CENTER>
 
 				</div>
 
 			</div>
 
-			<div class="modal fade bs-1-modal-lg" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
+		</div> <!--end of bs-example-modal-lg -->
 
-				<div class="modal-dialog modal-lg">
-
-					<div class="modal-content alert alert-danger">
-
-						<CENTER>
-
-							<h3>Fill in all required empty fields.</h3>
-
-						</CENTER>
-
-					</div>
-			
-				</div>
-
-			</div>
-
-		</div>
+	
 
 		<div class="modal-footer">
 
@@ -374,7 +335,7 @@
 
 			?>
 
-		</div>
+		</div>    <!--end of modal footer -->
 
 	</div>
 
