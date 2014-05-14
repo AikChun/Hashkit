@@ -105,6 +105,7 @@ class HashResultsController extends AppController {
 
 
 	public function basic_hashing_result() {
+
 		$output = $this->Session->read('output');
 		if(!empty($output)) {
 			$this->set("output", $output);
@@ -117,6 +118,7 @@ class HashResultsController extends AppController {
 
 
 	public function compute_and_compare_result() {
+
 		$outputResult = $this->Session->read('output');
 
 		if (!empty($outputResult)) {

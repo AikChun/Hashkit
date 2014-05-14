@@ -9,7 +9,6 @@
 	  	
 	  		echo $this->Html->script('jquery-2.1.0.js');
 	  		echo $this->Html->script('bootstrap.js');
-	  		echo $this->Html->script('smooth-scroll.js');
 
 			echo $this->Html->css(array('bootstrap','styles','sidebar'));
 			echo $this->fetch('script');
@@ -134,29 +133,6 @@
 			</div>
 
 		</div>
-
-	<script type="text/javascript">
-
-		$(document).ready(function () {
-		$('a[href="' + this.location.pathname + '"]').parent().addClass('active');
-		});
-
-		$(function() {
-		  $('a[href*=#]:not([href=#])').click(function() {
-		    if (location.pathname.replace(/^\//,'') == this.pathname.replace(/^\//,'') && location.hostname == this.hostname) {
-		      var target = $(this.hash);
-		      target = target.length ? target : $('[name=' + this.hash.slice(1) +']');
-		      if (target.length) {
-		        $('html,body').animate({
-		          scrollTop: target.offset().top
-		        }, 1000);
-		        return false;
-		      }
-		    }
-		  });
-		});
-
-	</script>
 
 	</body>
 

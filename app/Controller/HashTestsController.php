@@ -93,6 +93,7 @@ class HashTestsController extends AppController {
  */
 
 	public function basic_hashing_input() {
+
 		$selectedAlgorithms = $this->Session->read('selectedAlgorithms');
 
 		if($this->request->is('post')) {
@@ -125,12 +126,15 @@ class HashTestsController extends AppController {
 				}
 			} catch (Exception $e) {
 				$this->Session->setFlash($e->getMessage(), 'alert-box', array('class'=>'alert-danger'));
-				$this->redirect(array('action' => 'basic_hashing'));
+				return $this->redirect(array('action' => 'basic_hashing'));
 			}
             $this->Session->write('output', $output);
-			$this->redirect(array('controller' => 'HashResults', 'action' => 'basic_hashing_result'));
+			return $this->redirect(array('controller' => 'HashResults', 'action' => 'basic_hashing_result'));
+		}
+		if($this->referer() != FULL_BASE_URL.'/HashTests/basic_hashing') {
+			return $this->redirect(array('action' => 'basic_hashing', 'controller' => 'HashTests'));
+		}
 	}
-}
 /**
  * To allow the user choose the algorithms that is to analyzed.
  */
@@ -174,7 +178,9 @@ class HashTestsController extends AppController {
  * Input page of the compute and compare functionality of the project.
  */
 	public function compute_and_compare_input() {
+
 		$selectedAlgorithms = $this->Session->read('selectedAlgorithms');
+
 		if($this->request->is('post')) {
 			$data = $this->request->data;
 
@@ -216,7 +222,11 @@ class HashTestsController extends AppController {
 				$this->redirect(array('controller' => 'HashResults', 'action' => 'compute_and_compare_result'));
 			}
 			
-		}	
+		}
+		
+		if($this->referer() != FULL_BASE_URL.'/HashTests/compute_and_compare') {
+			return $this->redirect(array('action' => 'compute_and_compare', 'controller' => 'HashTests'));
+		}
 
 	}
 

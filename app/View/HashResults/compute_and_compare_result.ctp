@@ -10,7 +10,11 @@
 			
 		<br/>
 
-		<?php
+		<?php if(empty($output)){
+			echo 'empty';
+		} else {
+
+		
 
 			echo '<b>Plaintext entered:</b>';
 			echo '<br/>';
@@ -299,8 +303,9 @@
 			echo '<br/>';
 			echo $last['HashResult']['recommendation'];
 
+		}
 		?>
-	
+			
 		<div class="modal-footer">
 
 			<?php
