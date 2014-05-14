@@ -78,7 +78,7 @@
 				}
 
 			}else if(empty($output)) {
-				echo 'Please select and choose your choice of algorithm';
+				echo 'No hash algorithm selected! Please start a new test.';
 			}
 
 		?>

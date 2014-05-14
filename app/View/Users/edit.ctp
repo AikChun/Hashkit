@@ -56,14 +56,14 @@
 
 			<label class="col-lg-2 control-label">User Group:</label>
 	
-			<div class="col-lg-2">
+			<div class="col-lg-3">
 
 				<select class="form-control" name="data[User][group_id]" required>
 
 					<option value="">(choose one)</option>
-					<option value="1">1</option>
-					<option value="2">2</option>
-					<option value="3">3</option>
+					<option value="1">Super Administrator</option>
+					<option value="2">Administrator</option>
+					<option value="3">Normal User</option>
 				
 				</select>
 
@@ -97,6 +97,7 @@
 			<div class="col-lg-10">
 
 				<?php
+
 					echo $this->Form->input('status', array(
 						'class' => 'form-control',
 						'placeholder' => 'Status of current user',
@@ -137,31 +138,3 @@
 	</div>
 
 </div>
-
-<!--
-<div class="users form">
-<?php echo $this->Form->create('User'); ?>
-	<fieldset>
-		<legend><?php echo __('Edit User'); ?></legend>
-	<?php
-		echo $this->Form->input('id');
-		echo $this->Form->input('password');
-		echo $this->Form->input('name');
-		echo $this->Form->input('email');
-		echo $this->Form->input('status');
-		echo $this->Form->input('group_id');
-		echo $this->Form->input('profile');
-
-	?>
-	</fieldset>
-<?php echo $this->Form->end(__('Submit')); ?>
-</div>
-<div class="actions">
-	<h3><?php echo __('Actions'); ?></h3>
-	<ul>
-
-		<li><?php echo $this->Form->postLink(__('Delete'), array('action' => 'delete', $this->Form->value('User.id')), null, __('Are you sure you want to delete # %s?', $this->Form->value('User.id'))); ?></li>
-		<li><?php echo $this->Html->link(__('List Users'), array('action' => 'index')); ?></li>
-	</ul>
-</div>
--->

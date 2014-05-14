@@ -153,6 +153,10 @@ class HashResultsController extends AppController {
 
 	public function calculate_probability_of_collision_result() {
 
+		if($this->referer() != FULL_BASE_URL.'/HashTests/calculate_probability_of_collision') {
+			return $this->redirect(array('action' => 'calculate_probability_of_collision', 'controller' => 'HashTests'));
+		}
+
 		$base =	$this->Session->read('base');
 		$exponent = $this->Session->read('exponent');
 		$requiredbase =	$this->Session->read('requiredbase');
@@ -179,6 +183,11 @@ class HashResultsController extends AppController {
 	}
 
 	public function hash_analyser_result() {
+
+		if($this->referer() != FULL_BASE_URL.'/HashTests/hash_analyser') {
+			return $this->redirect(array('action' => 'hash_analyser', 'controller' => 'HashTests'));
+		}
+
 		$arrayofhashalgorithms = $this->Session->read('resultfromdatabase');
 		$messagedigestlength = $this->Session->read ('messagedigestlength');
 		$this->set('arrayofhashalgorithms', $arrayofhashalgorithms);
@@ -186,6 +195,11 @@ class HashResultsController extends AppController {
 
 	}
 	public function avalanche_effect_result() {
+
+		if($this->referer() != FULL_BASE_URL.'/HashTests/avalanche_effect') {
+			return $this->redirect(array('action' => 'avalanche_effect', 'controller' => 'HashTests'));
+		}
+
 		$output = $this->Session->read('output');
 
 		if(!empty($output)) {
@@ -194,9 +208,15 @@ class HashResultsController extends AppController {
 	}
 
 	public function reverse_look_up_result() {
+
+		if($this->referer() != FULL_BASE_URL.'/HashTests/reverse_look_up') {
+			return $this->redirect(array('action' => 'reverse_look_up', 'controller' => 'HashTests'));
+		}
+
 		$data = $this->Session->read('reverseData');
 		$this->Session->write('reverseData', '');
 		$this->set('data',$data);
+		
 	}
 
 }
