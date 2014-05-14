@@ -73,6 +73,12 @@ public $validate = array(
 	public function beforeDelete($cascade = true) {
 		$conditions = array('HashTest.user_id' => $this->id);
 		$this->HashTest->deleteAll($conditions);
+		$this->Behaviors->disable('Acl');
+		return true;
+	}
+
+	public function afterDelete($cascade = true) {
+		$this->Behaviors->enable('Acl');
 		return true;
 	}
 
