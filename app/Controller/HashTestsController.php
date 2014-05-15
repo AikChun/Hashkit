@@ -677,16 +677,16 @@ class HashTestsController extends AppController {
 
 		foreach($searchHashResult as $key => $hashResult) {
 
-		$options2 = array(
-				'conditions' => array(
-					'HashAlgorithm.id' => $hashResult['HashResult']['hash_algorithm_id']
-					),
-				);
+			$options2 = array(
+					'conditions' => array(
+						'HashAlgorithm.id' => $hashResult['HashResult']['hash_algorithm_id']
+						),
+					);
 
-		$searchAlgo = array();
-		$searchAlgo = $hashAlgorithmModel->find('first', $options2);
+			$searchAlgo = array();
+			$searchAlgo = $hashAlgorithmModel->find('first', $options2);
 
-		array_push($searchResultAlgo, $searchAlgo);
+			array_push($searchResultAlgo, $searchAlgo);
 		}
 
 		$this->Set('hashalgorithm', $searchResultAlgo);
@@ -696,8 +696,8 @@ class HashTestsController extends AppController {
 			$result = $view->render('view','ajax');
 		
     		$this->response->body($result);
-   		 	$this->response->type('html');
-   			$this->response->download('hashresult.html');
+			$this->response->type('html');
+			$this->response->download('hashresult.html');
 			
 			$this->Session->setFlash('Hash result have been saved', 'alert-box', array('class'=>'alert-danger'));
 		}
