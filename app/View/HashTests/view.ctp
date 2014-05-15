@@ -12,31 +12,31 @@
 
 		<?php
 
-			echo '<b>Plaintext entered:</b>';
-			echo '<br/>';
-
 			$ptline = explode("\n",$hashresult[0]['HashResult']['plaintext']);
-			
-			if(count($ptline > 1)) {
 
-				$asd = end($ptline);
+			// echo '<b>Plaintext entered:</b>';
+			// echo '<br/>';
 
-				foreach($ptline as $key1 => $data1){
+			// if(count($ptline > 1)) {
 
-					echo $data1;
+			// 	$lastPt = end($ptline);
 
-					if($asd != $data1) {
-						echo '<br/>';
-					}
+			// 	foreach($ptline as $key1 => $data1){
 
-				}
+			// 		echo $data1;
 
-			}else {
-				echo $hashresult[0]['HashResult']['plaintext'];
-			}
+			// 		if($lastPt != $data1) {
+			// 			echo '<br/>';
+			// 		}
 
-			echo '<br/>';
-			echo '<br/>';
+			// 	}
+
+			// }else {
+			// 	echo $hashresult[0]['HashResult']['plaintext'];
+			// }
+
+			// echo '<br/>';
+			// echo '<br/>';
 
 			foreach($hashresult as $key1 => $data1) {
 				
@@ -46,13 +46,15 @@
 				echo '<br/>';
 				echo $hashalgorithm[$key1]['HashAlgorithm']['name'];
 				echo '<br/>';
-				echo '<b>Message Digest:</b>';
+				echo '<b>Plaintext : Message Digest:</b>';
 				echo '<br/>';
 
 				if (count($mdline) == 1) {
 					
 					foreach($mdline as $key2 => $data2) {
 
+						echo $ptline[0];
+						echo ': ';
 						echo $data2;
 						echo '<br/>';
 						echo '<br/>';
@@ -61,14 +63,19 @@
 				
 				}else {
 
+					$indexCount = 0;
+
 					foreach($mdline as $key2 => $data2) {
 
 						if ($data2 == $mdline[(count($mdline)-1)]) {
 							echo '<br/>';
 						}else {
 
+							echo $ptline[$indexCount];
+							echo ': ';
 							echo $data2;
 							echo '<br/>';
+							$indexCount = $indexCount + 1;
 						
 						}
 

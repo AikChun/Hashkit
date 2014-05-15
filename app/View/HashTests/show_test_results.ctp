@@ -58,6 +58,8 @@
 
 			?>
 
+			<div>
+
 			<?php
 
 				echo $this->Paginator->counter(array(
@@ -65,17 +67,28 @@
 			
 			?>
 
-			<ul class="paging pager">
+			</div>
 
-				<?php
+			<!--<ul class="paging pager">-->
 
-					echo $this->Paginator->prev('< ' . __('Previous | '), array(), null, array('class' => 'prev enabled'));
-					echo $this->Paginator->numbers(array('separator' => ''));
-					echo $this->Paginator->next(__('Next') . ' >', array(), null, array('class' => 'next disabled'));
+			<br>
+			<br>
+
+			<div>
+
+				<center>
+
+					<?php
+
+						echo $this->Paginator->prev('< ' . __('Previous | '), array(), null, array('class' => 'prev disabled'));
+						echo $this->Paginator->numbers(array('separator' => ' '));
+						echo $this->Paginator->next(__(' | Next') . ' >', array(), null, array('class' => 'next disabled'));
+					
+					?>
 				
-				?>
-		
-			</ul>
+				</center>
+			
+			</div>
 
 		</div>
 

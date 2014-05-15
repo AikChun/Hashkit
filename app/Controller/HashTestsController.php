@@ -637,9 +637,10 @@ class HashTestsController extends AppController {
 	public function show_test_results() {
 		$this->HashTest->recursive = 0;
 		$this->Paginator->settings = array(
+			'limit' => 10,
 			'conditions' => array('HashTest.user_id' => $this->Auth->user('id')
-			)
-		);
+			));
+
 		$this->set('hashtests', $this->Paginator->paginate());
 
 	}

@@ -22,31 +22,31 @@
 			
 			}else {	
 
-				echo '<b>Plaintext entered:</b>';
-				echo '<br/>';
-
 				$ptline = explode("\n",$output[0]['HashResult']['plaintext']);
+
+				// echo '<b>Plaintext entered:</b>';
+				// echo '<br/>';
 				
-				if(count($ptline > 1)) {
+				// if(count($ptline > 1)) {
 
-					$asd = end($ptline);
+				// 	$asd = end($ptline);
 
-					foreach($ptline as $key1 => $data1){
+				// 	foreach($ptline as $key1 => $data1){
 
-						echo $data1;
+				// 		echo $data1;
 
-						if($asd != $data1) {
-							echo '<br/>';
-						}
+				// 		if($asd != $data1) {
+				// 			echo '<br/>';
+				// 		} 
 
-					}
+				// 	}
 
-				}else {
-					echo $output[0]['HashResult']['plaintext'];
-				}
+				// }else {
+				// 	echo $output[0]['HashResult']['plaintext'];
+				// }
 
-				echo '<br/>';
-				echo '<br/>';
+				// echo '<br/>';
+				// echo '<br/>';
 
 				foreach($output as $key1 => $data1) {
 					
@@ -56,13 +56,15 @@
 					echo '<br/>';
 					echo $data1['HashResult']['hash_algorithm_name'];
 					echo '<br/>';
-					echo '<b>Message Digest:</b>';
+					echo '<b>Plaintext : Message Digest:</b>';
 					echo '<br/>';
 
 					if (count($mdline) == 1) {
 						
 						foreach($mdline as $key2 => $data2) {
 
+							echo $ptline[0];
+							echo ': ';
 							echo $data2;
 							echo '<br/>';
 							echo '<br/>';
@@ -71,14 +73,19 @@
 					
 					}else {
 
+						$indexCount = 0;
+
 						foreach($mdline as $key2 => $data2) {
 
 							if ($data2 == $mdline[(count($mdline)-1)]) {
 								echo '<br/>';
 							}else {
 
+								echo $ptline[$indexCount];
+								echo ': ';
 								echo $data2;
 								echo '<br/>';
+								$indexCount = $indexCount + 1;
 							
 							}
 
