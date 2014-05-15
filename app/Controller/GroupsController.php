@@ -54,10 +54,10 @@ class GroupsController extends AppController {
 		if ($this->request->is('post')) {
 			$this->Group->create();
 			if ($this->Group->save($this->request->data)) {
-				$this->Session->setFlash(__('The group has been saved.', 'alert-box', array('class'=>'alert-danger')));
+				$this->Session->setFlash('The group has been saved.', 'alert-box', array('class'=>'alert-danger'));
 				return $this->redirect(array('action' => 'index'));
 			} else {
-				$this->Session->setFlash(__('The group could not be saved. Please, try again.', 'alert-box', array('class'=>'alert-danger')));
+				$this->Session->setFlash('The group could not be saved. Please, try again.', 'alert-box', array('class'=>'alert-danger'));
 			}
 		}
 	}
@@ -75,10 +75,10 @@ class GroupsController extends AppController {
 		}
 		if ($this->request->is(array('post', 'put'))) {
 			if ($this->Group->save($this->request->data)) {
-				$this->Session->setFlash(__('The group has been saved.', 'alert-box', array('class'=>'alert-danger')));
+				$this->Session->setFlash('The group has been saved.', 'alert-box', array('class'=>'alert-danger'));
 				return $this->redirect(array('action' => 'index'));
 			} else {
-				$this->Session->setFlash(__('The group could not be saved. Please, try again.', 'alert-box', array('class'=>'alert-danger')));
+				$this->Session->setFlash('The group could not be saved. Please, try again.', 'alert-box', array('class'=>'alert-danger'));
 			}
 		} else {
 			$options = array('conditions' => array('Group.' . $this->Group->primaryKey => $id));
@@ -100,9 +100,9 @@ class GroupsController extends AppController {
 		}
 		$this->request->onlyAllow('post', 'delete');
 		if ($this->Group->delete()) {
-			$this->Session->setFlash(__('The group has been deleted.', 'alert-box', array('class'=>'alert-danger')));
+			$this->Session->setFlash('The group has been deleted.', 'alert-box', array('class'=>'alert-danger'));
 		} else {
-			$this->Session->setFlash(__('The group could not be deleted. Please, try again.', 'alert-box', array('class'=>'alert-danger')));
+			$this->Session->setFlash('The group could not be deleted. Please, try again.', 'alert-box', array('class'=>'alert-danger'));
 		}
 		return $this->redirect(array('action' => 'index'));
 	}}

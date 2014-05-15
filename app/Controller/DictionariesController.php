@@ -50,10 +50,10 @@ class DictionariesController extends AppController {
 		if ($this->request->is('post')) {
 			$this->Dictionary->create();
 			if ($this->Dictionary->save($this->request->data)) {
-				$this->Session->setFlash(__('The dictionary has been saved.', 'alert-box', array('class'=>'alert-danger')));
+				$this->Session->setFlash('The dictionary has been saved.', 'alert-box', array('class'=>'alert-danger'));
 				return $this->redirect(array('action' => 'index'));
 			} else {
-				$this->Session->setFlash(__('The dictionary could not be saved. Please, try again.', 'alert-box', array('class'=>'alert-danger')));
+				$this->Session->setFlash('The dictionary could not be saved. Please, try again.', 'alert-box', array('class'=>'alert-danger'));
 			}
 		}
 	}
@@ -71,10 +71,10 @@ class DictionariesController extends AppController {
 		}
 		if ($this->request->is(array('post', 'put'))) {
 			if ($this->Dictionary->save($this->request->data)) {
-				$this->Session->setFlash(__('The dictionary has been saved.', 'alert-box', array('class'=>'alert-danger')));
+				$this->Session->setFlash('The dictionary has been saved.', 'alert-box', array('class'=>'alert-danger'));
 				return $this->redirect(array('action' => 'index'));
 			} else {
-				$this->Session->setFlash(__('The dictionary could not be saved. Please, try again.', 'alert-box', array('class'=>'alert-danger')));
+				$this->Session->setFlash('The dictionary could not be saved. Please, try again.', 'alert-box', array('class'=>'alert-danger'));
 			}
 		} else {
 			$options = array('conditions' => array('Dictionary.' . $this->Dictionary->primaryKey => $id));
@@ -96,9 +96,9 @@ class DictionariesController extends AppController {
 		}
 		$this->request->onlyAllow('post', 'delete');
 		if ($this->Dictionary->delete()) {
-			$this->Session->setFlash(__('The dictionary has been deleted.', 'alert-box', array('class'=>'alert-danger')));
+			$this->Session->setFlash('The dictionary has been deleted.', 'alert-box', array('class'=>'alert-danger'));
 		} else {
-			$this->Session->setFlash(__('The dictionary could not be deleted. Please, try again.', 'alert-box', array('class'=>'alert-danger')));
+			$this->Session->setFlash('The dictionary could not be deleted. Please, try again.', 'alert-box', array('class'=>'alert-danger'));
 		}
 		return $this->redirect(array('action' => 'index'));
     }

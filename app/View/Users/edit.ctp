@@ -1,4 +1,5 @@
 <div class="container">
+
 <?php echo $data['User']['group_id'];
 		echo 'Hello World';
 ?>
@@ -28,6 +29,7 @@
 					echo $this->Form->input('name', array(
 						'class' => 'form-control',
 						'label' => false,
+						'disabled' => true
 					));
 
 				?>
@@ -47,6 +49,7 @@
 					echo $this->Form->input('email', array(
 						'class' => 'form-control',
 						'label' => false,
+						'disabled' => true
 					));
 
 				?>
@@ -85,6 +88,7 @@
 					echo $this->Form->input('profile', array(
 						'class' => 'form-control',
 						'label' => false,
+						'disabled' => true
 					));
 
 				?>

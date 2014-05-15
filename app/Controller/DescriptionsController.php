@@ -50,10 +50,10 @@ class DescriptionsController extends AppController {
 		if ($this->request->is('post')) {
 			$this->Description->create();
 			if ($this->Description->save($this->request->data)) {
-				$this->Session->setFlash(__('The description has been saved.', 'alert-box', array('class'=>'alert-danger')));
+				$this->Session->setFlash('The description has been saved.', 'alert-box', array('class'=>'alert-danger'));
 				return $this->redirect(array('action' => 'index'));
 			} else {
-				$this->Session->setFlash(__('The description could not be saved. Please, try again.', 'alert-box', array('class'=>'alert-danger')));
+				$this->Session->setFlash('The description could not be saved. Please, try again.', 'alert-box', array('class'=>'alert-danger'));
 			}
 		}
 		$users = $this->Description->User->find('list');
@@ -73,10 +73,10 @@ class DescriptionsController extends AppController {
 		}
 		if ($this->request->is(array('post', 'put'))) {
 			if ($this->Description->save($this->request->data)) {
-				$this->Session->setFlash(__('The description has been saved.', 'alert-box', array('class'=>'alert-danger')));
+				$this->Session->setFlash('The description has been saved.', 'alert-box', array('class'=>'alert-danger'));
 				return $this->redirect(array('action' => 'index'));
 			} else {
-				$this->Session->setFlash(__('The description could not be saved. Please, try again.', 'alert-box', array('class'=>'alert-danger')));
+				$this->Session->setFlash('The description could not be saved. Please, try again.', 'alert-box', array('class'=>'alert-danger'));
 			}
 		} else {
 			$options = array('conditions' => array('Description.' . $this->Description->primaryKey => $id));
@@ -100,9 +100,9 @@ class DescriptionsController extends AppController {
 		}
 		$this->request->onlyAllow('post', 'delete');
 		if ($this->Description->delete()) {
-			$this->Session->setFlash(__('The description has been deleted.', 'alert-box', array('class'=>'alert-danger')));
+			$this->Session->setFlash('The description has been deleted.', 'alert-box', array('class'=>'alert-danger'));
 		} else {
-			$this->Session->setFlash(__('The description could not be deleted. Please, try again.', 'alert-box', array('class'=>'alert-danger')));
+			$this->Session->setFlash('The description could not be deleted. Please, try again.', 'alert-box', array('class'=>'alert-danger'));
 		}
 		return $this->redirect(array('action' => 'index'));
 	}}

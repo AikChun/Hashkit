@@ -50,6 +50,8 @@ class UsersController extends AppController {
  */
 	public function index() {
 		$this->User->recursive = 0;
+		$this->Paginator->settings = array(
+			'limit' => 10);
 		$this->set('users', $this->Paginator->paginate());
 	}
 
@@ -80,10 +82,10 @@ class UsersController extends AppController {
 		if ($this->request->is('post')) {
 			$this->User->create();
 			if ($this->User->save($this->request->data)) {
-				$this->Session->setFlash(__('The user has been saved.', 'alert-box', array('class'=>'alert-danger')));
+				$this->Session->setFlash('The user has been added.', 'alert-box', array('class'=>'alert-danger'));
 				return $this->redirect(array('action' => 'index'));
 			} else {
-				$this->Session->setFlash(__('The user could not be saved. Please, try again.', 'alert-box', array('class'=>'alert-danger')));
+				$this->Session->setFlash('The user could not be saved. Please, try again.', 'alert-box', array('class'=>'alert-danger'));
 			}
 		}
 	}
@@ -102,17 +104,17 @@ class UsersController extends AppController {
 		if ($this->request->is(array('post', 'put'))) {
 			$this->User->id = $id;
 				$this->User->set(array(
-					'name' => $this->request->data['User']['name'],
-					'email' => $this->request->data['User']['email'],
+					//'name' => $this->request->data['User']['name'],
+					//'email' => $this->request->data['User']['email'],
 					'group_id' => $this->request->data['User']['group_id'],
-					'profile' => $this->request->data['User']['profile'],
+					//'profile' => $this->request->data['User']['profile'],
 					'status' => $this->request->data['User']['status']
 					));
 			if ($this->User->save()) {
-				$this->Session->setFlash(__('The user has been saved.', 'alert-box', array('class'=>'alert-danger')));
+				$this->Session->setFlash('The user has been saved.', 'alert-box', array('class'=>'alert-danger'));
 				return $this->redirect(array('action' => 'index'));
 			} else {
-				$this->Session->setFlash(__('The user could not be saved. Please, try again.', 'alert-box', array('class'=>'alert-danger')));
+				$this->Session->setFlash('The user could not be saved. Please, try again.', 'alert-box', array('class'=>'alert-danger'));
 			}
 		} else {
 			$options = array('conditions' => array('User.' . $this->User->primaryKey => $id));
@@ -136,9 +138,9 @@ class UsersController extends AppController {
 		}
 		$this->request->onlyAllow('post', 'delete');
 		if ($this->User->delete()) {
-			$this->Session->setFlash(__('The user has been deleted.', 'alert-box', array('class'=>'alert-danger')));
+			$this->Session->setFlash('The user has been deleted.', 'alert-box', array('class'=>'alert-danger'));
 		} else {
-			$this->Session->setFlash(__('The user could not be deleted. Please, try again.', 'alert-box', array('class'=>'alert-danger')));
+			$this->Session->setFlash('The user could not be deleted. Please, try again.', 'alert-box', array('class'=>'alert-danger'));
 		}
 		return $this->redirect(array('action' => 'index'));
 	}
