@@ -649,11 +649,17 @@ class HashTestsController extends AppController {
 		if (!$this->HashTest->exists($id)) {
 			throw new NotFoundException(__('Invalid hash result'));
 		}
-		$options = array(
+		$conditions = array(
 			'conditions' => array(
-				'HashTest.' . $this->HashTest->primaryKey => $id)
-			);
-		$this->set('hashtest', $this->HashTest->find('first', $options));
+				'HashTest.id' => $id,
+				'HashTest.user_id' => $this->Auth->user('id')
+			)
+		);
+		$data = $this->HashTest->find('first', $conditions);
+		if(empty($data)) {
+			return $this->redirect(array('action' => 'show_test_results', 'controller' => 'HashTests'));
+		}
+		$this->set('hashtest', $data);
 
 		$hashResultModel = ClassRegistry::init('HashResult');
 
@@ -672,16 +678,16 @@ class HashTestsController extends AppController {
 
 		foreach($searchHashResult as $key => $hashResult) {
 
-		$options2 = array(
-				'conditions' => array(
-					'HashAlgorithm.id' => $hashResult['HashResult']['hash_algorithm_id']
-					),
-				);
+			$options2 = array(
+					'conditions' => array(
+						'HashAlgorithm.id' => $hashResult['HashResult']['hash_algorithm_id']
+						),
+					);
 
-		$searchAlgo = array();
-		$searchAlgo = $hashAlgorithmModel->find('first', $options2);
+			$searchAlgo = array();
+			$searchAlgo = $hashAlgorithmModel->find('first', $options2);
 
-		array_push($searchResultAlgo, $searchAlgo);
+			array_push($searchResultAlgo, $searchAlgo);
 		}
 
 		$this->Set('hashalgorithm', $searchResultAlgo);
@@ -691,8 +697,8 @@ class HashTestsController extends AppController {
 			$result = $view->render('view','ajax');
 		
     		$this->response->body($result);
-   		 	$this->response->type('html');
-   			$this->response->download('hashresult.html');
+			$this->response->type('html');
+			$this->response->download('hashresult.html');
 			
 			$this->Session->setFlash('Hash result have been saved', 'alert-box', array('class'=>'alert-danger'));
 		}
