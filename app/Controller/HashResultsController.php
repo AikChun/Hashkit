@@ -113,20 +113,19 @@ class HashResultsController extends AppController {
 			$output = '';
 			$this->set('output', $output);
 		}
-		$this->Session->write('output', '');
 
 		if($this->request->is('post')) {
-			$view = new View($this);
-			$result = $view->render('basic_hashing_result','ajax');
-		
-    		$this->response->body($result);
-   		 	$this->response->type('html');
-   			$this->response->download('hashresult.html');
+			$choice = 1;
+			$this->HashResult->writeFile($output,$choice);
+			
+    		$this->response->file('/webroot/' . 'hashresult.txt',array(
+    			'download' => true, 'name' => 'hashresult.txt'
+    			));
 			
 			$this->Session->setFlash('Hash result have been saved', 'alert-box', array('class'=>'alert-danger'));
 		}
+		//$this->Session->write('output', '');
 	}
-
 
 	public function compute_and_compare_result() {
 
@@ -142,14 +141,15 @@ class HashResultsController extends AppController {
 		//$this->Session->write('output', '');
 
 		if($this->request->is('post')) {
-			$view = new View($this);
-			$result = $view->render('compute_and_compare_result','ajax');
-		
-    		$this->response->body($result);
-   		 	$this->response->type('html');
-   			$this->response->download('hashresult.html');
+			$choice = 2;
+			$this->HashResult->writeFile($outputResult,$choice);
+			
+    		$this->response->file('/webroot/' . 'hashresult.txt',array(
+    			'download' => true, 'name' => 'hashresult.txt'
+    			));
 			
 			$this->Session->setFlash('Hash result have been saved', 'alert-box', array('class'=>'alert-danger'));
+
 		}
 	}
 
