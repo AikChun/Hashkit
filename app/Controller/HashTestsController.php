@@ -648,11 +648,17 @@ class HashTestsController extends AppController {
 		if (!$this->HashTest->exists($id)) {
 			throw new NotFoundException(__('Invalid hash result'));
 		}
-		$options = array(
+		$conditions = array(
 			'conditions' => array(
-				'HashTest.' . $this->HashTest->primaryKey => $id)
-			);
-		$this->set('hashtest', $this->HashTest->find('first', $options));
+				'HashTest.id' => $id,
+				'HashTest.user_id' => $this->Auth->user('id')
+			)
+		);
+		$data = $this->HashTest->find('first', $conditions);
+		if(empty($data)) {
+			return $this->redirect(array('action' => 'show_test_results', 'controller' => 'HashTests'));
+		}
+		$this->set('hashtest', $data);
 
 		$hashResultModel = ClassRegistry::init('HashResult');
 
