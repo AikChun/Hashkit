@@ -168,7 +168,7 @@
                       <br><br>
                       -in 2008, researchers are able to use a techinque to fake SSL certificate validity and malware uses this flaw to fake a Microsoft digital signature. Since then, applications has switch over to a secure algorithm such SHA2 and etc. Later, a group of algorithm designer included Ronald Rivest came out with <a href="http://groups.csail.mit.edu/cis/md6/"> MD6 </a> which uses Merkle tree-like structure and can prove to be resistant against differential attacks. 
                       <br><br>
-                      Example of a MD5 function to perform on a message :
+                      An example of a MD5 function to perform on a message :
                       <br>
                       <center><img src="/img/example.jpg" class="img-responsive"></center>
                       <br>
@@ -203,17 +203,30 @@
                       <br><br>
                       SHA3 is the lastest in the series of hash functions,not many applications has used it yet but it should be taken over as common hash function by 2017 and later. Instead of using Merkle-Damgård construction, SHA3 use the sponge function and it does not have any successful attack yet.
                       <br><br>
+                      An exaple of sha1 and sha256 function example :
+                      <br>
+                      <center><img src="/img/sha.jpg" class="img-responsive"></center>
+                      <br>
+                      <br><br>
                       <h4><b>Other Hash function</b></h4>
                       <br>
                       <h4><b>Whirlpool</b></h4>
                       <br>
-                      A hash function is designed after the square block cipher based on Miyaguchi Preneel construction(taken from a modified Advanced Encryption Standard). It generates 512 bits of hash value.In 2009, a rebound attack was announced that presents a full collisions against 4.5 rounds of Whirlpool in 2^120 operations. You can find out more here.<a href="http://eprint.iacr.org/2010/198.pdf">link</a>
+                      A hash function is designed after the square block cipher based on Miyaguchi Preneel construction(taken from a modified Advanced Encryption Standard). It generates 512 bits of hash value.In 2009, a rebound attack was announced that presents a full collisions against 4.5 rounds of Whirlpool in 2^120 operations. You can find out more here (<a href="http://eprint.iacr.org/2010/198.pdf">link</a>).
+                      <br><br>
+                      An example of whirlpool function :
                       <br>
+                      <img src="/img/whirlpoolexample.jpg" class="img-responsive">
+                      <br>   
                       <h4><b>RIPEMD</b></h4>
                       <br>
-                      RIPEMD stands for RACE Integrity Primitives Evaluation Message Digest. A series of hash functions 
+                      RIPEMD stands for RACE Integrity Primitives Evaluation Message Digest. A series of hash functions produces 128,160,256 and 320 bits of hash value and based on the design principle of MD4 and with the same performance as SHA1.
+                      <br>
+                      An example of the RIPEMD to show the different length of output
+                      <br><br>
+                      <img src="/img/ripemdexample.jpg" class="img-responsive">
+                      <br>
                       <hr>
-
                       <h2 id="sec3"class="text-center v-center">Uses for Hash functions</h2>
                       <p>Today with the accessibility of lots of resources, nearly every application are integrating hash functions in their products due to their security reasons like to protect against alteration and unwanted attacks.</p> 
                       <br>
