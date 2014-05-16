@@ -28,12 +28,15 @@ class HashTest extends AppModel {
 
 	public function beforeDelete($cascade = true) {
 		$conditions = array('HashResult.hash_test_id' => $this->id);
-		$this->log('Logging id');
-		$this->log($this->id);
 		$this->HashResult->deleteAll($conditions);
 		return true;
 	}
 
+/**
+ * Saving hash results as a part of hashtests
+ * @param array $data containing data[n]['HashResult']['fields']
+ * @param string outputResult anaylsis type
+ */
 	public function saveTestResults($data, $outputResult = 'Basic Hashing') {
 		$hashResultModel = ClassRegistry::init('HashResult');
 
@@ -265,33 +268,33 @@ class HashTest extends AppModel {
 		$count = 0;
 		$dup = array();
 		$dupIndex = array();
-    	$duplicates=FALSE;
-    	foreach($array as $k=>$i) {
-        	if(!isset($value_{$i})) {
-          	  $value_{$i}=TRUE;
-        	}
-        	else {
-            	$duplicates|=TRUE; 
-            	array_push($dup, $i);    
-            	//array_push($dup, $count);  
-        	}
-    	}
+		$duplicates=FALSE;
+		foreach($array as $k=>$i) {
+			if(!isset($value_{$i})) {
+			  $value_{$i}=TRUE;
+			}
+			else {
+				$duplicates|=TRUE; 
+				array_push($dup, $i);	 
+				//array_push($dup, $count);  
+			}
+		}
 
-    	foreach ($dup as $q => $w) {
-    		foreach ($array as $a => $s) {
-    			if($w == $s) {
-    				array_push($dupIndex, $count);
-    			}
-    			$count += 1;
-    		}
-    		$count = 0;
-    	}
+		foreach ($dup as $q => $w) {
+			foreach ($array as $a => $s) {
+				if($w == $s) {
+					array_push($dupIndex, $count);
+				}
+				$count += 1;
+			}
+			$count = 0;
+		}
 
-    	if ($duplicates == TRUE) {
-    		return $dupIndex;
-   		} else {
-   			return ($duplicates);
-   		}
+		if ($duplicates == TRUE) {
+			return $dupIndex;
+		} else {
+			return ($duplicates);
+		}
 	}
 
 
