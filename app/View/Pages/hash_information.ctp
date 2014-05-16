@@ -211,7 +211,7 @@
                       <br><br>
                       <a href="http://eprint.iacr.org/2011/037.pdf">Higher-Order Differential Attack on Reduced SHA-256</a>
                       <br><br>
-                      SHA3 is the lastest in the series of hash functions,not many applications has used it yet but it should be taken over as common hash function by 2017 and later. Instead of using Merkle-Damgård construction, SHA3 use the sponge function and it does not have any successful attack yet.
+                      SHA3 is the lastest hash function in the list of hash functions. However, not many applications has used it yet but it will take over as the commonly usedhash function by 2017 or later. Instead of using Merkle-Damgård construction, SHA3 use the sponge function and it does not have any successful attack yet.
                       <br><br>
                       An exaple of sha1 and sha256 function example :
                       <br>
@@ -303,11 +303,12 @@
                           
                       </p>
                       <br>
-                      <h4><b>Optional properties</b></h4>
+                      <h4><b>desirable properties(optional)</b></h4>
                       <br>
-                      <h4><b>Avalanche effect</b><h4>
-
-                      <hr >
+                      <h4><b>Avalanche effect</b></h4>
+                      <br>
+                      Every crytpographic hash algorithm should exhibit a certain degree of avalanche effect and if it does not, it shows a poor randomization. And when it produce poor randomization, crytanalyst can use it to make predications which is useful to completely or sufficient to partially break algorithm. To see if the algorithm you chose has a degree of avalanche effect, you can choose this tool: <a href="/HashTests/avalanche_effect">link</a>  
+                      <hr>
                       
                         <h2 id="sec5" class="text-center v-center">Attacks on Hash functions</h2>
                         <br><br>
