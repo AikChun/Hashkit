@@ -275,6 +275,12 @@ class HashTestsController extends AppController {
  */
 	public function calculate_probability_of_collision() {
 		
+		App::import('Vendor', 'Phpsec/Math/BigInteger');
+		// $a = new Math_BigInteger(555234124141241512);
+		// $b = new Math_BigInteger(355235124121412412);
+
+		// $result1 = $a->add($b)->toString();
+		// echo $result1;
 		$HashAlgorithmV1Model = ClassRegistry::init('HashAlgorithmV1');
 		
 		$findConditions = array(
@@ -363,7 +369,9 @@ class HashTestsController extends AppController {
 
 					$firstexpEqu = (- pow($N,2)) / (2 * $K);
 					$probability = (1 - exp($firstexpEqu)) * 100;
+					
 					$total_sample_size_ninety_nine_percentage = (bcsqrt(log(1 - 99/100) * - 2 * $K));
+					
 					$samplespace = $N;
 					$totalhash = $K;
 					

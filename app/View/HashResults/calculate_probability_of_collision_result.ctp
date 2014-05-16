@@ -24,9 +24,9 @@
 			if((int)$requiredbase != 0 && (int)$requiredexponent != 0){
 
 				if((int)$customizedalgorithmbase == 0 && (int)$customizedalgorithmexponent == 0 && (int)$base == 0 && (int)$exponent == 0){
-					echo "For the sample space of " . '<font color="red">'. $requiredbase . '</font><font style="vertical-align:super;font-size:50%;">'.$requiredexponent . '</font><font color="black">'. " and the total size of hash function output " . '<font color="red">'. $totalhash . '<font color="black">' . ",";
+					echo "For the sample space of " . '<font color="red">'. $requiredbase . '</font><font style="vertical-align:super;font-size:50%;">'.'<sup>'. $requiredexponent . '</sup></font><font color="black">'. " and the total size of hash function output " . '<font color="red">'. $totalhash . '<font color="black">' . ",";
 				}elseif((int)$customizedalgorithmbase != 0 && (int)$customizedalgorithmexponent != 0 && (int)$base == 0 && (int)$exponent == 0){
-					echo "For the sample space of " . '<font color="red">'. $requiredbase . $requiredexponent . '<font color="black">'. " and the total size of hash function output " . '<font color="red">'. $customizedalgorithmbase . $customizedalgorithmexponent . '<font color="black">' . ",";
+					echo "For the sample space of " . '<font color="red">'. $requiredbase .'<sup>'. $requiredexponent . '</sup><font color="black">'. " and the total size of hash function output " . '<font color="red">'. $customizedalgorithmbase .'<sup>'. $customizedalgorithmexponent . '</sup><font color="black">' . ",";
 
 				}else{
 					echo "For the sample space of " . '<font color="red">'. $requiredbase .'<sup>'. $requiredexponent .'</sup><font color="black">'. " and the total size of hash function output " . '<font color="red">'. $base .'<sup>'. $exponent . '</sup><font color="black">' . ",";
@@ -37,10 +37,10 @@
 				if((int)$customizedalgorithmbase == 0 && (int)$customizedalgorithmexponent == 0 && (int)$base == 0 && (int)$exponent == 0){
 					echo "For the sample space of " . '<font color="red">'. $samplespace . '<font color="black">'. " and the total size of hash function output " . '<font color="red">'. $totalhash . '<font color="black">' . ",";
 				}elseif((int)$customizedalgorithmbase != 0 && (int)$customizedalgorithmexponent != 0 && (int)$base == 0 && (int)$exponent == 0){
-					echo "For the sample space of " . '<font color="red">'. $samplespace . '<font color="black">'. " and the total size of hash function output " . '<font color="red">'. $customizedalgorithmbase . $customizedalgorithmexponent . '<font color="black">' . ",";
+					echo "For the sample space of " . '<font color="red">'. $samplespace . '<font color="black">'. " and the total size of hash function output " . '<font color="red">'. $customizedalgorithmbase .'<sup>'. $customizedalgorithmexponent . '</sup><font color="black">' . ",";
 
 				}else{
-					echo "For the sample space of " . '<font color="red">'. $samplespace .'<font color="black">'. " and the total size of hash function output " . '<font color="red">'. $base . $exponent . '<font color="black">' . ",";
+					echo "For the sample space of " . '<font color="red">'. $samplespace .'<font color="black">'. " and the total size of hash function output " . '<font color="red">'. $base . '<sup>' . $exponent . '</sup><font color="black">' . ",";
 				}
 				
 			}
@@ -50,7 +50,7 @@
 		<br>
 
 		<?php
-			echo "the probability of getting a collision in numbers of tries: " . round($probability,2) . " %";
+			echo "the probability of getting a collision for the hash algorithm : " . round($probability,2) . " %";
 		?>
 
 		<br>

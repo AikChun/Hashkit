@@ -101,3 +101,43 @@
 	</div>
 
 </div>
+
+<script>
+	
+	$(document).ready(function() {
+
+		$('#UserResetPasswordForm').submit(function() {
+			var password = $('#UserPassword').val();
+			var confirmPassword = $('#UserConfirmNewPassword').val();
+
+			try {
+				var errorMessage = '';
+				if(password != confirmPassword) {
+					throw 'Your passwords do not match!';
+				}
+				if(password.search(/\d/) == -1) {
+					errorMessage += 'must contain at least one number.\n';
+				}
+
+				if(password.search(/[a-zA-Z]/)) {
+					errorMessage += 'must contain at least one character.\n';
+				}
+
+				if(password.length < 8) {
+					errorMessage += 'must be at least 8 characters long.';
+				}
+
+				if(errorMessage != '') {
+					throw 'Your password must contain' + errorMessage;
+				}
+			} catch (err) {
+				alert(err);
+				event.preventDefault();
+			}
+
+			
+		});
+
+	});
+
+</script>
