@@ -14,30 +14,6 @@
 
 			$ptline = explode("\n",$hashresult[0]['HashResult']['plaintext']);
 
-			// echo '<b>Plaintext entered:</b>';
-			// echo '<br/>';
-
-			// if(count($ptline > 1)) {
-
-			// 	$lastPt = end($ptline);
-
-			// 	foreach($ptline as $key1 => $data1){
-
-			// 		echo $data1;
-
-			// 		if($lastPt != $data1) {
-			// 			echo '<br/>';
-			// 		}
-
-			// 	}
-
-			// }else {
-			// 	echo $hashresult[0]['HashResult']['plaintext'];
-			// }
-
-			// echo '<br/>';
-			// echo '<br/>';
-
 			foreach($hashresult as $key1 => $data1) {
 				
 				$mdline = explode("\n",$data1['HashResult']['message_digest']);
@@ -46,14 +22,14 @@
 				echo '<br/>';
 				echo $hashalgorithm[$key1]['HashAlgorithm']['name'];
 				echo '<br/>';
-				echo '<b>Plaintext : Message Digest:</b>';
+				echo '<b>Plaintext: Message Digest:</b>';
 				echo '<br/>';
 
 				if (count($mdline) == 1) {
 					
 					foreach($mdline as $key2 => $data2) {
 
-						echo $ptline[0];
+						echo trim($ptline[0]);
 						echo ': ';
 						echo $data2;
 						echo '<br/>';
@@ -71,7 +47,7 @@
 							echo '<br/>';
 						}else {
 
-							echo $ptline[$indexCount];
+							echo trim($ptline[$indexCount]);
 							echo ': ';
 							echo $data2;
 							echo '<br/>';

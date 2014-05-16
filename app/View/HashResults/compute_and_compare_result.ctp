@@ -32,7 +32,7 @@
 					echo '<br/>';
 					echo $data1['HashResult']['hash_algorithm_name'];
 					echo '<br/>';
-					echo '<b>Plaintext : Message Digest:</b>';
+					echo '<b>Plaintext: Message Digest:</b>';
 					echo '<br/>';
 
 					if (count($mdline) == 1) {
