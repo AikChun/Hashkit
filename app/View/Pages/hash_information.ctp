@@ -112,6 +112,16 @@
                       </p>
                       <hr>
 
+                      <h3 id="unbroken">What is broken and unbroken in hash function?</h3>
+                      <br>
+                      <p>
+                      Unbroken - Best known attack on the hash function is brute force.
+                      </p>
+                      <p>
+                      Broken - Better than brute force attack is avaliable. Known internal weakness in hash function structure.
+                      </p>
+                      <hr>
+
                       <h2 id="sec1" class="text-center v-center" >Type of Hash functions</h2>
                       <br>
                       <br>
