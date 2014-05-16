@@ -6,7 +6,7 @@
 		var y = document.getElementById('required_exponent').value;
 		var r = document.getElementById('hash_value').value;
 		if (y != 0 || x != 0){
-			if (isNaN(y) || isNaN(x) || x > 5 ){
+			if (isNaN(y) || isNaN(x) || x > 5 || x > 99999 ){
 				$('.bs-example-modal-lg').modal('show')
 				var required_base = $('#required_base');
 				required_base.val('');
@@ -52,7 +52,7 @@
 
 		if(a != 0 && b != 0){
 
-			if (isNaN(a) || isNaN(b) || a > 5){
+			if (isNaN(a) || isNaN(b) || a > 5 || b > 99999){
 					
 					$('.bs-example-modal-lg').modal('show')
 					var required_base = $('#customized_algorithm_base');
