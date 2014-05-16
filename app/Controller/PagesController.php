@@ -93,28 +93,9 @@ class PagesController extends AppController {
 	public function index() {
 
 	}
-	public function computeAndCompare() {
-
-	}
-
-	public function sendEmailNotification() {
-
-	}
-
-	public function begin_test() {
-
-	}
-
-	public function hash_function_properties() {
-
-	}
 
 	public function hash_information() {
 		$this->layout = 'hashinfolayout';
 	}
 
-
-	public function hash_function() {
-
-	}
 }
