@@ -104,10 +104,10 @@ class UsersController extends AppController {
 		if ($this->request->is(array('post', 'put'))) {
 			$this->User->id = $id;
 				$this->User->set(array(
-					//'name' => $this->request->data['User']['name'],
-					//'email' => $this->request->data['User']['email'],
+					'name' => $this->request->data['User']['name'],
+					'email' => $this->request->data['User']['email'],
 					'group_id' => $this->request->data['User']['group_id'],
-					//'profile' => $this->request->data['User']['profile'],
+					'profile' => $this->request->data['User']['profile'],
 					'status' => $this->request->data['User']['status']
 					));
 			if ($this->User->save()) {

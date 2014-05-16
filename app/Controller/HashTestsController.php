@@ -275,6 +275,8 @@ class HashTestsController extends AppController {
  */
 	public function calculate_probability_of_collision() {
 		
+		// App::import('Vendor', '');
+
 		$HashAlgorithmV1Model = ClassRegistry::init('HashAlgorithmV1');
 		
 		$findConditions = array(

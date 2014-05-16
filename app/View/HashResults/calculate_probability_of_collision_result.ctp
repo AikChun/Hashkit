@@ -10,8 +10,6 @@
 
 		<br/>
 
-		<font style="vertical-align:super;font-size:50%;">hello</font>
-
 		<?php
 
 				//base - result from database (total hashes)
@@ -31,7 +29,7 @@
 					echo "For the sample space of " . '<font color="red">'. $requiredbase . $requiredexponent . '<font color="black">'. " and the total size of hash function output " . '<font color="red">'. $customizedalgorithmbase . $customizedalgorithmexponent . '<font color="black">' . ",";
 
 				}else{
-					echo "For the sample space of " . '<font color="red">'. $requiredbase . $requiredexponent .'<font color="black">'. " and the total size of hash function output " . '<font color="red">'. $base . $exponent . '<font color="black">' . ",";
+					echo "For the sample space of " . '<font color="red">'. $requiredbase .'<sup>'. $requiredexponent .'</sup><font color="black">'. " and the total size of hash function output " . '<font color="red">'. $base .'<sup>'. $exponent . '</sup><font color="black">' . ",";
 				}
 
 			}else {
@@ -52,7 +50,7 @@
 		<br>
 
 		<?php
-			echo "the probability of getting a collision in numbers of tries: " . round($probability,2) . " %";
+			echo "the probability of getting a collision for the hash algorithm : " . round($probability,2) . " %";
 		?>
 
 		<br>
