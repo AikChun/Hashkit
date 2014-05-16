@@ -10,8 +10,6 @@
 
 		<br/>
 
-		<font style="vertical-align:super;font-size:50%;">hello</font>
-
 		<?php
 
 				//base - result from database (total hashes)
@@ -52,7 +50,7 @@
 		<br>
 
 		<?php
-			echo "the probability of getting a collision in numbers of tries: " . round($probability,2) . " %";
+			echo "the probability of getting a collision for the hash algorithm : " . round($probability,2) . " %";
 		?>
 
 		<br>
