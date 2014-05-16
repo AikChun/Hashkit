@@ -102,7 +102,7 @@
       <p>
       Sim Aik Chun (leader)
       <br>
-      Ng Yuetyong
+      Ng Yuet Yong
       <br> 
       Ian Chua Zhi Ying
       <br>
