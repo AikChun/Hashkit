@@ -54,11 +54,9 @@ class HashResult extends AppModel {
 	}
 
 	public function writeFile($output,$choice) {
-		$this->log($output);
-		$saveResult = '';
 
+		$saveResult = '';
 		$ptline1 = explode("\n",$output[0]['HashResult']['plaintext']);
-		$this->log(count($ptline1));
 
 		foreach($output as $key => $hashResult) {
 
@@ -67,7 +65,7 @@ class HashResult extends AppModel {
 			$saveResult .= 'Plaintext: Message Digest' . "\n";
 
 			if(count($ptline1) == 1) {
-				$this->log('HEHEE');
+
 				$saveResult .= $hashResult['HashResult']['plaintext'] . ': ' 
 				. $hashResult['HashResult']['message_digest'] . "\n" . "\n";
 			
@@ -78,9 +76,9 @@ class HashResult extends AppModel {
 				array_pop($mdline);
 				array_pop($ptline);
 					foreach ($ptline as $key => $data) {
-					$saveResult .= $ptline[$key] . ': ' . $mdline[$key] . "\n";
+					$saveResult .= trim($ptline[$key]) . ': ' . $mdline[$key] . "\n";
 					}
-				$saveResult .= "\n";	
+				$saveResult .= "\n";
 			}
 		}
 
@@ -97,7 +95,7 @@ class HashResult extends AppModel {
 				
 				foreach($collision_pt as $key => $data) {
 					$collision_index[$key] = $collision_index[$key] + 1;
-					$saveResult .= $collision_pt[$key] . ": " . $collision_md[$key] .
+					$saveResult .= trim($collision_pt[$key]) . ": " . $collision_md[$key] .
 					": " . $collision_index[$key] . "\n";
 				}
 			}
@@ -112,7 +110,19 @@ class HashResult extends AppModel {
 				}
 				$count++;
 				$saveResult .= ': ' . $data['HashResult']['hash_algorithm_name'];
+
+				if (strlen($data['HashResult']['hash_algorithm_name']) < 8) {
+
+					$paddingLength = 8 - strlen($data['HashResult']['hash_algorithm_name']);
+
+					for ($i = 0; $i < $paddingLength; $i++) {
+ 						$saveResult .= ' ';
+					}
+
+				}
+
 			}
+
 			$saveResult .= "\n";
 
 			$count = 0;
@@ -122,7 +132,19 @@ class HashResult extends AppModel {
 				}
 				$count++;
 				$saveResult .= ': ' . $data['HashResult']['output_length'];
+
+				if (strlen($data['HashResult']['output_length']) < 8) {
+
+					$paddingLength = 8 - strlen($data['HashResult']['output_length']);
+
+					for ($i = 0; $i < $paddingLength; $i++) {
+							$saveResult .= ' ';
+					}
+				
+				}
+
 			}
+
 			$saveResult .= "\n";
 
 			$count = 0;
@@ -132,7 +154,19 @@ class HashResult extends AppModel {
 				}
 				$count++;
 				$saveResult .= ': ' . $data['HashResult']['speed'];
+
+				if (strlen($data['HashResult']['speed']) < 8) {
+
+					$paddingLength = 8 - strlen($data['HashResult']['speed']);
+
+					for ($i = 0; $i < $paddingLength; $i++) {
+							$saveResult .= ' ';
+					}
+				
+				}
+
 			}
+
 			$saveResult .= "\n";
 
 			$count = 0;
@@ -142,7 +176,19 @@ class HashResult extends AppModel {
 				}
 				$count++;
 				$saveResult .= ': ' . $data['HashResult']['collision_resistance'];
+			
+				if (strlen($data['HashResult']['collision_resistance']) < 8) {
+
+					$paddingLength = 8 - strlen($data['HashResult']['collision_resistance']);
+
+					for ($i = 0; $i < $paddingLength; $i++) {
+							$saveResult .= ' ';
+					}
+
+				}
+
 			}
+
 			$saveResult .= "\n";
 
 			$count = 0;
@@ -152,7 +198,19 @@ class HashResult extends AppModel {
 				}
 				$count++;
 				$saveResult .= ': ' . $data['HashResult']['preimage_resistance'];
+
+				if (strlen($data['HashResult']['preimage_resistance']) < 8) {
+
+					$paddingLength = 8 - strlen($data['HashResult']['preimage_resistance']);
+
+					for ($i = 0; $i < $paddingLength; $i++) {
+							$saveResult .= ' ';
+					}
+
+				}
+
 			}
+
 			$saveResult .= "\n";
 
 			$count = 0;
@@ -162,7 +220,19 @@ class HashResult extends AppModel {
 				}
 				$count++;
 				$saveResult .= ': ' . $data['HashResult']['2nd_preimage_resistance'];
+
+				if (strlen($data['HashResult']['2nd_preimage_resistance']) < 8) {
+
+				$paddingLength = 8 - strlen($data['HashResult']['2nd_preimage_resistance']);
+
+					for ($i = 0; $i < $paddingLength; $i++) {
+							$saveResult .= ' ';
+					}
+				
+				}
+
 			}
+
 			$saveResult .= "\n";
 
 			$count = 0;
@@ -172,6 +242,17 @@ class HashResult extends AppModel {
 				}
 				$count++;
 				$saveResult .= ': ' . $data['HashResult']['collision_bka'];
+
+				if (strlen($data['HashResult']['collision_bka']) < 8) {
+
+					$paddingLength = 8 - strlen($data['HashResult']['collision_bka']);
+
+					for ($i = 0; $i < $paddingLength; $i++) {
+							$saveResult .= ' ';
+					}
+
+				}
+
 			}
 			$saveResult .= "\n";
 
@@ -182,7 +263,19 @@ class HashResult extends AppModel {
 				}
 				$count++;
 				$saveResult .= ': ' . $data['HashResult']['preimage_bka'];
+
+				if (strlen($data['HashResult']['preimage_bka']) < 8) {
+
+					$paddingLength = 8 - strlen($data['HashResult']['preimage_bka']);
+
+					for ($i = 0; $i < $paddingLength; $i++) {
+							$saveResult .= ' ';
+					}
+
+				}
+
 			}
+
 			$saveResult .= "\n";
 
 			$count = 0;
@@ -192,7 +285,19 @@ class HashResult extends AppModel {
 				}
 				$count++;
 				$saveResult .= ': ' . $data['HashResult']['2nd_preimage_bka'];
+
+				if (strlen($data['HashResult']['2nd_preimage_bka']) < 8) {
+
+					$paddingLength = 8 - strlen($data['HashResult']['2nd_preimage_bka']);
+
+					for ($i = 0; $i < $paddingLength; $i++) {
+							$saveResult .= ' ';
+					}
+				
+				}
+
 			}
+
 			$saveResult .= "\n" . "\n";
 
 			$saveResult .= 'Recommended Hash Function:' . "\n";
