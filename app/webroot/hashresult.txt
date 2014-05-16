@@ -1,0 +1,26 @@
+Selected Algorithm:
+MD5
+Plaintext: Message Digest
+hello: 5d41402abc4b2a76b9719d911017c592
+
+Selected Algorithm:
+MD4
+Plaintext: Message Digest
+hello: 866437cb7a794bce2b727acc0362ee27
+
+Analysis:
+No collision detected
+
+Comparing between selected algorithmn:
+Algorithm                     : MD5     : MD4     
+Output Length(bits)           : 128     : 128     
+Speed(MB/s)                   : 392.32  : 540.87  
+Collision Resistence          : Broken  : Broken  
+Preimage Resistence           : Broken  : Broken  
+2nd Preimage Resistence       : Unbroken: Broken  
+Collision Best Known Attack   : 2^20.96 : 3       
+Preimage Best Known Attack    : 2^123.4 : 2^69.4  
+2nd Preimage Best Known Attack: Nil     : 2^78.4  
+
+Recommended Hash Function:
+MD5

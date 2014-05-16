@@ -29,7 +29,7 @@
 					echo "For the sample space of " . '<font color="red">'. $requiredbase . $requiredexponent . '<font color="black">'. " and the total size of hash function output " . '<font color="red">'. $customizedalgorithmbase . $customizedalgorithmexponent . '<font color="black">' . ",";
 
 				}else{
-					echo "For the sample space of " . '<font color="red">'. $requiredbase . $requiredexponent .'<font color="black">'. " and the total size of hash function output " . '<font color="red">'. $base . $exponent . '<font color="black">' . ",";
+					echo "For the sample space of " . '<font color="red">'. $requiredbase .'<font style="">'. $requiredexponent .'<font color="black">'. " and the total size of hash function output " . '<font color="red">'. $base .'^'. $exponent . '<font color="black">' . ",";
 				}
 
 			}else {

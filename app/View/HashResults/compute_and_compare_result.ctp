@@ -24,30 +24,6 @@
 
 				$ptline = explode("\n",$output[0]['HashResult']['plaintext']);
 
-				// echo '<b>Plaintext entered:</b>';
-				// echo '<br/>';
-				
-				// if(count($ptline > 1)) {
-
-				// 	$asd = end($ptline);
-
-				// 	foreach($ptline as $key1 => $data1){
-
-				// 		echo $data1;
-
-				// 		if($asd != $data1) {
-				// 			echo '<br/>';
-				// 		} 
-
-				// 	}
-
-				// }else {
-				// 	echo $output[0]['HashResult']['plaintext'];
-				// }
-
-				// echo '<br/>';
-				// echo '<br/>';
-
 				foreach($output as $key1 => $data1) {
 					
 					$mdline = explode("\n",$data1['HashResult']['message_digest']);
@@ -63,7 +39,7 @@
 						
 						foreach($mdline as $key2 => $data2) {
 
-							echo $ptline[0];
+							echo trim($ptline[0]);
 							echo ': ';
 							echo $data2;
 							echo '<br/>';
@@ -81,7 +57,7 @@
 								echo '<br/>';
 							}else {
 
-								echo $ptline[$indexCount];
+								echo trim($ptline[$indexCount]);
 								echo ': ';
 								echo $data2;
 								echo '<br/>';
@@ -331,7 +307,7 @@
 				
 				<div class="col-lg-8.5 pull-right">
 
-					<a href="/" class="btn btn-primary">Start New Test</a>
+					<a href="/HashTests/compute_and_compare" class="btn btn-primary">Start New Test</a>
 					<a href="/" class="btn btn-default">Back to Home</a>
 				
 				</div>

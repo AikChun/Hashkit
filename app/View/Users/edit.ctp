@@ -1,9 +1,5 @@
 <div class="container">
 
-<?php echo $data['User']['group_id'];
-		echo 'Hello World';
-?>
-
 	<div class="jumbotron">
 		
 		<div class="modal-header">
@@ -28,8 +24,7 @@
 
 					echo $this->Form->input('name', array(
 						'class' => 'form-control',
-						'label' => false,
-						'disabled' => true
+						'label' => false
 					));
 
 				?>
@@ -48,8 +43,7 @@
 
 					echo $this->Form->input('email', array(
 						'class' => 'form-control',
-						'label' => false,
-						'disabled' => true
+						'label' => false
 					));
 
 				?>
@@ -87,8 +81,7 @@
 
 					echo $this->Form->input('profile', array(
 						'class' => 'form-control',
-						'label' => false,
-						'disabled' => true
+						'label' => false
 					));
 
 				?>
