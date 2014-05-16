@@ -10,6 +10,8 @@
 
 		<br/>
 
+		<font style="vertical-align:super;font-size:50%;">hello</font>
+
 		<?php
 
 				//base - result from database (total hashes)
@@ -24,7 +26,7 @@
 			if((int)$requiredbase != 0 && (int)$requiredexponent != 0){
 
 				if((int)$customizedalgorithmbase == 0 && (int)$customizedalgorithmexponent == 0 && (int)$base == 0 && (int)$exponent == 0){
-					echo "For the sample space of " . '<font color="red">'. $requiredbase . $requiredexponent . '<font color="black">'. " and the total size of hash function output " . '<font color="red">'. $totalhash . '<font color="black">' . ",";
+					echo "For the sample space of " . '<font color="red">'. $requiredbase . '</font><font style="vertical-align:super;font-size:50%;">'.$requiredexponent . '</font><font color="black">'. " and the total size of hash function output " . '<font color="red">'. $totalhash . '<font color="black">' . ",";
 				}elseif((int)$customizedalgorithmbase != 0 && (int)$customizedalgorithmexponent != 0 && (int)$base == 0 && (int)$exponent == 0){
 					echo "For the sample space of " . '<font color="red">'. $requiredbase . $requiredexponent . '<font color="black">'. " and the total size of hash function output " . '<font color="red">'. $customizedalgorithmbase . $customizedalgorithmexponent . '<font color="black">' . ",";
 

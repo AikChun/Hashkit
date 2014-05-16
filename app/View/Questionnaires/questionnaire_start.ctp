@@ -11,11 +11,16 @@
 		<br/>
 
 		<p>
-			Press on the button "Next" to begin the questionnaire. 	
+			
+			Test yourself on your knowledge on hash functions now!
+			<br>
+			<br>
+			Click on "Start Test" to begin the questionnaire.
+		
 		</p>
 		
 		<div class="modal-footer">
-			<a href="/Questionnaires/questionnaire" class="btn btn-primary">Next</a>
+			<a href="/Questionnaires/questionnaire" class="btn btn-primary">Start Test</a>
 		</div>
 
 	</div>

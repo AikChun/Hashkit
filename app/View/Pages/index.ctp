@@ -9,26 +9,17 @@
   </ol>
   <div class="carousel-inner" >
     <div class="item active" >
-     <!--  <img src="/img/wallpaper6.jpg" class="img-responsive"> -->
-      <!-- <img src="/img/wallpaper1color.png" class="img-responsive"> -->
-      <!-- <img src="/img/wallpaper1gradient.png" class="img-responsive"> -->
-      <!-- <img src="/img/wallpapertest1.jpg" class="img-responsive"> -->
       <img src="/img/test3.png" class="img-responsive">
       <div class="container">
         <div class="carousel-caption" style="left:-44%; top: 60%;position:absolute;">
           <!-- <h1>HashKit</h1> -->
-          <!-- <img src="/img/hash_logo.png"> -->
-          <!-- <img src="/img/testlogo.png"> -->
           <?php if($authUser):?>
-          <!-- <h3 id ="textforcarsousel">You are a click away to learn about hash functions and to start, press the any button below:</h3> -->
-
           <a class="btn btn-lg btn-primary" href="/Pages/hash_information">Information</a>
           <a class="btn btn-lg btn-warning" href="/Questionnaires/questionnaire">Quiz</a>
 
           <?php endif;?>
           
           <?php if(!$authUser):?>
-          <!-- <h3 id ="textforcarsousel">Want to learn more about hash functions? Now, You can by just clicking the buttons below:</h3> -->
           <div class="buttonposition">
           <a class="btn btn-lg btn-primary" href="/Users/register">Register</a>
           <a class="btn btn-lg btn-warning" href="/Users/login">Login</a>
@@ -38,19 +29,19 @@
       </div>
     </div>
     <div class="item">
-      <img src="/img/wallpaper3.jpg" class="img-responsive">
-      <!-- <img src="/img/wallpaper3gradient.png" class="img-responsive"> -->
+      <img src="/img/wallpapertest2.jpg" class="img-responsive">
       <div class="container">
-        <div class="carousel-caption" id="blackfrontforcarousel">
-          <h1 id="textforcarsouselhead">Facts about Hash functions</h1>
+        <div class="carousel-caption" style=" top: 55%;position:absolute;" id="blackfrontforcarousel">
+<!--           <h1 id="textforcarsouselhead">Facts about Hash functions</h1> -->
           
           <?php if($authUser):?>
-          <h3 id ="textforcarsousel">Find out more about Hash functions by clicking the button below:</h3>
+<!--           <h3 id ="textforcarsousel">Find out more about Hash functions by clicking the button below:</h3> -->
           <button type="button" class="btn btn-lg btn-warning" href="/Pages/hash_information">start</button>
           <?php endif;?>
 
           <?php if(!$authUser):?>
-          <h3 id ="textforcarsousel">want to learn more ? Login and You can read up on information about Hash functions</h3>
+<!--           <h3 id ="textforcarsousel">want to learn more ? Login and You can read up on information about Hash functions</h3> -->
+          <a class="btn btn-lg btn-primary" href="/Users/register">Register</a>
           <a class="btn btn-lg btn-warning" href="/Users/login">Login</a>
           <?php endif;?>
 
@@ -58,35 +49,29 @@
       </div>
     </div>
     <div class="item">
-      <img src="/img/wallpaper4.jpg" class="img-responsive">
+      <img src="/img/wallpapertest3.jpg" class="img-responsive" >
       <!-- <img src="/img/wallpaper4gradient.png" class="img-responsive"> -->
       <div class="container">
-        <div class="carousel-caption">
-          <h1 id="textforcarsouselhead">Hash Tools</h1>
-          
+        <div class="carousel-caption" style="left:-30%; top: 65%;position:absolute;">
+<!--           <h1 id="textforcarsouselhead">Hash Tools</h1>
+           -->
           <?php if(!$authUser):?>
-          <p id ="textforcarsousel">Come and try out our tools by logging in..</p>
+         <!--  <p id ="textforcarsousel">Come and try out our tools by logging in..</p> -->
+          <a class="btn btn-lg btn-primary" href="/Users/register">Register</a>
           <a class="btn btn-lg btn-warning" href="/Users/login">Login</a>
           <?php endif;?>
 
           <?php if($authUser):?>
-          <p id ="textforcarsousel">Come and try out our tools by clicking any button below:</p>
-          <button type="button" class="btn btn-lg btn-warning" href="/HashTests/basic_hashing">Hash generator</button>
-          <button type="button" class="btn btn-lg btn-warning" href="/HashTests/compute_and_compare">Hash algo recommendation</button>
-          <button type="button" class="btn btn-lg btn-warning" href="/HashTests/hash_analyser">Hash analyser</button>
-          <p id ="textforcarsousel">Or try other tools by clicking the Hash Functions on top</p>
+          <!-- <p id ="textforcarsousel">Come and try out our tools by clicking any button below:</p> -->
+          <a class="btn btn-lg btn-primary" href="/HashTests/basic_hashing">Hash generator</a>
+          <a class="btn btn-lg btn-warning" href="/HashTests/compute_and_compare">Hash algo recommendation</a>
+          <a class="btn btn-lg btn-success" href="/HashTests/hash_analyser">Hash analyser</a>
+     <!--      <p id ="textforcarsousel">Or try other tools by clicking the Hash Functions on top</p> -->
           <?php endif;?>
         </div>
       </div>
     </div>
   </div>
-  <!-- Controls -->
-  <!-- <a class="left carousel-control" href="#myCarousel" data-slide="prev">
-    <span class="icon-prev"></span>
-  </a>
-  <a class="right carousel-control" href="#myCarousel" data-slide="next">
-    <span class="icon-next"></span>
-  </a> -->  
 </div>
 <!-- /.carousel -->
 
@@ -117,7 +102,7 @@
       <p>
       Sim Aik Chun (leader)
       <br>
-      Ng Yuetyong
+      Ng Yuet Yong
       <br> 
       Ian Chua Zhi Ying
       <br>
