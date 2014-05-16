@@ -179,11 +179,7 @@
         <br>
         <p class="lead" id="textforcontentpage">Here are the requirements of password:
         <br>  
-        - The use of both uppercase and lowercase letters (case sensitivity)
-        <br>
-        - Inclusion of one or more numerical digits
-        <br>
-        - Inclusion of special characters, e.g. @, #, &, $ etc.
+        - Inclusion of alphabets and numbers (alphanumeric)
         <br>
         - At least 8 characters
         </p>
