@@ -16,7 +16,8 @@
 Plugin/ClearCache
 /app/Vendor/*
 /app/webroot/dictionaryfiles
-/app/build
+/app/webroot/build
+/app/webroot/build/*
 
 # OS generated files #
 ######################
