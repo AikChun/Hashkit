@@ -55,8 +55,14 @@
 
 		<br>
 
-		<?php 
-			echo "the required sample space to get 99% probability of getting a collision: " . $requiredsamplespace . " hashes";
+		<?php
+			echo $condition; 
+			if($condition == 1){
+				echo "the required sample space to get 99% probability of getting a collision:". '<font color="red">'. " 2<sup>" . $requiredsamplespace . '</sup></font color="black">'. " hashes";
+			}else{
+				echo "the required sample space to get 99% probability of getting a collision: " . $requiredsamplespace . " hashes";
+			}
+			
 		?>
 
 		<br>

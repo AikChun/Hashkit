@@ -370,7 +370,7 @@ class HashTestsController extends AppController {
 					$firstexpEqu = (- pow($N,2)) / (2 * $K);
 					$probability = (1 - exp($firstexpEqu)) * 100;
 					
-					$total_sample_size_ninety_nine_percentage = (bcsqrt(log(1 - 99/100) * - 2 * $K));
+					$getresult = false;
 					
 					$samplespace = $N;
 					$totalhash = $K;
@@ -382,6 +382,50 @@ class HashTestsController extends AppController {
 					$customizedalgorithmbase = (int)$data['HashTests']['customized_algorithm_base'];
 					$customizedalgorithmexponent = (int)$data['HashTests']['customized_algorithm_exponent'];
 					
+					// do{
+					// 	$value = $exponent / 2;
+					// 	$N = bcpow(2,$value);
+					// 	$K = bcpow(2,$exponent);
+					// 	$exp = (- pow($N,2)) / (2 * $K);
+					// 	$prob = (1 - exp($exp)) * 100;
+					// 	if($prob > 98){
+					// 		$total_sample_size_ninety_nine_percentage = 2 + $value;
+					// 		$getresult = true;
+					// 	}else{
+					// 		$value += 1;
+					// 		$getresult = false;
+					// 	}
+					// }while($getresult == true);
+					$condition = 0;
+					switch($exponent){
+						case 32: $total_sample_size_ninety_nine_percentage = 18; 
+								  $condition = 1;
+								break;
+						case 128: $total_sample_size_ninety_nine_percentage = 66; 
+								  $condition = 1;
+								break;
+						case 160: $total_sample_size_ninety_nine_percentage = 82; 
+								  $condition = 1;
+								break;
+						case 192: $total_sample_size_ninety_nine_percentage = 98; 
+								  $condition = 1;
+								break;
+						case 224: $total_sample_size_ninety_nine_percentage = 114; 
+								  $condition = 1;
+								break;	
+						case 256: $total_sample_size_ninety_nine_percentage = 130; 
+								  $condition = 1;
+								break;
+						case 384: $total_sample_size_ninety_nine_percentage = 194; 
+								  $condition = 1;
+								break;
+						case 512: $total_sample_size_ninety_nine_percentage = 258; 
+								  $condition = 1;
+								break;
+						default : $total_sample_size_ninety_nine_percentage = (bcsqrt(log(1 - 99/100) * - 2 * $K));
+								break;
+					}
+
 					$this->Session->write('base',$base);
 					$this->Session->write('exponent',$exponent);
 					$this->Session->write('requiredbase',$requiredbase);
@@ -393,7 +437,7 @@ class HashTestsController extends AppController {
 					$this->Session->write('samplespace', $samplespace);
 					$this->Session->write('totalhash', $totalhash);
 					$this->Session->write('requiredsamplespace', $total_sample_size_ninety_nine_percentage);	
-					//HashingLib::generate_ninety_nine_percentage_proability($N,$K);	
+					$this->Session->write('condition',$condition);
 					$this->redirect(array('controller' => 'HashResults', 'action' => 'calculate_probability_of_collision_result'));
 				 }//end of if else 
 					
