@@ -209,7 +209,7 @@ class User extends AppModel {
 		} else {
 			throw new CakeException ('Your new passwords do not match.');
 		}
-	return false;
+		return false;
 	}
 // end of password related function
 
