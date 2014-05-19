@@ -58,6 +58,31 @@ class UserTest extends CakeTestCase {
  * @return void
  */
 	public function testSafeRead() {
+		// WHEN $id = 10;
+		$id = 10;
+
+		// THEN execute safeRead();
+		$data = $this->User->safeRead($id);
+		
+		
+		
+		// EXPECTED To have array containing user's information without password field
+		$this->recursive = 0;
+		$conditions = array(
+			'conditions' => array(
+				'User.id' => $id
+			),
+			'contain' => null
+		);
+		$result = $this->User->find('first', $conditions);
+		$user = $result['User'];
+		unset($user['password']);
+		unset($result['User']);
+		$expectedData = array_merge($user, $result);
+		$this->assertEqual($data, $expectedData);
+
+
+
 	}
 
 /**
@@ -66,6 +91,25 @@ class UserTest extends CakeTestCase {
  * @return void
  */
 	public function testBindNode() {
+		// WHEN $user == array(
+		//	'User' => array(
+		//		'group_id' => '1'
+		//	)
+		// );
+		$user = array(
+			'User' => array(
+				'group_id' => '1'
+			)
+		);
+
+		// THEN execute bindNode();
+		$data = $this->User->bindNode($user);
+
+		$expected = array(
+			'model' => 'Group',
+			'foreign_key' => '1'
+		);
+		$this->assertEqual($data, $expected);
 	}
 
 /**
@@ -95,19 +139,41 @@ class UserTest extends CakeTestCase {
  * @return void
  */
 	public function testCheckEmailPasswordWorks() {
-		//WHEN $email == aikchun616@gmail.com
-		$email = 'aikchun616@gmail.com';
+		// WHEN $data == array( 
+		// 'email' => 'aikchun616@gmail.com',
+		// 'name' => 'AikChun',
+		// 'password' => 'hello'
+		// );
+		$data = array( 
+			'User' => array(
+				'email' => 'aikchun616@gmail.com',
+				'name' => 'AikChun',
+				'password' => 'hello'
+			)
+		);
+
 		//THEN execute checkEmailExists();
-		$emailExists = $this->User->checkEmailExists($email);
+		$passwordMatch = $this->User->checkEmailPasswordWorks($data);
 		//Expect TRUE
-		$this->assertTrue($emailExists);
+		$this->assertTrue($passwordMatch);
 		
-		//WHEN $email == hashkitproject@gmail.com <= non-existant email in fixture
-		$email = 'hashkitproject@gmail.com';
+		// WHEN $email == hashkitproject@gmail.com <= non-existant email in fixture
+		// $data = array( 
+		// 'email' => 'ian@gmail.com',
+		// 'name' => 'ian',
+		// 'password' => 'password'
+		// );
+		$data2 = array( 
+			'User' => array(
+				'email' => 'ian@gmail.com',
+				'name' => 'ian',
+				'password' => 'password'
+			)
+		);
 		//THEN execute checkEmailExists();
-		$emailExists = $this->User->checkEmailExists($email);
+		$passwordMatch2 = $this->User->checkEmailPasswordWorks($data2);
 		//Expect False
-		$this->assertFalse($emailExists);
+		$this->assertFalse($passwordMatch2);
 	}
 
 /**
