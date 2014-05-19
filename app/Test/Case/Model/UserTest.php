@@ -118,19 +118,16 @@ class UserTest extends CakeTestCase {
 	public function testCreateToken() {
 		// We are testing for the if the tokens are created according to the time they're created
 
-		//WHEN $email == aikchun616@gmail.com AND $date = '2001-03-10 17:16:18';
+		//WHEN $email == aikchun616@gmail.com 
 		$email = 'aikchun616@gmail.com';
 		//THEN execute createToken();
 		$token1 = $this->User->createToken($email);
-		//Expect ccef18d2c4b5edbe8220180e3d3bf0cd93de391a 
 		
 		// Allow time counter to advance by a second
 		sleep(1);
-		//WHEN $email == aikchun616@gmail.com AND $date = '2001-03-10 17:16:18';
-		$email = 'aikchun616@gmail.com';
+		//WHEN $email == 'aikchun616@gmail.com';
 		//THEN execute createToken();
 		$token2 = $this->User->createToken($email);
-		//Expect ccef18d2c4b5edbe8220180e3d3bf0cd93de391a 
 
 		$this->assertNotEqual($token1, $token2);
 	}
@@ -141,6 +138,39 @@ class UserTest extends CakeTestCase {
  * @return void
  */
 	public function testFindXORCreateToken() {
+		// WHEN $email == 'aikchun616@gmail.com';
+		$email = 'aikchun616@gmail.com';
+
+		// THEN execute findXORCreateToken();
+		$data = $this->User->findXORCreateToken($email);
+
+		// EXPECT 
+		$dataInFixture = array(
+			'id' => '10',
+			'name' => 'AikChun',
+			'token' => '4571ae82ce05f63d3c3d38d386abf16d39302921',
+			'email' => 'aikchun616@gmail.com'
+		);
+
+		$this->assertEqual($data, $dataInFixture);
+
+		// Test for token creation
+		// WHEN $email == 'ian@gmail.com'
+		$email2 = 'ian@gmail.com';
+
+		// THEN execute findXORCreateToken();
+		$data2 = $this->User->findXORCreateToken($email2);
+
+
+		// EXPECT
+		$dataInFixture2 = array(
+			'id' => '12',
+			'name' => 'ian',
+			'email' => 'ian@gmail.com',
+			'token' => '',
+		);
+
+		$this->assertNotEqual($data2, $dataInFixture2);
 	}
 
 /**
