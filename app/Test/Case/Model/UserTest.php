@@ -116,6 +116,23 @@ class UserTest extends CakeTestCase {
  * @return void
  */
 	public function testCreateToken() {
+		// We are testing for the if the tokens are created according to the time they're created
+
+		//WHEN $email == aikchun616@gmail.com AND $date = '2001-03-10 17:16:18';
+		$email = 'aikchun616@gmail.com';
+		//THEN execute createToken();
+		$token1 = $this->User->createToken($email);
+		//Expect ccef18d2c4b5edbe8220180e3d3bf0cd93de391a 
+		
+		// Allow time counter to advance by a second
+		sleep(1);
+		//WHEN $email == aikchun616@gmail.com AND $date = '2001-03-10 17:16:18';
+		$email = 'aikchun616@gmail.com';
+		//THEN execute createToken();
+		$token2 = $this->User->createToken($email);
+		//Expect ccef18d2c4b5edbe8220180e3d3bf0cd93de391a 
+
+		$this->assertNotEqual($token1, $token2);
 	}
 
 /**
