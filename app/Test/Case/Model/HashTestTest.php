@@ -31,7 +31,7 @@ class HashTestTest extends CakeTestCase {
 		$this->HashTest = ClassRegistry::init('HashTest');
 		$this->HashAlgorithm = ClassRegistry::init('HashAlgorithm');
 		$this->HashResult = ClassRegistry::init('HashResult');
-		$this->HashResult = ClassRegistry::init('Dictionary');
+		$this->Dictionary = ClassRegistry::init('Dictionary');
 	}
 
 /**
@@ -43,6 +43,7 @@ class HashTestTest extends CakeTestCase {
 		unset($this->HashTest);
 		unset($this->HashAlgorithm);
 		unset($this->HashResult);
+		unset($this->Dictionary);
 
 		parent::tearDown();
 	}

@@ -107,7 +107,7 @@
 	$(document).ready(function() {
 
 		$('#UserResetPasswordForm').submit(function() {
-			var password = $('#UserPassword').val();
+			var password = $('#UserNewPassword').val();
 			var confirmPassword = $('#UserConfirmNewPassword').val();
 
 			try {
