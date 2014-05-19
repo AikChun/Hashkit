@@ -68,7 +68,7 @@ class UserTest extends CakeTestCase {
 		
 		// EXPECTED To have array containing user's information without password field
 		$this->recursive = 0;
-		$conditions = array(
+		// $conditions = array(
 			'conditions' => array(
 				'User.id' => $id
 			),
@@ -253,7 +253,7 @@ class UserTest extends CakeTestCase {
  * @return void
  */
 	public function testResetPassword() {
-		// WHEN $data =
+		// WHEN $data
 		$data = array(
 			'User' => array(
 				'id' => '10',
@@ -264,15 +264,25 @@ class UserTest extends CakeTestCase {
 			)
 		);
 
-
 		// THEN execute resetPassword()
 		$result = $this->User->resetPassword($data);
+		unset($result['User']['modified']);
 
-		// EXPECT result to be true
-		$this->assertTrue($result);
-
-		// If $data have their new_password and confirm_new_password do not match
-
+		// EXPECT to be true
+		$expectedData = array(
+			'User' => array(
+				'id' => '10',
+				'name' => 'Aik Chun',
+				'email' => 'aikchun616@gmail.com',
+				'new_password' => 'Hello',
+				'confirm_new_password' => 'Hello',
+				'password' => '6ad8e1ba173d4728b89e5f0b1a2f12f342406c6f',
+				'token' => null
+			)
+		);
+		$this->assertEqual($result, $expectedData);
+		
+		// WHEN $data
 		$data = array(
 			'User' => array(
 				'id' => '10',
@@ -286,9 +296,8 @@ class UserTest extends CakeTestCase {
 		// THEN execute resetPassword()
 		$result = $this->User->resetPassword($data);
 
-		// EXPECTED FALSE
+		// EXPECT to be true
 		$this->assertFalse($result);
-
-	} 
+	}
 
 }
