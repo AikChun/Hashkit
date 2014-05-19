@@ -1,8 +1,8 @@
--- Adminer 4.1.0 MySQL dump
+-- Adminer 4.0.3 MySQL dump
 
 SET NAMES utf8;
-SET time_zone = '+00:00';
 SET foreign_key_checks = 0;
+SET time_zone = '-07:00';
 SET sql_mode = 'NO_AUTO_VALUE_ON_ZERO';
 
 DROP DATABASE IF EXISTS `Hashkit`;
@@ -10284,7 +10284,7 @@ INSERT INTO `hash_algorithm_v1s` (`id`, `name`, `base`, `exponent`) VALUES
 (14,	'SHA256',	2,	256),
 (15,	'WHIRLPOOL',	2,	512),
 (16,	'CUSTOMISED',	0,	0),
-(17,	'TIGER128,3',	2,	32),
+(17,	'TIGER128,3',	2,	128),
 (18,	'SHA384',	2,	384),
 (19,	'SHA512',	2,	512),
 (20,	'TIGER160,3',	2,	160),
@@ -10383,4 +10383,4 @@ INSERT INTO `users` (`id`, `password`, `name`, `email`, `group_id`, `profile`, `
 (11,	'96b9369f55be479d63a8ef366966a03a607657e4',	'dude',	'dude@gmail.com',	3,	'',	'',	'',	'2014-04-05 00:20:03',	'2014-04-05 00:20:03'),
 (12,	'1fda6ac901aee9291e9ef40a02e86367bb6da06d',	'ian',	'ian@gmail.com',	1,	'super user',	'',	'',	'2014-04-16 15:29:25',	'2014-04-16 15:29:25');
 
--- 2014-05-12 07:04:20
+-- 2014-05-19 02:36:44

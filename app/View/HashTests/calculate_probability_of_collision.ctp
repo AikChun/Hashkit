@@ -156,7 +156,7 @@
 						'size' => 10,
 						'id' => 'required_exponent',
 						'onchange' => "checkform()",
-						'placeholder' =>'exponent'
+						'placeholder' =>'exponent(in terms of bits)'
 					));
 
 				?>
@@ -265,7 +265,7 @@
 								'label' => false,
 								'id' => 'customized_algorithm_exponent',
 								'onchange' => 'checkform2()',
-								'placeholder' =>'algorithm exponent'
+								'placeholder' =>'algorithm exponent(in terms of bits)'
 							));
 
 						?>
