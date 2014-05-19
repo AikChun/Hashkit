@@ -27,6 +27,8 @@ class UserTest extends CakeTestCase {
 	public function setUp() {
 		parent::setUp();
 		$this->User = ClassRegistry::init('User');
+		$this->HashTest = ClassRegistry::init('HashTest');
+		$this->HashResult = ClassRegistry::init('HashResult');
 	}
 
 /**
@@ -36,6 +38,8 @@ class UserTest extends CakeTestCase {
  */
 	public function tearDown() {
 		unset($this->User);
+		unset($this->HashTest);
+		unset($this->HashResult);
 
 		parent::tearDown();
 	}
@@ -70,12 +74,19 @@ class UserTest extends CakeTestCase {
  * @return void
  */
 	public function testCheckEmailExists() {
-		//data
+		//WHEN $email == aikchun616@gmail.com
 		$email = 'aikchun616@gmail.com';
-
-		$checkSuccessful = $this->User->checkEmailExists($email);
-
-		$this->assertTrue($checkSuccessful);
+		//THEN execute checkEmailExists();
+		$emailExists = $this->User->checkEmailExists($email);
+		//Expect TRUE
+		$this->assertTrue($emailExists);
+		
+		//WHEN $email == hashkitproject@gmail.com <= non-existant email in fixture
+		$email = 'hashkitproject@gmail.com';
+		//THEN execute checkEmailExists();
+		$emailExists = $this->User->checkEmailExists($email);
+		//Expect False
+		$this->assertFalse($emailExists);
 	}
 
 /**
@@ -84,6 +95,19 @@ class UserTest extends CakeTestCase {
  * @return void
  */
 	public function testCheckEmailPasswordWorks() {
+		//WHEN $email == aikchun616@gmail.com
+		$email = 'aikchun616@gmail.com';
+		//THEN execute checkEmailExists();
+		$emailExists = $this->User->checkEmailExists($email);
+		//Expect TRUE
+		$this->assertTrue($emailExists);
+		
+		//WHEN $email == hashkitproject@gmail.com <= non-existant email in fixture
+		$email = 'hashkitproject@gmail.com';
+		//THEN execute checkEmailExists();
+		$emailExists = $this->User->checkEmailExists($email);
+		//Expect False
+		$this->assertFalse($emailExists);
 	}
 
 /**
