@@ -253,6 +253,42 @@ class UserTest extends CakeTestCase {
  * @return void
  */
 	public function testResetPassword() {
-	}
+		// WHEN $data =
+		$data = array(
+			'User' => array(
+				'id' => '10',
+				'name' => 'Aik Chun',
+				'email' => 'aikchun616@gmail.com',
+				'new_password' => 'Hello',
+				'confirm_new_password' => 'Hello'
+			)
+		);
+
+
+		// THEN execute resetPassword()
+		$result = $this->User->resetPassword($data);
+
+		// EXPECT result to be true
+		$this->assertTrue($result);
+
+		// If $data have their new_password and confirm_new_password do not match
+
+		$data = array(
+			'User' => array(
+				'id' => '10',
+				'name' => 'Aik Chun',
+				'email' => 'aikchun616@gmail.com',
+				'new_password' => 'Hello',
+				'confirm_new_password' => 'Hello123'
+			)
+		);
+
+		// THEN execute resetPassword()
+		$result = $this->User->resetPassword($data);
+
+		// EXPECTED FALSE
+		$this->assertFalse($result);
+
+	} 
 
 }
