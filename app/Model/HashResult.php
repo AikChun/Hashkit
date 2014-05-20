@@ -15,6 +15,9 @@ class HashResult extends AppModel {
 
 	public function writeFile($output,$choice) {
 
+		if($choice < 1 || $choice > 2) {
+			return false;
+		}
 		$saveResult = '';
 		$ptline1 = explode("\n",$output[0]['HashResult']['plaintext']);
 
@@ -264,11 +267,15 @@ class HashResult extends AppModel {
 
 			$last = end($output);
 			$saveResult .= $last['HashResult']['recommendation'];
+		} else {
+			return false;
 		}
 
 		$fp = fopen('hashresult.txt','w');
 		fwrite($fp,$saveResult);
 		fclose($fp);
+
+		return true;
 	}
 
 }
