@@ -68,7 +68,7 @@ class UserTest extends CakeTestCase {
 		
 		// EXPECTED To have array containing user's information without password field
 		$this->recursive = 0;
-		// $conditions = array(
+		$conditions = array(
 			'conditions' => array(
 				'User.id' => $id
 			),
