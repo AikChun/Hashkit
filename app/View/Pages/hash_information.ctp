@@ -373,14 +373,23 @@
 												<br>
 												<h4><b>differential attack</b></h4>
 												<br>
+												In recent years, this method of cryptanalysis is usually done on symmetric ciphers but it is also applicable in the case of crytographic hash functions like MD5, SHA-0 and etc. This method is all about finding a correlation between the differences (XOR or modular) in input and output of a hash function with difference in output being equal to zero to produce a full collision or differ slightly to obtain so called near-collision.
+												<br>
 												<h4><b>rebound attack</b></h4>
+												<br>
+												With the application like meet-in-the-middle approach which improves the differential paths, rebound attack is about merging two different differential paths to form a better degrees of freedom and this resulted in creating longer paths. It is proposed by Mendael et al in and this has push better attacks on cryptographic hash functions like Whirlpool and etc.
 												<br>
 												<h4><b>linear attack</b></h4>
 												<br>
+												This method is to approximate the internal states of the cryptographic hash function with its origin from cipher analysis. An example of a linear attack is when cryptoanalyst found out solutions of a system of non linear equations describing internal states of the LASH hash function.
+												<br>
 												<h4><b>random graph theory attack</b></h4>
+												<br>
+												Collision Search methods such p-Pollard method are based on the structure of a random mapping directed graph (digraph) and from that, finding two distinct points in the same connected conponent on the function digraph such that there is no directed path between both of them.
 												<br>
 												<h4><b>distinguishing attack</b></h4>
 												<br>
+												A form of cryptanalysis that allows attackers to distinguish encrypted data from random inputs. The revealed information might be the encryption method used or some information about the encrypted message.
 												<br>
 												<br>
 												<br>
