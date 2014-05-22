@@ -18,8 +18,5 @@ class Group extends AppModel {
  */
 	public $displayField = 'name';
 
-	public function parentNode() {
-		return null;
-	}
 
 }
