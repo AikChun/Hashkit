@@ -297,7 +297,9 @@
 													<CENTER><img src="/img/weakcollision.jpg" class="img-responsive"></CENTER>
 													<br>
 													In practice, for fixed-sized digest hash functions it is assumed that the asymptotic bounds are instantiated to 2<sup>n</sup>; 2<sup>n</sup> and 2<sup>n/2</sup> calculations of a hash function, respectively. An example is that SHA1 is a hash function with 160-bit digest and is required to withstand any collision search attack with the complexity less than 2<sup>80</sup> hash calculations. However, there are collision attacks with complexity 2<sup>39</sup>hash operations and means that the collision resistance of the function has been broken.  
-													
+													<br>
+													If you want find out more about which hash function is suitable for your application or want to know about the facts on the particular hash function, you can click this. <a href="/HashTests/compute_and_compare">link</a> 
+													<br>
 													<h4 id="preimageresist"><b>Pre-image resistance</b></h4>
 													A measure to show the difficulty for anyone to create an input which hashes to a particular value that is similar to the hash of unknown message.
 													If given hash value (H) of some unknown message, it is computationally difficult to find such a message M whose hash value is equal to H, i.e. hash(M) = H.
@@ -307,7 +309,9 @@
 													The problem with weak preimage resistance hash functions is that the attacker can generate random message with same hash as the hashed passwords in the system which means that the penetrator can access the entire system even thought he/she does not need to know the hashed passwords.
 
 													In practice, for fixed-sized digest hash functions it is assumed that the asymptotic bounds are instantiated to 2<sup>n</sup>; 2<sup>n</sup> and 2<sup>n/2</sup> calculations of a hash function, respectively. For preimage resistance, if the hash function is with 128-bit message digest and if there is a attack better than the complexity of 2<sup>64</sup>, then the hash function has lost its preimage resistance property.
-
+													<br>
+													If you want find out more about which hash function is suitable for your application or want to know about the facts on the particular hash function, you can click this. <a href="/HashTests/compute_and_compare">link</a> 
+													<br>
 													<h4 id="secpreimageresist"><b>Second pre-image resistance</b></h4>
 													A measure to show the difficulty for anyone to create an input which hashes to the same value that some other given input hashes to.
 													For any given input Y, it should be difficult to find another input X such that hash(Y) = hash(X) and Y not equals to X. Function that does not have this property are prone to preimage attacks.(This property is important to Digital Signature.)
@@ -316,6 +320,9 @@
 													<br>
 													Any hash function with weak second pre-image resistance will help the penetrator to fool people into installing/downloading malicious software which are supposed to be genuine as he/she might alter the source code of the software and produce the same hash as the genuine software.In practice, for fixed-sized digest hash functions it is assumed that the asymptotic bounds are instantiated to 2<sup>n</sup>; 2<sup>n</sup> and 2<sup>n/2</sup> calculations of a hash function, respectively. For second preimage resistance, if the hash function is with 128-bit message digest and if there is a attack better than the complexity of 2<sup>64</sup>, then the hash function has lost its second preimage resistance property.
 													<br>
+													If you want find out more about which hash function is suitable for your application or want to know about the facts on the particular hash function, you can click this. <a href="/HashTests/compute_and_compare">link</a> 
+													<br>
+									
 													<br>
 													<h4 id="secpreimageresist"><b>Random oracle property</b></h4>
 													<br>
