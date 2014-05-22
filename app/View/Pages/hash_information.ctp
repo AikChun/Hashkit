@@ -125,7 +125,7 @@
 											<h3 id="compuinf">How can the hash function to be considered to have computational infeasibility?</h3>
 											<br>
 											<p>
-											in mathematical sense, the computational infeasibility is directly related to complexity  theory. 
+											In mathematical sense, the computational infeasibility is directly related to complexity theory which means that no polynomial complexity algorithm can solve the given problem or a attack is simply infeasible to be conducted due to the computational restrictions of available hardware. 
 											</p>
 											<hr>
 
@@ -136,7 +136,7 @@
 											<br>
 											<h4 id="MAC"><b>Keyed Hash Functions</b></h4>
 											<br>
-											<p>Keyed hash functions such as MAC(message authentication code) are defined by having their hash function HK indexed by a secret key K with additional property called the computation-resistance – given any set of pairs (message (Mi), hash (message)H(Mi)), it is computationally infeasible to find a valid message-MAC-pair(M,H(M)) such that M is not equal to Mi. A MAC is a short piece of information and its purpose is to provide authenticity to affirm the message's origin and integrity check to detect accidental or intentional changes to the message, so that only parties have the same secret key to verify if the message has been modified and if the MAC was generated with the correct secret key.
+											<p>Keyed hash functions such as MAC(message authentication code) are defined by having their hash function HK indexed by a secret key K with additional property called the computation-resistance (given any set of pairs (message (Mi), hash (message)H(Mi)), it is computationally infeasible to find a valid message-MAC-pair(M,H(M)) such that M is not equal to Mi). A MAC is a short piece of information and its purpose is to provide authenticity to affirm the message's origin and integrity check to detect accidental or intentional changes to the message, so that only parties have the same secret key to verify if the message has been modified and if the MAC was generated with the correct secret key.
 											</p>
 											<br>
 											Example of the MAC process :
@@ -177,13 +177,13 @@
 											<br><br>
 											Soon after in 1991, he replaced MD4 with the current most widely used algorithm <a href="http://tools.ietf.org/html/rfc1321">MD5</a>. After years have went pass, a series of attack has successfully found weaknesses and flaws in this algorithm. some will be listed below:
 											<br>
-											-in 2004, an article online states that MD5 is not collision resistant, hence it should be used in applications such as SSL. Also in the same year, researchers are able to create two different files with same MD5 checksum
+											-in 2004, an article online states that MD5 is not collision resistant, hence it should be used in applications such as <a href="http://en.wikipedia.org/wiki/Secure_Sockets_Layer">SSL</a>. Also in the same year, researchers are able to create two different files with same MD5 <a href="http://en.wikipedia.org/wiki/Checksum">checksum</a>.
 											<br><br>
 											-in 2006, an article on improvement and analysis on MD5 attack has created a more serious problem for the application using the algorithm. 
 											<br><br>
-											-in 2007, an article which uses chosen-prefix collisions to attack MD5 can be faster than the previous attacks.
+											-in 2007, an article which uses <a href="#chosenprefix">chosen-prefix</a> collisions to attack MD5 can be faster than the previous attacks.
 											<br><br>
-											-in 2008, researchers are able to use a techinque to fake SSL certificate validity and malware uses this flaw to fake a Microsoft digital signature. Since then, applications has switch over to a secure algorithm such SHA2 and etc. Later, a group of algorithm designer included Ronald Rivest came out with <a href="http://groups.csail.mit.edu/cis/md6/"> MD6 </a> which uses Merkle tree-like structure and can prove to be resistant against differential attacks. 
+											-in 2008, researchers are able to use a techinque to fake SSL certificate validity and malware uses this flaw to fake a Microsoft digital signature. Since then, applications has switch over to a secure algorithm such SHA2 and etc. Later, a group of algorithm designer included <a href="http://people.csail.mit.edu/rivest/">Ronald Rivest</a> came out with <a href="http://groups.csail.mit.edu/cis/md6/"> MD6 </a> which uses Merkle tree-like structure and can prove to be resistant against differential attacks. 
 											<br><br>
 											An example of a MD5 function to perform on a message :
 											<br>
@@ -218,7 +218,7 @@
 											<br><br>
 											<a href="http://eprint.iacr.org/2011/037.pdf">Higher-Order Differential Attack on Reduced SHA-256</a>
 											<br><br>
-											SHA3 is the lastest hash function in the list of hash functions. However, not many applications has used it yet but it will take over as the commonly usedhash function by 2017 or later. Instead of using Merkle-Damgård construction, SHA3 use the sponge function and it does not have any successful attack yet.
+											SHA3 is the lastest hash function in the list of hash functions. However, not many applications has used it yet but it will take over as the commonly used hash function by 2017 or later. Instead of using Merkle-Damgård construction, SHA3 use the sponge function and it does not have any successful attack yet.
 											<br><br>
 											An exaple of sha1 and sha256 function example :
 											<br>
@@ -229,11 +229,11 @@
 											<br>
 											<h4><b>Whirlpool</b></h4>
 											<br>
-											A hash function is designed after the square block cipher based on Miyaguchi Preneel construction(taken from a modified Advanced Encryption Standard). It generates 512 bits of hash value.In 2009, a rebound attack was announced that presents a full collisions against 4.5 rounds of Whirlpool in 2<sup>120</sup> operations. You can find out more here (<a href="http://eprint.iacr.org/2010/198.pdf">link</a>).
+											A hash function is designed after the square block cipher based on Miyaguchi Preneel construction(taken from a modified Advanced Encryption Standard). It generates 512 bits of hash value.In 2009, a <a href="#reboundattack">rebound attack</a> was announced that presents a full collisions against 4.5 rounds of Whirlpool in 2<sup>120</sup> operations. You can find out more here (<a href="http://eprint.iacr.org/2010/198.pdf">link</a>).
 											<br><br>
 											An example of whirlpool function :
 											<br>
-											<img src="/img/whirlpoolexample.jpg" class="img-responsive">
+											<center><img src="/img/whirlpoolexample.jpg" class="img-responsive"></center>
 											<br>   
 											<h4><b>RIPEMD</b></h4>
 											<br>
@@ -241,7 +241,7 @@
 											<br>
 											An example of the RIPEMD to show the different length of output
 											<br><br>
-											<img src="/img/ripemdexample.jpg" class="img-responsive">
+											<center><img src="/img/ripemdexample.jpg" class="img-responsive"></center>
 											<br>
 											<hr>
 											<h2 id="sec3"class="text-center v-center">Uses for Hash functions</h2>
@@ -259,8 +259,10 @@
 											<br>
 											<CENTER><img src="/img/passwordhash.jpg" class="img-responsive"></CENTER>
 											<br>
+											
 											<h4 id="encryptionalgorithm"><b>Encryption algorithm</b></h4>
 											<p class="edit_area">Hash functions can be used as building block of ciphers like it has been used in the F-function in Feistel network designs and/or can be used to generate a key for the secret password to encrypt.</p> 
+
 											<h4 id="softwareprotection"><b>Software protection</b></h4>
 											In the websites which the softwares are allowed to distribute, they are tied to a hash digest. So when users downloaded the program, the user can hash it with the same algorithm and check the match of the hashes. However, this does not protect from forging another hash digest for modified software but,it can be done by using digital signature for the hash value of the software. 
 											</br>
@@ -277,7 +279,7 @@
 											<hr >
 
 											<h2 id="sec4" class="text-center v-center">Hash functions' properties</h2>
-											<br><br>  
+											<br><br> 
 											<p >A cyptographic hash functions must be able to defend against all known type of cryptanalytic attack. It should be able to apply to any input size and output a fixed size. It must have the following properties:
 													<br><br>
 													<h4 id="collisionresistance"><b>Collision resistance</b></h4>
@@ -292,13 +294,17 @@
 													<br>
 													<CENTER><img src="/img/weakcollision.jpg" class="img-responsive"></CENTER>
 													<br>
+													In practice, for fixed-sized digest hash functions it is assumed that the asymptotic bounds are instantiated to 2<sup>n</sup>; 2<sup>n</sup> and 2<sup>n/2</sup> calculations of a hash function, respectively. An example is that SHA1 is a hash function with 160-bit digest and is required to withstand any collision search attack with the complexity less than 2<sup>80</sup> hash calculations. However, there are collision attacks with complexity 2<sup>39</sup>hash operations and means that the collision resistance of the function has been broken.  
+													
 													<h4 id="preimageresist"><b>Pre-image resistance</b></h4>
 													A measure to show the difficulty for anyone to create an input which hashes to a particular value that is similar to the hash of unknown message.
 													If given hash value (H) of some unknown message, it is computationally difficult to find such a message M whose hash value is equal to H, i.e. hash(M) = H.
 													<br>
 													<CENTER><img src="/img/preimage.jpg" class="img-responsive"></CENTER>
 													<br>
-													The problem with weak preimage resistance hash functions is that the attacker can generate random message with same hash as the hashed passwords in the system which means that the penetrator can access the entire system even thought he/she does not need to know the hashed passwords. 
+													The problem with weak preimage resistance hash functions is that the attacker can generate random message with same hash as the hashed passwords in the system which means that the penetrator can access the entire system even thought he/she does not need to know the hashed passwords.
+
+													In practice, for fixed-sized digest hash functions it is assumed that the asymptotic bounds are instantiated to 2<sup>n</sup>; 2<sup>n</sup> and 2<sup>n/2</sup> calculations of a hash function, respectively. For preimage resistance, if the hash function is with 128-bit message digest and if there is a attack better than the complexity of 2<sup>64</sup>, then the hash function has lost its preimage resistance property.
 
 													<h4 id="secpreimageresist"><b>Second pre-image resistance</b></h4>
 													A measure to show the difficulty for anyone to create an input which hashes to the same value that some other given input hashes to.
@@ -306,11 +312,28 @@
 													<br>
 													<CENTER><img src="/img/secondpreimage.jpg" class="img-responsive"></CENTER>
 													<br>
-													Any hash function with weak second pre-image resistance will help the penetrator to fool people into installing/downloading malicious software which are supposed to be genuine as he/she might alter the source code of the software and produce the same hash as the genuine software.
+													Any hash function with weak second pre-image resistance will help the penetrator to fool people into installing/downloading malicious software which are supposed to be genuine as he/she might alter the source code of the software and produce the same hash as the genuine software.In practice, for fixed-sized digest hash functions it is assumed that the asymptotic bounds are instantiated to 2<sup>n</sup>; 2<sup>n</sup> and 2<sup>n/2</sup> calculations of a hash function, respectively. For second preimage resistance, if the hash function is with 128-bit message digest and if there is a attack better than the complexity of 2<sup>64</sup>, then the hash function has lost its second preimage resistance property.
+													<br>
 													<br>
 													<h4 id="secpreimageresist"><b>Random oracle property</b></h4>
 													<br>
-													It is computationally infeasible to distinguish hash(message) from random n-bit value
+													It is computationally infeasible to distinguish hash(message) from random n-bit value.
+													<br>
+													<h4><b>Some facts about this properties</b></h4>
+													<br>
+													Does the hash functions that do have collision resistance imply to also have 2nd preimage resistance ?
+													<br>
+													Yes.
+													<br>
+													Does the hash functions that do have preimage resistance imply 2nd preimage resistance ?
+													<br>
+													No.
+													<br>
+													Does the hash functions that do have 2nd preimage resistance imply preimage resistance ?
+													<br>
+													No.
+													<br>
+													<br>
 													
 											</p>
 											<br>
@@ -358,7 +381,7 @@
 												<p>An attack that finds two different messages m1 and m2, such that hash(m1) = hash(m2). In a classical collision attack, the attacker  has no control over the content of either message, but are arbitrarily chosen by the algorithm. A collision found from two random message does not really affect the security of hash function. For the attack to be useful, the attack must be in control of the input to the hash function</p>
 												<br>
 												<br>
-												<h4><b>Chosen-prefix collision attack</b></h4>
+												<h4 id="chosenprefix"><b>Chosen-prefix collision attack</b></h4>
 												<p>An extension of collision attack where the attacker can choose two arbitrarily different message, and then append different calculated values that result in the whole message having an equal hash value. This attack is much more powerful than a classical collision attack</p>
 												<br>
 												<h4><b>Pre-image attack</b></h4>
@@ -375,7 +398,7 @@
 												<br>
 												In recent years, this method of cryptanalysis is usually done on symmetric ciphers but it is also applicable in the case of crytographic hash functions like MD5, SHA-0 and etc. This method is all about finding a correlation between the differences (XOR or modular) in input and output of a hash function with difference in output being equal to zero to produce a full collision or differ slightly to obtain so called near-collision.
 												<br>
-												<h4><b>rebound attack</b></h4>
+												<h4 id="reboundattack"><b>rebound attack</b></h4>
 												<br>
 												With the application like meet-in-the-middle approach which improves the differential paths, rebound attack is about merging two different differential paths to form a better degrees of freedom and this resulted in creating longer paths. It is proposed by Mendael et al in and this has push better attacks on cryptographic hash functions like Whirlpool and etc.
 												<br>
