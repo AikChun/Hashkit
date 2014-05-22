@@ -55,7 +55,8 @@
 										</li>
 										<li><a href="#sec5" class="text-center"><i class="glyphicon glyphicon-globe"></i></a>
 										</li>
-
+										<li><a href="#sec6" class="text-center"><i class="glyphicon glyphicon-inbox"></i></a>
+										</li>
 								</ul>
 							
 						</div>
@@ -440,6 +441,7 @@
 												<a href="http://merlot.usc.edu/csac-f06/papers/Wang05a.pdf">How to Break MD5 and Other Hash Functions </a>
 												<br>
 												</p>
+												<br><br><br><br><br><br>
 												
 									</div>
 								</div>
