@@ -37,7 +37,8 @@
 										</li>
 										 <li><a data-scroll href="#sec5"><i class="glyphicon glyphicon-globe"></i> Attacks on Hash functions</a>
 										</li>
-
+										<li><a data-scroll href="#sec6"><i class="glyphicon glyphicon-inbox"></i> Sources</a>
+										</li>
 								</ul>
 							
 								<!-- tiny only nav-->
@@ -415,12 +416,30 @@
 												A form of cryptanalysis that allows attackers to distinguish encrypted data from random inputs. The revealed information might be the encryption method used or some information about the encrypted message.
 												<br>
 												<br>
+												<!-- <h2 id="sec6" class="text-center v-center">Design of hash functions</h2> -->
+												<hr>
+												<h2 id="sec6">Sources</h2>
 												<br>
+												<p>
+												Below are some good sources are for you to understand more about hash functions:
+												<br> 
+												<a href="web.science.mq.edu.au/~josef/.../PHD.../Przemek_Sokolowski_thesis.pdf">Design and Analysis of Cryptographic Hash Functions</a>
 												<br>
+												<a href="http://www.win.tue.nl/~bdeweger/downloads/Hash%20Functions%20October%2020,%202011%20v1.2.pdf">Design of Hash Functions</a>
 												<br>
+												<a href="http://csrc.nist.gov/groups/ST/hash/documents/WATANABE_cr_criteria.pdf">A proposal of a criterion for collision resistance of hash functions</a>
 												<br>
+												<a href="http://www.win.tue.nl/hashclash/On%20Collisions%20for%20MD5%20-%20M.M.J.%20Stevens.pdf">Collision on MD5</a>
 												<br>
-												<h2 id="sec6" class="text-center v-center">Design of hash functions</h2>
+												<a href="http://www.cl.cam.ac.uk/~rja14/Papers/hash.pdf">Classfication of Hash functions</a>
+												<br>
+												<a href="http://cryptography.hyperlink.cz/MD5_collisions.html">MD5 collision</a>
+												<br>
+												<a href="http://people.csail.mit.edu/yiqun/SHA1AttackProceedingVersion.pdf">Collision Search Attacks on SHA1</a>
+												<br>
+												<a href="http://merlot.usc.edu/csac-f06/papers/Wang05a.pdf">How to Break MD5 and Other Hash Functions </a>
+												<br>
+												</p>
 												
 									</div>
 								</div>
