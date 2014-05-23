@@ -24,7 +24,8 @@
 
 					echo $this->Form->input('name', array(
 						'class' => 'form-control',
-						'label' => false
+						'label' => false,
+						'required'
 					));
 
 				?>
@@ -43,7 +44,8 @@
 
 					echo $this->Form->input('email', array(
 						'class' => 'form-control',
-						'label' => false
+						'label' => false,
+						'required'
 					));
 
 				?>

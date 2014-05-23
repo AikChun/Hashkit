@@ -9,7 +9,7 @@
   </ol>
   <div class="carousel-inner" >
     <div class="item active" >
-      <img src="/img/test3.jpg" class="img-responsive">
+      <img src="/img/test3.jpg" class="img-responsive" style="width:100%;">
       <div class="container">
         <div class="carousel-caption" style="left:-44%; top: 60%;position:absolute;">
           <!-- <h1>HashKit</h1> -->
@@ -29,14 +29,14 @@
       </div>
     </div>
     <div class="item">
-      <img src="/img/wallpapertest2.jpg" class="img-responsive">
+      <img src="/img/wallpapertest2.jpg" class="img-responsive" style="width:100%;">
       <div class="container">
         <div class="carousel-caption" style=" top: 55%;position:absolute;" id="blackfrontforcarousel">
 <!--           <h1 id="textforcarsouselhead">Facts about Hash functions</h1> -->
           
           <?php if($authUser):?>
 <!--           <h3 id ="textforcarsousel">Find out more about Hash functions by clicking the button below:</h3> -->
-          <button type="button" class="btn btn-lg btn-warning" href="/Pages/hash_information">start</button>
+          <button type="button" class="btn btn-lg btn-warning" href="/Pages/hash_information">Start</button>
           <?php endif;?>
 
           <?php if(!$authUser):?>
@@ -49,7 +49,7 @@
       </div>
     </div>
     <div class="item">
-      <img src="/img/wallpapertest3.jpg" class="img-responsive" >
+      <img src="/img/wallpapertest3.jpg" class="img-responsive" style="width:100%;">
       <!-- <img src="/img/wallpaper4gradient.png" class="img-responsive"> -->
       <div class="container">
         <div class="carousel-caption" style="left:-30%; top: 65%;position:absolute;">
@@ -63,9 +63,9 @@
 
           <?php if($authUser):?>
           <!-- <p id ="textforcarsousel">Come and try out our tools by clicking any button below:</p> -->
-          <a class="btn btn-lg btn-primary" href="/HashTests/basic_hashing">Hash generator</a>
-          <a class="btn btn-lg btn-warning" href="/HashTests/compute_and_compare">Hash algo recommendation</a>
-          <a class="btn btn-lg btn-success" href="/HashTests/hash_analyser">Hash analyser</a>
+          <a class="btn btn-lg btn-primary" href="/HashTests/basic_hashing">Hash Generator</a>
+          <a class="btn btn-lg btn-warning" href="/HashTests/compute_and_compare">Hash Algo recommendation</a>
+          <a class="btn btn-lg btn-success" href="/HashTests/hash_analyser">Hash Analyser</a>
      <!--      <p id ="textforcarsousel">Or try other tools by clicking the Hash Functions on top</p> -->
           <?php endif;?>
         </div>

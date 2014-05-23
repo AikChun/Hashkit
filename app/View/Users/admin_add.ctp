@@ -80,7 +80,7 @@
 	
 			<div class="col-lg-3">
 
-				<select class="form-control" name="data[User][group_id]">
+				<select class="form-control" name="data[User][group_id]" required>
 
 					<option value="">(choose one)</option>
 					<option value="1">Super Administrator</option>
@@ -104,8 +104,7 @@
 					echo $this->Form->input('profile',array(
 						'class' => 'form-control',
 						'placeholder' => 'User Profile',
-						'label' => false,
-						'required'));
+						'label' => false));
 				
 				?>
 

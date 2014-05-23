@@ -34,7 +34,8 @@
 											'class' => 'form-control',
 											'placeholder' => 'Enter your new password here',
 											'label' => false,
-											'type' => 'password'
+											'type' => 'password',
+											'required'
 					));
 				
 				?>
@@ -58,7 +59,8 @@
 						'class' => 'form-control',
 						'placeholder' => 'Re-enter your password here',
 						'label' => false,
-						'type' => 'password'
+						'type' => 'password',
+						'required'
 					));
 
 					echo $this->Form->input('User.id', array(
