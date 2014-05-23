@@ -97,7 +97,9 @@ class HashTestsController extends AppController {
 		$selectedAlgorithms = $this->Session->read('selectedAlgorithms');
 
 		if($this->request->is('post')) {
+
 			$data = $this->request->data;
+
 			$text = $this->request->data['HashTests']['plaintext'];
 			
 			if (!empty($data['HashTests']['file_upload']) && 
@@ -744,12 +746,11 @@ class HashTestsController extends AppController {
 		$this->Set('hashalgorithm', $searchResultAlgo);
 
 		if($this->request->is('post')) {
-			$view = new View($this);
-			$result = $view->render('view','ajax');
-		
-    		$this->response->body($result);
-			$this->response->type('html');
-			$this->response->download('hashresult.html');
+			$this->HashTest->writeFile($data,$searchHashResult,$searchResultAlgo);
+			
+    		$this->response->file('/webroot/' . 'hashresult.txt',array(
+    			'download' => true, 'name' => 'hashresult.txt'
+    			));
 			
 			$this->Session->setFlash('Hash result have been saved', 'alert-box', array('class'=>'alert-danger'));
 		}

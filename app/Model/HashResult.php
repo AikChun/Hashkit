@@ -267,8 +267,7 @@ class HashResult extends AppModel {
 
 			$last = end($output);
 			$saveResult .= $last['HashResult']['recommendation'];
-		} else {
-			return false;
+
 		}
 
 		$fp = fopen('hashresult.txt','w');

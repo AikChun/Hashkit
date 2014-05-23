@@ -390,5 +390,273 @@ class HashTest extends AppModel {
 			
 	}
 
+	public function writeFile($hashtest,$hashresult,$hashalgorithm) {
+		$this->log('IHIHIHIHIIHIHI');
+		$this->log($hashtest);
+		$this->log($hashresult);
+		$this->log($hashalgorithm);
+
+		$saveResult = '';
+		$ptline1 = explode("\n",$hashresult[0]['HashResult']['plaintext']);
+
+
+
+		foreach($hashresult as $key => $hashResult) {
+
+			$saveResult .= 'Selected Algorithm:' . "\n";
+			$saveResult .= $hashalgorithm[$key]['HashAlgorithm']['name'] . "\n";
+			$saveResult .= 'Plaintext: Message Digest' . "\n";
+
+			if(count($ptline1) == 1) {
+				$this->log('line1111111');
+
+				$saveResult .= $hashResult['HashResult']['plaintext'] . ': ' 
+				. $hashResult['HashResult']['message_digest'] . "\n" . "\n";
+			
+			}else{
+				$this->log('line222222');
+				$ptline = explode("\n",$hashResult['HashResult']['plaintext']);
+				$mdline = explode("\n",$hashResult['HashResult']['message_digest']);
+				array_pop($mdline);
+				array_pop($ptline);
+					foreach ($ptline as $key => $data) {
+					$saveResult .= trim($ptline[$key]) . ': ' . $mdline[$key] . "\n";
+					}
+				$saveResult .= "\n";
+			}
+		}
+		
+
+		if($hashtest['HashTest']['analysis'] != 'Basic Hashing') {
+			$this->log('MAMAMAMA');
+			$saveResult .= 'Analysis:' . "\n";
+			$saveResult .= $hashtest['HashTest']['analysis'] . "\n";
+			if($hashtest['HashTest']['collision_count'] > 1) {
+				$collision_pt = explode("\n", $hashtest['HashTest']['collision_pt']);
+				$collision_md = explode("\n", $hashtest['HashTest']['collision_md']);
+				$collision_index = explode(" ", $hashtest['HashTest']['collision_index']);
+		
+				$saveResult .= 'Plaintext: ' . $hashalgorithm[0]['HashAlgorithm']['name'] .
+				' Message Digest: File Line' . "\n";
+				
+				foreach($collision_pt as $key => $data) {
+					$collision_index[$key] = $collision_index[$key] + 1;
+					$saveResult .= trim($collision_pt[$key]) . ": " . $collision_md[$key] .
+					": " . $collision_index[$key] . "\n";
+				}
+			}
+
+			$saveResult .= "\n";
+			$saveResult .= 'Comparing between selected algorithmn:' . "\n";
+
+			$count = 0;
+			foreach($hashalgorithm as $key => $data) {
+				if($count<1) {
+				$saveResult .= 'Algorithm                     ';
+				}
+				$count++;
+				$saveResult .= ': ' . $data['HashAlgorithm']['name'];
+
+				if (strlen($data['HashAlgorithm']['name']) < 8) {
+
+					$paddingLength = 8 - strlen($data['HashAlgorithm']['name']);
+
+					for ($i = 0; $i < $paddingLength; $i++) {
+ 						$saveResult .= ' ';
+					}
+
+				}
+
+			}
+
+			$saveResult .= "\n";
+
+			$count = 0;
+			foreach($hashalgorithm as $key => $data) {
+				if($count<1) {
+				$saveResult .= 'Output Length(bits)           ';
+				}
+				$count++;
+				$saveResult .= ': ' . $data['HashAlgorithm']['output_length'];
+
+				if (strlen($data['HashAlgorithm']['output_length']) < 8) {
+
+					$paddingLength = 8 - strlen($data['HashAlgorithm']['output_length']);
+
+					for ($i = 0; $i < $paddingLength; $i++) {
+							$saveResult .= ' ';
+					}
+				
+				}
+
+			}
+
+			$saveResult .= "\n";
+
+			$count = 0;
+			foreach($hashalgorithm as $key => $data) {
+				if($count<1) {
+				$saveResult .= 'Speed(MB/s)                   ';
+				}
+				$count++;
+				$saveResult .= ': ' . $data['HashAlgorithm']['speed'];
+
+				if (strlen($data['HashAlgorithm']['speed']) < 8) {
+
+					$paddingLength = 8 - strlen($data['HashAlgorithm']['speed']);
+
+					for ($i = 0; $i < $paddingLength; $i++) {
+							$saveResult .= ' ';
+					}
+				
+				}
+
+			}
+
+			$saveResult .= "\n";
+
+			$count = 0;
+			foreach($hashalgorithm as $key => $data) {
+				if($count<1) {
+				$saveResult .= 'Collision Resistence          ';
+				}
+				$count++;
+				$saveResult .= ': ' . $data['HashAlgorithm']['collision_resistance'];
+			
+				if (strlen($data['HashAlgorithm']['collision_resistance']) < 8) {
+
+					$paddingLength = 8 - strlen($data['HashAlgorithm']['collision_resistance']);
+
+					for ($i = 0; $i < $paddingLength; $i++) {
+							$saveResult .= ' ';
+					}
+
+				}
+
+			}
+
+			$saveResult .= "\n";
+
+			$count = 0;
+			foreach($hashalgorithm as $key => $data) {
+				if($count<1) {
+				$saveResult .= 'Preimage Resistence           ';
+				}
+				$count++;
+				$saveResult .= ': ' . $data['HashAlgorithm']['preimage_resistance'];
+
+				if (strlen($data['HashAlgorithm']['preimage_resistance']) < 8) {
+
+					$paddingLength = 8 - strlen($data['HashAlgorithm']['preimage_resistance']);
+
+					for ($i = 0; $i < $paddingLength; $i++) {
+							$saveResult .= ' ';
+					}
+
+				}
+
+			}
+
+			$saveResult .= "\n";
+
+			$count = 0;
+			foreach($hashalgorithm as $key => $data) {
+				if($count<1) {
+				$saveResult .= '2nd Preimage Resistence       ';
+				}
+				$count++;
+				$saveResult .= ': ' . $data['HashAlgorithm']['2nd_preimage_resistance'];
+
+				if (strlen($data['HashAlgorithm']['2nd_preimage_resistance']) < 8) {
+
+				$paddingLength = 8 - strlen($data['HashAlgorithm']['2nd_preimage_resistance']);
+
+					for ($i = 0; $i < $paddingLength; $i++) {
+							$saveResult .= ' ';
+					}
+				
+				}
+
+			}
+
+			$saveResult .= "\n";
+
+			$count = 0;
+			foreach($hashalgorithm as $key => $data) {
+				if($count<1) {
+				$saveResult .= 'Collision Best Known Attack   ';
+				}
+				$count++;
+				$saveResult .= ': ' . $data['HashAlgorithm']['collision_bka'];
+
+				if (strlen($data['HashAlgorithm']['collision_bka']) < 8) {
+
+					$paddingLength = 8 - strlen($data['HashAlgorithm']['collision_bka']);
+
+					for ($i = 0; $i < $paddingLength; $i++) {
+							$saveResult .= ' ';
+					}
+
+				}
+
+			}
+			$saveResult .= "\n";
+
+			$count = 0;
+			foreach($hashalgorithm as $key => $data) {
+				if($count<1) {
+				$saveResult .= 'Preimage Best Known Attack    ';
+				}
+				$count++;
+				$saveResult .= ': ' . $data['HashAlgorithm']['preimage_bka'];
+
+				if (strlen($data['HashAlgorithm']['preimage_bka']) < 8) {
+
+					$paddingLength = 8 - strlen($data['HashAlgorithm']['preimage_bka']);
+
+					for ($i = 0; $i < $paddingLength; $i++) {
+							$saveResult .= ' ';
+					}
+
+				}
+
+			}
+
+			$saveResult .= "\n";
+
+			$count = 0;
+			foreach($hashalgorithm as $key => $data) {
+				if($count<1) {
+				$saveResult .= '2nd Preimage Best Known Attack';
+				}
+				$count++;
+				$saveResult .= ': ' . $data['HashAlgorithm']['2nd_preimage_bka'];
+
+				if (strlen($data['HashAlgorithm']['2nd_preimage_bka']) < 8) {
+
+					$paddingLength = 8 - strlen($data['HashAlgorithm']['2nd_preimage_bka']);
+
+					for ($i = 0; $i < $paddingLength; $i++) {
+							$saveResult .= ' ';
+					}
+				
+				}
+
+			}
+
+			$saveResult .= "\n" . "\n";
+
+			$saveResult .= 'Recommended Hash Function:' . "\n";
+
+			$saveResult .= $hashtest['HashTest']['recommendation'];
+
+		}
+
+		$fp = fopen('hashresult.txt','w');
+		fwrite($fp,$saveResult);
+		fclose($fp);
+
+		return true;
+	}
 
 }

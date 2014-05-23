@@ -1,36 +1,72 @@
 Selected Algorithm:
+SHA1
+Plaintext: Message Digest
+hello: aaf4c61ddcc5e8a2dabede0f3b482cd9aea9434d
+asd: f10e2821bbbea527ea02200352313bc059445190
+bye: 78c9a53e2f28b543ea62c8266acfdf36d5c63e61
+hello: aaf4c61ddcc5e8a2dabede0f3b482cd9aea9434d
+hey: 7f550a9f4c44173a37664d938f1355f0f92a47a7
+asd: f10e2821bbbea527ea02200352313bc059445190
+
+Selected Algorithm:
 MD5
 Plaintext: Message Digest
-Hello There: 32b170d923b654360f351267bf440045
-Good bye: fc9516d5dfcd680ef15f087041155fe8
-Scarified: 7fafbfc50032f66abf91935fd50c95cb
-Hello There: 32b170d923b654360f351267bf440045
+hello: 5d41402abc4b2a76b9719d911017c592
+asd: 7815696ecbf1c96e6894b779456d330e
+bye: bfa99df33b137bc8fb5f5407d7e58da8
+hello: 5d41402abc4b2a76b9719d911017c592
+hey: 6057f13c496ecf7fd777ceb9e79ae285
+asd: 7815696ecbf1c96e6894b779456d330e
+
+Selected Algorithm:
+MD2
+Plaintext: Message Digest
+hello: a9046c73e00331af68917d3804f70655
+asd: cc470f0b5f04e543889629a01218291f
+bye: 0db91a35fdfa86ac290cd1339f268518
+hello: a9046c73e00331af68917d3804f70655
+hey: e8d879bc01812845068512a38d480ff1
+asd: cc470f0b5f04e543889629a01218291f
 
 Selected Algorithm:
 MD4
 Plaintext: Message Digest
-Hello There: 2a150b3cb9168f86749b3ea82789616d
-Good bye: 98758c6d3eef73cd60e687375b91f4bc
-Scarified: 7b27134a3e23fb9ea9a6aef3ed34b1d1
-Hello There: 2a150b3cb9168f86749b3ea82789616d
+hello: 866437cb7a794bce2b727acc0362ee27
+asd: 61118995d26bef582a59dec9220483e8
+bye: 739fc397b5948fdc4fdd293fe378e1a2
+hello: 866437cb7a794bce2b727acc0362ee27
+hey: 1828111b039cc9cc5a3600061eb0264e
+asd: 61118995d26bef582a59dec9220483e8
+
+Selected Algorithm:
+SHA256
+Plaintext: Message Digest
+hello: 2cf24dba5fb0a30e26e83b2ac5b9e29e1b161e5c1fa7425e73043362938b9824
+asd: 688787d8ff144c502c7f5cffaafe2cc588d86079f9de88304c26b0cb99ce91c6
+bye: b49f425a7e1f9cff3856329ada223f2f9d368f15a00cf48df16ca95986137fe8
+hello: 2cf24dba5fb0a30e26e83b2ac5b9e29e1b161e5c1fa7425e73043362938b9824
+hey: fa690b82061edfd2852629aeba8a8977b57e40fcb77d1a7a28b26cba62591204
+asd: 688787d8ff144c502c7f5cffaafe2cc588d86079f9de88304c26b0cb99ce91c6
 
 Analysis:
 There is collision detected at: 
 
-Plaintext: MD5 Message Digest: File Line
-Hello There: 32b170d923b654360f351267bf440045: 1
-Hello There: 32b170d923b654360f351267bf440045: 4
+Plaintext: SHA1 Message Digest: File Line
+hello: aaf4c61ddcc5e8a2dabede0f3b482cd9aea9434d: 1
+hello: aaf4c61ddcc5e8a2dabede0f3b482cd9aea9434d: 4
+asd: f10e2821bbbea527ea02200352313bc059445190: 2
+asd: f10e2821bbbea527ea02200352313bc059445190: 6
 
 Comparing between selected algorithmn:
-Algorithm                     : MD5     : MD4     
-Output Length(bits)           : 128     : 128     
-Speed(MB/s)                   : 392.32  : 540.87  
-Collision Resistence          : Broken  : Broken  
-Preimage Resistence           : Broken  : Broken  
-2nd Preimage Resistence       : Unbroken: Broken  
-Collision Best Known Attack   : 2^20.96 : 3       
-Preimage Best Known Attack    : 2^123.4 : 2^69.4  
-2nd Preimage Best Known Attack: Nil     : 2^78.4  
+Algorithm                     : SHA1    : MD5     : MD2     : MD4     : SHA256  
+Output Length(bits)           : 160     : 128     : 128     : 128     : 256     
+Speed(MB/s)                   : 333.29  : 392.32  : 5.43    : 540.87  : 169.49  
+Collision Resistence          : Broken  : Broken  : Broken  : Broken  : Unbroken
+Preimage Resistence           : Unbroken: Broken  : Broken  : Broken  : Unbroken
+2nd Preimage Resistence       : Unbroken: Unbroken: Unbroken: Broken  : Unbroken
+Collision Best Known Attack   : 2^60    : 2^20.96 : 2^63.3  : 3       : Nil     
+Preimage Best Known Attack    : Nil     : 2^123.4 : 2^73    : 2^69.4  : Nil     
+2nd Preimage Best Known Attack: Nil     : Nil     : Nil     : 2^78.4  : Nil     
 
 Recommended Hash Function:
-MD5
+SHA256
