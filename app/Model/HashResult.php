@@ -6,11 +6,18 @@ App::uses('AppModel', 'Model');
  */
 class HashResult extends AppModel {
 
-	public $belongsTo = array('HashTest' => array('className' => 'HashTest',
-												'foreignKey' => 'hash_test_id'));
+	public $belongsTo = array(
+		'HashTest' => array(
+			'className' => 'HashTest',
+			'foreignKey' => 'hash_test_id'
+		)
+	);
 
-	public function writeFile($output, $choice) {
+	public function writeFile($output,$choice) {
 
+		if($choice < 1 || $choice > 2) {
+			return false;
+		}
 		$saveResult = '';
 		$ptline1 = explode("\n",$output[0]['HashResult']['plaintext']);
 
@@ -25,52 +32,45 @@ class HashResult extends AppModel {
 				$saveResult .= $hashResult['HashResult']['plaintext'] . ': ' 
 				. $hashResult['HashResult']['message_digest'] . "\n" . "\n";
 			
-			}else {
+			}else{
 
 				$ptline = explode("\n",$hashResult['HashResult']['plaintext']);
 				$mdline = explode("\n",$hashResult['HashResult']['message_digest']);
 				array_pop($mdline);
 				array_pop($ptline);
-
-				foreach ($ptline as $key => $data) {
+					foreach ($ptline as $key => $data) {
 					$saveResult .= trim($ptline[$key]) . ': ' . $mdline[$key] . "\n";
-				}
+					}
 				$saveResult .= "\n";
 			}
 		}
 
 		if($choice == 2) {
-
 			$saveResult .= 'Analysis:' . "\n";
 			$saveResult .= $output[0]['HashResult']['description'] . "\n";
-
 			if(($output[0]['HashResult']['collision_count']) > 1) {
-
 				$collision_pt = explode("\n", $output[0]['HashResult']['collision_pt']);
 				$collision_md = explode("\n", $output[0]['HashResult']['collision_md']);
 				$collision_index = explode(" ", $output[0]['HashResult']['collision_index']);
+		
 				$saveResult .= 'Plaintext: ' . $output[0]['HashResult']['hash_algorithm_name'] .
 				' Message Digest: File Line' . "\n";
 				
 				foreach($collision_pt as $key => $data) {
-
 					$collision_index[$key] = $collision_index[$key] + 1;
 					$saveResult .= trim($collision_pt[$key]) . ": " . $collision_md[$key] .
 					": " . $collision_index[$key] . "\n";
-
 				}
 			}
 
 			$saveResult .= "\n";
 			$saveResult .= 'Comparing between selected algorithmn:' . "\n";
+
 			$count = 0;
-
 			foreach($output as $key => $data) {
-
-				if($count < 1) {
-					$saveResult .= 'Algorithm                     ';
+				if($count<1) {
+				$saveResult .= 'Algorithm                     ';
 				}
-
 				$count++;
 				$saveResult .= ': ' . $data['HashResult']['hash_algorithm_name'];
 
@@ -87,14 +87,12 @@ class HashResult extends AppModel {
 			}
 
 			$saveResult .= "\n";
+
 			$count = 0;
-
 			foreach($output as $key => $data) {
-
-				if($count < 1) {
-					$saveResult .= 'Output Length(bits)           ';
+				if($count<1) {
+				$saveResult .= 'Output Length(bits)           ';
 				}
-
 				$count++;
 				$saveResult .= ': ' . $data['HashResult']['output_length'];
 
@@ -111,14 +109,12 @@ class HashResult extends AppModel {
 			}
 
 			$saveResult .= "\n";
+
 			$count = 0;
-
 			foreach($output as $key => $data) {
-
 				if($count<1) {
-					$saveResult .= 'Speed(MB/s)                   ';
+				$saveResult .= 'Speed(MB/s)                   ';
 				}
-
 				$count++;
 				$saveResult .= ': ' . $data['HashResult']['speed'];
 
@@ -135,14 +131,12 @@ class HashResult extends AppModel {
 			}
 
 			$saveResult .= "\n";
+
 			$count = 0;
-
 			foreach($output as $key => $data) {
-
 				if($count<1) {
-					$saveResult .= 'Collision Resistence          ';
+				$saveResult .= 'Collision Resistence          ';
 				}
-
 				$count++;
 				$saveResult .= ': ' . $data['HashResult']['collision_resistance'];
 			
@@ -159,14 +153,12 @@ class HashResult extends AppModel {
 			}
 
 			$saveResult .= "\n";
+
 			$count = 0;
-
 			foreach($output as $key => $data) {
-				
 				if($count<1) {
-					$saveResult .= 'Preimage Resistence           ';
+				$saveResult .= 'Preimage Resistence           ';
 				}
-
 				$count++;
 				$saveResult .= ': ' . $data['HashResult']['preimage_resistance'];
 
@@ -183,14 +175,12 @@ class HashResult extends AppModel {
 			}
 
 			$saveResult .= "\n";
+
 			$count = 0;
-
 			foreach($output as $key => $data) {
-				
 				if($count<1) {
-					$saveResult .= '2nd Preimage Resistence       ';
+				$saveResult .= '2nd Preimage Resistence       ';
 				}
-
 				$count++;
 				$saveResult .= ': ' . $data['HashResult']['2nd_preimage_resistance'];
 
@@ -207,14 +197,12 @@ class HashResult extends AppModel {
 			}
 
 			$saveResult .= "\n";
+
 			$count = 0;
-
 			foreach($output as $key => $data) {
-				
 				if($count<1) {
-					$saveResult .= 'Collision Best Known Attack   ';
+				$saveResult .= 'Collision Best Known Attack   ';
 				}
-
 				$count++;
 				$saveResult .= ': ' . $data['HashResult']['collision_bka'];
 
@@ -229,16 +217,13 @@ class HashResult extends AppModel {
 				}
 
 			}
-
 			$saveResult .= "\n";
+
 			$count = 0;
-
 			foreach($output as $key => $data) {
-			
 				if($count<1) {
-					$saveResult .= 'Preimage Best Known Attack    ';
+				$saveResult .= 'Preimage Best Known Attack    ';
 				}
-
 				$count++;
 				$saveResult .= ': ' . $data['HashResult']['preimage_bka'];
 
@@ -255,14 +240,12 @@ class HashResult extends AppModel {
 			}
 
 			$saveResult .= "\n";
+
 			$count = 0;
-
 			foreach($output as $key => $data) {
-				
 				if($count<1) {
-					$saveResult .= '2nd Preimage Best Known Attack';
+				$saveResult .= '2nd Preimage Best Known Attack';
 				}
-
 				$count++;
 				$saveResult .= ': ' . $data['HashResult']['2nd_preimage_bka'];
 
@@ -279,15 +262,20 @@ class HashResult extends AppModel {
 			}
 
 			$saveResult .= "\n" . "\n";
+
 			$saveResult .= 'Recommended Hash Function:' . "\n";
+
 			$last = end($output);
 			$saveResult .= $last['HashResult']['recommendation'];
-			
+		} else {
+			return false;
 		}
 
 		$fp = fopen('hashresult.txt','w');
 		fwrite($fp,$saveResult);
 		fclose($fp);
+
+		return true;
 	}
 
 }

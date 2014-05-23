@@ -174,6 +174,7 @@ class HashResultsController extends AppController {
 		$requiredexponent = $this->Session->read('requiredexponent');
 		$customizedalgorithmbase = $this->Session->read('customizedalgorithmbase');
 		$customizedalgorithmexponent = $this->Session->read('customizedalgorithmexponent');
+		$condition = $this->Session->read('condition');
 
 		$probability = $this->Session->read('probability');
 		$samplespace = $this->Session->read('samplespace');
@@ -184,13 +185,14 @@ class HashResultsController extends AppController {
 		$this->set('samplespace',$samplespace);
 		$this->set('totalhash', $totalhash);
 		$this->set('requiredsamplespace', $requiredsamplespace);
-		
+				
 		$this->set('base',$base);
 		$this->set('exponent',$exponent);
 		$this->set('requiredbase',$requiredbase);
 		$this->set('requiredexponent',$requiredexponent);
 		$this->set('customizedalgorithmbase',$customizedalgorithmbase);
 		$this->set('customizedalgorithmexponent',$customizedalgorithmexponent);
+		$this->set('condition',$condition);
 	}
 
 	public function hash_analyser_result() {

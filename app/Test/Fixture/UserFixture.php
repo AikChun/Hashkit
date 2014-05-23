@@ -48,15 +48,15 @@ class UserFixture extends CakeTestFixture {
 		),
 		array(
 			'id' => '10',
-			'password' => '96b9369f55be479d63a8ef366966a03a607657e4',
+			'password' => '3ff6baff38492b6669ebfdcd2f36194d3eb6cb01',
 			'name' => 'AikChun',
 			'email' => 'aikchun616@gmail.com',
 			'group_id' => '1',
 			'profile' => 'Just changed my profile. ',
 			'status' => '',
-			'token' => '',
+			'token' => '4571ae82ce05f63d3c3d38d386abf16d39302921',
 			'created' => '2014-03-28 01:36:02',
-			'modified' => '2014-05-05 17:42:04'
+			'modified' => '2014-05-18 23:19:57'
 		),
 		array(
 			'id' => '11',
@@ -81,18 +81,6 @@ class UserFixture extends CakeTestFixture {
 			'token' => '',
 			'created' => '2014-04-16 15:29:25',
 			'modified' => '2014-04-16 15:29:25'
-		),
-		array(
-			'id' => '13',
-			'password' => '96b9369f55be479d63a8ef366966a03a607657e4',
-			'name' => 'dudes',
-			'email' => 'dudes@gmail.com',
-			'group_id' => '3',
-			'profile' => 'dues',
-			'status' => '',
-			'token' => '',
-			'created' => '2014-05-04 22:51:33',
-			'modified' => '2014-05-04 22:51:33'
 		),
 	);
 

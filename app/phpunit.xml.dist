@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?> 
+
+<phpunit>
+	<filter>
+		<blacklist>
+			<directory >../lib</directory>
+			<directory >Vendor</directory>
+			<directory >Plugin</directory>
+			<directory >Test</directory>
+		</blacklist>
+	</filter>
+</phpunit>

@@ -207,7 +207,8 @@ class User extends AppModel {
 			$result = $this->save($data);
 			return $result;
 		} else {
-			throw new CakeException ('Your new passwords do not match.');
+
+			return false;
 		}
 	}
 // end of password related function

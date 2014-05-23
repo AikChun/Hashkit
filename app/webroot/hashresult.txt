@@ -1,15 +1,25 @@
 Selected Algorithm:
 MD5
 Plaintext: Message Digest
-hello: 5d41402abc4b2a76b9719d911017c592
+Hello There: 32b170d923b654360f351267bf440045
+Good bye: fc9516d5dfcd680ef15f087041155fe8
+Scarified: 7fafbfc50032f66abf91935fd50c95cb
+Hello There: 32b170d923b654360f351267bf440045
 
 Selected Algorithm:
 MD4
 Plaintext: Message Digest
-hello: 866437cb7a794bce2b727acc0362ee27
+Hello There: 2a150b3cb9168f86749b3ea82789616d
+Good bye: 98758c6d3eef73cd60e687375b91f4bc
+Scarified: 7b27134a3e23fb9ea9a6aef3ed34b1d1
+Hello There: 2a150b3cb9168f86749b3ea82789616d
 
 Analysis:
-No collision detected
+There is collision detected at: 
+
+Plaintext: MD5 Message Digest: File Line
+Hello There: 32b170d923b654360f351267bf440045: 1
+Hello There: 32b170d923b654360f351267bf440045: 4
 
 Comparing between selected algorithmn:
 Algorithm                     : MD5     : MD4     
