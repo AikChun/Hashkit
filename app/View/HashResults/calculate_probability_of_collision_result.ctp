@@ -57,9 +57,9 @@
 
 		<?php
 			if($condition == 1){
-				echo "The required sample space to get 99% probability of getting a collision:". '<font color="red">'. " 2<sup>" . $requiredsamplespace . '</sup></font color="black">'. " of complexity";
+				echo "The required sample space to get 99% probability of getting a collision:". '<font color="red">'. " 2<sup>" . $requiredsamplespace . '</sup></font color="black">'. "  complexity";
 			}else{
-				echo "The required sample space to get 99% probability of getting a collision: " . $requiredsamplespace . " of complexity";
+				echo "The required sample space to get 99% probability of getting a collision: " . $requiredsamplespace . " complexity";
 			}
 			
 		?>
