@@ -185,6 +185,10 @@
 		//   $('body,html').animate({scrollTop:posi},700);
 		// })
 
+		setTimeout(function() {
+		    $('#flash_alert').fadeOut('fast');
+		}, 3000);
+
 	</script>
 
 </html>

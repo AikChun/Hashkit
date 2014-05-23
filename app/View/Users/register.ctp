@@ -300,7 +300,7 @@
 	
 	$(document).ready(function() {
 
-		$('#UserRegisterForm').submit(function() {
+		$('#UserRegisterForm').submit(function(event) {
 			var password = $('#UserPassword').val();
 			var confirmPassword = $('#UserConfirmPassword').val();
 

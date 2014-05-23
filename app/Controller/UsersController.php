@@ -309,22 +309,12 @@ class UsersController extends AppController {
 			$success = $email->send($this->data['User']['message']);
 
 			if ($success) {
-				$this->Session->setFlash('',
-					'status_email', 'alert-box',
-					array(
-					'title' => 'Successfully sent!',
-					'content' => 'Check your inbox. We have sent you a copy of the email.'
-					)
-				);
+				$this->Session->setFlash('An email has been sent to Us and we will get back to you shortly. Thank you!', 'alert-box',
+					array('class'=>'alert-danger'));
 				$this->redirect('/contact_us');
 			} else {
-				$this->Session->setFlash('',
-					'status_email', 'alert-box',
-					array(
-					'title' => 'Email not sent!',
-					'content' => 'Please try again!'
-					)
-				);
+				$this->Session->setFlash('Sorry an error has occurred. Please try again!', 'alert-box',
+					array('class'=>'alert-danger'));
 				$this->redirect('/contact_us');
 			}
 		}
