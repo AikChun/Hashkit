@@ -116,7 +116,7 @@
 		?>
 
 		<h4>1. Sample size of the hash function </h4>
-		<h5>Either enter the base/exponent or the sample size of hashes</h5>
+		<h5>Either enter the base/exponent or the sample size of the complexity of the hash function</h5>
 		<div class="form-group">
 
 			<label class="col-lg-2 control-label">Base:</label>

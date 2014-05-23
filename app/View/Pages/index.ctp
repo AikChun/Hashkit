@@ -9,7 +9,7 @@
   </ol>
   <div class="carousel-inner" >
     <div class="item active" >
-      <img src="/img/test3.png" class="img-responsive">
+      <img src="/img/test3.jpg" class="img-responsive">
       <div class="container">
         <div class="carousel-caption" style="left:-44%; top: 60%;position:absolute;">
           <!-- <h1>HashKit</h1> -->
