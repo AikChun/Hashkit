@@ -50,17 +50,16 @@
 		<br>
 
 		<?php
-			echo "the probability of getting a collision for the hash algorithm : " . round($probability,2) . " %";
+			echo "The probability of getting a collision for the hash algorithm : " . round($probability,2) . " %";
 		?>
 
 		<br>
 
 		<?php
-			echo $condition; 
 			if($condition == 1){
-				echo "the required sample space to get 99% probability of getting a collision:". '<font color="red">'. " 2<sup>" . $requiredsamplespace . '</sup></font color="black">'. " hashes";
+				echo "The required sample space to get 99% probability of getting a collision:". '<font color="red">'. " 2<sup>" . $requiredsamplespace . '</sup></font color="black">'. " hashes";
 			}else{
-				echo "the required sample space to get 99% probability of getting a collision: " . $requiredsamplespace . " hashes";
+				echo "The required sample space to get 99% probability of getting a collision: " . $requiredsamplespace . " hashes";
 			}
 			
 		?>
